@@ -1,0 +1,8 @@
+{
+  "manifest_schema_version": "1",
+  "repository_name": "Governance-Knowledge",
+  "status": "draft",
+  "release_version": null,
+  "effective_entries": [],
+  "description": "供内部同事与AI会话设计或编制流程的共享知识库；内容为草稿，尚无正式发布版本或已生效条目。"
+}
