@@ -8,7 +8,7 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 
 - 已建立本地 Git 仓库及起步文件。
 - 尚无正式发布版本，`manifest.json` 的正式内容清单为空。
-- 已创建 GitHub 私有仓库并配置远程地址；首次推送尚未完成。
+- 已完成首次提交并推送至 GitHub 私有仓库的 `main` 分支。
 - 尚未添加同事账号，未配置分支保护、自动检查或备份任务；创建远程库不代表多人协作已经开启。
 
 ## 首批组织与职责材料
@@ -32,6 +32,16 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 5. 提出共享内容更新时遵循 [贡献说明](CONTRIBUTING.md)，使用 [修改申请模板](templates/change-request.md)。
 
 原 [建设说明](planning/internal-governance-knowledge-guide.md) 保留前期讨论记录；其中固定电脑及 Gitea 部署内容不再作为当前托管方案。
+
+取得访问权限后，可将仓库克隆到自己的电脑，并记录本次使用的提交标识：
+
+```bash
+git clone https://github.com/Harbinian/CX-Avi-Governance-Knowledge.git
+cd CX-Avi-Governance-Knowledge
+git rev-parse HEAD
+```
+
+新任务可主动获取新版；正在进行的任务继续使用已记录的提交，换版前核对影响。浏览器可阅读共享文件，但 AI 是否能直接读取私有仓库需按实际工具验证。
 
 ## 目录职责
 
