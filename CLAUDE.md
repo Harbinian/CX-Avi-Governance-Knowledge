@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 本库是内部 AI 治理知识与规则库（内容仓库），不是应用代码库：没有构建、lint 或依赖安装步骤，主要工作是起草中文知识/规则文档、按 V8 合同生成流程 JSON，以及维护离线校验包。AI 在本库的工作约定全文在 `AGENTS.md`，修改本库内容前必读；本文件是操作摘要。
 
 - 正文内容使用中文；机器字段、文件名、代码标识使用英文。
-- 引用旧 Git 提交时须同时说明本地未提交的新增内容归属，不得假称新增文件已包含在旧提交中。
+- 引用旧 Git 提交时须说明相关文件所属的提交或包版本，不得假称新增文件已包含在旧提交中。
 
 ## 常用命令
 
@@ -35,11 +35,11 @@ node scripts/check-package.cjs
 # 离线合成测试（本地32项，加--source时34项）；--source仅维护者对照纯校验器时使用
 node scripts/test-offline-package.cjs [--source <Infomat目录>] [--report <新报告路径>]
 
-# 维护者专用：从指定 Infomat 工作副本重新生成 technical/ 快照
+# 维护者专用：从指定 Infomat 工作副本重新生成 technical/ 快照（需该副本已安装自身依赖）
 node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 ```
 
-检查脚本使用Node内置断言和合成示例，无需安装测试框架。`check-package.cjs`检查入口、链接及摘要；`test-offline-package.cjs`检查校验和文件保护，未指定--source时也可独立运行。它们不替代内容来源核验或业务验收。
+检查脚本使用Node内置断言和合成示例，无需安装测试框架，也没有按名称筛选单项测试的参数；两个脚本均全量运行。`check-package.cjs`检查入口、链接及摘要；`test-offline-package.cjs`检查校验和文件保护，未指定--source时也可独立运行。它们不替代内容来源核验或业务验收。
 
 ## 架构：三层与完整性链条
 
