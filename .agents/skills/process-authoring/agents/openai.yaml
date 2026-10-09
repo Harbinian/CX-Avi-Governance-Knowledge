@@ -1,0 +1,6 @@
+interface:
+  display_name: "流程编制旧入口"
+  short_description: "兼容旧process-authoring调用，统一转到single-process-authoring完整编制"
+  default_prompt: "按兼容入口调用本库 $single-process-authoring，执行完整四项成果与会话规则。"
+policy:
+  allow_implicit_invocation: true

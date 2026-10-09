@@ -1,0 +1,122 @@
+{
+  "package_version": "2026-10-08.1",
+  "generated_at": "2026-10-08T05:25:48.135Z",
+  "primary_schema_version": "process-governance-v8",
+  "supported_schema_versions": [
+    "process-governance-v8",
+    "process-governance-v7"
+  ],
+  "validation_profile": "strict",
+  "source_repository": "Infomat",
+  "source_head": "e96a220ed6c2308fc7a3d9a253c6301672109ab1",
+  "source_worktree_dirty": true,
+  "source_rules_commit": "e96a220ed6c2308fc7a3d9a253c6301672109ab1",
+  "source_service_entry_sha256": "4378da88f93ba6513fb2fa283efca38f7637605c3553ee7aad50d3a8416c703e",
+  "source_mdm_format_entry_sha256": "8798013aa7f57f48f74a444c6e0b77d9f880024f334611c569d9e2918faf5fa6",
+  "schema_digests": {
+    "process-governance-v7": "e1d5b33ba80393c0d02c1a48540dca5a67947295c66a7d1f0fbf7e20a25eaacb",
+    "process-governance-v8": "3b68c1fdb9cf92f883a6d05c9ee91f42588aefe45ddfc86c55b70da7e79a8ef3"
+  },
+  "ajv_version": "8.20.0",
+  "build_options": {
+    "allErrors": true,
+    "strict": false,
+    "validateFormats": false,
+    "code": {
+      "source": true
+    }
+  },
+  "source_files": [
+    {
+      "path": "docs/contracts/process-governance-v1.schema.json",
+      "sha256": "46bd18099cbd5d68675a97a76bc7b488508f4f45f62254a8f0aaeccbb38beab0",
+      "package_path": "technical/contracts/process-governance-v1.schema.json"
+    },
+    {
+      "path": "docs/contracts/process-governance-v2.schema.json",
+      "sha256": "d8e534862c386fdca5e2a920b758fc6e8ac5e15b016a3ef1af9bdbdf67eb0b9a",
+      "package_path": "technical/contracts/process-governance-v2.schema.json"
+    },
+    {
+      "path": "docs/contracts/process-governance-v7.schema.json",
+      "sha256": "e1d5b33ba80393c0d02c1a48540dca5a67947295c66a7d1f0fbf7e20a25eaacb",
+      "package_path": "technical/contracts/process-governance-v7.schema.json"
+    },
+    {
+      "path": "docs/contracts/process-governance-v8.schema.json",
+      "sha256": "3b68c1fdb9cf92f883a6d05c9ee91f42588aefe45ddfc86c55b70da7e79a8ef3",
+      "package_path": "technical/contracts/process-governance-v8.schema.json"
+    },
+    {
+      "path": "scripts/process-governance/v7-validator.js",
+      "sha256": "926f9a2e85cdbe4c38cdc150465cfc17507ff83b934009f894e734c9b3bcc65c",
+      "package_path": "technical/semantic-validator.cjs"
+    },
+    {
+      "path": ".agents/skills/single-process-authoring/assets/minimal-v8-example.json",
+      "sha256": "52a4a458be5a97523cf871b5db34b498cdb1bc709689f1d9f65939aecbc98fbb",
+      "package_path": "examples/demo-process-v8.json"
+    }
+  ],
+  "files": [
+    {
+      "path": "technical/contracts/process-governance-v1.schema.json",
+      "sha256": "46bd18099cbd5d68675a97a76bc7b488508f4f45f62254a8f0aaeccbb38beab0"
+    },
+    {
+      "path": "technical/contracts/process-governance-v2.schema.json",
+      "sha256": "d8e534862c386fdca5e2a920b758fc6e8ac5e15b016a3ef1af9bdbdf67eb0b9a"
+    },
+    {
+      "path": "technical/contracts/process-governance-v7.schema.json",
+      "sha256": "e1d5b33ba80393c0d02c1a48540dca5a67947295c66a7d1f0fbf7e20a25eaacb"
+    },
+    {
+      "path": "technical/contracts/process-governance-v8.schema.json",
+      "sha256": "3b68c1fdb9cf92f883a6d05c9ee91f42588aefe45ddfc86c55b70da7e79a8ef3"
+    },
+    {
+      "path": "technical/runtime/ucs2length.js",
+      "sha256": "227b420dcc6803880945d707a968f7394afb2fa596d43c8a5e7a80ec2339e169"
+    },
+    {
+      "path": "technical/runtime/fast-deep-equal.cjs",
+      "sha256": "eb469e206280321a3878f2335ec98aa2104a155079d8ed83a23029098dccd215"
+    },
+    {
+      "path": "technical/licenses/fast-deep-equal.txt",
+      "sha256": "7bf9b2de73a6b356761c948d0e9eeb4be6c1270bd04c79cd489c1e400ffdfc1a"
+    },
+    {
+      "path": "technical/runtime/equal.js",
+      "sha256": "182bdc8e9662fd9a331cd8fcd48c67ae4d58a677170a0cebf4a82ce548fbc455"
+    },
+    {
+      "path": "technical/compiled-schemas.cjs",
+      "sha256": "7b6fabab4021901017daa641fd50c334c666f8ce372d9e99eaf3aaf3c0736ce8"
+    },
+    {
+      "path": "technical/licenses/ajv.txt",
+      "sha256": "a05350a88e318e4f5f2c2a1ff1e2e88daa4dd38e6e78b71cccae422bdc762cc3"
+    },
+    {
+      "path": "technical/semantic-validator.cjs",
+      "sha256": "926f9a2e85cdbe4c38cdc150465cfc17507ff83b934009f894e734c9b3bcc65c"
+    },
+    {
+      "path": "templates/process-v8.blank.json",
+      "sha256": "ff4b95b890dd8290358b65d4f9080ad6a9ed1b225a77c350d6dbbf707d7c4e86"
+    },
+    {
+      "path": "examples/demo-process-v8.json",
+      "sha256": "52a4a458be5a97523cf871b5db34b498cdb1bc709689f1d9f65939aecbc98fbb"
+    }
+  ],
+  "limits": [
+    "offline_technical_checks_only",
+    "active_departments_not_checked",
+    "permissions_not_checked",
+    "business_facts_not_approved",
+    "formal_runtime_not_verified"
+  ]
+}
