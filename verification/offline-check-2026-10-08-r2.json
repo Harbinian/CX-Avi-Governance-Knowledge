@@ -1,0 +1,129 @@
+{
+  "completed_at": "2026-10-08T05:36:07.439Z",
+  "node_version": "v25.2.1",
+  "package_version": "2026-10-08.1",
+  "schema_digests": {
+    "process-governance-v7": "e1d5b33ba80393c0d02c1a48540dca5a67947295c66a7d1f0fbf7e20a25eaacb",
+    "process-governance-v8": "3b68c1fdb9cf92f883a6d05c9ee91f42588aefe45ddfc86c55b70da7e79a8ef3"
+  },
+  "source_parity_checked": true,
+  "source_validators": [
+    "3001_pure_validation",
+    "3000_pure_validation_projection_with_synthetic_departments"
+  ],
+  "passed": 27,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "native_v8_example",
+      "passed": true
+    },
+    {
+      "name": "strict_v7_without_decision_data",
+      "passed": true
+    },
+    {
+      "name": "v7_decision_use_rejected",
+      "passed": true
+    },
+    {
+      "name": "decision_update_rejected",
+      "passed": true
+    },
+    {
+      "name": "decision_create_rejected",
+      "passed": true
+    },
+    {
+      "name": "parallel_control_data_rejected",
+      "passed": true
+    },
+    {
+      "name": "form_decision_operation_rejected",
+      "passed": true
+    },
+    {
+      "name": "dangling_flow_endpoint_rejected",
+      "passed": true
+    },
+    {
+      "name": "self_loop_rejected",
+      "passed": true
+    },
+    {
+      "name": "duplicate_stable_id_rejected",
+      "passed": true
+    },
+    {
+      "name": "cross_object_update_field_rejected",
+      "passed": true
+    },
+    {
+      "name": "dangling_form_field_rejected",
+      "passed": true
+    },
+    {
+      "name": "form_field_type_mismatch_rejected",
+      "passed": true
+    },
+    {
+      "name": "invalid_operation_enum_rejected",
+      "passed": true
+    },
+    {
+      "name": "extra_interview_property_rejected",
+      "passed": true
+    },
+    {
+      "name": "missing_required_behavior_property_rejected",
+      "passed": true
+    },
+    {
+      "name": "active_3000_departments_are_a_separate_gate",
+      "passed": true
+    },
+    {
+      "name": "unsupported_schema_not_guessed",
+      "passed": true
+    },
+    {
+      "name": "cli_read_only_and_repeatable",
+      "passed": true
+    },
+    {
+      "name": "invalid_cli_document_is_not_overwritten",
+      "passed": true
+    },
+    {
+      "name": "template_is_current_source_structure",
+      "passed": true
+    },
+    {
+      "name": "new_templates_use_new_identity",
+      "passed": true
+    },
+    {
+      "name": "malformed_json_rejected_unchanged",
+      "passed": true
+    },
+    {
+      "name": "invalid_utf8_rejected",
+      "passed": true
+    },
+    {
+      "name": "oversized_input_rejected",
+      "passed": true
+    },
+    {
+      "name": "relocated_package_needs_no_infomat_or_npm",
+      "passed": true
+    },
+    {
+      "name": "tampered_snapshot_fails_closed",
+      "passed": true
+    }
+  ],
+  "business_acceptance": "not_performed",
+  "real_colleague_ai_conversation": "not_performed",
+  "live_3000_upload": "not_performed"
+}

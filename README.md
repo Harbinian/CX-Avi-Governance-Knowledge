@@ -2,7 +2,7 @@
 
 本库供内部同事共享治理知识、规则、AI 作业方法和模板，作为与 AI 会话设计或编制业务流程的共同基础。2026-10-05 用户明确选择 GitHub 作为远程托管方向。本库与 Infomat 独立维护，每位同事使用自己的工作副本和任务材料。
 
-GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com/Harbinian/CX-Avi-Governance-Knowledge)，私有。`Governance-Knowledge` 为本库简称，本地工作副本目录可自行选择。
+GitHub 远程仓库：[Harbinian/Governance-Knowledge](https://github.com/Harbinian/Governance-Knowledge)，私有。本地工作副本目录可自行选择。
 
 ## 当前状态
 
@@ -10,6 +10,18 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 - 尚无正式发布版本，`manifest.json` 的正式内容清单为空。
 - 已完成首次提交并推送至 GitHub 私有仓库的 `main` 分支。
 - 尚未添加同事账号，未配置分支保护、自动检查或备份任务；创建远程库不代表多人协作已经开启。
+
+当前**单流程AI完整编制包为2026-10-09.1**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring仅保留兼容入口。技术合同快照仍为2026-10-08.1，编制方法更新没有改变V7/V8合同。本包已提交并推送至GitHub的`main`分支，初始提交不包含这些新增文件；同事可克隆或拉取取得，直接传文件夹时须包含`.agents/`目录。正式业务知识清单仍为空。
+
+## 同事拿到文件夹后
+
+1. 按 [AI会话作业入口](workflows/process-ai-collaboration.md) 复制启动文本，分别填写首次／继续、梳理实际流程／设计新流程、材料及成果目录，使用[完整主技能](.agents/skills/single-process-authoring/SKILL.md)。
+2. 首次调用同包 [grill-me](.agents/skills/grill-me/SKILL.md) 明确行为、条件和角色；续编在使用者认为当前版符合事实后逐个情景核验答案。新设计获得认可后做设计一致性与约束推演，不能记为事实已验证。详见 [会话规则](rules/process-session-rules.md)。
+3. 交付八章正文、完整V8 JSON、工作平衡报告和待确认事项四项成果，另存问答、续接与交接记录。按 [V8合同](rules/process-v8-contract.md)、[技术快照](technical/snapshot.json)、[六维及周期负荷方法](.agents/skills/single-process-authoring/references/workload-method.md)及templates工作；未知事实、分数和容量不猜填。
+4. 本机安装Node.js后，运行`node scripts/validate-process.cjs <JSON路径> --json`离线检查，无需Infomat仓库或npm安装。首次用`--emit-template`创建新骨架；可指定目标结构摘要，或将V7版本标识转换稿另存。用法见 [交接说明](workflows/process-handoff.md)。
+5. 用户在3001核对、检查并主动下载未审核文件，再上传3000办理治理。技术通过和AI问答有据支持都不等于正式审核或发布。
+
+配套 [虚构示例](examples/demo-process-procedure.md) 仅演示结构。技能能否原生调用、AI能否读取文件按实际工具验证；不能运行校验时明确记录未执行。当前包提供本地准备，实际同事会话、目标3000启用和业务验收另行记录。
 
 ## 首批组织与职责材料
 
@@ -36,8 +48,8 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 取得访问权限后，可将仓库克隆到自己的电脑，并记录本次使用的提交标识：
 
 ```bash
-git clone https://github.com/Harbinian/CX-Avi-Governance-Knowledge.git
-cd CX-Avi-Governance-Knowledge
+git clone https://github.com/Harbinian/Governance-Knowledge.git
+cd Governance-Knowledge
 git rev-parse HEAD
 ```
 
@@ -47,15 +59,19 @@ git rev-parse HEAD
 
 | 目录 | 内容 |
 |---|---|
-| rules | 经确认的治理规则；未生效内容必须明确标为草稿 |
+| rules | 用户确认的AI会话方法及技术编制约束；公司业务规则生效须有相应确认 |
 | knowledge | 术语、概念及通用知识 |
 | workflows | 按任务组织的 AI 作业方法 |
 | templates | 编写和提交内容使用的模板 |
 | examples | 脱敏示例，不作为具体业务依据 |
-| sources | 来源索引与确认记录，不默认保存受限原件 |
+| sources | 来源索引、确认记录及原技能历史快照；不默认保存受限业务原件 |
 | planning | 建设和部署准备材料，不作为已生效治理规则 |
+| .agents/skills | single-process-authoring主技能、grill-me及process-authoring兼容入口；共享时必须包含 |
+| technical | 固定结构、共享语义校验器、预编译校验及来源摘要，供离线使用 |
+| scripts | 离线校验、维护者生成与验证脚本，不自动连接业务系统 |
+| verification | 本次实际技术检查记录，区别于真实业务验收 |
 
-空目录仅用于本地起步定位，不添加占位文件；首次增加实际内容时再纳入 Git。
+具体任务成果保存到使用者自己的任务目录，不直接写入共享规则、示例或技术快照。原件、材料获取及任务角色缺口仍需按本次流程落实。
 
 ## 内容边界
 
