@@ -1,6 +1,6 @@
 # 内容贡献说明
 
-状态：起步协作说明；已创建 GitHub 私有仓库 `Harbinian/Governance-Knowledge`，同事账号、成员权限及正式内容审核人员尚未配置。
+状态：起步协作说明；已创建 GitHub 私有仓库 `Harbinian/CX-Avi-Governance-Knowledge`，同事账号、成员权限及正式内容审核人员尚未配置。
 
 ## 当前可以做什么
 

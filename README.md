@@ -2,7 +2,7 @@
 
 本库供内部同事共享治理知识、规则、AI 作业方法和模板，作为与 AI 会话设计或编制业务流程的共同基础。2026-10-05 用户明确选择 GitHub 作为远程托管方向。本库与 Infomat 独立维护，每位同事使用自己的工作副本和任务材料。
 
-GitHub 远程仓库：[Harbinian/Governance-Knowledge](https://github.com/Harbinian/Governance-Knowledge)，私有。本地工作副本目录可自行选择。
+GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com/Harbinian/CX-Avi-Governance-Knowledge)，私有。`Governance-Knowledge` 为本库简称，本地工作副本目录可自行选择。
 
 ## 当前状态
 
@@ -48,8 +48,8 @@ GitHub 远程仓库：[Harbinian/Governance-Knowledge](https://github.com/Harbin
 取得访问权限后，可将仓库克隆到自己的电脑，并记录本次使用的提交标识：
 
 ```bash
-git clone https://github.com/Harbinian/Governance-Knowledge.git
-cd Governance-Knowledge
+git clone https://github.com/Harbinian/CX-Avi-Governance-Knowledge.git
+cd CX-Avi-Governance-Knowledge
 git rev-parse HEAD
 ```
 
