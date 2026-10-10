@@ -3,5 +3,6 @@
 /templates/process-v8.blank.json -text
 /examples/demo-process-v8.json -text
 /sources/skill-snapshots/** -text
+/verification/conversation-fixtures/*.json -text
 /.agents/**/SKILL.md text eol=lf
 /.claude/**/SKILL.md text eol=lf

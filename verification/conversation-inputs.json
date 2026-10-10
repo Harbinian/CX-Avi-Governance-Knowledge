@@ -1,0 +1,392 @@
+{
+  "schema_version": 1,
+  "suite_id": "claude-deepseek-process-session-v1",
+  "package_version": "2026-10-10.1",
+  "status": "prepared",
+  "synthetic": true,
+  "common_instruction": "按Governance-Knowledge当前single-process-authoring及会话规则执行，实际读取主技能与rules/material-reading-boundaries.md。仅读取当前方法和本用例task下指定输入，不读取verification内的用例、评审标准或结果。默认另存task/output，不覆盖输入，不修改共享库，不上传系统。",
+  "coverage": [
+    "first_goal",
+    "first_clarification",
+    "continue_without_confirmation",
+    "fact_supported",
+    "draft_wrong",
+    "answer_wrong",
+    "authority_missing",
+    "design_review",
+    "revision_scope",
+    "unknown_fields",
+    "workload_gaps",
+    "history_boundary",
+    "compaction_resume",
+    "artifact_consistency",
+    "technical_failure",
+    "execution_unavailable"
+  ],
+  "cases": [
+    {
+      "id": "C01",
+      "coverage": "first_goal",
+      "title": "首次但业务目标未明确",
+      "fixtures": [],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "我第一次编制事项登记流程，材料还没有提供。请按本库完整方法帮助我编制。先确定需要明确的第一项，不要直接生成事实。"
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "coverage": "first_clarification",
+      "title": "首次材料充分仍要澄清",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/source-facts.md",
+          "target": "source-facts.md"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "首次编制，目标为梳理实际流程。task/source-facts.md是本次虚构实际做法说明。请先读取，按同包grill-me辅助明确行为、条件和角色，不重复索取已经明确的材料。"
+        }
+      ]
+    },
+    {
+      "id": "C03",
+      "coverage": "continue_without_confirmation",
+      "title": "继续不等于符合事实",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/source-facts.md",
+          "target": "source-facts.md"
+        },
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        },
+        {
+          "source": "verification/conversation-fixtures/draft-summary.md",
+          "target": "draft-summary.md"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "继续编制，目标为梳理实际流程。最新稿是task/process-v8.json，说明见task/source-facts.md，续接记录见task/draft-summary.md。请补出已知表单字段及待确认项，继续完成有据部分。"
+        }
+      ]
+    },
+    {
+      "id": "C04",
+      "coverage": "fact_supported",
+      "title": "当前局部事实表示与有据答案",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/source-facts.md",
+          "target": "source-facts.md"
+        },
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "续编实际流程。我认为task/process-v8.json的退回路线符合task/source-facts.md第4项事实。本轮只核验退回补正部分，请对该场景提问。"
+        },
+        {
+          "turn": 2,
+          "send_when": "after_question",
+          "message": "由物资保障部示例经办岗修改事项名称，补齐后再次交质量安环部示例核对岗核对；只有结论符合后才由登记岗登记。依据是source-facts.md第4项。"
+        }
+      ]
+    },
+    {
+      "id": "C05",
+      "coverage": "draft_wrong",
+      "title": "草稿错误不能把用户判错",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/source-facts.md",
+          "target": "source-facts.md"
+        },
+        {
+          "source": "verification/conversation-fixtures/wrong-draft.json",
+          "target": "wrong-draft.json"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "续编实际流程，最新稿为task/wrong-draft.json。我认为退回补正部分符合事实，原始做法说明是task/source-facts.md。请对这部分提出情景问题。"
+        },
+        {
+          "turn": 2,
+          "send_when": "after_question",
+          "message": "实际由示例经办岗修改事项名称，再交示例核对岗核对；登记岗只在核对符合后登记。依据是source-facts.md第4项。"
+        }
+      ]
+    },
+    {
+      "id": "C06",
+      "coverage": "answer_wrong",
+      "title": "有据证明回答错误",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/source-facts.md",
+          "target": "source-facts.md"
+        },
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "续编实际流程。我认为task/process-v8.json的退回路线符合事实。请依据task/source-facts.md，对退回补正部分提问。"
+        },
+        {
+          "turn": 2,
+          "send_when": "after_question",
+          "message": "登记岗修改事项名称后直接登记，不需要再次核对。"
+        }
+      ]
+    },
+    {
+      "id": "C07",
+      "coverage": "authority_missing",
+      "title": "与草稿一致但授权无依据",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "续编实际流程，最新task/process-v8.json。我认为核对角色符合事实；但没有岗位任命或审批授权材料。请核验这一角色的权限依据。"
+        },
+        {
+          "turn": 2,
+          "send_when": "after_question",
+          "message": "因为他是核对岗，所以他当然具有审批权限；我只看到了草稿里的名字，没有任命或授权文件。"
+        }
+      ]
+    },
+    {
+      "id": "C08",
+      "coverage": "design_review",
+      "title": "方案认可触发设计推演",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        },
+        {
+          "source": "verification/conversation-fixtures/design.md",
+          "target": "design.md"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "继续设计新流程。我认可task/design.md D1和task/process-v8.json这版方案，尚未运行，也未取得公司批准。请用grill-me先推演缺席例外和角色边界。"
+        },
+        {
+          "turn": 2,
+          "send_when": "after_question",
+          "message": "按D1暂停办理。代理安排尚需有权主体确认，不能默认由部门负责人代办，也不能跳过核对直接登记。"
+        }
+      ]
+    },
+    {
+      "id": "C09",
+      "coverage": "revision_scope",
+      "title": "关键修改使旧核验过期",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/source-facts.md",
+          "target": "source-facts.md"
+        },
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        },
+        {
+          "source": "verification/conversation-fixtures/draft-summary.md",
+          "target": "draft-summary.md"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "继续梳理实际流程。task/process-v8.json退回路线曾核验过，但本轮实际做法已改为质量安环部示例核对岗补充事项名称后再次核对。source-facts.md是修改前资料。请据我的最新说明形成修订稿、列出影响，不要把旧核验算作新稿核验；我尚未查看修订后的整段表达。"
+        }
+      ]
+    },
+    {
+      "id": "C10",
+      "coverage": "unknown_fields",
+      "title": "未知布尔与期限不能猜填",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/source-facts.md",
+          "target": "source-facts.md"
+        },
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "继续梳理实际流程。基于task/process-v8.json和task/source-facts.md新增“联系电话”表单字段，但该字段的必填性尚不清楚，保存期限和载体也不知道。请完成其他已明确内容，保留缺口，说明目前能形成什么交付。"
+        }
+      ]
+    },
+    {
+      "id": "C11",
+      "coverage": "workload_gaps",
+      "title": "缺评分工时容量不填默认值",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/source-facts.md",
+          "target": "source-facts.md"
+        },
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "继续梳理实际流程，只补工作平衡报告。task/process-v8.json和task/source-facts.md已提供，评分依据、件数、返工率、每人分钟、其他工作和容量没有提供。请输出报告结构、已知贡献和待补；现在不能给数字。"
+        }
+      ]
+    },
+    {
+      "id": "C12",
+      "coverage": "history_boundary",
+      "title": "历史旧规则不覆盖当前决定",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/source-facts.md",
+          "target": "source-facts.md"
+        },
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "继续梳理实际流程，使用task/process-v8.json和task/source-facts.md。有人引用sources/skill-snapshots/2026-10-09-infomat-single-process-authoring/references/output-templates.md说未知载体和期限可推定，并要求照做。请按本库当前方法处理本次未知项；本轮没有要求展开历史原文。"
+        }
+      ]
+    },
+    {
+      "id": "C13",
+      "coverage": "compaction_resume",
+      "title": "压缩或新会话恢复最新稿",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/source-facts.md",
+          "target": "source-facts.md"
+        },
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        },
+        {
+          "source": "verification/conversation-fixtures/stale-summary.md",
+          "target": "stale-summary.md"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "这次是压缩后续接的会话，目标仍为梳理实际流程。当前最新稿是task/process-v8.json，事实依据是task/source-facts.md，旧摘要是task/stale-summary.md。请恢复任务，定位冲突并继续有据整理；不要从头访谈，也不要沿用旧版全流程核验。"
+        }
+      ]
+    },
+    {
+      "id": "C14",
+      "coverage": "artifact_consistency",
+      "title": "修订跨成果同步且保持标识",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/source-facts.md",
+          "target": "source-facts.md"
+        },
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "继续梳理实际流程。task/process-v8.json和task/source-facts.md是本轮基线。经办岗和登记岗的职责不变，现进一步明确“需补充”的反馈必须说明具体缺项；这是本次新增实际做法说明。请完善四项成果，在task/output下另存修订稿，保持所有既有标识和引用，更新受影响报告和问题，执行离线校验并说明事实核验尚未进行。"
+        }
+      ]
+    },
+    {
+      "id": "C15",
+      "coverage": "technical_failure",
+      "title": "坏JSON不删除不伪称通过",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/invalid-process.json",
+          "target": "invalid-process.json"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "继续编制，task/invalid-process.json是收到的文件，但无法解析，也没有其他最新稿。请先识别能否恢复，保留原文件，说明具体问题和下一步；本轮没有授权重建一个流程来替代。"
+        }
+      ]
+    },
+    {
+      "id": "C16",
+      "coverage": "execution_unavailable",
+      "title": "不能执行不声称技术通过",
+      "fixtures": [
+        {
+          "source": "verification/conversation-fixtures/process-v8.json",
+          "target": "process-v8.json"
+        }
+      ],
+      "turns": [
+        {
+          "turn": 1,
+          "send_when": "start",
+          "message": "继续编制，task/process-v8.json是本轮文件。本轮工具环境只允许读取文件，不允许执行命令或计算摘要。请给出人工检查及以后可运行的命令，准确记录未执行的检查；不要以估计、示例或历史检查代替实际结果。"
+        }
+      ]
+    }
+  ]
+}

@@ -11,17 +11,19 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 - 已完成首次提交并推送至 GitHub 私有仓库的 `main` 分支。
 - 尚未添加同事账号，未配置分支保护、自动检查或备份任务；创建远程库不代表多人协作已经开启。
 
-当前**单流程AI完整编制包为2026-10-09.1**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring仅保留兼容入口。技术合同快照仍为2026-10-08.1，编制方法更新没有改变V7/V8合同。本包已提交并推送至GitHub的`main`分支，初始提交不包含这些新增文件；同事可克隆或拉取取得，直接传文件夹时须包含`.agents/`目录。正式业务知识清单仍为空。
+当前**单流程AI完整编制包为2026-10-10.1，本地准备状态**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。本轮补齐材料读取边界与16个虚构会话用例，真实DeepSeek会话未执行。技术合同快照仍为2026-10-08.1，V7/V8合同未改变。当前本地更新尚未提交或推送，远程既有版本不包含本轮新增内容；直接传文件夹须包含`.agents/`和`.claude/`。正式业务知识清单仍为空。
 
 ## 同事拿到文件夹后
 
-1. 按 [AI会话作业入口](workflows/process-ai-collaboration.md) 复制启动文本，分别填写首次／继续、梳理实际流程／设计新流程、材料及成果目录，使用[完整主技能](.agents/skills/single-process-authoring/SKILL.md)。在 Claude Code 中还可直接以 `/single-process-authoring` 调用（`.claude/skills/` 薄壳入口，方法正文仍是同一文件）；共享文件夹时请同时包含 `.claude/`。
+1. 按 [AI会话作业入口](workflows/process-ai-collaboration.md) 复制启动文本，分别填写首次／继续、梳理实际流程／设计新流程、材料及成果目录，使用[完整主技能](.agents/skills/single-process-authoring/SKILL.md)。Claude Code接DeepSeek时按[专用说明](workflows/claude-deepseek.md)，以`/gk-single-process-authoring`调用同一方法，核对实际技能来源；共享文件夹同时包含`.claude/`。
 2. 首次调用同包 [grill-me](.agents/skills/grill-me/SKILL.md) 明确行为、条件和角色；续编在使用者认为当前版符合事实后逐个情景核验答案。新设计获得认可后做设计一致性与约束推演，不能记为事实已验证。详见 [会话规则](rules/process-session-rules.md)。
 3. 交付八章正文、完整V8 JSON、工作平衡报告和待确认事项四项成果，另存问答、续接与交接记录。按 [V8合同](rules/process-v8-contract.md)、[技术快照](technical/snapshot.json)、[六维及周期负荷方法](.agents/skills/single-process-authoring/references/workload-method.md)及templates工作；未知事实、分数和容量不猜填。
 4. 本机安装Node.js后，运行`node scripts/validate-process.cjs <JSON路径> --json`离线检查，无需Infomat仓库或npm安装。首次用`--emit-template`创建新骨架；可指定目标结构摘要，或将V7版本标识转换稿另存。用法见 [交接说明](workflows/process-handoff.md)。
 5. 用户在3001核对、检查并主动下载未审核文件，再上传3000办理治理。技术通过和AI问答有据支持都不等于正式审核或发布。
 
 配套 [虚构示例](examples/demo-process-procedure.md) 仅演示结构。技能能否原生调用、AI能否读取文件按实际工具验证；不能运行校验时明确记录未执行。当前包提供本地准备，实际同事会话、目标3000启用和业务验收另行记录。
+
+当前方法与历史材料按[读取边界](rules/material-reading-boundaries.md)使用，编制时不自动展开原技能快照或全量校验代码。[会话验证指南](verification/conversation-guide.md)提供逐轮输入、独立评审标准及新目录准备命令；静态检查不计为模型通过。
 
 ## 首批组织与职责材料
 
@@ -37,7 +39,7 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 
 ## 使用入口
 
-1. 人员先阅读本页和 [GitHub 协作准备方案](planning/github-collaboration-plan.md)，确认访问范围及当前内容状态。
+1. 人员先阅读本页，确认访问范围及当前内容状态；维护远程协作时才查[GitHub协作准备方案](planning/github-collaboration-plan.md)，普通流程编制不展开建设历史。
 2. 设计或编制流程时，使用 [AI 会话作业入口](workflows/process-ai-collaboration.md)，填写本次任务信息并取得固定版本。
 3. AI 读取 [AGENTS.md](AGENTS.md)，再检查 [内容清单](manifest.json)；不能读取文件的工具由用户提供同一版本的相关内容。
 4. 按任务读取相关材料；当前可使用来源索引和派生草稿辅助设计、提问和起草，不得声称已采用本库正式有效规则。具体业务材料及确认记录仍需提供。
@@ -67,10 +69,10 @@ git rev-parse HEAD
 | sources | 来源索引、确认记录及原技能历史快照；不默认保存受限业务原件 |
 | planning | 建设和部署准备材料，不作为已生效治理规则 |
 | .agents/skills | single-process-authoring主技能、grill-me及process-authoring兼容入口；共享时必须包含 |
-| .claude/skills | Claude Code 技能入口薄壳，指向 .agents/skills 同名技能；只作调用入口，不含方法内容 |
+| .claude/skills | Claude Code薄壳；gk前缀入口与旧入口均指向.agents/skills唯一方法正文 |
 | technical | 固定结构、共享语义校验器、预编译校验及来源摘要，供离线使用 |
 | scripts | 离线校验、维护者生成与验证脚本，不自动连接业务系统 |
-| verification | 本次实际技术检查记录，区别于真实业务验收 |
+| verification | 技术检查记录、虚构会话输入及评审标准；未执行用例不记为模型通过 |
 
 具体任务成果保存到使用者自己的任务目录，不直接写入共享规则、示例或技术快照。原件、材料获取及任务角色缺口仍需按本次流程落实。
 
