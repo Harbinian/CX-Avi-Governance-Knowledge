@@ -8,7 +8,7 @@
 
 为本次流程另建任务目录，准备流程名称、边界、原始制度、表单、实际说明与确认记录。组织摘要可辅助识别业务主题，涉及具体条件和权限时回查原件。原件获取方式见 sources/organization-sources.md；本机登记路径不代表同事可访问。
 
-支持仓库技能的AI调用`$single-process-authoring`，或明确要求按`.agents/skills/single-process-authoring/SKILL.md`工作；旧`$process-authoring`路由同一主技能。普通工具不会必然自动读取AGENTS或技能，使用者需提供同版本内容并核对实际读取范围。
+支持仓库技能的AI调用`$single-process-authoring`，或明确要求按`.agents/skills/single-process-authoring/SKILL.md`工作；旧`$process-authoring`路由同一主技能。Claude Code 中可调用`/single-process-authoring`、`/grill-me`（`.claude/skills/`薄壳入口，方法与`.agents/skills/`为同一份）。普通工具不会必然自动读取AGENTS或技能，使用者需提供同版本内容并核对实际读取范围。
 
 ## 可复制的启动文本
 

@@ -14,6 +14,7 @@
     "authoring_skill": ".agents/skills/single-process-authoring/SKILL.md",
     "compatibility_skill": ".agents/skills/process-authoring/SKILL.md",
     "interview_skill": ".agents/skills/grill-me/SKILL.md",
+    "claude_code_skill_entrypoints": ".claude/skills",
     "authoring_source_snapshot": "sources/authoring-source-snapshot.json",
     "default_outputs": ["procedure_draft", "process_v8_json", "workload_report", "pending_items"],
     "authoring_goals": ["actual_process_mapping", "new_process_design"],

@@ -19,6 +19,9 @@ Thumbs.db
 /backups/
 /dist/
 
+# Local AI tool settings (not shared)
+.claude/settings.local.json
+
 # Dependencies
 node_modules/
 .venv/

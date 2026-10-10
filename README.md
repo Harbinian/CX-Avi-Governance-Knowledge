@@ -15,7 +15,7 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 
 ## 同事拿到文件夹后
 
-1. 按 [AI会话作业入口](workflows/process-ai-collaboration.md) 复制启动文本，分别填写首次／继续、梳理实际流程／设计新流程、材料及成果目录，使用[完整主技能](.agents/skills/single-process-authoring/SKILL.md)。
+1. 按 [AI会话作业入口](workflows/process-ai-collaboration.md) 复制启动文本，分别填写首次／继续、梳理实际流程／设计新流程、材料及成果目录，使用[完整主技能](.agents/skills/single-process-authoring/SKILL.md)。在 Claude Code 中还可直接以 `/single-process-authoring` 调用（`.claude/skills/` 薄壳入口，方法正文仍是同一文件）；共享文件夹时请同时包含 `.claude/`。
 2. 首次调用同包 [grill-me](.agents/skills/grill-me/SKILL.md) 明确行为、条件和角色；续编在使用者认为当前版符合事实后逐个情景核验答案。新设计获得认可后做设计一致性与约束推演，不能记为事实已验证。详见 [会话规则](rules/process-session-rules.md)。
 3. 交付八章正文、完整V8 JSON、工作平衡报告和待确认事项四项成果，另存问答、续接与交接记录。按 [V8合同](rules/process-v8-contract.md)、[技术快照](technical/snapshot.json)、[六维及周期负荷方法](.agents/skills/single-process-authoring/references/workload-method.md)及templates工作；未知事实、分数和容量不猜填。
 4. 本机安装Node.js后，运行`node scripts/validate-process.cjs <JSON路径> --json`离线检查，无需Infomat仓库或npm安装。首次用`--emit-template`创建新骨架；可指定目标结构摘要，或将V7版本标识转换稿另存。用法见 [交接说明](workflows/process-handoff.md)。
@@ -67,6 +67,7 @@ git rev-parse HEAD
 | sources | 来源索引、确认记录及原技能历史快照；不默认保存受限业务原件 |
 | planning | 建设和部署准备材料，不作为已生效治理规则 |
 | .agents/skills | single-process-authoring主技能、grill-me及process-authoring兼容入口；共享时必须包含 |
+| .claude/skills | Claude Code 技能入口薄壳，指向 .agents/skills 同名技能；只作调用入口，不含方法内容 |
 | technical | 固定结构、共享语义校验器、预编译校验及来源摘要，供离线使用 |
 | scripts | 离线校验、维护者生成与验证脚本，不自动连接业务系统 |
 | verification | 本次实际技术检查记录，区别于真实业务验收 |

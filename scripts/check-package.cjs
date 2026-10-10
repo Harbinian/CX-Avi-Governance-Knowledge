@@ -14,7 +14,7 @@ assert.deepEqual(manifest.authoring_package.supported_schema_versions, snapshot.
 assert.equal(manifest.status, 'draft');
 assert.equal(manifest.release_version, null);
 assert.equal(manifest.authoring_package.business_rules_approved, false);
-for (const key of ['entrypoint', 'session_rules', 'authoring_skill', 'compatibility_skill', 'interview_skill', 'authoring_source_snapshot', 'technical_snapshot', 'offline_validator', 'handoff_workflow', 'verification_record']) {
+for (const key of ['entrypoint', 'session_rules', 'authoring_skill', 'compatibility_skill', 'interview_skill', 'claude_code_skill_entrypoints', 'authoring_source_snapshot', 'technical_snapshot', 'offline_validator', 'handoff_workflow', 'verification_record']) {
   assert.ok(fs.existsSync(path.join(root, manifest.authoring_package[key])), `缺少manifest入口：${key}`);
 }
 const sourceSnapshot = JSON.parse(fs.readFileSync(path.join(root, manifest.authoring_package.authoring_source_snapshot), 'utf8'));
@@ -48,6 +48,12 @@ for (const name of skills) {
   const content = fs.readFileSync(path.join(root, '.agents/skills', name, 'SKILL.md'), 'utf8');
   assert.ok(content.startsWith('---\n'));
   assert.ok(content.includes(`name: ${name}\n`));
-  assert.ok(/^description: .+/m.test(content));
+  const description = content.match(/^description: .+/m);
+  assert.ok(description);
+  // The Claude Code entry is a thin shell: frontmatter only, description kept identical.
+  const entry = fs.readFileSync(path.join(root, '.claude/skills', name, 'SKILL.md'), 'utf8');
+  assert.ok(entry.startsWith('---\n'), `.claude/skills/${name} 缺少frontmatter`);
+  assert.ok(entry.includes(`name: ${name}\n`), `.claude/skills/${name} name不一致`);
+  assert.ok(entry.includes(description[0] + '\n'), `.claude/skills/${name} description与主技能不一致，需同步`);
 }
 console.log(JSON.stringify({ valid: true, authoring_package_version: manifest.authoring_package.version, technical_snapshot_version: snapshot.package_version, markdown_files: markdownFiles, local_links: localLinks, technical_files: snapshot.files.length, source_skill_files: sourceSnapshot.files.length, skills }, null, 2));
