@@ -14,6 +14,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 需要 Node.js ≥18（实测 v25.2.1），无需 npm install，全部离线运行：
 
 ```powershell
+# 用法与退出码（脚本自身输出为准，本文件仅为摘要）
+node scripts/validate-process.cjs --help
+
 # 校验一个流程 JSON（退出码：0 通过 / 1 结构或语义失败 / 2 用法、输入或快照错误）
 node scripts/validate-process.cjs <JSON路径> --json
 
@@ -35,24 +38,24 @@ node scripts/check-package.cjs
 # 离线合成测试（本地32项，加--source时34项）；--source仅维护者对照纯校验器时使用
 node scripts/test-offline-package.cjs [--source <Infomat目录>] [--report <新报告路径>]
 
-# 维护者专用：从指定 Infomat 工作副本重新生成 technical/ 快照（需该副本已安装自身依赖）
+# 维护者专用：重建快照，同时重写空白模板与虚构示例（需该副本已安装自身依赖）
 node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 ```
 
-检查脚本使用Node内置断言和合成示例，无需安装测试框架，也没有按名称筛选单项测试的参数；两个脚本均全量运行。`check-package.cjs`检查入口、链接及摘要；`test-offline-package.cjs`检查校验和文件保护，未指定--source时也可独立运行。它们不替代内容来源核验或业务验收。
+检查脚本使用Node内置断言和合成示例，无需安装测试框架，也没有按名称筛选单项测试的参数；两个脚本均全量运行。`check-package.cjs`检查入口、链接及摘要；`test-offline-package.cjs`检查校验和文件保护，未指定--source时也可独立运行；其`--report`以拒绝覆盖方式写入，路径已存在即失败，实际记录写入`verification/`并按日期新起文件名。它们不替代内容来源核验或业务验收。
 
 ## 架构：三层与完整性链条
 
 **内容层**（人工编辑）：`README.md`、`AGENTS.md`、`manifest.json`、`rules/`、`workflows/`、`templates/`、`knowledge/`、`sources/`、`planning/`、`examples/`、`verification/`。各目录职责见 README 的"目录职责"表。
 
-**编制包入口链**：`workflows/process-ai-collaboration.md` → `rules/process-session-rules.md` → `.agents/skills/single-process-authoring/`与`.agents/skills/grill-me/`。旧process-authoring只作兼容路由，只有一套主规则。默认四项成果为八章正文、V8 JSON、工作平衡报告、待确认事项，问答及续接记录另存。共享时必须包含.agents目录；方法变化同步入口、模板和技能。
+**编制包入口链**：`workflows/process-ai-collaboration.md` → `rules/process-session-rules.md` → `.agents/skills/single-process-authoring/`与`.agents/skills/grill-me/`；`manifest.json` 的 `authoring_package` 段登记这条链的入口路径、两个版本号及四项默认成果，`check-package.cjs` 逐个断言入口存在。旧process-authoring只作兼容路由，只有一套主规则。默认四项成果为八章正文、V8 JSON、工作平衡报告、待确认事项，问答及续接记录另存。共享时必须包含.agents目录；方法变化同步入口、模板和技能。
 
-**技术层**（生成物，不手工编辑）：`technical/snapshot.json` 以 SHA-256 固定 `technical/contracts/`（V1/V2/V7/V8 结构）、`technical/compiled-schemas.cjs`（Ajv standalone 编译）与 `technical/semantic-validator.cjs`（语义规则：如 decision 仅允许 `use`、引用完整性、标识唯一）。`validate-process.cjs` 每次运行先执行 `checkIntegrity()` 逐文件核对摘要，失配即退出码 2。
+**技术层**（生成物，不手工编辑）：`technical/snapshot.json` 以 SHA-256 固定 `technical/contracts/`（V1/V2/V7/V8 结构）、`technical/compiled-schemas.cjs`（Ajv standalone 编译）与 `technical/semantic-validator.cjs`（语义规则：如 decision 仅允许 `use`、引用完整性、标识唯一）。`validate-process.cjs` 每次运行先执行 `checkIntegrity()` 逐文件核对摘要，失配即退出码 2；该脚本同时是模块，导出 `validateDocument` 与 `checkIntegrity`，新检查脚本直接 require 复用，不必解析 CLI 输出。
 
 关键约束：
 
 - `.gitattributes`对技术快照、空白JSON、虚构JSON及`sources/skill-snapshots/**`标记`-text`，防止换行转换破坏摘要。技术文件由validate检查，原技能历史快照由check-package检查；历史快照不能作为当前业务规则执行。
-- 更新技术快照的唯一途径是 `build-technical-snapshot.cjs --source <Infomat目录>`，随后按 `sources/tooling-sources.md` 重新验证，不得手改预编译代码。
+- 更新技术快照的唯一途径是 `build-technical-snapshot.cjs --source <Infomat目录>`；该命令除 `technical/**` 外还重写 `templates/process-v8.blank.json` 与 `examples/demo-process-v8.json`（后者是离线测试的合法夹具），重建后须按 `sources/tooling-sources.md` 重新验证并重跑两项检查，不得手改预编译代码。
 - 编制包版本与技术快照版本分别维护：当前2026-10-09.1方法包使用2026-10-08.1技术快照。manifest的technical_snapshot_version及结构范围应与snapshot一致；兼容校验输出package_version仍指技术快照。check-package还断言当前正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
 - 移动或重命名任何文件后必须更新引用：`check-package.cjs` 扫描全部 Markdown 的本地链接并断言目标存在。
 
