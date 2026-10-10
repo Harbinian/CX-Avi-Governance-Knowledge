@@ -48,7 +48,7 @@ node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 
 **内容层**（人工编辑）：`README.md`、`AGENTS.md`、`manifest.json`、`rules/`、`workflows/`、`templates/`、`knowledge/`、`sources/`、`planning/`、`examples/`、`verification/`。各目录职责见 README 的"目录职责"表。
 
-**编制包入口链**：`workflows/process-ai-collaboration.md` → `rules/process-session-rules.md` → `.agents/skills/single-process-authoring/`与`.agents/skills/grill-me/`；`manifest.json` 的 `authoring_package` 段登记这条链的入口路径、两个版本号及四项默认成果，`check-package.cjs` 逐个断言入口存在。旧process-authoring只作兼容路由，只有一套主规则。默认四项成果为八章正文、V8 JSON、工作平衡报告、待确认事项，问答及续接记录另存。共享时必须包含.agents目录；方法变化同步入口、模板和技能。
+**编制包入口链**：`workflows/process-ai-collaboration.md` → `rules/process-session-rules.md` → `.agents/skills/single-process-authoring/`与`.agents/skills/grill-me/`；`manifest.json` 的 `authoring_package` 段登记这条链的入口路径、两个版本号及四项默认成果，`check-package.cjs` 逐个断言入口存在。旧process-authoring只作兼容路由，只有一套主规则。默认四项成果为八章正文、V8 JSON、工作平衡报告、待确认事项，问答及续接记录另存。共享时必须包含.agents目录；供 Claude Code 使用时还须包含`.claude/`，其中`skills/<name>/SKILL.md`只是指向`.agents/skills/`同名技能的薄壳入口（无方法内容，description须与主技能一致，由check-package断言），冲突时以`.agents/skills/`为准。方法变化同步入口、模板和技能（含薄壳description）。
 
 **技术层**（生成物，不手工编辑）：`technical/snapshot.json` 以 SHA-256 固定 `technical/contracts/`（V1/V2/V7/V8 结构）、`technical/compiled-schemas.cjs`（Ajv standalone 编译）与 `technical/semantic-validator.cjs`（语义规则：如 decision 仅允许 `use`、引用完整性、标识唯一）。`validate-process.cjs` 每次运行先执行 `checkIntegrity()` 逐文件核对摘要，失配即退出码 2；该脚本同时是模块，导出 `validateDocument` 与 `checkIntegrity`，新检查脚本直接 require 复用，不必解析 CLI 输出。
 
@@ -64,6 +64,22 @@ node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 ## 会话规则
 
 流程编制与续编的全部会话时点规则（首次/续编的 grill-me 调用、设计推演、修订后重核等）以 `rules/process-session-rules.md` 为唯一权威；执行前实际读取该文件，不以其摘要代替。
+
+## 技能来源与分工
+
+本库自带技能以 `.agents/skills/` 为唯一正文：`single-process-authoring`（唯一主技能）、`grill-me`（会话访谈与情景核验）、`process-authoring`（兼容路由）。`.claude/skills/` 下是同名薄壳，只让 Claude Code 会话能按名称调用，不含方法内容。
+
+全局技能按需使用、不随库分发；与本库任务相关的常用项：
+
+| 技能 | 用途 | 边界 |
+|---|---|---|
+| `norms-formatter` | 体系文件／Office／PDF 原件转 Markdown | 只做转换与格式整理，不用于制度起草、流程编制 |
+| `docx`、`xlsx`、`pdf` | 读写 Word／Excel／PDF 原件，按指定模板出 Word 成果 | 专有许可，只在本机使用，不复制进本库 |
+| `skill-creator` | 维护本库技能时做结构与 frontmatter 校验 | 工具校验不等于方法已获确认 |
+| `humanizer-zh` | 中文正文去 AI 痕迹 | 只改表达，不得改动事实、编号与依据 |
+| `doc-coauthoring` | 正文共创（可选） | 不替代四项成果与双向核对 |
+
+同名易混：全局 `grilling`（及用户级 `grill-me` 外壳）是通用方案压测，不能替代本库 `grill-me`，也不受 `rules/process-session-rules.md` 约束；全局 `handoff` 是会话交接，与本库 `workflows/process-handoff.md`（3001／3000 人工交接）无关。仅在维护 `scripts/*.cjs` 时使用 `code-review`、`security-review`、`simplify`、`tdd`。这些全局技能按各人本机实际安装情况可用；未安装时按本库流程手工完成同等步骤，不因缺少工具降低成果要求。
 
 ## 修改边界
 
