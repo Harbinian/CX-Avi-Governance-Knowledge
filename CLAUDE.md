@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 本库是内部 AI 治理知识与规则库（内容仓库），不是应用代码库：没有构建、lint 或依赖安装步骤，主要工作是起草中文知识/规则文档、按 V8 合同生成流程 JSON，以及维护离线校验包。AI 在本库的工作约定全文在 `AGENTS.md`，修改本库内容前必读；本文件是操作摘要。
 
+流程会话实际读取`AGENTS.md`、同包主技能、`rules/process-session-rules.md`及`rules/material-reading-boundaries.md`，按阶段只读必要参考。历史快照、旧报告和链接不能自动成为当前指令；压缩或中断续接后重读当前规则并核对最新稿。
+
+Claude Code接DeepSeek的环境与验证说明见`workflows/claude-deepseek.md`。推荐`/gk-single-process-authoring`和`/gk-grill-me`，实际检查加载路径；个人同名技能可能优先于项目入口。
+
 - 正文内容使用中文；机器字段、文件名、代码标识使用英文。
 - 引用旧 Git 提交时须说明相关文件所属的提交或包版本，不得假称新增文件已包含在旧提交中。
 
@@ -35,6 +39,12 @@ node scripts/validate-process.cjs --promote <V7源文件> <新V8文件> --json
 # 包一致性检查：manifest 与快照版本、全部 Markdown 本地链接、技能 frontmatter
 node scripts/check-package.cjs
 
+# 会话用例静态检查、列表及新任务目录准备；不调用模型API
+node scripts/prepare-conversation-case.cjs --check
+node scripts/prepare-conversation-case.cjs --list
+node scripts/prepare-conversation-case.cjs --case C04 --output scratch/conversation-runs/round-1/C04
+node scripts/test-conversation-preparation.cjs
+
 # 离线合成测试（本地32项，加--source时34项）；--source仅维护者对照纯校验器时使用
 node scripts/test-offline-package.cjs [--source <Infomat目录>] [--report <新报告路径>]
 
@@ -42,21 +52,21 @@ node scripts/test-offline-package.cjs [--source <Infomat目录>] [--report <新�
 node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 ```
 
-检查脚本使用Node内置断言和合成示例，无需安装测试框架，也没有按名称筛选单项测试的参数；两个脚本均全量运行。`check-package.cjs`检查入口、链接及摘要；`test-offline-package.cjs`检查校验和文件保护，未指定--source时也可独立运行；其`--report`以拒绝覆盖方式写入，路径已存在即失败，实际记录写入`verification/`并按日期新起文件名。它们不替代内容来源核验或业务验收。
+检查脚本使用Node内置断言和合成示例，无需安装测试框架，两个测试脚本整体运行、没有按名称筛选单个用例的参数，改动后直接重跑整个脚本（纯离线，秒级）。`check-package.cjs`检查入口文件存在性、manifest与快照版本、来源快照SHA-256、全部Markdown本地链接、技能frontmatter及description路由、用例定义；`test-offline-package.cjs`检查JSON校验和文件保护，未指定--source时也可独立运行，其`--report`拒绝覆盖。`test-conversation-preparation.cjs`检查用例复制、输入与标准分开、拒绝覆盖及路径边界。`prepare-conversation-case.cjs`要求输出目录不存在，且只允许`scratch/`下的新目录。`scratch/`已被`.gitignore`忽略：测试证据与未指定成果目录时的默认落点`scratch/single-process-authoring/<新批次>/`都不进入git状态。实际检查记录按日期新建在verification；这些检查不替代真实模型会话、内容来源核验或业务验收。
 
 ## 架构：三层与完整性链条
 
 **内容层**（人工编辑）：`README.md`、`AGENTS.md`、`manifest.json`、`rules/`、`workflows/`、`templates/`、`knowledge/`、`sources/`、`planning/`、`examples/`、`verification/`。各目录职责见 README 的"目录职责"表。
 
-**编制包入口链**：`workflows/process-ai-collaboration.md` → `rules/process-session-rules.md` → `.agents/skills/single-process-authoring/`与`.agents/skills/grill-me/`；`manifest.json` 的 `authoring_package` 段登记这条链的入口路径、两个版本号及四项默认成果，`check-package.cjs` 逐个断言入口存在。旧process-authoring只作兼容路由，只有一套主规则。默认四项成果为八章正文、V8 JSON、工作平衡报告、待确认事项，问答及续接记录另存。共享时必须包含.agents目录；供 Claude Code 使用时还须包含`.claude/`，其中`skills/<name>/SKILL.md`只是指向`.agents/skills/`同名技能的薄壳入口（无方法内容，description须与主技能一致，由check-package断言），冲突时以`.agents/skills/`为准。方法变化同步入口、模板和技能（含薄壳description）。
+**编制包入口链**：会话作业入口 → 会话规则与读取边界 → `.agents/skills/single-process-authoring/`与`.agents/skills/grill-me/`；manifest登记入口、版本、四项成果及会话用例。旧process-authoring只兼容路由，只有一套方法。默认四项成果为八章正文、V8 JSON、工作平衡报告、待确认事项，问答及续接记录另存。共享包含.agents和.claude目录；Claude Code的gk前缀入口和旧入口均为薄壳，实际读取同包正文，description与目标技能一致，由check-package检查路由及描述。方法变化同步受影响入口、模板与manifest。
 
-**技术层**（生成物，不手工编辑）：`technical/snapshot.json` 以 SHA-256 固定 `technical/contracts/`（V1/V2/V7/V8 结构）、`technical/compiled-schemas.cjs`（Ajv standalone 编译）与 `technical/semantic-validator.cjs`（语义规则：如 decision 仅允许 `use`、引用完整性、标识唯一）。`validate-process.cjs` 每次运行先执行 `checkIntegrity()` 逐文件核对摘要，失配即退出码 2；该脚本同时是模块，导出 `validateDocument` 与 `checkIntegrity`，新检查脚本直接 require 复用，不必解析 CLI 输出。
+**技术层**（生成物，不手工编辑）：`technical/snapshot.json` 以 SHA-256 固定 `technical/contracts/`（V1/V2/V7/V8 结构，V1/V2 仅供历史依赖）、`technical/compiled-schemas.cjs`（Ajv standalone 编译）、`technical/semantic-validator.cjs`（语义规则：如 decision 仅允许 `use`、引用完整性、标识唯一）及随包的运行辅助模块 `technical/runtime/` 与许可证 `technical/licenses/`。`validate-process.cjs` 每次运行先执行 `checkIntegrity()` 逐文件核对摘要，失配即退出码 2；该脚本同时是模块，导出 `validateDocument` 与 `checkIntegrity`，新检查脚本直接 require 复用，不必解析 CLI 输出。
 
 关键约束：
 
-- `.gitattributes`对技术快照、空白JSON、虚构JSON及`sources/skill-snapshots/**`标记`-text`，防止换行转换破坏摘要。技术文件由validate检查，原技能历史快照由check-package检查；历史快照不能作为当前业务规则执行。
+- `.gitattributes`对技术快照、空白JSON、虚构JSON、`sources/skill-snapshots/**`及`verification/conversation-fixtures/*.json`标记`-text`，对`.agents`与`.claude`下的`SKILL.md`固定`eol=lf`，防止换行转换破坏摘要或入口文件。技术文件由validate检查，原技能历史快照与来源快照摘要由check-package检查；历史快照不能作为当前业务规则执行。
 - 更新技术快照的唯一途径是 `build-technical-snapshot.cjs --source <Infomat目录>`；该命令除 `technical/**` 外还重写 `templates/process-v8.blank.json` 与 `examples/demo-process-v8.json`（后者是离线测试的合法夹具），重建后须按 `sources/tooling-sources.md` 重新验证并重跑两项检查，不得手改预编译代码。
-- 编制包版本与技术快照版本分别维护：当前2026-10-09.1方法包使用2026-10-08.1技术快照。manifest的technical_snapshot_version及结构范围应与snapshot一致；兼容校验输出package_version仍指技术快照。check-package还断言当前正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
+- 编制包版本与技术快照版本分别维护：当前2026-10-10.1方法包为本地准备，使用2026-10-08.1技术快照。manifest的technical_snapshot_version及结构范围与snapshot一致；兼容校验输出package_version仍指技术快照。check-package断言正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
 - 移动或重命名任何文件后必须更新引用：`check-package.cjs` 扫描全部 Markdown 的本地链接并断言目标存在。
 
 **状态区分（全库核心原则）**：技术校验通过 ≠ 用户确认事实 ≠ 3000 部门核对与正式审核发布。校验输出固定携带 `business_review: "not_assessed"` 与 `target_3000_readiness: "not_checked"`；当前 manifest 正式有效清单为空。任何报告中不得把本地准备或技术通过表述为已批准、已上传或已验收。
@@ -65,9 +75,13 @@ node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 
 流程编制与续编的全部会话时点规则（首次/续编的 grill-me 调用、设计推演、修订后重核等）以 `rules/process-session-rules.md` 为唯一权威；执行前实际读取该文件，不以其摘要代替。
 
+材料进入上下文按 `rules/material-reading-boundaries.md` 控制：普通编制会话按阶段只读当前所需参考，不用全仓 `rg` 把历史原文、旧报告和预编译校验代码一并读入；维护者做文件清单、字节摘要和链接检查时可以扫描全部文件，这种检查不使其成为执行规则。
+
 ## 技能来源与分工
 
-本库自带技能以 `.agents/skills/` 为唯一正文：`single-process-authoring`（唯一主技能）、`grill-me`（会话访谈与情景核验）、`process-authoring`（兼容路由）。`.claude/skills/` 下是同名薄壳，只让 Claude Code 会话能按名称调用，不含方法内容。
+本库自带技能以`.agents/skills/`为唯一正文：single-process-authoring、grill-me及process-authoring兼容路由。`.claude/skills/`的两个gk前缀入口与三个旧入口不复制方法。真实会话检查实际来源；原生调用未加载本包时可按文件执行，并如实记录方式。
+
+会话验证使用`verification/conversation-guide.md`。被测会话只接收准备目录task下的指定材料与当轮输入，不读取评审标准或结果；评审者在会话外按实际逐轮证据记录。16项用例的准备检查不能记为DeepSeek通过。
 
 全局技能按需使用、不随库分发；与本库任务相关的常用项：
 

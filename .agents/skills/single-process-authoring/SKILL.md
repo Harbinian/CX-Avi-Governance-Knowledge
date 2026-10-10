@@ -9,6 +9,8 @@ description: 在Governance-Knowledge中编制或续修一个流程，先区分�
 
 先读取根README、AGENTS、manifest和[会话作业入口](../../../workflows/process-ai-collaboration.md)，确定资料包版本、最新草稿和任务目录。输出文件默认写入使用者任务目录；未指定时使用`scratch/single-process-authoring/<新批次>/`，不覆盖既有批次。
 
+整个任务遵守[材料读取边界](../../../rules/material-reading-boundaries.md)，先实际读取本技能及会话规则，再按阶段读所需参考；不自动展开历史来源链接或全量预编译校验代码。压缩、中断续接或换版后重新读取当前规则并核对最新稿，实际记录技能来源及核验范围。
+
 ## 编制目标与事实边界
 
 启动时明确“梳理实际流程”或“设计新流程”，不能从代码、示例或现有模板猜目标。
