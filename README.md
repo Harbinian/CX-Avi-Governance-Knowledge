@@ -11,7 +11,7 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 - 已完成首次提交并推送至 GitHub 私有仓库的 `main` 分支。
 - 尚未添加同事账号，未配置分支保护、自动检查或备份任务；创建远程库不代表多人协作已经开启。
 
-当前**单流程AI完整编制包为2026-10-10.1，本地准备状态**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。本轮补齐材料读取边界与16个虚构会话用例，真实DeepSeek会话未执行。技术合同快照仍为2026-10-08.1，V7/V8合同未改变。当前本地更新尚未提交或推送，远程既有版本不包含本轮新增内容；直接传文件夹须包含`.agents/`和`.claude/`。正式业务知识清单仍为空。
+当前**单流程AI完整编制包为2026-10-12.1，方法包已准备**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。当前方法包括材料读取边界、流程内容复核与继续治理反馈，以及22个虚构会话用例；**真实Claude Code／DeepSeek会话尚未验证，22项用例均未实际执行**。技术合同快照仍为2026-10-08.1，V7/V8合同未改变。使用者记录取得版本的实际提交及本地修改状态；直接传文件夹须包含`.agents/`和`.claude/`。正式业务知识清单仍为空。
 
 ## 同事拿到文件夹后
 
@@ -21,9 +21,11 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 4. 本机安装Node.js后，运行`node scripts/validate-process.cjs <JSON路径> --json`离线检查，无需Infomat仓库或npm安装。首次用`--emit-template`创建新骨架；可指定目标结构摘要，或将V7版本标识转换稿另存。用法见 [交接说明](workflows/process-handoff.md)。
 5. 用户在3001核对、检查并主动下载未审核文件，再上传3000办理治理。技术通过和AI问答有据支持都不等于正式审核或发布。
 
-配套 [虚构示例](examples/demo-process-procedure.md) 仅演示结构。技能能否原生调用、AI能否读取文件按实际工具验证；不能运行校验时明确记录未执行。当前包提供本地准备，实际同事会话、目标3000启用和业务验收另行记录。
+配套 [虚构示例](examples/demo-process-procedure.md) 仅演示结构。技能能否原生调用、AI能否读取文件按实际工具验证；不能运行校验时明确记录未执行。方法包准备与Git共享不表示实际同事会话、目标3000启用或业务验收完成，相关结果另行记录。
 
 当前方法与历史材料按[读取边界](rules/material-reading-boundaries.md)使用，编制时不自动展开原技能快照或全量校验代码。[会话验证指南](verification/conversation-guide.md)提供逐轮输入、独立评审标准及新目录准备命令；静态检查不计为模型通过。
+
+评价草稿内容或整理继续治理反馈时，按[内容复核规则](rules/process-content-review.md)与[反馈模板](templates/process-review-feedback.md)工作。允许阶段稿继续治理，技术结果与业务完整性分开；真实案例优先，允许可定位材料和明确说明提供等效依据；理解偏差只评价具体问题和已核验范围。方法依据见[用户确认记录](sources/process-review-confirmations-2026-10-12.md)，实际检查见[准备检查记录](verification/content-review-readiness-2026-10-12.md)。
 
 ## 首批组织与职责材料
 

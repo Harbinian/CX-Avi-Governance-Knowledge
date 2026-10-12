@@ -66,7 +66,7 @@ node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 
 - `.gitattributes`对技术快照、空白JSON、虚构JSON、`sources/skill-snapshots/**`及`verification/conversation-fixtures/*.json`标记`-text`，对`.agents`与`.claude`下的`SKILL.md`固定`eol=lf`，防止换行转换破坏摘要或入口文件。技术文件由validate检查，原技能历史快照与来源快照摘要由check-package检查；历史快照不能作为当前业务规则执行。
 - 更新技术快照的唯一途径是 `build-technical-snapshot.cjs --source <Infomat目录>`；该命令除 `technical/**` 外还重写 `templates/process-v8.blank.json` 与 `examples/demo-process-v8.json`（后者是离线测试的合法夹具），重建后须按 `sources/tooling-sources.md` 重新验证并重跑两项检查，不得手改预编译代码。
-- 编制包版本与技术快照版本分别维护：当前2026-10-10.1方法包为本地准备，使用2026-10-08.1技术快照。manifest的technical_snapshot_version及结构范围与snapshot一致；兼容校验输出package_version仍指技术快照。check-package断言正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
+- 编制包版本与技术快照版本分别维护：当前2026-10-12.1方法包已准备，使用2026-10-08.1技术快照；真实DeepSeek会话尚未验证，Git共享不改变这一状态。manifest的technical_snapshot_version及结构范围与snapshot一致；兼容校验输出package_version仍指技术快照。check-package断言正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
 - 移动或重命名任何文件后必须更新引用：`check-package.cjs` 扫描全部 Markdown 的本地链接并断言目标存在。
 
 **状态区分（全库核心原则）**：技术校验通过 ≠ 用户确认事实 ≠ 3000 部门核对与正式审核发布。校验输出固定携带 `business_review: "not_assessed"` 与 `target_3000_readiness: "not_checked"`；当前 manifest 正式有效清单为空。任何报告中不得把本地准备或技术通过表述为已批准、已上传或已验收。
@@ -75,13 +75,15 @@ node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 
 流程编制与续编的全部会话时点规则（首次/续编的 grill-me 调用、设计推演、修订后重核等）以 `rules/process-session-rules.md` 为唯一权威；执行前实际读取该文件，不以其摘要代替。
 
+流程内容复核和继续治理反馈读取`rules/process-content-review.md`及`templates/process-review-feedback.md`。阶段稿允许继续治理，技术通过与内容完整性分别记录；真实案例优先、允许等效依据；理解偏差限于具体问题和已核验范围。方法确认不赋予部门责任、审批权或3000软件门槛，原案例与答复保存在独立任务目录。
+
 材料进入上下文按 `rules/material-reading-boundaries.md` 控制：普通编制会话按阶段只读当前所需参考，不用全仓 `rg` 把历史原文、旧报告和预编译校验代码一并读入；维护者做文件清单、字节摘要和链接检查时可以扫描全部文件，这种检查不使其成为执行规则。
 
 ## 技能来源与分工
 
 本库自带技能以`.agents/skills/`为唯一正文：single-process-authoring、grill-me及process-authoring兼容路由。`.claude/skills/`的两个gk前缀入口与三个旧入口不复制方法。真实会话检查实际来源；原生调用未加载本包时可按文件执行，并如实记录方式。
 
-会话验证使用`verification/conversation-guide.md`。被测会话只接收准备目录task下的指定材料与当轮输入，不读取评审标准或结果；评审者在会话外按实际逐轮证据记录。16项用例的准备检查不能记为DeepSeek通过。
+会话验证使用`verification/conversation-guide.md`。被测会话只接收准备目录task下的指定材料与当轮输入，不读取评审标准或结果；评审者在会话外按实际逐轮证据记录。22项用例的准备检查不能记为DeepSeek通过。
 
 全局技能按需使用、不随库分发；与本库任务相关的常用项：
 
