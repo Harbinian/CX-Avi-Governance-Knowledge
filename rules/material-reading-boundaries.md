@@ -8,6 +8,7 @@
 |---|---|
 | README、AGENTS、manifest、会话作业入口 | 启动时核对当前包、范围、技能正文及任务目录 |
 | `.agents/skills/`、`rules/`、`workflows/`、`templates/` | 当前作业方法；单流程任务先读主技能、会话规则及本文件，按阶段只读所需参考，不展开全部references |
+| 流程内容复核规则、继续治理反馈模板 | 内容评价或反馈任务读取[当前规则](process-content-review.md)和[模板](../templates/process-review-feedback.md)，不因此自动读取原案例、部门原答复或全部确认历史 |
 | `.claude/skills/` | Claude Code调用入口；实际执行前读取其指向的同包方法正文，不能只看description |
 | 用户指定的最新四项成果、问答与续接记录 | 恢复当前任务；旧摘要与最新文件冲突时定位差异，不直接覆盖最新稿 |
 | `knowledge/`、`sources/organization-sources.md` | 按业务主题读取派生草稿和来源定位；不能从部门或岗位推定任务角色及审批权 |

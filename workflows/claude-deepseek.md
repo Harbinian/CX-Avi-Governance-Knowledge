@@ -1,6 +1,6 @@
 # Claude Code接DeepSeek的使用与验证
 
-适用包：2026-10-10.1；技术快照：2026-10-08.1。当前是本地准备，真实DeepSeek会话尚未验证。本页只说明工具入口；编制方法以[主技能](../.agents/skills/single-process-authoring/SKILL.md)、[会话规则](../rules/process-session-rules.md)和[读取边界](../rules/material-reading-boundaries.md)为准。
+适用包：2026-10-12.1；技术快照：2026-10-08.1。方法包已准备，真实DeepSeek会话尚未验证；Git共享不表示用例已经通过。本页只说明工具入口；编制方法以[主技能](../.agents/skills/single-process-authoring/SKILL.md)、[会话规则](../rules/process-session-rules.md)和[读取边界](../rules/material-reading-boundaries.md)为准。内容复核和继续治理反馈按[当前规则](../rules/process-content-review.md)执行。
 
 ## 接入与技能来源
 
@@ -26,7 +26,7 @@
 
 ## 会话验证
 
-用[会话验证指南](../verification/conversation-guide.md)准备并逐轮执行16个虚构用例。先做静态包检查，再在真实Claude Code／DeepSeek会话中观察入口触发、实际读取、提问、判定及成果。输入与评审标准分开，被测会话不得读取评审标准。
+用[会话验证指南](../verification/conversation-guide.md)准备并逐轮执行22个虚构用例。先做静态包检查，再在真实Claude Code／DeepSeek会话中观察入口触发、实际读取、提问、判定及成果。输入与评审标准分开，被测会话不得读取评审标准；C17—C22进一步检查阶段稿、等效依据、理解偏差范围及反馈边界。
 
 ```powershell
 node scripts/check-package.cjs
@@ -37,4 +37,4 @@ node scripts/prepare-conversation-case.cjs --case C04 --output scratch/conversat
 
 每个独立用例开新会话，多轮用例在同一会话依次发送；先检查实际路径和执行环境。使用者确认环境与材料范围后自行运行真实模型测试；准备脚本不连接API。C13的新会话续接与真实`/compact`续接分别记录，不能相互替代。
 
-技术校验通过只说明结构和语义检查结果。被测用例通过只说明指定条件下的会话表现，不代表3000已接收或业务已验收。当前实际检查范围见[准备检查记录](../verification/claude-deepseek-readiness-2026-10-10.md)。
+技术校验通过只说明结构和语义检查结果。被测用例通过只说明指定条件下的会话表现，不代表3000已接收或业务已验收。当前实际检查范围见[准备检查记录](../verification/content-review-readiness-2026-10-12.md)；[2026-10-10记录](../verification/claude-deepseek-readiness-2026-10-10.md)仅说明当时版本。

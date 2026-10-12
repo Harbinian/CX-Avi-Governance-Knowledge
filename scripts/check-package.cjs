@@ -15,7 +15,7 @@ assert.deepEqual(manifest.authoring_package.supported_schema_versions, snapshot.
 assert.equal(manifest.status, 'draft');
 assert.equal(manifest.release_version, null);
 assert.equal(manifest.authoring_package.business_rules_approved, false);
-for (const key of ['entrypoint', 'session_rules', 'authoring_skill', 'compatibility_skill', 'interview_skill', 'claude_code_skill_entrypoints', 'claude_code_primary_skill', 'claude_code_interview_skill', 'reading_boundaries', 'claude_deepseek_workflow', 'conversation_inputs', 'conversation_rubric', 'conversation_preparer', 'authoring_source_snapshot', 'technical_snapshot', 'offline_validator', 'handoff_workflow', 'verification_record']) {
+for (const key of ['entrypoint', 'session_rules', 'content_review_rules', 'review_feedback_template', 'content_review_confirmations', 'authoring_skill', 'compatibility_skill', 'interview_skill', 'claude_code_skill_entrypoints', 'claude_code_primary_skill', 'claude_code_interview_skill', 'reading_boundaries', 'claude_deepseek_workflow', 'conversation_inputs', 'conversation_rubric', 'conversation_preparer', 'authoring_source_snapshot', 'technical_snapshot', 'offline_validator', 'handoff_workflow', 'verification_record']) {
   assert.ok(fs.existsSync(path.join(root, manifest.authoring_package[key])), `缺少manifest入口：${key}`);
 }
 const sourceSnapshot = JSON.parse(fs.readFileSync(path.join(root, manifest.authoring_package.authoring_source_snapshot), 'utf8'));

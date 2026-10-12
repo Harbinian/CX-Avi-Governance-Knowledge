@@ -1,0 +1,80 @@
+{
+  "schema_version": "process-governance-v8",
+  "export_meta": {
+    "package_ref": "package_synthetic_handoff_001",
+    "exported_at": "2026-10-12T00:00:00.000Z",
+    "initiating_department": "虚构发出部门",
+    "compiler": "虚构测试编制人"
+  },
+  "process": {
+    "process_ref": "process_synthetic_handoff_001",
+    "process_name": "虚构事项交接流程",
+    "owning_department": "虚构发出部门",
+    "purpose": "虚构发出部门交付办理信息，虚构接收部门接收并继续办理；仅用于测试内容复核方法",
+    "scope": "仅虚构测试，具体起止及后续办理范围尚未说明",
+    "capability_domain": null,
+    "business_capability": null,
+    "classification_status": "unclassified"
+  },
+  "behaviors": [
+    {
+      "behavior_ref": "behavior_synthetic_send",
+      "node_type": "action",
+      "behavior_name": "发出办理信息",
+      "behavior_description": "整理并发出办理信息。",
+      "current_actor_role": "虚构发出部门示例办理岗",
+      "actor_assignment_mode": "fixed_department",
+      "actor_department_data_ref": null,
+      "actor_position_rule": "",
+      "trigger": "收到示例事项",
+      "precondition": "",
+      "input_description": "",
+      "timing": null,
+      "completion_standard": "",
+      "output_description": "",
+      "countersign_all_required": false,
+      "countersign_target_departments": []
+    },
+    {
+      "behavior_ref": "behavior_synthetic_receive",
+      "node_type": "action",
+      "behavior_name": "接收办理信息",
+      "behavior_description": "接收办理信息。",
+      "current_actor_role": "虚构接收部门示例接收岗",
+      "actor_assignment_mode": "fixed_department",
+      "actor_department_data_ref": null,
+      "actor_position_rule": "",
+      "trigger": "收到示例办理信息",
+      "precondition": "",
+      "input_description": "",
+      "timing": null,
+      "completion_standard": "",
+      "output_description": "",
+      "countersign_all_required": false,
+      "countersign_target_departments": []
+    }
+  ],
+  "flow_relations": [
+    {
+      "relation_ref": "relation_synthetic_handoff_001",
+      "relation_type": "sequence",
+      "from_behavior_ref": "behavior_synthetic_send",
+      "to_behavior_ref": "behavior_synthetic_receive",
+      "condition": ""
+    }
+  ],
+  "data_objects": [],
+  "forms": [],
+  "terms": [],
+  "migration": {
+    "source_schema_version": "process-governance-v8",
+    "source_process_ref": null,
+    "source_process_count": 1,
+    "legacy_cross_department_records": [],
+    "reference_materials": [],
+    "internal_process_calls": [],
+    "work_roles": [],
+    "unresolved_actor_roles": [],
+    "unresolved_join_modes": []
+  }
+}

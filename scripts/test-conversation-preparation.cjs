@@ -87,8 +87,8 @@ test('fixture_traversal_and_missing_rubric_rejected', () => {
   fs.writeFileSync(rubricPath, JSON.stringify(rubric));
   assert.throws(() => loadSuite(relocated), /评审标准/);
 });
-test('valid_and_factually_wrong_fixtures_both_pass_technical_only', () => {
-  for (const file of ['process-v8.json', 'wrong-draft.json']) {
+test('valid_wrong_and_skeleton_fixtures_pass_technical_only', () => {
+  for (const file of ['process-v8.json', 'wrong-draft.json', 'handoff-skeleton.json']) {
     const result = validateDocument(JSON.parse(fs.readFileSync(path.join(root, 'verification/conversation-fixtures', file), 'utf8')));
     assert.equal(result.valid, true);
     assert.equal(result.business_review, 'not_assessed');
