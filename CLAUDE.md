@@ -33,7 +33,7 @@ node scripts/validate-process.cjs --emit-template "<任务目录>/<流程>-proce
 # 指定目标结构摘要；不一致返回1
 node scripts/validate-process.cjs <JSON路径> --expect-digest <SHA-256> --json
 
-# V7顶层版本标识转换稿另存，保留真实归档；不表示3001迁移完成
+# V7顶层版本标识转换稿另存，保留真实归档；校验未通过仍另存并返回1；不表示3001迁移完成
 node scripts/validate-process.cjs --promote <V7源文件> <新V8文件> --json
 
 # 包一致性检查：manifest 与快照版本、全部 Markdown 本地链接、技能 frontmatter
@@ -52,21 +52,21 @@ node scripts/test-offline-package.cjs [--source <Infomat目录>] [--report <新�
 node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 ```
 
-检查脚本使用Node内置断言和合成示例，无需安装测试框架，两个测试脚本整体运行、没有按名称筛选单个用例的参数，改动后直接重跑整个脚本（纯离线，秒级）。`check-package.cjs`检查入口文件存在性、manifest与快照版本、来源快照SHA-256、全部Markdown本地链接、技能frontmatter及description路由、用例定义；`test-offline-package.cjs`检查JSON校验和文件保护，未指定--source时也可独立运行，其`--report`拒绝覆盖。`test-conversation-preparation.cjs`检查用例复制、输入与标准分开、拒绝覆盖及路径边界。`prepare-conversation-case.cjs`要求输出目录不存在，且只允许`scratch/`下的新目录。`scratch/`已被`.gitignore`忽略：测试证据与未指定成果目录时的默认落点`scratch/single-process-authoring/<新批次>/`都不进入git状态。实际检查记录按日期新建在verification；这些检查不替代真实模型会话、内容来源核验或业务验收。
+检查脚本使用Node内置断言和合成示例，无需安装测试框架，两个测试脚本整体运行、没有按名称筛选单个用例的参数，改动后直接重跑整个脚本（纯离线，秒级）。改动 Markdown、`manifest.json` 或技能文件后先跑 `check-package.cjs`；改动 `scripts/*.cjs` 后重跑对应测试脚本。`check-package.cjs`检查入口文件存在性（含依据追溯、方法升级与试用记录登记项）、manifest与快照版本、来源快照SHA-256、全部Markdown本地链接、技能frontmatter及description路由、用例定义；`test-offline-package.cjs`检查JSON校验和文件保护，未指定--source时也可独立运行，其`--report`拒绝覆盖。`test-conversation-preparation.cjs`检查用例复制、输入与标准分开、拒绝覆盖及路径边界。`prepare-conversation-case.cjs`要求输出目录不存在，且只允许`scratch/`下的新目录。`scratch/`已被`.gitignore`忽略：测试证据与未指定成果目录时的默认落点`scratch/single-process-authoring/<新批次>/`都不进入git状态。实际检查记录按日期新建在verification；这些检查不替代真实模型会话、内容来源核验或业务验收。
 
-## 架构：三层与完整性链条
+## 架构：内容层、编制包与技术层
 
 **内容层**（人工编辑）：`README.md`、`AGENTS.md`、`manifest.json`、`rules/`、`workflows/`、`templates/`、`knowledge/`、`sources/`、`planning/`、`examples/`、`verification/`。各目录职责见 README 的"目录职责"表。
 
-**编制包入口链**：会话作业入口 → 会话规则与读取边界 → `.agents/skills/single-process-authoring/`与`.agents/skills/grill-me/`；manifest登记入口、版本、四项成果及会话用例。旧process-authoring只兼容路由，只有一套方法。默认四项成果为八章正文、V8 JSON、工作平衡报告、待确认事项，问答及续接记录另存。共享包含.agents和.claude目录；Claude Code的gk前缀入口和旧入口均为薄壳，实际读取同包正文，description与目标技能一致，由check-package检查路由及描述。方法变化同步受影响入口、模板与manifest。
+**编制包入口链**：会话作业入口 → 会话规则与读取边界 → `.agents/skills/single-process-authoring/`与`.agents/skills/grill-me/`；manifest登记入口、版本、四项成果及会话用例；生成或修复流程 JSON 前读取 `rules/process-v8-contract.md`（V8 合同）。旧process-authoring只兼容路由，只有一套方法。默认四项成果为八章正文、V8 JSON、工作平衡报告、待确认事项，问答及续接记录另存。共享包含.agents和.claude目录；Claude Code的gk前缀入口和旧入口均为薄壳，实际读取同包正文，description与目标技能一致，由check-package检查路由及描述。方法变化同步受影响入口、模板与manifest。
 
-**技术层**（生成物，不手工编辑）：`technical/snapshot.json` 以 SHA-256 固定 `technical/contracts/`（V1/V2/V7/V8 结构，V1/V2 仅供历史依赖）、`technical/compiled-schemas.cjs`（Ajv standalone 编译）、`technical/semantic-validator.cjs`（语义规则：如 decision 仅允许 `use`、引用完整性、标识唯一）及随包的运行辅助模块 `technical/runtime/` 与许可证 `technical/licenses/`。`validate-process.cjs` 每次运行先执行 `checkIntegrity()` 逐文件核对摘要，失配即退出码 2；该脚本同时是模块，导出 `validateDocument` 与 `checkIntegrity`，新检查脚本直接 require 复用，不必解析 CLI 输出。
+**技术层**（生成物，不手工编辑）：`technical/snapshot.json` 以 SHA-256 固定 `technical/contracts/`（V1/V2/V7/V8 结构，V1/V2 仅供历史依赖）、`technical/compiled-schemas.cjs`（Ajv standalone 编译）、`technical/semantic-validator.cjs`（语义规则：如 decision 仅允许 `use`、引用完整性、标识唯一）及随包的运行辅助模块 `technical/runtime/` 与许可证 `technical/licenses/`。`validate-process.cjs` 每次运行先执行 `checkIntegrity()` 逐文件核对摘要，失配即退出码 2；该脚本同时是模块，导出 `validateDocument`、`readDocument`、`checkIntegrity`、`emitTemplate`、`promoteDocument`，新检查脚本直接 require 复用，不必解析 CLI 输出。
 
 关键约束：
 
 - `.gitattributes`对技术快照、空白JSON、虚构JSON、`sources/skill-snapshots/**`及`verification/conversation-fixtures/*.json`标记`-text`，对`.agents`与`.claude`下的`SKILL.md`固定`eol=lf`，防止换行转换破坏摘要或入口文件。技术文件由validate检查，原技能历史快照与来源快照摘要由check-package检查；历史快照不能作为当前业务规则执行。
-- 更新技术快照的唯一途径是 `build-technical-snapshot.cjs --source <Infomat目录>`；该命令除 `technical/**` 外还重写 `templates/process-v8.blank.json` 与 `examples/demo-process-v8.json`（后者是离线测试的合法夹具），重建后须按 `sources/tooling-sources.md` 重新验证并重跑两项检查，不得手改预编译代码。
-- 编制包版本与技术快照版本分别维护：当前2026-10-12.1方法包已准备，使用2026-10-08.1技术快照；真实DeepSeek会话尚未验证，Git共享不改变这一状态。manifest的technical_snapshot_version及结构范围与snapshot一致；兼容校验输出package_version仍指技术快照。check-package断言正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
+- 更新技术快照的唯一途径是 `build-technical-snapshot.cjs --source <Infomat目录>`；该命令除 `technical/**` 外还重写 `templates/process-v8.blank.json` 与 `examples/demo-process-v8.json`（后者是离线测试的合法夹具），重建后须按 `sources/tooling-sources.md` 重新验证，重跑 `check-package.cjs` 与 `test-offline-package.cjs`（来源等价检查加 `--source`），不得手改预编译代码。
+- 编制包版本与技术快照版本分别维护：当前2026-10-13.1方法升级本地准备，使用2026-10-08.1技术快照。用户已确认完整试用、功能无问题，具体范围见manifest登记的user_trial_record；22项预设用例仍按各自实际记录说明，Git共享不改变执行结果。编制及复核读取`rules/process-evidence-traceability.md`，按`templates/process-task-record.md`登记来源实际取得、关键结论、成果位置与修订影响；复用已有记录，不逐句建台账，来源号与结论号不写入 JSON。manifest的technical_snapshot_version及结构范围与snapshot一致；兼容校验输出package_version仍指技术快照。check-package断言正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
 - 移动或重命名任何文件后必须更新引用：`check-package.cjs` 扫描全部 Markdown 的本地链接并断言目标存在。
 
 **状态区分（全库核心原则）**：技术校验通过 ≠ 用户确认事实 ≠ 3000 部门核对与正式审核发布。校验输出固定携带 `business_review: "not_assessed"` 与 `target_3000_readiness: "not_checked"`；当前 manifest 正式有效清单为空。任何报告中不得把本地准备或技术通过表述为已批准、已上传或已验收。
@@ -95,7 +95,7 @@ node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 | `humanizer-zh` | 中文正文去 AI 痕迹 | 只改表达，不得改动事实、编号与依据 |
 | `doc-coauthoring` | 正文共创（可选） | 不替代四项成果与双向核对 |
 
-同名易混：全局 `grilling`（及用户级 `grill-me` 外壳）是通用方案压测，不能替代本库 `grill-me`，也不受 `rules/process-session-rules.md` 约束；全局 `handoff` 是会话交接，与本库 `workflows/process-handoff.md`（3001／3000 人工交接）无关。仅在维护 `scripts/*.cjs` 时使用 `code-review`、`security-review`、`simplify`、`tdd`。这些全局技能按各人本机实际安装情况可用；未安装时按本库流程手工完成同等步骤，不因缺少工具降低成果要求。
+同名易混：全局 `grilling`（及用户级 `/grill` 外壳）是通用方案压测，不能替代本库 `grill-me`，也不受 `rules/process-session-rules.md` 约束；全局 `handoff` 是会话交接，与本库 `workflows/process-handoff.md`（3001／3000 人工交接）无关。仅在维护 `scripts/*.cjs` 时使用 `code-review`、`security-review`、`simplify`、`tdd`。这些全局技能按各人本机实际安装情况可用；未安装时按本库流程手工完成同等步骤，不因缺少工具降低成果要求。
 
 ## 修改边界
 

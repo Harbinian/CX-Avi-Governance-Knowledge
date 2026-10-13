@@ -15,6 +15,7 @@
 7. 生成JSON读取`rules/process-v8-contract.md`及`technical/snapshot.json`；使用随包离线校验。工具不能读取或执行时明确限制，不假称已调用、已校验或已取得材料。
 8. 流程会话实际读取`rules/material-reading-boundaries.md`。只按任务读取当前参考，历史来源链接不默认展开；压缩或续接后重新核对当前规则及最新稿。维护者摘要检查与向模型读入历史指令分别处理。
 9. 评价内容完整性、整理继续治理反馈或复核交付时读取`rules/process-content-review.md`，需要清单时用`templates/process-review-feedback.md`；阶段稿可继续治理，技术检查与内容结论分别说明。评价只限于具体问题和已核验范围，不自动扩大为部门整体认知不足。
+10. 编制、续编和交付复核按`rules/process-evidence-traceability.md`记录来源实际取得情况、关键结论与四项成果对应位置及修订影响；复用已有任务记录，不逐句建台账或重复索取材料。
 
 ## 内容与来源
 

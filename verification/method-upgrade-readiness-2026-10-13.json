@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "purpose": "process_evidence_traceability_method_upgrade",
+  "date": "2026-10-13",
+  "authoring_package_version": "2026-10-13.1",
+  "technical_snapshot_version": "2026-10-08.1",
+  "baseline_head": "8b96761a34d1e2029bdbca8058b4a8c7a8b84f48",
+  "baseline_worktree": "CLAUDE.md modified",
+  "user_trial": {
+    "status": "user_confirmed",
+    "record": "verification/user-trial-confirmation-2026-10-13.md",
+    "tested_package_version": null,
+    "client": null,
+    "model": null,
+    "scope": "complete trial reported by user before this upgrade"
+  },
+  "package_check": {
+    "valid": true,
+    "authoring_package_version": "2026-10-13.1",
+    "technical_snapshot_version": "2026-10-08.1",
+    "markdown_files": 70,
+    "local_links": 215,
+    "technical_files": 13,
+    "source_skill_files": 10,
+    "skills": [
+      "single-process-authoring",
+      "grill-me",
+      "process-authoring"
+    ],
+    "claude_entries": [
+      "single-process-authoring",
+      "grill-me",
+      "process-authoring",
+      "gk-single-process-authoring",
+      "gk-grill-me"
+    ],
+    "user_trial_status": "user_confirmed",
+    "conversation_cases": 22,
+    "conversation_model_execution": "not_run"
+  },
+  "case_definition_check": {
+    "valid": true,
+    "cases": 22,
+    "coverage": 22,
+    "model_execution": "not_run"
+  },
+  "preparation_functional_tests": {
+    "purpose": "conversation_preparation_functional_tests",
+    "model_execution": "not_run",
+    "cases_prepared": 22,
+    "passed": 9,
+    "failed": 0,
+    "results": [
+      {
+        "name": "all_cases_copy_exact_inputs_and_start_unexecuted",
+        "passed": true
+      },
+      {
+        "name": "existing_output_refused_and_bytes_preserved",
+        "passed": true
+      },
+      {
+        "name": "unknown_case_does_not_create_output",
+        "passed": true
+      },
+      {
+        "name": "shared_repository_output_refused",
+        "passed": true
+      },
+      {
+        "name": "relocated_case_pack_independent_of_original_paths",
+        "passed": true
+      },
+      {
+        "name": "fixture_traversal_and_missing_rubric_rejected",
+        "passed": true
+      },
+      {
+        "name": "valid_wrong_and_skeleton_fixtures_pass_technical_only",
+        "passed": true
+      },
+      {
+        "name": "cli_check_and_invalid_arguments_report_without_model_execution",
+        "passed": true
+      },
+      {
+        "name": "source_fixtures_unchanged",
+        "passed": true
+      }
+    ],
+    "evidence_directory": "E:\\CA001\\Governance-Knowledge\\scratch\\conversation-preparation-tests\\ad4dd693-8aed-4c1d-b714-5f821dd12cce"
+  },
+  "skill_validation": {
+    "skill": "single-process-authoring",
+    "result": "passed"
+  },
+  "patch_check": {
+    "command": "git -c core.autocrlf=false diff --check",
+    "result": "passed"
+  },
+  "preservation_check": {
+    "preexisting_claude_changes_preserved": true,
+    "claude_task_change": "one_current_status_line",
+    "technical_files_verified": 13,
+    "historical_records_unchanged": 4,
+    "head_unchanged": true,
+    "user_trial_recorded": true,
+    "predefined_model_cases": "not_run",
+    "formal_business_entries": 0
+  },
+  "predefined_model_cases": {
+    "status": "not_run",
+    "prepared": 22,
+    "executed": 0
+  },
+  "upgraded_method_live_conversation": "not_recorded",
+  "business_review": "not_assessed",
+  "target_3000_readiness": "not_checked",
+  "git_distribution": "local_changes_only",
+  "node_version": "v25.2.1",
+  "evidence_directory": "scratch\\method-upgrade-2026-10-13-20ca6fb6-4f05-442b-9202-05885f1d904c",
+  "notes": [
+    "User confirmation is recorded without inventing trial environment or per-case results.",
+    "Current method changes reuse task records and do not change process JSON contracts.",
+    "Historical verification records retain their original bytes."
+  ]
+}

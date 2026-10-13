@@ -15,7 +15,7 @@ assert.deepEqual(manifest.authoring_package.supported_schema_versions, snapshot.
 assert.equal(manifest.status, 'draft');
 assert.equal(manifest.release_version, null);
 assert.equal(manifest.authoring_package.business_rules_approved, false);
-for (const key of ['entrypoint', 'session_rules', 'content_review_rules', 'review_feedback_template', 'content_review_confirmations', 'authoring_skill', 'compatibility_skill', 'interview_skill', 'claude_code_skill_entrypoints', 'claude_code_primary_skill', 'claude_code_interview_skill', 'reading_boundaries', 'claude_deepseek_workflow', 'conversation_inputs', 'conversation_rubric', 'conversation_preparer', 'authoring_source_snapshot', 'technical_snapshot', 'offline_validator', 'handoff_workflow', 'verification_record']) {
+for (const key of ['entrypoint', 'session_rules', 'content_review_rules', 'review_feedback_template', 'content_review_confirmations', 'traceability_rules', 'method_upgrade_record', 'user_trial_record', 'authoring_skill', 'compatibility_skill', 'interview_skill', 'claude_code_skill_entrypoints', 'claude_code_primary_skill', 'claude_code_interview_skill', 'reading_boundaries', 'claude_deepseek_workflow', 'conversation_inputs', 'conversation_rubric', 'conversation_preparer', 'authoring_source_snapshot', 'technical_snapshot', 'offline_validator', 'handoff_workflow', 'verification_record']) {
   assert.ok(fs.existsSync(path.join(root, manifest.authoring_package[key])), `缺少manifest入口：${key}`);
 }
 const sourceSnapshot = JSON.parse(fs.readFileSync(path.join(root, manifest.authoring_package.authoring_source_snapshot), 'utf8'));
@@ -67,4 +67,4 @@ for (const [entryName, methodName] of Object.entries(prefixedEntries)) {
   assert.ok(entry.includes(`../../../.agents/skills/${methodName}/SKILL.md`), `${entryName} 缺少方法路由`);
 }
 const { suite } = loadSuite(root);
-console.log(JSON.stringify({ valid: true, authoring_package_version: manifest.authoring_package.version, technical_snapshot_version: snapshot.package_version, markdown_files: markdownFiles, local_links: localLinks, technical_files: snapshot.files.length, source_skill_files: sourceSnapshot.files.length, skills, claude_entries: [...skills, ...Object.keys(prefixedEntries)], conversation_cases: suite.cases.length, conversation_model_execution: manifest.authoring_package.conversation_verification_status }, null, 2));
+console.log(JSON.stringify({ valid: true, authoring_package_version: manifest.authoring_package.version, technical_snapshot_version: snapshot.package_version, markdown_files: markdownFiles, local_links: localLinks, technical_files: snapshot.files.length, source_skill_files: sourceSnapshot.files.length, skills, claude_entries: [...skills, ...Object.keys(prefixedEntries)], user_trial_status: manifest.authoring_package.user_trial_status, conversation_cases: suite.cases.length, conversation_model_execution: manifest.authoring_package.conversation_verification_status }, null, 2));
