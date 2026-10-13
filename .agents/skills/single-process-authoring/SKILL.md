@@ -33,6 +33,8 @@ description: 在Governance-Knowledge中编制或续修一个流程，先区分�
 
 事实与问答记录、续接摘要及交接记录为辅助文件，不能替代工作平衡报告，也不写入JSON。模板及双向一致性核对见[四项成果](references/output-templates.md)。
 
+编制、续编和交付复核读取[依据追溯规则](../../../rules/process-evidence-traceability.md)，在既有任务记录中关联实际取得的来源、关键结论与成果位置。来源路径已登记不等于原件已读取；材料与答复仍适用时直接复用，只追问剩余缺口。换版和关键修订按影响记录重核范围，不逐句增加台账。
+
 默认交付三份Markdown及一份JSON。用户指定Word时，由同源正文按指定模板生成并检查实际呈现；没有可用生成工具时保留Markdown并如实说明。格式与原件引用见[制度编写规范](references/document-standard.md)。不自动生成替代流程图或声称图件已经插入。
 
 ## 七阶段与grill-me

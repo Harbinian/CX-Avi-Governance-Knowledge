@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "suite_id": "claude-deepseek-process-session-v1",
-  "package_version": "2026-10-12.1",
+  "package_version": "2026-10-13.1",
   "status": "prepared",
   "synthetic": true,
   "common_instruction": "按Governance-Knowledge当前single-process-authoring及会话规则执行，实际读取主技能与rules/material-reading-boundaries.md；涉及内容复核和继续治理反馈时读取rules/process-content-review.md及相关模板。仅读取当前方法和本用例task下指定输入，不读取verification内的用例、评审标准或结果。默认另存task/output，不覆盖输入，不修改共享库，不上传系统。",

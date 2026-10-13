@@ -11,6 +11,7 @@
 | 流程内容复核规则、继续治理反馈模板 | 内容评价或反馈任务读取[当前规则](process-content-review.md)和[模板](../templates/process-review-feedback.md)，不因此自动读取原案例、部门原答复或全部确认历史 |
 | `.claude/skills/` | Claude Code调用入口；实际执行前读取其指向的同包方法正文，不能只看description |
 | 用户指定的最新四项成果、问答与续接记录 | 恢复当前任务；旧摘要与最新文件冲突时定位差异，不直接覆盖最新稿 |
+| 依据追溯规则 | 编制、续编或交付复核读取[当前规则](process-evidence-traceability.md)，复用任务记录核对来源实际取得情况、关键结论及修订影响；不默认展开全部来源正文 |
 | `knowledge/`、`sources/organization-sources.md` | 按业务主题读取派生草稿和来源定位；不能从部门或岗位推定任务角色及审批权 |
 | `technical/snapshot.json`、`technical/contracts/` | 需要JSON字段或兼容检查时读取对应版本和有关字段；旧结构仅为兼容依赖 |
 | `technical/compiled-schemas.cjs`及校验运行模块 | 默认由Node执行，不整份送入提示词；维护校验实现时才读有关代码 |

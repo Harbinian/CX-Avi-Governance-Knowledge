@@ -1,6 +1,6 @@
 # 与AI会话编制或继续修订一个流程
 
-完整编制包版本：2026-10-12.1，方法包已准备；技术合同快照：2026-10-08.1。真实Claude Code／DeepSeek会话尚未验证。方法依据用户确认；V8/V7合同固定于本包快照。公司业务知识的正式有效清单仍为空，具体业务内容须依原始材料和确认取得。
+完整编制包版本：2026-10-13.1，本轮升级本地准备；技术合同快照：2026-10-08.1。用户已确认完整试用、功能无问题，具体环境与包版本未登记，见[试用确认](../verification/user-trial-confirmation-2026-10-13.md)。本轮新增方法与22项预设用例分别按实际检查记录说明。方法依据用户授权；V8/V7合同固定于本包快照。公司业务知识的正式有效清单仍为空，具体业务内容须依原始材料和确认取得。
 
 ## 开始前
 
@@ -29,6 +29,8 @@
 先读取README.md、AGENTS.md、manifest.json、本作业入口和
 .agents/skills/single-process-authoring/SKILL.md，按任务读取相关规则与资料。
 实际读取rules/process-session-rules.md及rules/material-reading-boundaries.md；
+按rules/process-evidence-traceability.md记录来源实际取得情况、
+关键结论与四项成果对应位置及修订影响，复用已有材料与答复。
 参考按任务阶段取得，不自动展开历史快照链接或全量校验代码。
 不能读取时说明需要我提供什么，不假称已取得内容或调用技能。
 
@@ -57,6 +59,7 @@ JSON按本包实际结构和语义规则生成；技术检查实际执行后再�
 | 首次澄清／续编核验 | [会话规则](../rules/process-session-rules.md)及 [grill-me](../.agents/skills/grill-me/SKILL.md) |
 | 内容完整性评价／继续治理反馈 | [内容复核规则](../rules/process-content-review.md)及[反馈模板](../templates/process-review-feedback.md)，按行为划分说明对象并对照双方接口 |
 | 当前方法／历史追溯／压缩续接 | [材料读取边界](../rules/material-reading-boundaries.md) |
+| 来源实际取得／结论追溯／修订影响 | [依据追溯规则](../rules/process-evidence-traceability.md)，在既有任务记录中登记；只读本轮相关依据 |
 | Claude Code接DeepSeek入口 | [专用说明](claude-deepseek.md)，普通编制不展开其评审链接 |
 | 维护会话用例及会话外评审 | [验证指南](../verification/conversation-guide.md)，被测会话不读取指南及评审标准 |
 | 部门业务主题、组织边界与配置参考 | knowledge相关摘要、待确认事项及sources原件登记 |

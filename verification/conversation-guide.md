@@ -1,6 +1,6 @@
 # 会话验证指南
 
-状态：22个虚构用例已准备，真实DeepSeek执行结果未取得。输入定义为[conversation-inputs.json](conversation-inputs.json)，评审标准为[conversation-rubric.json](conversation-rubric.json)。本指南供运行者与评审者使用，不交给被测会话。用例测试AI作业方法，不验证公司事实。
+状态：22个虚构用例已准备，各用例实际执行结果未登记。用户已确认完整试用、功能无问题，见[试用确认](user-trial-confirmation-2026-10-13.md)；该确认不替代逐项用例证据。本轮增强依据追溯及成果一致性的评审要求，新增要求未取得真实会话执行记录。输入定义为[conversation-inputs.json](conversation-inputs.json)，评审标准为[conversation-rubric.json](conversation-rubric.json)。本指南供运行者与评审者使用，不交给被测会话。用例测试AI作业方法，不验证公司事实。
 
 ## 准备与逐轮执行
 
