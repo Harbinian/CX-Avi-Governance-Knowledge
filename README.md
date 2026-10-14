@@ -1,15 +1,15 @@
 # 内部 AI 治理知识与规则库
 
-本库供内部同事共享治理知识、规则、AI 作业方法和模板，作为与 AI 会话设计或编制业务流程的共同基础。2026-10-05 用户明确选择 GitHub 作为远程托管方向。本库与 Infomat 独立维护，每位同事使用自己的工作副本和任务材料。
+本库供内部同事共享治理知识、规则、AI 作业方法和模板，作为与 AI 会话设计或编制业务流程的共同基础。远程托管采用 GitHub 和 Gitee，维护工作副本默认向两端推送。本库与 Infomat 独立维护，每位同事使用自己的工作副本和任务材料。
 
-GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com/Harbinian/CX-Avi-Governance-Knowledge)，私有。`Governance-Knowledge` 为本库简称，本地工作副本目录可自行选择。
+GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com/Harbinian/CX-Avi-Governance-Knowledge)；Gitee 远程仓库：[HarbinianCN/CX-Avi-Governance-Knowledge](https://gitee.com/HarbinianCN/CX-Avi-Governance-Knowledge)。两端当前均为公开仓库，推送前核对材料的共享范围。`Governance-Knowledge` 为本库简称，本地工作副本目录可自行选择。
 
 ## 当前状态
 
 - 已建立本地 Git 仓库及起步文件。
 - 尚无正式发布版本，`manifest.json` 的正式内容清单为空。
-- 已完成首次提交并推送至 GitHub 私有仓库的 `main` 分支。
-- 尚未添加同事账号，未配置分支保护、自动检查或备份任务；创建远程库不代表多人协作已经开启。
+- 已完成首次提交并推送至 GitHub 的 `main` 分支；日常维护默认向两端推送 `main` 或当前工作分支。
+- 同事的写入权限、分支保护、自动检查和备份任务须按各平台实际配置核对；仓库公开不表示受控协作已经开启。
 
 当前**单流程AI完整编制包为2026-10-13.1，本轮升级已在本地准备**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。方法包括材料读取边界、流程内容复核、依据追溯、成果一致性及继续治理反馈。
 
@@ -53,13 +53,32 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 
 原 [建设说明](planning/internal-governance-knowledge-guide.md) 保留前期讨论记录；其中固定电脑及 Gitea 部署内容不再作为当前托管方案。
 
-取得访问权限后，可将仓库克隆到自己的电脑，并记录本次使用的提交标识：
+可将仓库克隆到自己的电脑，并记录本次使用的提交标识；推送需要取得目标仓库的写入权限：
 
 ```bash
 git clone https://github.com/Harbinian/CX-Avi-Governance-Knowledge.git
 cd CX-Avi-Governance-Knowledge
 git rev-parse HEAD
 ```
+
+维护工作副本从 GitHub 拉取，普通 `git push` 向 GitHub 和 Gitee 推送当前分支。Git 的远程配置保存在本机，不会随克隆传递；新工作副本需要执行一次以下配置：
+
+```bash
+git config --local --replace-all remote.origin.pushurl https://github.com/Harbinian/CX-Avi-Governance-Knowledge.git
+git config --local --add remote.origin.pushurl https://gitee.com/HarbinianCN/CX-Avi-Governance-Knowledge.git
+git config --local remote.pushDefault origin
+git config --local push.default current
+git remote get-url --push --all origin
+```
+
+两端推送分别执行，可能一端成功、另一端失败。维护者检查两端结果，并在失败端恢复连接或完成身份验证后重试；不得将单端成功表述为两端同步完成。单端重试可显式指定目标：
+
+```bash
+git push https://github.com/Harbinian/CX-Avi-Governance-Knowledge.git main
+git push https://gitee.com/HarbinianCN/CX-Avi-Governance-Knowledge.git main
+```
+
+两端共享主线为 `main`。Gitee 已有的初始化 `master` 分支保留，不作为双端推送目标；浏览器或克隆时以平台实际默认分支为准，需要主线时显式选择 `main`。
 
 新任务可主动获取新版；正在进行的任务继续使用已记录的提交，换版前核对影响。浏览器可阅读共享文件，但 AI 是否能直接读取私有仓库需按实际工具验证。
 
@@ -86,4 +105,4 @@ git rev-parse HEAD
 
 具体业务事实、责任和审批依据来自用户指定的原始材料及有权主体确认。Infomat 的历史文档、技术实现和 AI 输出不会因复制进本库而获得业务权威。具体案例继续按其既有治理路径办理，本库不自动读写3000或3001。
 
-远程共享前需确定 GitHub 仓库地址、可见性及成员权限；正式知识发布还需明确维护人员、内容确认主体和发布记录。推送或合并不会自动使业务规则生效。允许读取仓库不等于允许把内部材料上传到任意外部 AI 服务，应使用组织允许的工具和材料范围。
+远程共享前核对 GitHub 和 Gitee 的可见性、成员权限及材料范围；正式知识发布还需明确维护人员、内容确认主体和发布记录。推送或合并不会自动使业务规则生效。允许读取仓库不等于允许把内部材料上传到任意外部 AI 服务，应使用组织允许的工具和材料范围。

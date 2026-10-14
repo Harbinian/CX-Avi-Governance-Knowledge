@@ -1,10 +1,10 @@
 # 内容贡献说明
 
-状态：起步协作说明；已创建 GitHub 私有仓库 `Harbinian/CX-Avi-Governance-Knowledge`，同事账号、成员权限及正式内容审核人员尚未配置。
+状态：起步协作说明；GitHub 仓库 `Harbinian/CX-Avi-Governance-Knowledge` 与 Gitee 仓库 `HarbinianCN/CX-Avi-Governance-Knowledge` 当前均公开，维护工作副本默认向两端推送。成员写入权限及正式内容审核人员按实际配置和确认记录核对。
 
 ## 当前可以做什么
 
-可以在本地起草内容和提出修改建议。初始内容已提交并推送至 GitHub 的 `main` 分支，同事账号和成员访问尚未配置及验证；未授权成员暂不能开展远程协作。不得把本文件中的拟建审核流程描述为已启用控制。
+可以在本地起草内容和提出修改建议。初始内容已提交并推送至 GitHub 的 `main` 分支；两端以 `main` 作为共享主线，推送配置及单端失败后的重试见 [README](README.md)。公开仓库可供读取，写入须有相应授权；不得把本文件中的拟建审核流程描述为已启用控制。
 
 同事使用本库设计或编制具体流程时，按照 [AI 会话作业入口](workflows/process-ai-collaboration.md) 取得固定基线，成果保存到各自任务目录。只有需要改变共享知识、规则、方法或模板时，才向本库提出内容修改申请。
 
