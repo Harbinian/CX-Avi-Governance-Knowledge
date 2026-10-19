@@ -8,7 +8,7 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 
 - 已建立本地 Git 仓库及起步文件。
 - 尚无正式发布版本，`manifest.json` 的正式内容清单为空。
-- 日常维护以本地 `main` 为主线，将同一提交推送至 GitHub 的 `main` 和 Gitee 的默认分支 `master`；推送完成后，同事直接打开或克隆 Gitee 仓库即可取得主线内容。
+- 日常维护以本地 `main` 为主线，将同一提交推送至 GitHub 和 Gitee 的 `main`；推送完成后，同事直接打开或克隆 Gitee 仓库即可取得主线内容。
 - 同事的写入权限、分支保护、自动检查和备份任务须按各平台实际配置核对；仓库公开不表示受控协作已经开启。
 
 当前**单流程AI完整编制包为2026-10-19.1，本轮升级已在本地准备**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。方法包括材料读取边界、流程内容复核、依据追溯、成果一致性、继承性外部流程的外部单位部门与角色补充及继续治理反馈。
@@ -61,7 +61,7 @@ cd CX-Avi-Governance-Knowledge
 git rev-parse HEAD
 ```
 
-发布维护者从 GitHub 拉取。本地主线为 `main`，GitHub 对应 `main`，Gitee 对应默认分支 `master`。维护者使用 `git publish` 一次推送同一提交到两端，执行[发布脚本](scripts/push-remotes.cjs)；需要本机安装 Node.js。Git 的远程配置保存在本机，不会随克隆传递，新维护副本执行一次以下配置：
+发布维护者从 GitHub 拉取。本地主线为 `main`，GitHub 和 Gitee 均对应 `main`。维护者使用 `git publish` 一次推送同一提交到两端，执行[发布脚本](scripts/push-remotes.cjs)；需要本机安装 Node.js。Git 的远程配置保存在本机，不会随克隆传递，新维护副本执行一次以下配置：
 
 ```bash
 git remote set-url origin https://github.com/Harbinian/CX-Avi-Governance-Knowledge.git
@@ -81,10 +81,10 @@ git publish
 
 ```bash
 git push origin main:main
-git push gitee main:master
+git push gitee main:main
 ```
 
-向 Gitee `master` 发布时保留初始化提交的历史，并承接完整知识库。旧 `main` 分支保留用于追溯，主线内容以默认 `master` 为准。两端主分支名称不同，内容和提交按发布结果核对。
+GitHub 和 Gitee 的主线分支均为 `main`，各自保留初始化提交的历史并承接完整知识库；Gitee 旧 `master` 分支不再使用，仅供历史追溯。两端内容和提交按发布结果核对。
 
 新任务可主动获取新版；正在进行的任务继续使用已记录的提交，换版前核对影响。浏览器可阅读共享文件，但 AI 是否能直接读取私有仓库需按实际工具验证。
 
