@@ -33,11 +33,11 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 
 ## 首批组织与职责材料
 
-2026-10-05，用户指定外部制度PDF和员工基础信息表，并确认“制度现行，员工表仅供参考”。已准备以下本地草稿，尚未纳入正式有效清单：
+2026-10-05，用户指定外部制度PDF和员工基础信息表，并确认“制度现行，员工表仅供参考”。2026-10-19，用户提供新花名册（新花名册.xlsx）替代员工基础信息表作为岗位配置参考来源；旧表登记保留为历史。已准备以下本地草稿，尚未纳入正式有效清单：
 
 - [组织架构](knowledge/organization-structure.md)：按现行制度组织图整理，保留车间名称差异。
 - [部门职能摘要](knowledge/department-functions.md)：覆盖制度5.2至5.10，保留条款和PDF页码。
-- [岗位配置参考](knowledge/position-allocation-reference.md)：保留参考表的部门、室／工区、班组和职务组合，未收录姓名和人员编号。
+- [岗位配置参考](knowledge/position-allocation-reference.md)：按新花名册保留部门、办公室、班组和职务组合，未收录姓名、员工编号和OA编号。
 - [待确认事项](knowledge/organization-open-items.md)：记录名称、归属及资料缺口；任务角色尚未提供。
 - [来源登记与确认记录](sources/organization-sources.md)：记录原件位置、版本、文件指纹和用户确认口径。
 
