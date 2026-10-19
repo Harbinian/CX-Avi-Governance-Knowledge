@@ -18,7 +18,7 @@ function git(argv, capture = false) {
 
 try {
   if (args.length === 1 && ['--help', '-h'].includes(args[0])) {
-    console.log('用法：node scripts/push-remotes.cjs [--dry-run]\n将本地 main 的已提交内容推送到 GitHub main 和 Gitee master。');
+    console.log('用法：node scripts/push-remotes.cjs [--dry-run]\n将本地 main 的已提交内容推送到 GitHub 和 Gitee 的 main。');
     process.exit(0);
   }
   if (args.length > 1 || (args.length === 1 && args[0] !== '--dry-run')) {
@@ -29,7 +29,7 @@ try {
   }
   const targets = [
     { remote: 'origin', branch: 'main' },
-    { remote: 'gitee', branch: 'master' }
+    { remote: 'gitee', branch: 'main' }
   ];
   for (const target of targets) {
     const urls = git(['remote', 'get-url', '--push', '--all', target.remote], true).split('\n').filter(Boolean);
