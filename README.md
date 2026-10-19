@@ -4,6 +4,90 @@
 
 GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com/Harbinian/CX-Avi-Governance-Knowledge)；Gitee 远程仓库：[HarbinianCN/CX-Avi-Governance-Knowledge](https://gitee.com/HarbinianCN/CX-Avi-Governance-Knowledge)。两端当前均为公开仓库，推送前核对材料的共享范围。`Governance-Knowledge` 为本库简称，本地工作副本目录可自行选择。
 
+## 使用者快速上手（Gitee）
+
+本节面向使用本库编制流程、或需要提出修改的同事。只阅读和使用知识库时，可以直接浏览或克隆公开仓库，不需要 Gitee 账号；需要推送修改或发起合并请求时，才需要注册账号并取得相应权限。
+
+### 1. 注册 Gitee 账号
+
+1. 打开 [Gitee](https://gitee.com)，点击“注册”。
+2. 使用邮箱或手机号完成注册并登录。
+3. 如需推送代码，在“设置 → 安全设置 → 私人令牌”生成令牌，勾选 `projects` 权限。令牌只用于 Git 认证，不要写入仓库、文档或发给他人。
+
+### 2. 安装并配置 Git
+
+Windows 可从 [Git 官网](https://git-scm.com/download/win) 下载安装。安装后在终端配置提交身份：
+
+```bash
+git config --global user.name "<你的姓名或工号>"
+git config --global user.email "<你的邮箱>"
+```
+
+### 3. 克隆仓库
+
+```bash
+git clone https://gitee.com/HarbinianCN/CX-Avi-Governance-Knowledge.git
+cd CX-Avi-Governance-Knowledge
+git rev-parse HEAD
+```
+
+Gitee 默认分支为 `main`。记录当前提交标识，作为本次使用的版本基线。
+
+### 4. 拉取更新
+
+```bash
+git pull --ff-only
+```
+
+拉取前工作区应为 clean；有本地修改时先提交或暂存。
+
+### 5. 修改内容
+
+只影响本次流程任务的成果，写入自己的任务目录，不修改共享规则、示例或技术快照。
+
+需要修改共享内容时，先按 [贡献说明](CONTRIBUTING.md) 和 [修改申请模板](templates/change-request.md) 记录修改原因、依据、适用范围和影响条目，再从最新 `main` 创建独立分支：
+
+```bash
+git switch main
+git pull --ff-only
+git switch -c <修改分支>
+# 修改文件
+git add <文件>
+git commit -m "<修改说明>"
+```
+
+### 6. 推送到 Gitee
+
+```bash
+git push origin <修改分支>
+```
+
+首次推送会要求 Gitee 认证：用户名填 Gitee 账号，密码填第 1 步生成的私人令牌。凭据可保存到本机凭据管理器，后续推送无需重复输入。
+
+没有主仓库写入权限时，先在 Gitee 页面 Fork 本仓库，把自己的 Fork 克隆到本地，在 Fork 中创建分支并推送，然后向主仓库发起 Pull Request。
+
+### 7. 发起合并请求
+
+1. 打开 Gitee 仓库页面，进入 **Pull Requests → 新建 Pull Request**。
+2. 源分支选择你的修改分支，目标分支选择 `main`。
+3. 填写修改说明和依据，提交后等待管理者审核合并。
+4. 合并前不要删除分支；合并后可在本地切换到 `main` 并拉取更新：
+
+```bash
+git switch main
+git pull --ff-only
+```
+
+### 8. 注意事项
+
+- `git commit` 是本地操作，不需要登录 Gitee；只有 `git push` 需要认证。
+- 不向 `master` 分支提交或推送；Gitee 旧 `master` 已停止使用，仅供历史追溯。
+- 不在 `main` 上直接修改并推送共享规则；需要更新时按修改申请和 Pull Request 流程提出。
+- 不把姓名、员工编号、访问令牌、受限业务材料提交到仓库。
+- 技术检查通过不等于业务审核、3000 核对或正式发布。
+
+更完整的命令和边界说明见 [使用者与管理者操作帮助](workflows/collaboration-guide.md)。
+
 ## 当前状态
 
 - 已建立本地 Git 仓库及起步文件。
@@ -46,7 +130,7 @@ GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com
 ## 使用入口
 
 1. 人员先阅读本页，确认访问范围及当前内容状态；维护远程协作时才查[GitHub协作准备方案](planning/github-collaboration-plan.md)，普通流程编制不展开建设历史。
-2. 设计或编制流程时，使用 [AI 会话作业入口](workflows/process-ai-collaboration.md)，填写本次任务信息并取得固定版本。
+2. 设计或编制流程时，使用 [AI 会话作业入口](workflows/process-ai-collaboration.md)，填写本次任务信息并取得固定版本。使用者和维护者的拉取、提交、合并与推送操作见[使用者与管理者操作帮助](workflows/collaboration-guide.md)。
 3. AI 读取 [AGENTS.md](AGENTS.md)，再检查 [内容清单](manifest.json)；不能读取文件的工具由用户提供同一版本的相关内容。
 4. 按任务读取相关材料；当前可使用来源索引和派生草稿辅助设计、提问和起草，不得声称已采用本库正式有效规则。具体业务材料及确认记录仍需提供。
 5. 提出共享内容更新时遵循 [贡献说明](CONTRIBUTING.md)，使用 [修改申请模板](templates/change-request.md)。
