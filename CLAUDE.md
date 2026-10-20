@@ -50,9 +50,16 @@ node scripts/test-offline-package.cjs [--source <Infomat目录>] [--report <新�
 
 # 维护者专用：重建快照，同时重写空白模板与虚构示例（需该副本已安装自身依赖）
 node scripts/build-technical-snapshot.cjs --source <Infomat目录>
+
+# 用户授权发布主线时，把本地 main 的已提交内容推送到 GitHub 与 Gitee 的 main（须在 main 分支）
+node scripts/push-remotes.cjs [--dry-run]
+# README 配置的等价别名
+git publish [--dry-run]
 ```
 
-检查脚本使用Node内置断言和合成示例，无需安装测试框架，两个测试脚本整体运行、没有按名称筛选单个用例的参数，改动后直接重跑整个脚本（纯离线，秒级）。改动 Markdown、`manifest.json` 或技能文件后先跑 `check-package.cjs`；改动 `scripts/*.cjs` 后重跑对应测试脚本。`check-package.cjs`检查入口文件存在性（含依据追溯、方法升级与试用记录登记项）、manifest与快照版本、来源快照SHA-256、全部Markdown本地链接、技能frontmatter及description路由、用例定义；`test-offline-package.cjs`检查JSON校验和文件保护，未指定--source时也可独立运行，其`--report`拒绝覆盖。`test-conversation-preparation.cjs`检查用例复制、输入与标准分开、拒绝覆盖及路径边界。`prepare-conversation-case.cjs`要求输出目录不存在，且只允许`scratch/`下的新目录。`scratch/`已被`.gitignore`忽略：测试证据与未指定成果目录时的默认落点`scratch/single-process-authoring/<新批次>/`都不进入git状态。实际检查记录按日期新建在verification；这些检查不替代真实模型会话、内容来源核验或业务验收。
+发布命令只处理已提交内容，不自动暂存或提交；两端分别执行，可能一端成功、另一端失败，须分别核对结果。其他分支按用户指定目标推送。
+
+检查脚本使用Node内置断言和合成示例，无需安装测试框架，两个测试脚本整体运行、没有按名称筛选单个用例的参数，改动后直接重跑整个脚本（纯离线，秒级）。改动 Markdown、`manifest.json` 或技能文件后先跑 `check-package.cjs`；改动 `scripts/*.cjs` 后重跑对应测试脚本。`check-package.cjs`检查入口文件存在性（含依据追溯、方法升级与试用记录登记项）、manifest与快照版本、来源快照SHA-256、通用方案文档包的登记/上游提交/许可摘要、全部Markdown本地链接、技能frontmatter及description路由、用例定义；`test-offline-package.cjs`检查JSON校验和文件保护，未指定--source时也可独立运行，其`--report`拒绝覆盖。`test-conversation-preparation.cjs`检查用例复制、输入与标准分开、拒绝覆盖及路径边界。`prepare-conversation-case.cjs`要求输出目录不存在，且只允许`scratch/`下的新目录。`scratch/`已被`.gitignore`忽略：测试证据与未指定成果目录时的默认落点`scratch/single-process-authoring/<新批次>/`都不进入git状态。实际检查记录按日期新建在verification；这些检查不替代真实模型会话、内容来源核验或业务验收。
 
 ## 架构：内容层、编制包与技术层
 
@@ -66,7 +73,7 @@ node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 
 - `.gitattributes`对技术快照、空白JSON、虚构JSON、`sources/skill-snapshots/**`及`verification/conversation-fixtures/*.json`标记`-text`，对`.agents`与`.claude`下的`SKILL.md`固定`eol=lf`，防止换行转换破坏摘要或入口文件。技术文件由validate检查，原技能历史快照与来源快照摘要由check-package检查；历史快照不能作为当前业务规则执行。
 - 更新技术快照的唯一途径是 `build-technical-snapshot.cjs --source <Infomat目录>`；该命令除 `technical/**` 外还重写 `templates/process-v8.blank.json` 与 `examples/demo-process-v8.json`（后者是离线测试的合法夹具），重建后须按 `sources/tooling-sources.md` 重新验证，重跑 `check-package.cjs` 与 `test-offline-package.cjs`（来源等价检查加 `--source`），不得手改预编译代码。
-- 编制包版本与技术快照版本分别维护：当前2026-10-19.1方法升级本地准备（新增继承性外部流程的外部单位部门与角色补充规则），使用2026-10-08.1技术快照。用户已确认完整试用、功能无问题，具体范围见manifest登记的user_trial_record；22项预设用例仍按各自实际记录说明，Git共享不改变执行结果。编制及复核读取`rules/process-evidence-traceability.md`，按`templates/process-task-record.md`登记来源实际取得、关键结论、成果位置与修订影响；复用已有记录，不逐句建台账，来源号与结论号不写入 JSON。manifest的technical_snapshot_version及结构范围与snapshot一致；兼容校验输出package_version仍指技术快照。check-package断言正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
+- 编制包版本与技术快照版本分别维护：当前2026-10-19.1方法升级本地准备（新增继承性外部流程的外部单位部门与角色补充规则），使用2026-10-08.1技术快照。用户已确认完整试用、功能无问题，但该确认只覆盖2026-10-13当时版本（见manifest登记的user_trial_record）；2026-10-19.1新增的继承性外部流程规则尚未完整试用。22项预设用例仍按各自实际记录说明，Git共享不改变执行结果。编制及复核读取`rules/process-evidence-traceability.md`，按`templates/process-task-record.md`登记来源实际取得、关键结论、成果位置与修订影响；复用已有记录，不逐句建台账，来源号与结论号不写入 JSON。manifest的technical_snapshot_version及结构范围与snapshot一致；兼容校验输出package_version仍指技术快照。check-package断言正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
 - 移动或重命名任何文件后必须更新引用：`check-package.cjs` 扫描全部 Markdown 的本地链接并断言目标存在。
 
 **状态区分（全库核心原则）**：技术校验通过 ≠ 用户确认事实 ≠ 3000 部门核对与正式审核发布。校验输出固定携带 `business_review: "not_assessed"` 与 `target_3000_readiness: "not_checked"`；当前 manifest 正式有效清单为空。任何报告中不得把本地准备或技术通过表述为已批准、已上传或已验收。
@@ -81,7 +88,9 @@ node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 
 ## 技能来源与分工
 
-本库自带技能以`.agents/skills/`为唯一正文：single-process-authoring、grill-me及process-authoring兼容路由。`.claude/skills/`的两个gk前缀入口与三个旧入口不复制方法。真实会话检查实际来源；原生调用未加载本包时可按文件执行，并如实记录方式。
+本库自带技能以`.agents/skills/`为唯一正文：single-process-authoring、grill-me、process-authoring兼容路由，以及独立的grill-with-docs、grilling、domain-modeling通用组合。`.claude/skills/`的同名和gk前缀入口不复制方法。真实会话检查实际来源；原生调用未加载本包时可按文件执行，并如实记录方式。
+
+通用需求或方案访谈需要同步术语与决定记录时，使用`/gk-grill-with-docs`并实际读取[同包方法](.agents/skills/grill-with-docs/SKILL.md)。依赖和格式参考均随库分发，来源及适配见[迁入记录](sources/grill-with-docs-import-2026-10-19.md)；真实模型会话尚未验证。单流程编制仍使用原grill-me方法。
 
 会话验证使用`verification/conversation-guide.md`。被测会话只接收准备目录task下的指定材料与当轮输入，不读取评审标准或结果；评审者在会话外按实际逐轮证据记录。22项用例的准备检查不能记为DeepSeek通过。
 
@@ -95,11 +104,11 @@ node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 | `humanizer-zh` | 中文正文去 AI 痕迹 | 只改表达，不得改动事实、编号与依据 |
 | `doc-coauthoring` | 正文共创（可选） | 不替代四项成果与双向核对 |
 
-同名易混：全局 `grilling`（及用户级 `/grill` 外壳）是通用方案压测，不能替代本库 `grill-me`，也不受 `rules/process-session-rules.md` 约束；全局 `handoff` 是会话交接，与本库 `workflows/process-handoff.md`（3001／3000 人工交接）无关。仅在维护 `scripts/*.cjs` 时使用 `code-review`、`security-review`、`simplify`、`tdd`。这些全局技能按各人本机实际安装情况可用；未安装时按本库流程手工完成同等步骤，不因缺少工具降低成果要求。
+同名易混：全局或本库同包的`grilling`都是通用方案访谈，不能替代本库`grill-me`，也不承担`rules/process-session-rules.md`中的事实核验职责。全局`handoff`是会话交接，与本库`workflows/process-handoff.md`（3001／3000人工交接）无关。仅在维护`scripts/*.cjs`时使用`code-review`、`security-review`、`simplify`、`tdd`。未随库分发的技能按各人本机实际安装情况可用；未安装时按本库流程手工完成同等步骤，不因缺少工具降低成果要求。
 
 ## 修改边界
 
-- 仅修改本次授权范围；不自动 git add / commit / push、不安装服务、不发布。
+- 仅修改本次授权范围；不自动 git add / commit / push、不安装服务、不发布。用户明确授权发布本库主线时，才在 `main` 上使用 `git publish`（或 `node scripts/push-remotes.cjs`），并分别核对 GitHub 与 Gitee 结果。
 - 不连接或读写 3000/3001 及正式数据库；3001 导入、下载与 3000 上传均由用户主动操作。
 - 校验失败时先修复有据可修的问题；不得为通过检查删除对象、清空引用、虚构业务值，或重建 `process_ref` 及其他稳定标识（改名、排序不得重新编号）。
 - 不伪造执行痕迹：无法计算 SHA-256、未运行校验、未调用技能时如实写"未执行"，不假称已调用或已取得材料。

@@ -99,6 +99,12 @@ git pull --ff-only
 
 **用户于2026-10-13确认已完成完整试用、功能无问题**，见[试用确认记录](verification/user-trial-confirmation-2026-10-13.md)；具体试用包版本与环境未登记。该确认只覆盖当时版本；2026-10-19.1新增的继承性外部流程规则尚未经过完整试用。2026-10-13升级检查见[记录](verification/method-upgrade-readiness-2026-10-13.md)，本次检查见[记录](verification/method-upgrade-readiness-2026-10-19.md)。22个虚构会话用例仍按各自记录保留未执行状态，不能由完整试用确认推定全部通过。技术合同快照仍为2026-10-08.1，V7/V8合同未改变。使用者记录取得版本的实际提交及本地修改状态；直接传文件夹须包含`.agents/`和`.claude/`。正式业务知识清单仍为空；本轮本地修改不表示已提交或推送。
 
+## 通用方案访谈与文档同步
+
+本库另附独立的[grill-with-docs](.agents/skills/grill-with-docs/SKILL.md)组合包`2026-10-19.1`，已在本地准备：包含同包`grilling`与`domain-modeling`，可在通用需求或方案讨论中同步记录已确认术语和重要决定。它不替代单流程编制的`grill-me`事实核验，也不修改现有编制包及技术合同。
+
+Claude Code可用`/gk-grill-with-docs`调用[同包入口](.claude/skills/gk-grill-with-docs/SKILL.md)；Codex可用`$grill-with-docs`或按文件执行，使用时核对实际来源。共享文件夹须包含`.agents/`和`.claude/`；运行不依赖个人全局技能。来源与适配见[迁入记录](sources/grill-with-docs-import-2026-10-19.md)，技术检查见[验证记录](verification/grill-with-docs-readiness-2026-10-19.md)。真实模型会话尚未验证。
+
 ## 同事拿到文件夹后
 
 1. 按 [AI会话作业入口](workflows/process-ai-collaboration.md) 复制启动文本，分别填写首次／继续、梳理实际流程／设计新流程、材料及成果目录，使用[完整主技能](.agents/skills/single-process-authoring/SKILL.md)。Claude Code接DeepSeek时按[专用说明](workflows/claude-deepseek.md)，以`/gk-single-process-authoring`调用同一方法，核对实际技能来源；共享文件夹同时包含`.claude/`。
@@ -183,7 +189,7 @@ GitHub 和 Gitee 的主线分支均为 `main`，各自保留初始化提交的�
 | examples | 脱敏示例，不作为具体业务依据 |
 | sources | 来源索引、确认记录及原技能历史快照；不默认保存受限业务原件 |
 | planning | 建设和部署准备材料，不作为已生效治理规则 |
-| .agents/skills | single-process-authoring主技能、grill-me及process-authoring兼容入口；共享时必须包含 |
+| .agents/skills | single-process-authoring主技能、grill-me、process-authoring兼容入口及grill-with-docs通用组合；共享时必须包含 |
 | .claude/skills | Claude Code薄壳；gk前缀入口与旧入口均指向.agents/skills唯一方法正文 |
 | technical | 固定结构、共享语义校验器、预编译校验及来源摘要，供离线使用 |
 | scripts | 离线校验、维护者生成与验证、显式运行的双端发布脚本，不连接业务系统 |

@@ -25,6 +25,19 @@ for (const item of sourceSnapshot.files) {
   const actual = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
   assert.equal(actual, item.sha256, `来源快照摘要不一致：${item.snapshot_path}`);
 }
+const designPackage = manifest.design_documentation_package;
+assert.ok(designPackage, '缺少通用方案文档技能包登记');
+for (const key of ['entrypoint', 'interview_skill', 'domain_skill', 'claude_code_skill', 'claude_code_primary_skill', 'source_record', 'change_record', 'license', 'verification_record']) {
+  assert.equal(typeof designPackage[key], 'string', `缺少方案技能包路径：${key}`);
+  const file = path.resolve(root, designPackage[key]);
+  assert.ok(file.startsWith(root + path.sep), `方案技能包路径越界：${key}`);
+  assert.ok(fs.existsSync(file), `缺少方案技能包文件：${designPackage[key]}`);
+}
+const designSource = JSON.parse(fs.readFileSync(path.join(root, designPackage.source_record), 'utf8'));
+assert.equal(designPackage.upstream_commit, designSource.upstream.commit, '方案技能包来源提交不一致');
+const designLicense = designSource.upstream.files.find(item => item.path === 'LICENSE');
+assert.ok(designLicense, '缺少上游许可摘要');
+assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, designPackage.license))).digest('hex'), designLicense.sha256, '方案技能包许可摘要不一致');
 let markdownFiles = 0;
 let localLinks = 0;
 function walk(directory) {
@@ -44,7 +57,7 @@ function walk(directory) {
   }
 }
 walk(root);
-const skills = ['single-process-authoring', 'grill-me', 'process-authoring'];
+const skills = ['single-process-authoring', 'grill-me', 'process-authoring', 'grill-with-docs', 'grilling', 'domain-modeling'];
 for (const name of skills) {
   const content = fs.readFileSync(path.join(root, '.agents/skills', name, 'SKILL.md'), 'utf8');
   assert.ok(content.startsWith('---\n'));
@@ -58,7 +71,7 @@ for (const name of skills) {
   assert.ok(entry.includes(description[0] + '\n'), `.claude/skills/${name} description与主技能不一致，需同步`);
   assert.ok(entry.includes(`../../../.agents/skills/${name}/SKILL.md`), `.claude/skills/${name} 缺少同包正文路由`);
 }
-const prefixedEntries = { 'gk-single-process-authoring': 'single-process-authoring', 'gk-grill-me': 'grill-me' };
+const prefixedEntries = { 'gk-single-process-authoring': 'single-process-authoring', 'gk-grill-me': 'grill-me', 'gk-grill-with-docs': 'grill-with-docs' };
 for (const [entryName, methodName] of Object.entries(prefixedEntries)) {
   const entry = fs.readFileSync(path.join(root, '.claude/skills', entryName, 'SKILL.md'), 'utf8');
   const method = fs.readFileSync(path.join(root, '.agents/skills', methodName, 'SKILL.md'), 'utf8');
@@ -67,4 +80,4 @@ for (const [entryName, methodName] of Object.entries(prefixedEntries)) {
   assert.ok(entry.includes(`../../../.agents/skills/${methodName}/SKILL.md`), `${entryName} 缺少方法路由`);
 }
 const { suite } = loadSuite(root);
-console.log(JSON.stringify({ valid: true, authoring_package_version: manifest.authoring_package.version, technical_snapshot_version: snapshot.package_version, markdown_files: markdownFiles, local_links: localLinks, technical_files: snapshot.files.length, source_skill_files: sourceSnapshot.files.length, skills, claude_entries: [...skills, ...Object.keys(prefixedEntries)], user_trial_status: manifest.authoring_package.user_trial_status, conversation_cases: suite.cases.length, conversation_model_execution: manifest.authoring_package.conversation_verification_status }, null, 2));
+console.log(JSON.stringify({ valid: true, authoring_package_version: manifest.authoring_package.version, technical_snapshot_version: snapshot.package_version, design_documentation_package_version: designPackage.version, markdown_files: markdownFiles, local_links: localLinks, technical_files: snapshot.files.length, source_skill_files: sourceSnapshot.files.length, skills, claude_entries: [...skills, ...Object.keys(prefixedEntries)], user_trial_status: manifest.authoring_package.user_trial_status, conversation_cases: suite.cases.length, conversation_model_execution: manifest.authoring_package.conversation_verification_status, design_documentation_model_execution: designPackage.conversation_verification_status }, null, 2));

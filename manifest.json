@@ -53,5 +53,21 @@
     "method_upgrade_record": "sources/method-upgrade-confirmation-2026-10-19.md",
     "user_trial_record": "verification/user-trial-confirmation-2026-10-13.md",
     "user_trial_status": "user_confirmed"
+  },
+  "design_documentation_package": {
+    "version": "2026-10-19.1",
+    "status": "prepared",
+    "entrypoint": ".agents/skills/grill-with-docs/SKILL.md",
+    "interview_skill": ".agents/skills/grilling/SKILL.md",
+    "domain_skill": ".agents/skills/domain-modeling/SKILL.md",
+    "claude_code_skill": ".claude/skills/grill-with-docs/SKILL.md",
+    "claude_code_primary_skill": ".claude/skills/gk-grill-with-docs/SKILL.md",
+    "source_record": "sources/grill-with-docs-source.json",
+    "change_record": "sources/grill-with-docs-import-2026-10-19.md",
+    "license": "sources/licenses/mattpocock-skills-MIT.txt",
+    "verification_record": "verification/grill-with-docs-readiness-2026-10-19.md",
+    "upstream_commit": "49dd158d1076134a641b33efb035946536778336",
+    "conversation_verification_status": "not_run",
+    "business_rules_approved": false
   }
 }

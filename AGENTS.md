@@ -16,6 +16,7 @@
 8. 流程会话实际读取`rules/material-reading-boundaries.md`。只按任务读取当前参考，历史来源链接不默认展开；压缩或续接后重新核对当前规则及最新稿。维护者摘要检查与向模型读入历史指令分别处理。
 9. 评价内容完整性、整理继续治理反馈或复核交付时读取`rules/process-content-review.md`，需要清单时用`templates/process-review-feedback.md`；阶段稿可继续治理，技术检查与内容结论分别说明。评价只限于具体问题和已核验范围，不自动扩大为部门整体认知不足。
 10. 编制、续编和交付复核按`rules/process-evidence-traceability.md`记录来源实际取得情况、关键结论与四项成果对应位置及修订影响；复用已有任务记录，不逐句建台账或重复索取材料。
+11. 通用需求或方案访谈需要同步术语与决定记录时，读取`.agents/skills/grill-with-docs/SKILL.md`及其同包依赖；具体单流程仍按第6项的方法与核验边界执行。
 
 ## 内容与来源
 
