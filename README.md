@@ -107,7 +107,7 @@ Claude Code可用`/gk-grill-with-docs`调用[同包入口](.claude/skills/gk-gri
 
 ## 技能用途与调用方法
 
-本库自带 6 个技能。Claude Code 推荐使用 gk 前缀入口，同名入口保留；使用前核对实际加载来源。下表按技能列出用途和 Claude Code 调用方式。
+本库自带 7 个技能。Claude Code 推荐使用 gk 前缀入口，同名入口保留；使用前核对实际加载来源。下表按技能列出用途和 Claude Code 调用方式。
 
 | 技能 | 用途 | Claude Code 调用 | 正文入口 |
 |---|---|---|---|
@@ -117,8 +117,11 @@ Claude Code可用`/gk-grill-with-docs`调用[同包入口](.claude/skills/gk-gri
 | `grill-with-docs` | 通用需求或方案访谈，同步记录已确认术语和重要决定 | `/gk-grill-with-docs`（同名 `/grill-with-docs` 保留） | [SKILL.md](.agents/skills/grill-with-docs/SKILL.md) |
 | `grilling` | `grill-with-docs` 的通用方案访谈依赖，通常随组合包调用 | `/grilling` | [SKILL.md](.agents/skills/grilling/SKILL.md) |
 | `domain-modeling` | `grill-with-docs` 的术语、词汇表和决定记录依赖，通常随组合包调用 | `/domain-modeling` | [SKILL.md](.agents/skills/domain-modeling/SKILL.md) |
+| `lossless-pull` | 本地有未提交改动时，用 stash 备份后从 Gitee 拉取 main，恢复改动并报告冲突；仅明确要求时操作 GitHub | `/gk-lossless-pull`（同名 `/lossless-pull` 保留） | [SKILL.md](.agents/skills/lossless-pull/SKILL.md) |
 
 单流程编制使用 `single-process-authoring`，并在首次或续编时按[会话规则](rules/process-session-rules.md)调用 `grill-me`。`grill-with-docs` 用于通用方案访谈，不承担 `grill-me` 的事实核验。
+
+需要同步远端且本地已有未提交改动时，使用 `lossless-pull`；它默认只连 Gitee，不自动提交、推送或发布，冲突时保留 stash。本地演练见[验证记录](verification/lossless-pull-readiness-2026-10-20.md)。
 
 Codex 等支持仓库技能的工具可用 `$技能名`，或按 `.agents/skills/<技能名>/SKILL.md` 执行；实际调用方式与读取路径记入任务记录。共享文件夹须包含 `.agents/` 和 `.claude/`。
 
@@ -206,7 +209,7 @@ GitHub 和 Gitee 的主线分支均为 `main`，各自保留初始化提交的�
 | examples | 脱敏示例，不作为具体业务依据 |
 | sources | 来源索引、确认记录及原技能历史快照；不默认保存受限业务原件 |
 | planning | 建设和部署准备材料，不作为已生效治理规则 |
-| .agents/skills | single-process-authoring主技能、grill-me、process-authoring兼容入口及grill-with-docs通用组合；共享时必须包含 |
+| .agents/skills | single-process-authoring主技能、grill-me、process-authoring兼容入口、grill-with-docs通用组合及lossless-pull无损拉取；共享时必须包含 |
 | .claude/skills | Claude Code薄壳；gk前缀入口与旧入口均指向.agents/skills唯一方法正文 |
 | technical | 固定结构、共享语义校验器、预编译校验及来源摘要，供离线使用 |
 | scripts | 离线校验、维护者生成与验证、显式运行的双端发布脚本，不连接业务系统 |

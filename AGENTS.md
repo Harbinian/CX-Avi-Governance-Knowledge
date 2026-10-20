@@ -31,7 +31,7 @@
 
 - 修改前核对 Git 状态并读取目标文件，保护已有工作。
 - 仅修改本次授权范围；不自动暂存、提交、推送、安装服务或发布。
-- 用户授权推送本库主线时，默认执行 `git publish`（或 `node scripts/push-remotes.cjs`），将同一提交分别推送到 GitHub `main` 和 Gitee `main`；地址及本机配置见 `README.md`，分别核对两端结果。其他分支按用户指定目标推送。
+- 除非用户明确指出推送至 GitHub，否则执行拉取、提交、推送等 Git 操作时，涉及远程的部分仅连接 Gitee（`gitee`）远程，不默认连接或操作 GitHub。用户明确要求推送 GitHub 时，才执行 `git publish`（或 `node scripts/push-remotes.cjs`），将同一提交分别推送到 GitHub `main` 和 Gitee `main`；地址及本机配置见 `README.md`，分别核对两端结果。其他分支按用户指定目标推送。
 - 不读取、输出或写入密码、令牌、私钥和真实私有配置。
 - 不自动修改 Infomat 或连接正式业务数据库。
 - 内容使用中文，机器字段和文件名使用英文；修改正式状态须有相应确认依据。

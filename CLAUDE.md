@@ -51,13 +51,13 @@ node scripts/test-offline-package.cjs [--source <Infomat目录>] [--report <新�
 # 维护者专用：重建快照，同时重写空白模板与虚构示例（需该副本已安装自身依赖）
 node scripts/build-technical-snapshot.cjs --source <Infomat目录>
 
-# 用户授权发布主线时，把本地 main 的已提交内容推送到 GitHub 与 Gitee 的 main（须在 main 分支）
+# 用户明确指出推送至 GitHub 时，把本地 main 的已提交内容推送到 GitHub 与 Gitee 的 main（须在 main 分支）
 node scripts/push-remotes.cjs [--dry-run]
 # README 配置的等价别名
 git publish [--dry-run]
 ```
 
-发布命令只处理已提交内容，不自动暂存或提交；两端分别执行，可能一端成功、另一端失败，须分别核对结果。其他分支按用户指定目标推送。
+发布命令只处理已提交内容，不自动暂存或提交；两端分别执行，可能一端成功、另一端失败，须分别核对结果。其他分支按用户指定目标推送。除非用户明确指出推送至 GitHub，否则执行拉取、提交、推送等 Git 操作时，涉及远程的部分仅连接 Gitee，不默认连接或操作 GitHub。
 
 检查脚本使用Node内置断言和合成示例，无需安装测试框架，两个测试脚本整体运行、没有按名称筛选单个用例的参数，改动后直接重跑整个脚本（纯离线，秒级）。改动 Markdown、`manifest.json` 或技能文件后先跑 `check-package.cjs`；改动 `scripts/*.cjs` 后重跑对应测试脚本。`check-package.cjs`检查入口文件存在性（含依据追溯、方法升级与试用记录登记项）、manifest与快照版本、来源快照SHA-256、通用方案文档包的登记/上游提交/许可摘要、全部Markdown本地链接、技能frontmatter及description路由、用例定义；`test-offline-package.cjs`检查JSON校验和文件保护，未指定--source时也可独立运行，其`--report`拒绝覆盖。`test-conversation-preparation.cjs`检查用例复制、输入与标准分开、拒绝覆盖及路径边界。`prepare-conversation-case.cjs`要求输出目录不存在，且只允许`scratch/`下的新目录。`scratch/`已被`.gitignore`忽略：测试证据与未指定成果目录时的默认落点`scratch/single-process-authoring/<新批次>/`都不进入git状态。实际检查记录按日期新建在verification；这些检查不替代真实模型会话、内容来源核验或业务验收。
 
@@ -88,7 +88,7 @@ git publish [--dry-run]
 
 ## 技能来源与分工
 
-本库自带技能以`.agents/skills/`为唯一正文：single-process-authoring、grill-me、process-authoring兼容路由，以及独立的grill-with-docs、grilling、domain-modeling通用组合。`.claude/skills/`的同名和gk前缀入口不复制方法。真实会话检查实际来源；原生调用未加载本包时可按文件执行，并如实记录方式。
+本库自带技能以`.agents/skills/`为唯一正文：single-process-authoring、grill-me、process-authoring兼容路由，独立的grill-with-docs、grilling、domain-modeling通用组合，以及lossless-pull无损拉取。`.claude/skills/`的同名和gk前缀入口不复制方法。真实会话检查实际来源；原生调用未加载本包时可按文件执行，并如实记录方式。
 
 通用需求或方案访谈需要同步术语与决定记录时，使用`/gk-grill-with-docs`并实际读取[同包方法](.agents/skills/grill-with-docs/SKILL.md)。依赖和格式参考均随库分发，来源及适配见[迁入记录](sources/grill-with-docs-import-2026-10-19.md)；真实模型会话尚未验证。单流程编制仍使用原grill-me方法。
 
@@ -108,7 +108,7 @@ git publish [--dry-run]
 
 ## 修改边界
 
-- 仅修改本次授权范围；不自动 git add / commit / push、不安装服务、不发布。用户明确授权发布本库主线时，才在 `main` 上使用 `git publish`（或 `node scripts/push-remotes.cjs`），并分别核对 GitHub 与 Gitee 结果。
+- 仅修改本次授权范围；不自动 git add / commit / push、不安装服务、不发布。除非用户明确指出推送至 GitHub，否则执行拉取、提交、推送等 Git 操作时，涉及远程的部分仅连接 Gitee（`gitee`）远程，不默认连接或操作 GitHub。用户明确要求推送 GitHub 时，才在 `main` 上使用 `git publish`（或 `node scripts/push-remotes.cjs`），并分别核对 GitHub 与 Gitee 结果。
 - 不连接或读写 3000/3001 及正式数据库；3001 导入、下载与 3000 上传均由用户主动操作。
 - 校验失败时先修复有据可修的问题；不得为通过检查删除对象、清空引用、虚构业务值，或重建 `process_ref` 及其他稳定标识（改名、排序不得重新编号）。
 - 不伪造执行痕迹：无法计算 SHA-256、未运行校验、未调用技能时如实写"未执行"，不假称已调用或已取得材料。
