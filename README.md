@@ -105,6 +105,23 @@ git pull --ff-only
 
 Claude Code可用`/gk-grill-with-docs`调用[同包入口](.claude/skills/gk-grill-with-docs/SKILL.md)；Codex可用`$grill-with-docs`或按文件执行，使用时核对实际来源。共享文件夹须包含`.agents/`和`.claude/`；运行不依赖个人全局技能。来源与适配见[迁入记录](sources/grill-with-docs-import-2026-10-19.md)，技术检查见[验证记录](verification/grill-with-docs-readiness-2026-10-19.md)。真实模型会话尚未验证。
 
+## 技能用途与调用方法
+
+本库自带 6 个技能。Claude Code 推荐使用 gk 前缀入口，同名入口保留；使用前核对实际加载来源。下表按技能列出用途和 Claude Code 调用方式。
+
+| 技能 | 用途 | Claude Code 调用 | 正文入口 |
+|---|---|---|---|
+| `single-process-authoring` | 编制或续修单个流程，产出八章正文、完整V8 JSON 以及工作平衡报告和待确认事项 | `/gk-single-process-authoring`（旧 `/single-process-authoring`、`/process-authoring` 兼容） | [SKILL.md](.agents/skills/single-process-authoring/SKILL.md) |
+| `grill-me` | 首次编制逐项澄清行为、条件和办理角色；续编核验答案；新设计做情景推演 | `/gk-grill-me`（同名 `/grill-me` 保留） | [SKILL.md](.agents/skills/grill-me/SKILL.md) |
+| `process-authoring` | 旧调用兼容路由，转入 `single-process-authoring` | `/process-authoring` | [SKILL.md](.agents/skills/process-authoring/SKILL.md) |
+| `grill-with-docs` | 通用需求或方案访谈，同步记录已确认术语和重要决定 | `/gk-grill-with-docs`（同名 `/grill-with-docs` 保留） | [SKILL.md](.agents/skills/grill-with-docs/SKILL.md) |
+| `grilling` | `grill-with-docs` 的通用方案访谈依赖，通常随组合包调用 | `/grilling` | [SKILL.md](.agents/skills/grilling/SKILL.md) |
+| `domain-modeling` | `grill-with-docs` 的术语、词汇表和决定记录依赖，通常随组合包调用 | `/domain-modeling` | [SKILL.md](.agents/skills/domain-modeling/SKILL.md) |
+
+单流程编制使用 `single-process-authoring`，并在首次或续编时按[会话规则](rules/process-session-rules.md)调用 `grill-me`。`grill-with-docs` 用于通用方案访谈，不承担 `grill-me` 的事实核验。
+
+Codex 等支持仓库技能的工具可用 `$技能名`，或按 `.agents/skills/<技能名>/SKILL.md` 执行；实际调用方式与读取路径记入任务记录。共享文件夹须包含 `.agents/` 和 `.claude/`。
+
 ## 同事拿到文件夹后
 
 1. 按 [AI会话作业入口](workflows/process-ai-collaboration.md) 复制启动文本，分别填写首次／继续、梳理实际流程／设计新流程、材料及成果目录，使用[完整主技能](.agents/skills/single-process-authoring/SKILL.md)。Claude Code接DeepSeek时按[专用说明](workflows/claude-deepseek.md)，以`/gk-single-process-authoring`调用同一方法，核对实际技能来源；共享文件夹同时包含`.claude/`。
