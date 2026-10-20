@@ -1,0 +1,3 @@
+interface:
+  display_name: "通用方案访谈"
+  short_description: "按问题依赖分轮澄清通用方案，区分用户决定、查证事实与尚未解决的分支"

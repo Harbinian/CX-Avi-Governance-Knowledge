@@ -1,0 +1,5 @@
+interface:
+  display_name: "方案访谈与文档同步"
+  short_description: "按决策依赖澄清需求和方案，同步记录已确认术语与重要决定及其适用范围"
+policy:
+  allow_implicit_invocation: false
