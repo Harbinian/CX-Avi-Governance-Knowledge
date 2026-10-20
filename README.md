@@ -33,13 +33,24 @@ git rev-parse HEAD
 
 Gitee 默认分支为 `main`。记录当前提交标识，作为本次使用的版本基线。
 
-### 4. 拉取更新
+### 4. 校验远端版本与拉取更新
+
+开始治理工作前先核对 Gitee 远端版本，确认本地基线。以下以本维护副本的 `gitee` 远程为例；从 Gitee 克隆的副本通常使用 `origin`，以 `git remote -v` 的实际地址为准：
+
+```bash
+git rev-parse HEAD
+git fetch gitee main
+git rev-parse FETCH_HEAD
+git rev-list --left-right --count HEAD...FETCH_HEAD
+```
+
+`rev-list` 输出为“本地独有提交数　远端独有提交数”。本地落后时再拉取：
 
 ```bash
 git pull --ff-only
 ```
 
-拉取前工作区应为 clean；有本地修改时先提交或暂存。
+拉取前工作区应为 clean；有本地修改时先按[无损拉取](.agents/skills/lossless-pull/SKILL.md)处理，或提交、暂存。核对和拉取只连接 Gitee；除明确要求外不操作 GitHub。
 
 ### 5. 修改内容
 
@@ -95,9 +106,9 @@ git pull --ff-only
 - 日常维护以本地 `main` 为主线，将同一提交推送至 GitHub 和 Gitee 的 `main`；推送完成后，同事直接打开或克隆 Gitee 仓库即可取得主线内容。
 - 同事的写入权限、分支保护、自动检查和备份任务须按各平台实际配置核对；仓库公开不表示受控协作已经开启。
 
-当前**单流程AI完整编制包为2026-10-19.1，本轮升级已在本地准备**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。方法包括材料读取边界、流程内容复核、依据追溯、成果一致性、继承性外部流程的外部单位部门与角色补充及继续治理反馈。
+当前**单流程AI完整编制包为2026-10-20.1，本轮升级已在本地准备**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。方法包括材料读取边界、流程内容复核、依据追溯、成果一致性、继承性外部流程的外部单位部门与角色补充、治理会话启动时的Gitee远端版本校验及继续治理反馈。
 
-**用户于2026-10-13确认已完成完整试用、功能无问题**，见[试用确认记录](verification/user-trial-confirmation-2026-10-13.md)；具体试用包版本与环境未登记。该确认只覆盖当时版本；2026-10-19.1新增的继承性外部流程规则尚未经过完整试用。2026-10-13升级检查见[记录](verification/method-upgrade-readiness-2026-10-13.md)，本次检查见[记录](verification/method-upgrade-readiness-2026-10-19.md)。22个虚构会话用例仍按各自记录保留未执行状态，不能由完整试用确认推定全部通过。技术合同快照仍为2026-10-08.1，V7/V8合同未改变。使用者记录取得版本的实际提交及本地修改状态；直接传文件夹须包含`.agents/`和`.claude/`。正式业务知识清单仍为空；本轮本地修改不表示已提交或推送。
+**用户于2026-10-13确认已完成完整试用、功能无问题**，见[试用确认记录](verification/user-trial-confirmation-2026-10-13.md)；具体试用包版本与环境未登记。该确认只覆盖当时版本；2026-10-19.1新增的继承性外部流程规则及2026-10-20.1新增的启动远端版本校验规则均尚未经过完整试用。2026-10-13升级检查见[记录](verification/method-upgrade-readiness-2026-10-13.md)，2026-10-19检查见[记录](verification/method-upgrade-readiness-2026-10-19.md)，本次检查见[记录](verification/method-upgrade-readiness-2026-10-20.md)。22个虚构会话用例仍按各自记录保留未执行状态，不能由完整试用确认推定全部通过。技术合同快照仍为2026-10-08.1，V7/V8合同未改变。使用者记录取得版本的实际提交及本地修改状态；直接传文件夹须包含`.agents/`和`.claude/`。正式业务知识清单仍为空；本轮本地修改不表示已提交或推送。
 
 ## 通用方案访谈与文档同步
 

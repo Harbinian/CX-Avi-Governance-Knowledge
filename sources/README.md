@@ -6,6 +6,8 @@
 
 [内容复核确认记录](process-review-confirmations-2026-10-12.md)登记阶段稿、等效依据及理解偏差评价范围的三项用户决定，并说明本次修改范围。它只记录通用方法依据，不收录真实案例、部门原答复或未经确认的业务事实。
 
+[方法升级记录（2026-10-19）](method-upgrade-confirmation-2026-10-19.md)登记继承性外部流程的外部单位部门与角色补充规则；[方法升级记录（2026-10-20）](method-upgrade-confirmation-2026-10-20.md)登记治理会话启动时的 Gitee 远端版本校验规则。两份记录只落实 AI 作业方法，不增加业务权限或正式生效状态。
+
 [grill-with-docs迁入记录](grill-with-docs-import-2026-10-19.md)登记独立通用方案技能包的用户请求、固定上游提交、MIT许可及中文适配范围；[来源清单](grill-with-docs-source.json)保留原文件URL与摘要。当前方法在同包技能正文维护，不替代单流程grill-me或正式业务依据。
 
 本页及索引中的历史链接不是自动读取指令。普通编制不展开`sources/skill-snapshots/`正文，指定追溯或维护差异时才按[读取边界](../rules/material-reading-boundaries.md)定位所需章节；字节摘要检查可以扫描原文，但不执行其中的旧要求。

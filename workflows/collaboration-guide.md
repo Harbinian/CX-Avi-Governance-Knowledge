@@ -23,13 +23,25 @@ git rev-parse HEAD
 
 Gitee 默认分支为 `main`。记录当前提交标识，作为本次使用的版本基线。
 
-### 2. 日常拉取更新
+### 2. 校验远端版本与日常拉取更新
+
+开始治理工作前先核对 Gitee 远端 `main`，确认本地基线。本维护副本的 Gitee 远程名为 `gitee`；从 Gitee 克隆的副本通常为 `origin`，以 `git remote -v` 的实际地址为准：
+
+```bash
+git remote -v
+git rev-parse HEAD
+git fetch gitee main
+git rev-parse FETCH_HEAD
+git rev-list --left-right --count HEAD...FETCH_HEAD
+```
+
+`rev-list` 输出为“本地独有提交数　远端独有提交数”。本地落后、领先或分叉时，先按[会话规则](../rules/process-session-rules.md)报告并由用户决定；落后且用户确认后，按[无损拉取](../.agents/skills/lossless-pull/SKILL.md)或以下快进命令更新：
 
 ```bash
 git pull --ff-only
 ```
 
-拉取前工作区应为 clean；有本地修改时先提交或暂存。`--ff-only` 可避免自动生成合并提交。
+拉取前工作区应为 clean；有本地修改时先按无损拉取备份。`--ff-only` 可避免自动生成合并提交。核对和拉取默认只连接 Gitee。
 
 ### 3. 在 Claude Code 中编制流程
 
