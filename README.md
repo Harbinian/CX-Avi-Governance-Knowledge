@@ -141,17 +141,16 @@ Codex 等支持仓库技能的工具可用 `$技能名`，或按 `.agents/skills
 
 评价草稿内容或整理继续治理反馈时，按[内容复核规则](rules/process-content-review.md)与[反馈模板](templates/process-review-feedback.md)工作。允许阶段稿继续治理，技术结果与业务完整性分开；真实案例优先，允许可定位材料和明确说明提供等效依据；理解偏差只评价具体问题和已核验范围。方法依据见[用户确认记录](sources/process-review-confirmations-2026-10-12.md)，实际检查见[准备检查记录](verification/content-review-readiness-2026-10-12.md)。
 
-## 首批组织与职责材料
+## 组织、岗位与制度职责参考
 
-2026-10-05，用户指定外部制度PDF和员工基础信息表，并确认“制度现行，员工表仅供参考”。2026-10-19，用户提供新花名册（新花名册.xlsx）替代员工基础信息表作为岗位配置参考来源；旧表登记保留为历史。已准备以下本地草稿，尚未纳入正式有效清单：
+2026-10-20用户指定以《新花名册.xlsx》导入3000后的数据为真源，同步Infomat与本库。组织名称、人员所属部门与办公室归属按3000当前目录；职务、班组按3000原始导入审计。Excel仅作明确导入材料，不以当前同名原件反向覆盖3000。
 
-- [组织架构](knowledge/organization-structure.md)：按现行制度组织图整理，保留车间名称差异。
-- [部门职能摘要](knowledge/department-functions.md)：覆盖制度5.2至5.10，保留条款和PDF页码。
-- [岗位配置参考](knowledge/position-allocation-reference.md)：按新花名册保留部门、办公室、班组和职务组合，未收录姓名、员工编号和OA编号。
-- [待确认事项](knowledge/organization-open-items.md)：记录名称、归属及资料缺口；任务角色尚未提供。
-- [来源登记与确认记录](sources/organization-sources.md)：记录原件位置、版本、文件指纹和用户确认口径。
+- [组织架构](knowledge/organization-structure.md)：12个部门、41个office单位；部门父级空值保留，不补造领导层级。
+- [岗位配置参考](knowledge/position-allocation-reference.md)：覆盖298条来源记录，保留组合及审计行定位，不含姓名、工号、OA编号或人员标识。
+- [部门职能摘要](knowledge/department-functions.md)：继续按SRC-ORG-001现行制度的原确认范围使用，不从目录推定逐岗职责、任务角色或审批。
+- [来源登记](sources/organization-sources.md)、[无人员标识快照](sources/organization-directory-snapshot.json)和[待确认事项](knowledge/organization-open-items.md)：记录读取时间、版本摘要、范围与差异。
 
-现行制度的业务依据状态与派生内容的草稿状态分别说明。岗位配置参考不能覆盖现行制度或用作任务角色任命，草稿不能宣称已按本库正式发布规则完成治理。
+2026-10-20用户已确认，职员来源第41行现任“复材二车间／调度员”。本参考已按该业务确认更正；3000当前目录及原始导入记录尚未回写。办公室仍保留原目录记录，二车间内的办公室归属未据此推定。 本次已同步本地副本，未改写业务库、原件或权限，也未启用自动同步。office与active不表示机构已正式成立。本库派生条目仍为草稿，正式有效清单保持为空；来源确认、Git共享和正式业务发布分别记录。
 
 ## 使用入口
 

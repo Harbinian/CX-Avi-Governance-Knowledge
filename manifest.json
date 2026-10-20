@@ -70,6 +70,21 @@
     "conversation_verification_status": "not_run",
     "business_rules_approved": false
   },
+  "organization_reference": {
+    "source": "3000",
+    "status": "synchronized_local_draft",
+    "confirmed_on": "2026-10-20",
+    "captured_at": "2026-10-20T06:59:17.929Z",
+    "source_record": "sources/organization-sources.md",
+    "snapshot": "sources/organization-directory-snapshot.json",
+    "snapshot_sha256": "22226966fa0a1e84e1222d606a7499b1c2718e7a3964132a64991090176280e1",
+    "directory_snapshot_hash": "e7f4f98544b842844b05d168d62c4e86719255b8f50d0ea9dd7e689b3662afbc",
+    "contains_personnel_identifiers": false,
+    "automatic_sync_enabled": false,
+    "business_rules_approved": false,
+    "pending_3000_corrections": 1,
+    "business_confirmation_source": "SRC-ORG-005"
+  },
   "repository_skills": [
     {
       "name": "lossless-pull",
