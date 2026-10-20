@@ -69,5 +69,16 @@
     "upstream_commit": "49dd158d1076134a641b33efb035946536778336",
     "conversation_verification_status": "not_run",
     "business_rules_approved": false
-  }
+  },
+  "repository_skills": [
+    {
+      "name": "lossless-pull",
+      "status": "prepared",
+      "entrypoint": ".agents/skills/lossless-pull/SKILL.md",
+      "claude_code_skill": ".claude/skills/lossless-pull/SKILL.md",
+      "claude_code_primary_skill": ".claude/skills/gk-lossless-pull/SKILL.md",
+      "verification_record": "verification/lossless-pull-readiness-2026-10-20.md",
+      "conversation_verification_status": "not_run"
+    }
+  ]
 }

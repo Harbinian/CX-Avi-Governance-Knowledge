@@ -38,6 +38,18 @@ assert.equal(designPackage.upstream_commit, designSource.upstream.commit, '方�
 const designLicense = designSource.upstream.files.find(item => item.path === 'LICENSE');
 assert.ok(designLicense, '缺少上游许可摘要');
 assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, designPackage.license))).digest('hex'), designLicense.sha256, '方案技能包许可摘要不一致');
+const repositorySkills = manifest.repository_skills;
+assert.ok(Array.isArray(repositorySkills) && repositorySkills.length > 0, '缺少仓库技能登记');
+for (const item of repositorySkills) {
+  for (const key of ['name', 'status', 'entrypoint', 'claude_code_skill', 'claude_code_primary_skill', 'verification_record', 'conversation_verification_status']) {
+    assert.equal(typeof item[key], 'string', `仓库技能登记缺少：${key}`);
+  }
+  for (const key of ['entrypoint', 'claude_code_skill', 'claude_code_primary_skill', 'verification_record']) {
+    const file = path.resolve(root, item[key]);
+    assert.ok(file.startsWith(root + path.sep), `仓库技能路径越界：${key}`);
+    assert.ok(fs.existsSync(file), `缺少仓库技能文件：${item[key]}`);
+  }
+}
 let markdownFiles = 0;
 let localLinks = 0;
 function walk(directory) {
@@ -57,7 +69,7 @@ function walk(directory) {
   }
 }
 walk(root);
-const skills = ['single-process-authoring', 'grill-me', 'process-authoring', 'grill-with-docs', 'grilling', 'domain-modeling'];
+const skills = ['single-process-authoring', 'grill-me', 'process-authoring', 'grill-with-docs', 'grilling', 'domain-modeling', 'lossless-pull'];
 for (const name of skills) {
   const content = fs.readFileSync(path.join(root, '.agents/skills', name, 'SKILL.md'), 'utf8');
   assert.ok(content.startsWith('---\n'));
@@ -71,7 +83,7 @@ for (const name of skills) {
   assert.ok(entry.includes(description[0] + '\n'), `.claude/skills/${name} description与主技能不一致，需同步`);
   assert.ok(entry.includes(`../../../.agents/skills/${name}/SKILL.md`), `.claude/skills/${name} 缺少同包正文路由`);
 }
-const prefixedEntries = { 'gk-single-process-authoring': 'single-process-authoring', 'gk-grill-me': 'grill-me', 'gk-grill-with-docs': 'grill-with-docs' };
+const prefixedEntries = { 'gk-single-process-authoring': 'single-process-authoring', 'gk-grill-me': 'grill-me', 'gk-grill-with-docs': 'grill-with-docs', 'gk-lossless-pull': 'lossless-pull' };
 for (const [entryName, methodName] of Object.entries(prefixedEntries)) {
   const entry = fs.readFileSync(path.join(root, '.claude/skills', entryName, 'SKILL.md'), 'utf8');
   const method = fs.readFileSync(path.join(root, '.agents/skills', methodName, 'SKILL.md'), 'utf8');
