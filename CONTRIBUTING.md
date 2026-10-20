@@ -8,7 +8,7 @@
 
 同事使用本库设计或编制具体流程时，按照 [AI 会话作业入口](workflows/process-ai-collaboration.md) 取得固定基线，成果保存到各自任务目录。只有需要改变共享知识、规则、方法或模板时，才向本库提出内容修改申请。
 
-当前2026-10-19.1方法升级已在本地准备（在2026-10-13.1基础上增加继承性外部流程的外部单位部门与角色补充规则），仍无正式业务发布。用户已确认完整试用、功能无问题，具体记录及范围见[试用确认](verification/user-trial-confirmation-2026-10-13.md)；22项预设用例仍按其实际记录保留状态。Git共享状态按实际提交与远程核对，不能从准备检查记录推定。维护者修改会话方法或四项成果时同步主技能、模板、受影响的Claude入口及manifest；旧process-authoring仅作兼容。原技能快照仅按[读取边界](rules/material-reading-boundaries.md)追溯，不直接覆盖当前规则。技术快照仍为2026-10-08.1，更新时按[技术来源说明](sources/tooling-sources.md)重新生成并验证，不能手改预编译代码。会话用例按[验证指南](verification/conversation-guide.md)记录真实结果，工具检查不代表模型通过；用户确认的grill-me方法不赋予业务审批权限。
+当前2026-10-20.1方法升级已在本地准备（在2026-10-19.1基础上增加治理会话启动时的Gitee远端版本校验规则；2026-10-19.1已增加继承性外部流程的外部单位部门与角色补充规则），仍无正式业务发布。用户已确认完整试用、功能无问题，具体记录及范围见[试用确认](verification/user-trial-confirmation-2026-10-13.md)；该确认不覆盖其后新增规则，22项预设用例仍按其实际记录保留状态。Git共享状态按实际提交与远程核对，不能从准备检查记录推定。维护者修改会话方法或四项成果时同步主技能、模板、受影响的Claude入口及manifest；旧process-authoring仅作兼容。原技能快照仅按[读取边界](rules/material-reading-boundaries.md)追溯，不直接覆盖当前规则。技术快照仍为2026-10-08.1，更新时按[技术来源说明](sources/tooling-sources.md)重新生成并验证，不能手改预编译代码。会话用例按[验证指南](verification/conversation-guide.md)记录真实结果，工具检查不代表模型通过；用户确认的grill-me方法不赋予业务审批权限。
 
 通用内容复核按[当前规则](rules/process-content-review.md)。实际案例只提供本次事实和评价背景；提炼共享方法时保留可复用要求及其确认依据，不复制真实部门原答复或把局部缺口推广为部门整体结论。本次方法修改的依据与范围见[确认及修改申请记录](sources/process-review-confirmations-2026-10-12.md)。
 

@@ -73,14 +73,14 @@ git publish [--dry-run]
 
 - `.gitattributes`对技术快照、空白JSON、虚构JSON、`sources/skill-snapshots/**`及`verification/conversation-fixtures/*.json`标记`-text`，对`.agents`与`.claude`下的`SKILL.md`固定`eol=lf`，防止换行转换破坏摘要或入口文件。技术文件由validate检查，原技能历史快照与来源快照摘要由check-package检查；历史快照不能作为当前业务规则执行。
 - 更新技术快照的唯一途径是 `build-technical-snapshot.cjs --source <Infomat目录>`；该命令除 `technical/**` 外还重写 `templates/process-v8.blank.json` 与 `examples/demo-process-v8.json`（后者是离线测试的合法夹具），重建后须按 `sources/tooling-sources.md` 重新验证，重跑 `check-package.cjs` 与 `test-offline-package.cjs`（来源等价检查加 `--source`），不得手改预编译代码。
-- 编制包版本与技术快照版本分别维护：当前2026-10-19.1方法升级本地准备（新增继承性外部流程的外部单位部门与角色补充规则），使用2026-10-08.1技术快照。用户已确认完整试用、功能无问题，但该确认只覆盖2026-10-13当时版本（见manifest登记的user_trial_record）；2026-10-19.1新增的继承性外部流程规则尚未完整试用。22项预设用例仍按各自实际记录说明，Git共享不改变执行结果。编制及复核读取`rules/process-evidence-traceability.md`，按`templates/process-task-record.md`登记来源实际取得、关键结论、成果位置与修订影响；复用已有记录，不逐句建台账，来源号与结论号不写入 JSON。manifest的technical_snapshot_version及结构范围与snapshot一致；兼容校验输出package_version仍指技术快照。check-package断言正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
+- 编制包版本与技术快照版本分别维护：当前2026-10-20.1方法升级本地准备（新增治理会话启动时的Gitee远端版本校验规则，并沿用2026-10-19.1的继承性外部流程外部单位部门与角色补充规则），使用2026-10-08.1技术快照。用户已确认完整试用、功能无问题，但该确认只覆盖2026-10-13当时版本（见manifest登记的user_trial_record）；2026-10-19.1及2026-10-20.1新增规则尚未完整试用。22项预设用例仍按各自实际记录说明，Git共享不改变执行结果。编制及复核读取`rules/process-evidence-traceability.md`，按`templates/process-task-record.md`登记来源实际取得、关键结论、成果位置与修订影响；复用已有记录，不逐句建台账，来源号与结论号不写入 JSON。manifest的technical_snapshot_version及结构范围与snapshot一致；兼容校验输出package_version仍指技术快照。check-package断言正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
 - 移动或重命名任何文件后必须更新引用：`check-package.cjs` 扫描全部 Markdown 的本地链接并断言目标存在。
 
 **状态区分（全库核心原则）**：技术校验通过 ≠ 用户确认事实 ≠ 3000 部门核对与正式审核发布。校验输出固定携带 `business_review: "not_assessed"` 与 `target_3000_readiness: "not_checked"`；当前 manifest 正式有效清单为空。任何报告中不得把本地准备或技术通过表述为已批准、已上传或已验收。
 
 ## 会话规则
 
-流程编制与续编的全部会话时点规则（首次/续编的 grill-me 调用、设计推演、修订后重核等）以 `rules/process-session-rules.md` 为唯一权威；执行前实际读取该文件，不以其摘要代替。
+流程编制与续编的全部会话时点规则（启动远端版本校验、首次/续编的 grill-me 调用、设计推演、修订后重核等）以 `rules/process-session-rules.md` 为唯一权威；执行前实际读取该文件，不以其摘要代替。
 
 流程内容复核和继续治理反馈读取`rules/process-content-review.md`及`templates/process-review-feedback.md`。阶段稿允许继续治理，技术通过与内容完整性分别记录；真实案例优先、允许等效依据；理解偏差限于具体问题和已核验范围。方法确认不赋予部门责任、审批权或3000软件门槛，原案例与答复保存在独立任务目录。
 
