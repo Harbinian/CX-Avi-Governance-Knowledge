@@ -106,15 +106,15 @@ git pull --ff-only
 - 日常维护以本地 `main` 为主线，将同一提交推送至 GitHub 和 Gitee 的 `main`；推送完成后，同事直接打开或克隆 Gitee 仓库即可取得主线内容。
 - 同事的写入权限、分支保护、自动检查和备份任务须按各平台实际配置核对；仓库公开不表示受控协作已经开启。
 
-当前**单流程AI完整编制包为2026-10-20.1，本轮升级已在本地准备**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。方法包括材料读取边界、流程内容复核、依据追溯、成果一致性、继承性外部流程的外部单位部门与角色补充、治理会话启动时的Gitee远端版本校验及继续治理反馈。
+当前**单流程AI完整编制包为2026-10-22.1，本轮升级已在本地准备**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。方法包括材料读取边界、流程内容复核、依据追溯、成果一致性、继承性外部流程的外部单位部门与角色补充、治理会话启动时的Gitee远端版本校验、流程逻辑与部署质量六维编制检查及继续治理反馈。
 
-**用户于2026-10-13确认已完成完整试用、功能无问题**，见[试用确认记录](verification/user-trial-confirmation-2026-10-13.md)；具体试用包版本与环境未登记。该确认只覆盖当时版本；2026-10-19.1新增的继承性外部流程规则及2026-10-20.1新增的启动远端版本校验规则均尚未经过完整试用。2026-10-13升级检查见[记录](verification/method-upgrade-readiness-2026-10-13.md)，2026-10-19检查见[记录](verification/method-upgrade-readiness-2026-10-19.md)，本次检查见[记录](verification/method-upgrade-readiness-2026-10-20.md)。22个虚构会话用例仍按各自记录保留未执行状态，不能由完整试用确认推定全部通过。技术合同快照仍为2026-10-08.1，V7/V8合同未改变。使用者记录取得版本的实际提交及本地修改状态；直接传文件夹须包含`.agents/`和`.claude/`。正式业务知识清单仍为空；本轮本地修改不表示已提交或推送。
+**用户于2026-10-13确认已完成完整试用、功能无问题**，见[试用确认记录](verification/user-trial-confirmation-2026-10-13.md)；具体试用包版本与环境未登记。该确认只覆盖当时版本；2026-10-19.1新增的继承性外部流程规则及2026-10-20.1新增的启动远端版本校验规则均尚未经过完整试用。2026-10-13升级检查见[记录](verification/method-upgrade-readiness-2026-10-13.md)，2026-10-19检查见[记录](verification/method-upgrade-readiness-2026-10-19.md)，2026-10-20检查见[记录](verification/method-upgrade-readiness-2026-10-20.md)，本次六维编制规则检查见[记录](verification/method-upgrade-readiness-2026-10-22.md)。2026-10-22.1新增规则尚未经过真实编制会话验证。22个虚构会话用例仍按各自记录保留未执行状态，不能由完整试用确认推定全部通过。技术合同快照仍为2026-10-08.1，V7/V8合同未改变。使用者记录取得版本的实际提交及本地修改状态；直接传文件夹须包含`.agents/`和`.claude/`。正式业务知识清单仍为空；本轮本地修改不表示已提交或推送。
 
 ## 通用方案访谈与文档同步
 
-本库另附独立的[grill-with-docs](.agents/skills/grill-with-docs/SKILL.md)组合包`2026-10-19.1`，已在本地准备：包含同包`grilling`与`domain-modeling`，可在通用需求或方案讨论中同步记录已确认术语和重要决定。它不替代单流程编制的`grill-me`事实核验，也不修改现有编制包及技术合同。
+本库另附独立的[grill-with-docs](.agents/skills/grill-with-docs/SKILL.md)组合包`2026-10-22.1`，已在本地准备：包含同包`grilling`与`domain-modeling`，可在通用需求或方案讨论中同步记录已确认术语和重要决定。涉及流程、办理安排或部署设计时，访谈可按[流程逻辑与部署质量六维](rules/process-content-quality.md)组织问题、发现缺口；访谈本身不评分，也不替代单流程编制的`grill-me`及交付前六维自查。它不修改现有编制包及技术合同。
 
-Claude Code可用`/gk-grill-with-docs`调用[同包入口](.claude/skills/gk-grill-with-docs/SKILL.md)；Codex可用`$grill-with-docs`或按文件执行，使用时核对实际来源。共享文件夹须包含`.agents/`和`.claude/`；运行不依赖个人全局技能。来源与适配见[迁入记录](sources/grill-with-docs-import-2026-10-19.md)，技术检查见[验证记录](verification/grill-with-docs-readiness-2026-10-19.md)。真实模型会话尚未验证。
+Claude Code可用`/gk-grill-with-docs`调用[同包入口](.claude/skills/gk-grill-with-docs/SKILL.md)；Codex可用`$grill-with-docs`或按文件执行，使用时核对实际来源。共享文件夹须包含`.agents/`和`.claude/`；运行不依赖个人全局技能。来源与适配见[迁入记录](sources/grill-with-docs-import-2026-10-19.md)，本轮六维问题结合见[变更记录](sources/grill-with-docs-six-dimension-2026-10-22.md)；迁入检查见[原验证记录](verification/grill-with-docs-readiness-2026-10-19.md)，本轮检查见[验证记录](verification/grill-with-docs-six-dimension-readiness-2026-10-22.md)。真实模型会话尚未验证。
 
 ## 技能用途与调用方法
 
@@ -125,7 +125,7 @@ Claude Code可用`/gk-grill-with-docs`调用[同包入口](.claude/skills/gk-gri
 | `single-process-authoring` | 编制或续修单个流程，产出八章正文、完整V8 JSON 以及工作平衡报告和待确认事项 | `/gk-single-process-authoring`（旧 `/single-process-authoring`、`/process-authoring` 兼容） | [SKILL.md](.agents/skills/single-process-authoring/SKILL.md) |
 | `grill-me` | 首次编制逐项澄清行为、条件和办理角色；续编核验答案；新设计做情景推演 | `/gk-grill-me`（同名 `/grill-me` 保留） | [SKILL.md](.agents/skills/grill-me/SKILL.md) |
 | `process-authoring` | 旧调用兼容路由，转入 `single-process-authoring` | `/process-authoring` | [SKILL.md](.agents/skills/process-authoring/SKILL.md) |
-| `grill-with-docs` | 通用需求或方案访谈，同步记录已确认术语和重要决定 | `/gk-grill-with-docs`（同名 `/grill-with-docs` 保留） | [SKILL.md](.agents/skills/grill-with-docs/SKILL.md) |
+| `grill-with-docs` | 通用需求或方案访谈，同步记录已确认术语和重要决定；涉及流程时按六维组织问题但不评分 | `/gk-grill-with-docs`（同名 `/grill-with-docs` 保留） | [SKILL.md](.agents/skills/grill-with-docs/SKILL.md) |
 | `grilling` | `grill-with-docs` 的通用方案访谈依赖，通常随组合包调用 | `/grilling` | [SKILL.md](.agents/skills/grilling/SKILL.md) |
 | `domain-modeling` | `grill-with-docs` 的术语、词汇表和决定记录依赖，通常随组合包调用 | `/domain-modeling` | [SKILL.md](.agents/skills/domain-modeling/SKILL.md) |
 | `lossless-pull` | 本地有未提交改动时，用 stash 备份后从 Gitee 拉取 main，恢复改动并报告冲突；仅明确要求时操作 GitHub | `/gk-lossless-pull`（同名 `/lossless-pull` 保留） | [SKILL.md](.agents/skills/lossless-pull/SKILL.md) |
@@ -140,7 +140,7 @@ Codex 等支持仓库技能的工具可用 `$技能名`，或按 `.agents/skills
 
 1. 按 [AI会话作业入口](workflows/process-ai-collaboration.md) 复制启动文本，分别填写首次／继续、梳理实际流程／设计新流程、材料及成果目录，使用[完整主技能](.agents/skills/single-process-authoring/SKILL.md)。Claude Code接DeepSeek时按[专用说明](workflows/claude-deepseek.md)，以`/gk-single-process-authoring`调用同一方法，核对实际技能来源；共享文件夹同时包含`.claude/`。
 2. 首次调用同包 [grill-me](.agents/skills/grill-me/SKILL.md) 明确行为、条件和角色；续编在使用者认为当前版符合事实后逐个情景核验答案。新设计获得认可后做设计一致性与约束推演，不能记为事实已验证。详见 [会话规则](rules/process-session-rules.md)。
-3. 交付八章正文、完整V8 JSON、工作平衡报告和待确认事项四项成果，另存问答、续接与交接记录。按 [V8合同](rules/process-v8-contract.md)、[技术快照](technical/snapshot.json)、[六维及周期负荷方法](.agents/skills/single-process-authoring/references/workload-method.md)及templates工作；未知事实、分数和容量不猜填。
+3. 交付八章正文、完整V8 JSON、工作平衡报告和待确认事项四项成果，另存问答、续接与交接记录。按 [V8合同](rules/process-v8-contract.md)、[技术快照](technical/snapshot.json)、[工作强度六维及周期负荷方法](.agents/skills/single-process-authoring/references/workload-method.md)及templates工作；未知事实、分数和容量不猜填。
 4. 本机安装Node.js后，运行`node scripts/validate-process.cjs <JSON路径> --json`离线检查，无需Infomat仓库或npm安装。首次用`--emit-template`创建新骨架；可指定目标结构摘要，或将V7版本标识转换稿另存。用法见 [交接说明](workflows/process-handoff.md)。
 5. 用户在3001核对、检查并主动下载未审核文件，再上传3000办理治理。技术通过和AI问答有据支持都不等于正式审核或发布。
 
@@ -149,6 +149,8 @@ Codex 等支持仓库技能的工具可用 `$技能名`，或按 `.agents/skills
 当前方法与历史材料按[读取边界](rules/material-reading-boundaries.md)使用，编制时不自动展开原技能快照或全量校验代码。[会话验证指南](verification/conversation-guide.md)提供逐轮输入、独立评审标准及新目录准备命令；静态检查不计为模型通过。
 
 编制、续编和交付复核按[依据追溯规则](rules/process-evidence-traceability.md)，在现有任务记录中登记来源实际取得情况、关键结论与四项成果对应位置及修订影响；已有准确记录直接引用。正在进行的任务保留原基线，新版采用范围和影响见[方法升级记录](sources/method-upgrade-confirmation-2026-10-13.md)。
+
+编制各阶段按[流程逻辑与部署质量六维](rules/process-content-quality.md)检查动作、标准、数据、交接、异常和范围，交付前记录六维自查。它评价流程内容质量；工作强度六维评价工作负荷，两套分数分别记录，不合并、不互代。
 
 评价草稿内容或整理继续治理反馈时，按[内容复核规则](rules/process-content-review.md)与[反馈模板](templates/process-review-feedback.md)工作。允许阶段稿继续治理，技术结果与业务完整性分开；真实案例优先，允许可定位材料和明确说明提供等效依据；理解偏差只评价具体问题和已核验范围。方法依据见[用户确认记录](sources/process-review-confirmations-2026-10-12.md)，实际检查见[准备检查记录](verification/content-review-readiness-2026-10-12.md)。
 
