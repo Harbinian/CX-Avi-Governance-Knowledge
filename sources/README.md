@@ -8,7 +8,11 @@
 
 [方法升级记录（2026-10-19）](method-upgrade-confirmation-2026-10-19.md)登记继承性外部流程的外部单位部门与角色补充规则；[方法升级记录（2026-10-20）](method-upgrade-confirmation-2026-10-20.md)登记治理会话启动时的 Gitee 远端版本校验规则。两份记录只落实 AI 作业方法，不增加业务权限或正式生效状态。
 
+[方法升级记录（2026-10-22）](method-upgrade-confirmation-2026-10-22.md)登记流程逻辑与部署质量六维纳入编制的用户授权，分档口径、工作负荷区分及换版影响；只共享通用标准和示例，不复制真实部门评分。
+
 [grill-with-docs迁入记录](grill-with-docs-import-2026-10-19.md)登记独立通用方案技能包的用户请求、固定上游提交、MIT许可及中文适配范围；[来源清单](grill-with-docs-source.json)保留原文件URL与摘要。当前方法在同包技能正文维护，不替代单流程grill-me或正式业务依据。
+
+[grill-with-docs六维问题结合记录（2026-10-22）](grill-with-docs-six-dimension-2026-10-22.md)登记通用方案访谈涉及流程时按六维组织问题的用户要求、修改范围及边界；该访谈不评分，不替代单流程编制的阶段检查和交付前自查。
 
 本页及索引中的历史链接不是自动读取指令。普通编制不展开`sources/skill-snapshots/`正文，指定追溯或维护差异时才按[读取边界](../rules/material-reading-boundaries.md)定位所需章节；字节摘要检查可以扫描原文，但不执行其中的旧要求。
 
