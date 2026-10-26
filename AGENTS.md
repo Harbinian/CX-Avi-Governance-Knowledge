@@ -25,9 +25,9 @@
 - 规则冲突时说明冲突条目及影响，暂停依赖该冲突的结论，继续不受影响的工作。
 - 不将 Infomat 的 `docs/` 历史内容视为真源；复用内容需重新核对来源和适用性。
 - 组织及员工有效记录以3000为唯一维护源；按2026-10-20用户指定，同步引用已导入3000的数据。岗位、班组来源值按3000原始导入审计追溯；本库只保存无人员标识副本，Excel仅作明确导入材料。读取`knowledge/organization-structure.md`、`knowledge/position-allocation-reference.md`及`sources/organization-sources.md`，不按岗位推定任务角色或权限。
-- 流程需要引用用友或勤哲数据时，按`knowledge/database-knowledge.md`及`rules/database-reference.md`检索本次获准取得的内部知识包。精确数据库映射另存辅助记录，不改流程合同；缺少架构、来源范围或业务含义时保留缺口。内部结构、映射和统计仅存Git忽略的`private/`，不复制到公共材料。
+- 流程需要引用用友或勤哲数据时，按`knowledge/database-knowledge.md`及`rules/database-reference.md`检索本次获准取得的内部知识包。精确数据库映射另存辅助记录，不改流程合同；缺少架构、来源范围或业务含义时保留缺口。已审阅的公开字典随`database-knowledge/`同库同步；原始取数、网络地址、个人电脑路径、核验统计及专项研究留在Git忽略的`private/`。不强制加入原始内部包。
 - 不依据示例推断真实业务，不因个人意见或AI生成内容而标记为已生效。
-- 部门职能可用于提出流程候选和问题，不按职责条款数量推定流程数量，也不按部门、岗位或职务推定具体任务角色及授权。
+- 部门职能按[参考文本](knowledge/department-functions-reference.md)及[来源登记](sources/organization-sources.md)使用。用户2026-10-26明确DOC-XZ-35虽为正式文件，但各部门颗粒度未对齐，仅供参考；不按条款数量推定流程数量、工作量或职责完整性，不据其自动改写已治理JSON的职责或审批，也不按部门、岗位或职务推定任务角色及授权。
 
 ## 修改边界
 

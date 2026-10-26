@@ -8,7 +8,7 @@
 |---|---|
 | manifest.json | 批次、状态、范围、各数据文件SHA-256、来源配置摘要及统计 |
 | objects.json | 对象、字段、技术元数据、键、逐次观察及冲突 |
-| sources.json | 原始文件位置和摘要、查询或缓存节点定位、来源时间及限制 |
+| sources.json | 来源摘要、查询或缓存节点定位、来源时间及限制；本地受限包可另含原件位置，公开字典不包含 |
 | aggregates.json | 显式允许的数字汇总；不含逐笔记录 |
 | views.json | 显式选定的缓存视图定义及成员摘要；不执行SQL |
 | curation.json | 业务检索标签、候选释义、对象映射、关联和实现观察 |
@@ -21,7 +21,7 @@ manifest可另以`supplemental_files`声明随包说明、辅助引用和其他�
 
 SQL Server的`max_length`保留为字节数，精度、标度和可空性按实际结果记录。DataGrip的`StoredType`保留原格式，`not_null_marked=false`只说明缓存未标记非空，不与SQL结果中的`nullable=true`混同。未采集的默认值、字段含义及外键不补造。
 
-每个包状态固定为`prepared`、共享范围为`local_restricted`；`business_rules_approved/current_database_verified/live_queries_enabled/contains_business_rows`均为`false`。数字汇总另用`contains_aggregate_statistics`表达，不能据“没有逐笔记录”判断包可公开。技术时间、业务确认与新鲜度分别记录。
+每个包状态固定为`prepared`；原始本地包共享范围为`local_restricted`，经审阅并排除地址、路径、业务汇总及调查材料的随库字典为`public_dictionary`。公开字典的`aggregates.json`为空，来源仅保留摘要及范围元数据；`business_rules_approved/current_database_verified/live_queries_enabled/contains_business_rows`均为`false`。数字汇总另用`contains_aggregate_statistics`表达，不能据“没有逐笔记录”判断包可公开。技术时间、业务确认与新鲜度分别记录。
 
 ## 维护者构建
 
@@ -55,6 +55,6 @@ node scripts/database-knowledge.cjs check --package <知识包目录> --referenc
 
 检查核对包摘要、标识唯一性、证据、关联端点、键字段、映射所属对象及流程文件身份；不能证明字段业务含义或完整性。`--verify-sources`额外只读核对原始文件和SQL摘要，原件不可访问时明确失败，不改用派生报告。缓存ZIP的文件摘要覆盖其内容；包中另保留选定成员的摘要。
 
-同事接收内部包时，按[同步与领用](../workflows/database-knowledge-sharing.md)核对ZIP和manifest摘要后运行普通`check`。该检查包括已声明的附加文件，不要求访问发送者的原始采集目录；`--verify-sources`仍是另一个明确的来源核验步骤。Git同步的组件版本与内部包批次分别登记。
+同事按[同步与使用](../workflows/database-knowledge-sharing.md)一次Git拉取取得随库字典，由`database-knowledge/current.json`定位并核对manifest摘要，运行普通`check`。该检查包括已声明的附加文件，不要求维护者的原始采集目录；公开字典拒绝`--verify-sources`并提示检查范围。本地受限旧包仍可在维护者环境按原方式核验来源。方法组件、Git提交和字典批次分别登记；已有流程不自动改写原批次引用。
 
 回归验证使用`python -X utf8 scripts/test-database-knowledge.py`，仅创建并移除本脚本拥有的临时虚构目录，不访问真实数据库。

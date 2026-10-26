@@ -1,0 +1,47 @@
+{
+  "schema_version": "gk-database-knowledge-v1",
+  "package_version": "2026-10-26.5-public",
+  "status": "prepared",
+  "created_at": "2026-10-26T16:56:34.302272+08:00",
+  "sharing_scope": "public_dictionary",
+  "business_rules_approved": false,
+  "current_database_verified": false,
+  "live_queries_enabled": false,
+  "contains_business_rows": false,
+  "contains_aggregate_statistics": false,
+  "contents": "reviewed dictionary structure, SQL definitions, relationships and evidence digests; no business rows or business aggregates",
+  "derivation": {
+    "source_package_version": "2026-10-26.4",
+    "source_manifest_sha256": "9905aa49bf2896df248dcf5bb77c9fbe6025efafd3406f7ecc15bb3095d14141",
+    "projection_policy": "public_dictionary_v1",
+    "original_files_distributed": false
+  },
+  "systems": {
+    "kfu8qz": {
+      "objects": 27,
+      "fields": 1333
+    },
+    "qinzhe": {
+      "objects": 938,
+      "fields": 14973
+    },
+    "u8": {
+      "objects": 125,
+      "fields": 8023
+    }
+  },
+  "files": {
+    "objects.json": "587250a4d7df9e43a8f7060e4b5824e18add449be6752f3d2570f9a275120aa5",
+    "sources.json": "a343850336f922c7e35025c3386a8e1d4382980a75cdcaa3823adfeaa7978571",
+    "aggregates.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "views.json": "0e20f688c665b0c1f9b9384cb75fe8339d5cb38ae176aaef40667470eb6fdce0",
+    "curation.json": "601dbb102a6fa765067b78a66d5d4500585ce08350e6067607dbc026ff7fadd8"
+  },
+  "supplemental_files": {
+    "README.md": "3132263a77e6758793b90338170f6dd9c92b97e6faf300af8ad39bbe01c319f5",
+    "workflow-reference.md": "e5834717a28ac9d6435b01122c3db9cf9286e7833a622074346b8febcbefd7bc",
+    "field-lineage.md": "4c1fcbf241bf269dc31a459e7a85a46072d5a9c4afab1a2acc0c43e5dc876725",
+    "verification.json": "3dfd75cc2d86b2381d70f88cea2784f81622b9cac805d2a756c32285015d308a"
+  },
+  "current_reference": "workflow-reference.md"
+}

@@ -1,19 +1,20 @@
 # 用友、勤哲数据库知识入口
 
-本入口帮助流程编制者查找已有系统的数据对象、字段和关联依据。方法组件版本为2026-10-26.1，状态为本地已准备；它不提供实时业务记录，也不代表业务规则已经批准。实际内部知识包另存于受限位置，公共仓库不附带真实结构、内部映射或业务统计。
+本入口帮助流程编制者查找已有系统的数据对象、字段和关联依据。方法组件版本为2026-10-26.2，状态为本地已准备；它不提供实时业务记录，也不代表业务规则已经批准。已审阅的真实结构、字段和关系随`database-knowledge/`同库同步；原始审计文件、网络地址、个人电脑路径、核验统计及专项调查材料不随库分发。
 
 ## 使用前
 
 面向同事的简短介绍及已有JSON的静默补充提示词，见[知识库升级说明](database-knowledge-upgrade-note.md)。
 
-维护者提供获准使用的知识包目录和版本，使用者在任务记录中登记。目录不存在时，明确“未取得数据库知识包”，继续能够依据现有材料处理的部分，不从示例、标准字段名或历史摘要补造公司数据库知识。知识包的取得不表示可以向任意外部模型上传。
+拉取包含本轮变更的Gitee提交后，按`database-knowledge/current.json`定位随库字典，并在任务记录中登记版本与manifest摘要。新版本要求的文件缺失时先核对Git版本及包检查，不以`private/database-knowledge/`是否存在判断字典可用。旧方法版本不附带字典时明确版本差异，继续能够依据已有材料处理的部分，不补造结构。
 
-同事同步当前公开方法仓库时，只取得方法、工具和模板。公司内部字典应按[同步与领用说明](../workflows/database-knowledge-sharing.md)进入已核实的私有目标，或通过受限离线包取得并校验；本机private隔离不代替公司共享。方法组件版本、Git提交与内部包批次分别记录。普通包内检查不要求原始采集文件，不能代替发送者的原始来源核验。
+同事一次Git拉取即可取得方法、工具和已审阅字典，具体操作见[同步与使用说明](../workflows/database-knowledge-sharing.md)，无需再索取ZIP。方法组件版本、Git提交与字典批次分别记录。普通包内检查不要求维护者原始采集文件；公开字典只提供证据摘要，接收者不加`--verify-sources`，不把包检查写成原件重新核验。
 
-读取[数据库引用规则](../rules/database-reference.md)。有Node.js即可离线检索，无需数据库账号、网络连接或新增npm依赖。以下路径是本地目录示例，具体批次以实际取得的文件为准：
+读取[数据库引用规则](../rules/database-reference.md)。有Node.js即可离线检索，无需数据库账号、网络连接或新增npm依赖。在仓库根目录运行，具体批次由随库指针定位：
 
 ```powershell
-$packageDir = '<本次获准取得的知识包目录>'
+$pointer = Get-Content database-knowledge/current.json -Raw | ConvertFrom-Json
+$packageDir = Join-Path 'database-knowledge' $pointer.package_path
 node scripts/database-knowledge.cjs check --package $packageDir
 node scripts/database-knowledge.cjs query --package $packageDir --kind business --query 生产订单
 node scripts/database-knowledge.cjs query --package $packageDir --kind object --system qinzhe --query 制造大纲 --limit 5
@@ -35,6 +36,6 @@ node scripts/database-knowledge.cjs query --package $packageDir --kind relation 
 
 ## 维护与换版
 
-维护者使用Python 3.11及以上的标准库，从明确指定的离线材料构建新批次，命令、格式及差异比较见[技术格式说明](../technical/database-knowledge-format.md)。生成器只写本仓库`private/`内的新目录，拒绝覆盖已有知识包。内部配置与采集结果均受Git忽略；共享时通过获准的受限渠道单独交付，不改变公开仓库可见性。
+维护者使用Python 3.11及以上的标准库，从明确指定的离线材料构建新批次，命令、格式及差异比较见[技术格式说明](../technical/database-knowledge-format.md)。生成器只写本仓库`private/`内的新目录，拒绝覆盖已有知识包。内部配置与采集结果继续受Git忽略；从已核对批次整理公开字典时保留结构标识、来源摘要和完整使用条件，剔除原始记录、地址、个人路径及核验统计，再写入新的`database-knowledge/`批次，不覆盖旧包。当前不要求仓库私有化。
 
 旧流程保留原知识包版本和映射；换版只处理受影响条目。对象未出现在新采集范围，不能自动解释为数据库删除。新知识包通过工具检查，仍不能称为当前数据库已核实、AI真实会话已通过或业务已验收。

@@ -42,15 +42,27 @@ const repositorySkills = manifest.repository_skills;
 const databasePackage = manifest.database_knowledge_package;
 assert.ok(databasePackage, '缺少数据库知识方法登记');
 assert.equal(databasePackage.status, 'prepared');
-assert.equal(databasePackage.contains_internal_catalog, false);
+assert.equal(databasePackage.contains_internal_catalog, true);
 assert.equal(databasePackage.business_rules_approved, false);
 assert.equal(databasePackage.live_queries_enabled, false);
-assert.equal(databasePackage.public_sync_scope, 'methods_tools_templates_only');
-assert.equal(databasePackage.restricted_package_delivery, 'separate_authorized_channel');
+assert.equal(databasePackage.public_sync_scope, 'methods_tools_templates_public_dictionary');
+assert.equal(databasePackage.restricted_package_delivery, 'maintainer_evidence_only');
 for (const key of ['entrypoint', 'reference_rules', 'format', 'reference_template', 'builder', 'query_tool', 'tests', 'source_record', 'verification_record', 'sharing_workflow', 'change_record']) {
   const file = path.resolve(root, databasePackage[key]);
   assert.ok(file.startsWith(root + path.sep) && fs.existsSync(file), `数据库知识方法入口缺失或越界：${key}`);
 }
+const catalogPointerPath = path.resolve(root, databasePackage.catalog_entrypoint);
+assert.ok(catalogPointerPath.startsWith(root + path.sep), '数据库字典入口越界');
+const catalogPointer = JSON.parse(fs.readFileSync(catalogPointerPath, 'utf8'));
+const catalogRoot = path.resolve(path.dirname(catalogPointerPath), catalogPointer.package_path);
+assert.ok(catalogRoot.startsWith(path.dirname(catalogPointerPath) + path.sep), '数据库字典批次越界');
+const catalogManifestPath = path.join(catalogRoot, 'manifest.json');
+assert.equal(crypto.createHash('sha256').update(fs.readFileSync(catalogManifestPath)).digest('hex'), catalogPointer.manifest_sha256, '数据库字典manifest摘要不一致');
+const catalogManifest = JSON.parse(fs.readFileSync(catalogManifestPath, 'utf8'));
+assert.equal(catalogManifest.package_version, catalogPointer.package_version);
+assert.equal(catalogManifest.sharing_scope, 'public_dictionary');
+const catalogTool = require('./database-knowledge.cjs');
+const catalogResult = catalogTool.check(catalogTool.load(catalogRoot));
 assert.ok(Array.isArray(repositorySkills) && repositorySkills.length > 0, '缺少仓库技能登记');
 for (const item of repositorySkills) {
   for (const key of ['name', 'status', 'entrypoint', 'claude_code_skill', 'claude_code_primary_skill', 'verification_record', 'conversation_verification_status']) {
@@ -104,4 +116,4 @@ for (const [entryName, methodName] of Object.entries(prefixedEntries)) {
   assert.ok(entry.includes(`../../../.agents/skills/${methodName}/SKILL.md`), `${entryName} 缺少方法路由`);
 }
 const { suite } = loadSuite(root);
-console.log(JSON.stringify({ valid: true, authoring_package_version: manifest.authoring_package.version, technical_snapshot_version: snapshot.package_version, design_documentation_package_version: designPackage.version, markdown_files: markdownFiles, local_links: localLinks, technical_files: snapshot.files.length, source_skill_files: sourceSnapshot.files.length, skills, claude_entries: [...skills, ...Object.keys(prefixedEntries)], user_trial_status: manifest.authoring_package.user_trial_status, conversation_cases: suite.cases.length, conversation_model_execution: manifest.authoring_package.conversation_verification_status, design_documentation_model_execution: designPackage.conversation_verification_status }, null, 2));
+console.log(JSON.stringify({ valid: true, authoring_package_version: manifest.authoring_package.version, technical_snapshot_version: snapshot.package_version, design_documentation_package_version: designPackage.version, database_knowledge_package_version: databasePackage.version, database_dictionary_version: catalogPointer.package_version, database_dictionary_valid: catalogResult.valid, database_dictionary_source_files_verified: catalogResult.source_files_verified, markdown_files: markdownFiles, local_links: localLinks, technical_files: snapshot.files.length, source_skill_files: sourceSnapshot.files.length, skills, claude_entries: [...skills, ...Object.keys(prefixedEntries)], user_trial_status: manifest.authoring_package.user_trial_status, conversation_cases: suite.cases.length, conversation_model_execution: manifest.authoring_package.conversation_verification_status, design_documentation_model_execution: designPackage.conversation_verification_status }, null, 2));

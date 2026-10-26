@@ -1,10 +1,10 @@
 # 来源登记说明
 
-[数据库知识引用升级记录](database-knowledge-upgrade-2026-10-22.md)登记用户授权的离线资料追溯、受限知识包与流程引用方法。公共部分只含方法与虚构验证；内部结构、来源绝对路径、字段映射和真实统计留在Git忽略的`private/`，不作为正式业务发布。
+[数据库知识引用升级记录](database-knowledge-upgrade-2026-10-22.md)登记用户授权的离线资料追溯、受限知识包与流程引用方法。原始本地包和调查材料继续留在Git忽略的`private/`；公开字典的当前范围见[同库同步记录](database-knowledge-public-sync-2026-10-26.md)，不作为正式业务发布。
 
-[数据库知识同步准备](database-knowledge-sharing-2026-10-26.md)登记共享方法与受限内部包分别交付的范围、附加文件检查及同事领用方法，不表示已提交、推送或完成接收。
+[数据库知识同库同步](database-knowledge-public-sync-2026-10-26.md)登记用户要求同事直接从公开Gitee一同拉取字典的决定，以及公开整理范围。[此前同步准备](database-knowledge-sharing-2026-10-26.md)保留当时分包方案的追溯；当前方法为2026-10-26.2，不再要求另行索取ZIP。
 
-本目录保存获准共享的来源索引和确认记录。[组织与职责来源](organization-sources.md)当前登记SRC-ORG-004：按2026-10-20用户指定，以《新花名册.xlsx》导入3000后的有效目录及原始导入审计为同步来源。制度职责仍按SRC-ORG-001的原确认范围引用，原Excel直接参考版本保留为历史。派生内容仍为草稿，尚未完成知识库正式发布；本次范围见[同步确认记录](organization-sync-confirmation-2026-10-20.md)。
+本目录保存获准共享的来源索引和确认记录。[组织与职责来源](organization-sources.md)以SRC-ORG-004登记3000有效目录及原始导入审计，原Excel直接参考版本保留为历史。SRC-ORG-006登记用户2026-10-26指定的DOC-XZ-35-A DOCX及其“各部门颗粒度未对齐，仅供参考”限制，正文及组织图见[参考文本](../knowledge/department-functions-reference.md)，SRC-ORG-001保留历史PDF摘要。派生内容尚未完成知识库正式业务发布；目录同步范围见[同步确认记录](organization-sync-confirmation-2026-10-20.md)，本次参考纳入范围见[纳入记录](organization-reference-confirmation-2026-10-26.md)。
 
 [编制作业与技术规则来源](tooling-sources.md)登记用户确认的完整技能、双目标与grill-me方法，以及固定V8/V7技术快照；[原技能来源清单](authoring-source-snapshot.json)登记10份历史原文件和摘要。历史原文仅追溯，当前规则以主技能和会话入口为准；这些方法的采用与公司业务知识发布分别记录。
 

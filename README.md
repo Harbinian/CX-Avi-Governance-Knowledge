@@ -156,11 +156,11 @@ Codex 等支持仓库技能的工具可用 `$技能名`，或按 `.agents/skills
 
 ## 数据库知识引用
 
-同事同步分两部分：Git拉取方法、工具和模板，真实内部字典按[同步与领用说明](workflows/database-knowledge-sharing.md)另行取得。共享方法、Git提交和受限批次分别记录；本轮准备及检查见[同步记录](sources/database-knowledge-sharing-2026-10-26.md)。
+本轮提交推送后，同事一次Git拉取即可同时取得方法、工具和已审阅的真实数据库字典，无需另行索取ZIP。按[同步与使用说明](workflows/database-knowledge-sharing.md)检查，当前字典由[批次指针](database-knowledge/current.json)定位；本轮依据与范围见[同库同步记录](sources/database-knowledge-public-sync-2026-10-26.md)。
 
-已准备[用友、勤哲数据库知识入口](knowledge/database-knowledge.md)、[引用规则](rules/database-reference.md)及离线检索工具，方法组件版本2026-10-26.1。主编制包2026-10-22.2按需使用该能力，精确数据库映射另存辅助记录；V8/V7合同未改。真实内部目录、映射与统计留在Git忽略的`private/`，同事需通过获准渠道另行取得，公开仓库只含方法、工具和虚构验证。没有内部包时明确缺口。
+已准备[用友、勤哲数据库知识入口](knowledge/database-knowledge.md)、[引用规则](rules/database-reference.md)及离线检索工具，方法组件版本2026-10-26.2。主编制包2026-10-22.2按需使用该能力，精确数据库映射另存辅助记录；V8/V7合同未改。已审阅的库表字段、关系、SQL定义及来源摘要保存在`database-knowledge/`；原始取数、地址、个人电脑路径、核验统计和专项调查仍留在Git忽略的`private/`。字段和关联可直接离线检索，不因此赋予数据库连接或业务审批权限。
 
-本轮授权及影响见[修改记录](sources/database-knowledge-upgrade-2026-10-22.md)，实际检查见[验证记录](verification/database-knowledge-readiness-2026-10-22.md)。本地已准备不表示已推送、当前数据库已核实或业务已验收；本次新增能力尚未经过真实AI编制会话验证。共享公共资料文件夹时排除`private/`、`scratch/`和`backups/`；内部包按获准范围单独交付，Git忽略不等于目录访问控制。
+本轮授权及影响见[同库同步记录](sources/database-knowledge-public-sync-2026-10-26.md)，实际检查见[验证记录](verification/database-knowledge-public-sync-2026-10-26.md)。本地已准备不表示已推送、当前数据库已核实或业务已验收；本次新增能力尚未经过真实AI编制会话验证。共享公共资料文件夹时排除`private/`、`scratch/`和`backups/`；原始本地包不随库分发，Git忽略不等于目录访问控制。
 
 ## 组织、岗位与制度职责参考
 
@@ -168,7 +168,7 @@ Codex 等支持仓库技能的工具可用 `$技能名`，或按 `.agents/skills
 
 - [组织架构](knowledge/organization-structure.md)：12个部门、41个office单位；部门父级空值保留，不补造领导层级。
 - [岗位配置参考](knowledge/position-allocation-reference.md)：覆盖298条来源记录，保留组合及审计行定位，不含姓名、工号、OA编号或人员标识。
-- [部门职能摘要](knowledge/department-functions.md)：继续按SRC-ORG-001现行制度的原确认范围使用，不从目录推定逐岗职责、任务角色或审批。
+- [组织架构及部门职能参考文本](knowledge/department-functions-reference.md)：已纳入用户2026-10-26指定的DOC-XZ-35-A DOCX正文和组织图。文件虽为正式文件，但各部门颗粒度未对齐，仅供参考；不据其确定流程数量、工作量、具体任务角色或审批链，也不自动改写已治理JSON。原[部门职能摘要](knowledge/department-functions.md)保留为历史PDF的参考摘要；载体与使用边界见[纳入记录](sources/organization-reference-confirmation-2026-10-26.md)。
 - [来源登记](sources/organization-sources.md)、[无人员标识快照](sources/organization-directory-snapshot.json)和[待确认事项](knowledge/organization-open-items.md)：记录读取时间、版本摘要、范围与差异。
 
 2026-10-20用户已确认，职员来源第41行现任“复材二车间／调度员”。本参考已按该业务确认更正；3000当前目录及原始导入记录尚未回写。办公室仍保留原目录记录，二车间内的办公室归属未据此推定。 本次已同步本地副本，未改写业务库、原件或权限，也未启用自动同步。office与active不表示机构已正式成立。本库派生条目仍为草稿，正式有效清单保持为空；来源确认、Git共享和正式业务发布分别记录。
@@ -230,6 +230,7 @@ GitHub 和 Gitee 的主线分支均为 `main`，各自保留初始化提交的�
 |---|---|
 | rules | 用户确认的AI会话方法及技术编制约束；公司业务规则生效须有相应确认 |
 | knowledge | 术语、概念及通用知识 |
+| database-knowledge | 随库公开数据库字典批次及 `current.json` 指针；由 `check-package.cjs` 核对摘要，原始审计材料仍在 `private/` |
 | workflows | 按任务组织的 AI 作业方法 |
 | templates | 编写和提交内容使用的模板 |
 | examples | 脱敏示例，不作为具体业务依据 |

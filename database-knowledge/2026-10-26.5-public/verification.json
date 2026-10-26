@@ -1,0 +1,16 @@
+{
+  "valid": true,
+  "scope": "offline package integrity and public projection checks",
+  "objects": 1090,
+  "fields": 24329,
+  "relations": 73,
+  "sources": 398,
+  "business_topics": 55,
+  "source_files_verified_on_recipient": false,
+  "current_database_verified": false,
+  "business_review": "not_assessed",
+  "original_source_paths_included": false,
+  "network_addresses_included": false,
+  "business_aggregates_included": false,
+  "no_new_database_queries": true
+}

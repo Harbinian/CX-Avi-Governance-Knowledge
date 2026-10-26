@@ -49,7 +49,17 @@ function check(pkg, options = {}) {
   for (const key of ['business_rules_approved', 'current_database_verified', 'live_queries_enabled', 'contains_business_rows']) {
     assert.equal(pkg.manifest[key], false, 'Unsupported authority or live-data claim: ' + key);
   }
-  assert.equal(pkg.manifest.sharing_scope, 'local_restricted');
+  assert.ok(['local_restricted', 'public_dictionary'].includes(pkg.manifest.sharing_scope), 'Unsupported sharing scope');
+  if (pkg.manifest.sharing_scope === 'public_dictionary') {
+    assert.equal(pkg.manifest.contains_aggregate_statistics, false, 'Public dictionary must exclude business aggregates');
+    assert.equal(pkg.aggregates.length, 0, 'Public dictionary must exclude business aggregates');
+    assert.ok(!options['--verify-sources'], 'Public dictionary contains evidence digests, not original source files; use check without --verify-sources.');
+    for (const source of pkg.sources) {
+      for (const key of ['source_path', 'original_source_path', 'sql_path', 'audit_catalog', 'target_host', 'row_count', 'result_rows', 'logged_result_row_count']) {
+        assert.ok(!(key in source), 'Public dictionary contains private source metadata: ' + key);
+      }
+    }
+  }
   const sources = new Map();
   for (const source of pkg.sources) {
     assert.ok(!sources.has(source.evidence_ref), 'Duplicate evidence reference');

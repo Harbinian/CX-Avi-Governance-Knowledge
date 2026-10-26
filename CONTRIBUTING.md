@@ -12,7 +12,7 @@
 
 通用内容复核按[当前规则](rules/process-content-review.md)。实际案例只提供本次事实和评价背景；提炼共享方法时保留可复用要求及其确认依据，不复制真实部门原答复或把局部缺口推广为部门整体结论。本次方法修改的依据与范围见[确认及修改申请记录](sources/process-review-confirmations-2026-10-12.md)。
 
-同事同步数据库知识时，按[同步与领用](workflows/database-knowledge-sharing.md)分别取得共享方法和受限内部包；Git拉取不包含内部字典。
+同事同步数据库知识时，按[同步与使用](workflows/database-knowledge-sharing.md)一次拉取方法、工具和已审阅字典。公开字典写入`database-knowledge/`的新批次，原始审计、地址、个人路径和核验统计留在`private/`；不得强制加入原始受限包。
 
 ## 每次修改需要说明
 

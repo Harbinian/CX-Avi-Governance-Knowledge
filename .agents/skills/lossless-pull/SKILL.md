@@ -85,12 +85,15 @@ node scripts/check-package.cjs
 
 按实际输出报告。检查失败时只修复有据可修的问题，不为通过检查删除对象、清空引用或伪造业务值。其他仓库按其实际校验命令执行，没有则写明未执行。
 
+当前本库的已审阅数据库字典随`database-knowledge/`同库同步，由`database-knowledge/current.json`定位；`check-package.cjs`同时核对指针、字典摘要及引用。不以被忽略的`private/database-knowledge/`是否存在判断字典可用，也不要求同事另行索取ZIP。旧的仅方法提交与新版本的字典缺失或摘要不符应分别报告，具体见[同步与使用](../../../workflows/database-knowledge-sharing.md)。公开字典不提供维护者的原始文件路径，接收者运行普通check，不加`--verify-sources`；缺少维护者原件不属于Git拉取风险。
+
 报告至少包含：
 
 - 远程/分支、拉取前 HEAD、拉取后 HEAD；
 - 本地改动：无 / 已用 stash 备份并恢复 / 冲突且 stash 保留（SHA）；
 - 冲突或失败原因；
 - `check-package.cjs`：通过 / 失败（摘要）/ 未执行；
+- 随库字典：已取得并检查通过（批次及manifest摘要）/ 当前旧提交尚未包含 / 新版本所需文件缺失或摘要不符；
 - 未执行的提交、推送或发布。
 
 ## 禁止事项

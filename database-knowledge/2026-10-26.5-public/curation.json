@@ -1,0 +1,4596 @@
+{
+  "status": "prepared",
+  "business_rules_approved": false,
+  "business_objects": [
+    {
+      "business_object_ref": "BO-INVENTORY",
+      "name": "用友存货档案",
+      "aliases": [
+        "物料",
+        "存货编码",
+        "物资分类"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:Inventory",
+        "gkdb:u8:UFDATA_333_2025:dbo:InventoryClass"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "覆盖档案与分类结构；编码含义、维护责任和主数据权威尚未取得业务确认。"
+    },
+    {
+      "business_object_ref": "BO-SALES",
+      "name": "用友销售订单",
+      "aliases": [
+        "客户订单",
+        "销售明细",
+        "生产编号"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:SO_SOMain",
+        "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails",
+        "gkdb:kfu8qz:KFU8QZ:dbo:SODetails"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "KFU8QZ为接口库查询范围；历史行级ID匹配不表示所有期间、账套或转单状态均适用。"
+    },
+    {
+      "business_object_ref": "BO-PRODUCTION",
+      "name": "用友生产订单",
+      "aliases": [
+        "生产任务",
+        "生产明细",
+        "领料",
+        "销售来源"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_order",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate",
+        "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "区分接口暂存记录与U8业务记录；不从表名确定实际办理和服务写入时点。"
+    },
+    {
+      "business_object_ref": "BO-BOM",
+      "name": "用友物料清单",
+      "aliases": [
+        "BOM",
+        "父件",
+        "子件",
+        "基础用量"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:bom_bom",
+        "gkdb:u8:UFDATA_333_2025:dbo:bom_parent",
+        "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "结构与版本日期不单独证明实际生效、工艺选择、损耗或实际领用。"
+    },
+    {
+      "business_object_ref": "BO-PURCHASE",
+      "name": "用友采购订单",
+      "aliases": [
+        "采购",
+        "供应商订单"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:PO_Pomain",
+        "gkdb:u8:UFDATA_333_2025:dbo:PO_Podetails"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "只覆盖已采集对象；采购到货、入库、发票、付款的实际业务条件须逐项核对。"
+    },
+    {
+      "business_object_ref": "BO-WAREHOUSE",
+      "name": "用友库存单据",
+      "aliases": [
+        "采购入库",
+        "产成品入库",
+        "材料出库",
+        "仓库"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:RdRecord01",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords01",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecord10",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords10",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecord11",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "单据日期不证明物料来自哪一批次；数量流、成本流和过账时点分别核对。"
+    },
+    {
+      "business_object_ref": "BO-FINANCE",
+      "name": "用友存货与总账",
+      "aliases": [
+        "成本",
+        "会计凭证",
+        "金额"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:IA_Subsidiary",
+        "gkdb:u8:UFDATA_333_2025:dbo:GL_accvouch"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "一张凭证可能汇总多张单据；整张凭证金额不能直接归属某一业务明细。"
+    },
+    {
+      "business_object_ref": "BO-FIXED-ASSET",
+      "name": "用友固定资产",
+      "aliases": [
+        "资产卡片",
+        "折旧"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:fa_Cards",
+        "gkdb:u8:UFDATA_333_2025:dbo:fa_DeprTransactions"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "独立于存货档案；已采集结构不证明固定资产卡片接口、财务确认或完整卡片到总账分摊关系。"
+    },
+    {
+      "business_object_ref": "BO-OUTLINE",
+      "name": "勤哲产品制造大纲",
+      "aliases": [
+        "制造大纲",
+        "大纲编号",
+        "大纲版次",
+        "工序",
+        "材料页"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%8F%82%E8%80%83%E6%96%87%E4%BB%B6_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%8F%82%E8%80%83%E6%96%87%E4%BB%B6_%E6%98%8E%E7%BB%86",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%B7%A5%E5%BA%8F%E9%A1%B5_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%B7%A5%E5%BA%8F%E9%A1%B5_%E6%98%8E%E7%BB%86",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%B7%A5%E8%A3%85%E5%92%8C%E8%AE%BE%E5%A4%87%E7%A8%8B%E5%BA%8F_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%B7%A5%E8%A3%85%E5%92%8C%E8%AE%BE%E5%A4%87%E7%A8%8B%E5%BA%8F_%E6%98%8E%E7%BB%86",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%9D%90%E6%96%99%E9%A1%B5_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%9D%90%E6%96%99%E9%A1%B5_%E6%98%8E%E7%BB%86",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E7%89%88%E6%AC%A1%E8%AE%B0%E5%BD%95%E9%A1%B5_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E7%89%88%E6%AC%A1%E8%AE%B0%E5%BD%95%E9%A1%B5_%E6%98%8E%E7%BB%86",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E8%9C%82%E7%AA%9D%E6%9D%90%E6%96%99%E9%A1%B5_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E8%9C%82%E7%AA%9D%E6%9D%90%E6%96%99%E9%A1%B5_%E6%98%8E%E7%BB%86",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E9%99%84%E5%9B%BE_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E9%99%84%E5%9B%BE_%E6%98%8E%E7%BB%86",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E9%92%A2%E7%B4%AB%E5%A4%96%E7%BA%BF%E6%9A%B4%E9%9C%B2%E9%A1%B5_%E4%B8%BB%E8%A1%A8"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "业务表与_wi表分别引用；字段名中的角色名称不构成任务授权或审批链确认。"
+    },
+    {
+      "business_object_ref": "BO-OUTLINE-VERSION",
+      "name": "勤哲大纲版本选择",
+      "aliases": [
+        "最新版本",
+        "批准日期",
+        "旧版例外",
+        "车间选用"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%E5%A4%A7%E7%BA%B2",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%B2%E8%B5%B0%E5%AE%8C%E5%AE%A1%E6%89%B9%E6%B5%81%E7%A8%8B%E5%A4%A7%E7%BA%B2",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E7%89%B9%E6%AE%8A%E5%8F%AF%E4%BE%9B%E8%BD%A6%E9%97%B4%E9%80%89%E7%94%A8%E6%97%A7%E7%89%88%E5%A4%A7%E7%BA%B2_%E6%98%8E%E7%BB%86"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "当前缓存实现含旧版例外集合；视图名不等于唯一最新、全部审批完成或已获业务确认。"
+    },
+    {
+      "business_object_ref": "BO-QZ-WORKFLOW",
+      "name": "勤哲工作项与待办",
+      "aliases": [
+        "工作流",
+        "工作项",
+        "待办",
+        "办理人"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:ES_WorkItem",
+        "gkdb:qinzhe:CXSYSYS:dbo:ES_WiTodo",
+        "gkdb:qinzhe:CXSYSYS:dbo:ES_WfTask",
+        "gkdb:qinzhe:CXSYSYS:dbo:ES_RepCase",
+        "gkdb:qinzhe:CXSYSYS:dbo:ES_WiLink",
+        "gkdb:qinzhe:CXSYSYS:dbo:ES_v_Todo"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "只引用结构与视图定义，不读取人员记录；状态数值、实际办理角色和页面使用情况待确认。"
+    },
+    {
+      "business_object_ref": "BO-QZ-U8-BRIDGE",
+      "name": "勤哲引用用友生产明细的视图",
+      "aliases": [
+        "跨系统",
+        "用友接口",
+        "生产编号",
+        "U8AUTOID"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:u8%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline structural and query evidence",
+      "limitations": "缓存定义指向链接服务器KFU8QZNEW4上的KFU8QZ.dbo.momorderdetail；未取得链接目标实例映射，不与本包用友探查实例自动合并。"
+    },
+    {
+      "business_object_ref": "BO-PRODUCTION-OUTLINE-LINEAGE",
+      "name": "生产订单、生产编号与制造大纲引用链",
+      "aliases": [
+        "生产订单 制造大纲",
+        "生产编号 大纲",
+        "跨系统追溯",
+        "关联链"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe",
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_order",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail",
+        "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail",
+        "gkdb:qinzhe:CXSYSYS:dbo:u8%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2_%E4%B8%BB%E8%A1%A8"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "reviewed offline SQL, cache keys and explicitly separated candidates",
+      "limitations": "勤哲内部任务→流转卡→大纲已有缓存SQL支持；远程用友投影到勤哲任务的具体转换与链接实例仍有缺口，整链未验证。"
+    },
+    {
+      "business_object_ref": "BO-QZ-TASK-CARD-OUTLINE",
+      "name": "勤哲生产任务、流转卡与大纲引用",
+      "aliases": [
+        "生产任务",
+        "流转卡 大纲",
+        "下卡",
+        "制造大纲表编号"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E6%89%80%E6%9C%89%E6%B5%81%E8%BD%AC%E5%8D%A1",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E6%B5%81%E8%BD%AC%E5%8D%A1%E5%92%8C%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2_%E4%B8%BB%E8%A1%A8"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "reviewed offline SQL, cache keys and explicitly separated candidates",
+      "limitations": "仅证明两个缓存视图的追溯连接；不表示所有卡命中任务或表编号唯一，不推定创建顺序、选版与审批授权。"
+    },
+    {
+      "business_object_ref": "BO-QZ-PRODUCTION-INPUT-CANDIDATES",
+      "name": "勤哲生产订单输入与中间明细映射线索",
+      "aliases": [
+        "U8生产编号",
+        "u8autoid",
+        "本地中间表",
+        "生产订单表编号",
+        "任务与u8生产编号"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E8%BE%93%E5%85%A5_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8%E6%96%B0_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8%E6%96%B0_%E6%98%8E%E7%BB%86",
+        "gkdb:qinzhe:CXSYSYS:dbo:u8%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "reviewed offline SQL, cache keys and explicitly separated candidates",
+      "limitations": "目前仅结构候选；不将本地表当成已核实远程缓存，填充公式和实际记录转换尚未取得。"
+    },
+    {
+      "business_object_ref": "BO-QZ-OPERATION-GRAIN",
+      "name": "生产工序与零件层级追溯",
+      "aliases": [
+        "零件编号 流水工序号",
+        "主零件 次零件",
+        "生产编号 工序"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95_%E6%98%8E%E7%BB%86",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95%E6%B1%87%E6%80%BB_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%A2%9E%E8%A1%A5%E5%8F%AF%E9%80%89%E5%8F%96%E5%B7%A5%E5%BA%8F"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "reviewed offline SQL, cache keys and explicitly separated candidates",
+      "limitations": "保留工序复合键和主次零件方向；相同生产编号不足以定位工序，不定义正式完工统计或工作负荷口径。"
+    },
+    {
+      "business_object_ref": "BO-QZ-SALES-SHIPMENT",
+      "name": "勤哲销售发货结构",
+      "aliases": [
+        "销售发货",
+        "送货",
+        "发货明细"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E9%94%80%E5%94%AE%E5%8F%91%E8%B4%A7%E5%8D%95_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E9%94%80%E5%94%AE%E5%8F%91%E8%B4%A7%E5%8D%95_%E6%98%8E%E7%BB%86"
+      ],
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline metadata; matched historical query SQL and logs where available",
+      "population_evidence_file": "table-population-evidence.json",
+      "limitations": "勤哲仅证实缓存结构，未核实非空或现行使用。"
+    },
+    {
+      "business_object_ref": "BO-QZ-OPERATION-INSPECTION",
+      "name": "勤哲工序检验结构",
+      "aliases": [
+        "工序检验",
+        "过检",
+        "质量检查"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%8D%E5%90%88%E6%A0%BC%E5%B7%A5%E5%BA%8F",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E6%A3%80%E9%AA%8C%E5%B7%A5%E5%BA%8F%E5%B7%B2%E8%BF%87%E6%A3%80%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7"
+      ],
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline metadata; matched historical query SQL and logs where available",
+      "population_evidence_file": "table-population-evidence.json",
+      "limitations": "勤哲仅证实缓存结构，未核实非空或现行使用。"
+    },
+    {
+      "business_object_ref": "BO-QZ-NONCONFORMANCE",
+      "name": "勤哲不合格审理结构",
+      "aliases": [
+        "不合格",
+        "质量审理",
+        "审理单"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%B8%8D%E5%90%88%E6%A0%BC%E5%AE%A1%E7%90%86%E5%8D%95_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%B8%8D%E5%90%88%E6%A0%BC%E5%AE%A1%E7%90%86%E5%8D%95%E6%98%8E%E7%BB%86_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%B8%8D%E5%90%88%E6%A0%BC%E5%AE%A1%E7%90%86%E5%8D%95_%E6%93%8D%E4%BD%9C%E5%B7%A5%E5%B7%A5%E6%97%B6"
+      ],
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline metadata; matched historical query SQL and logs where available",
+      "population_evidence_file": "table-population-evidence.json",
+      "limitations": "勤哲仅证实缓存结构，未核实非空或现行使用。"
+    },
+    {
+      "business_object_ref": "BO-QZ-REWORK",
+      "name": "勤哲返工返修结构",
+      "aliases": [
+        "返工",
+        "返修",
+        "返修大纲"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E8%BF%94%E5%B7%A5%E8%BF%94%E4%BF%AE%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E8%BF%94%E5%B7%A5%E8%BF%94%E4%BF%AE%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E6%93%8D%E4%BD%9C%E5%B7%A5%E5%B7%A5%E6%97%B6",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E8%BF%94%E4%BF%AE%E8%BF%94%E5%B7%A5%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8"
+      ],
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline metadata; matched historical query SQL and logs where available",
+      "population_evidence_file": "table-population-evidence.json",
+      "limitations": "勤哲仅证实缓存结构，未核实非空或现行使用。"
+    },
+    {
+      "business_object_ref": "BO-QZ-LABOR",
+      "name": "勤哲人员工时结构",
+      "aliases": [
+        "工时",
+        "人员工时",
+        "调度"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8"
+      ],
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline metadata; matched historical query SQL and logs where available",
+      "population_evidence_file": "table-population-evidence.json",
+      "limitations": "勤哲仅证实缓存结构，未核实非空或现行使用。"
+    },
+    {
+      "business_object_ref": "BO-QZ-OUTSOURCE-PRICING",
+      "name": "勤哲工序委外定价结构",
+      "aliases": [
+        "委外",
+        "外协",
+        "定价",
+        "供应商"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E5%BA%8F%E5%A7%94%E5%A4%96%E7%94%B3%E8%AF%B7%E5%AE%9A%E4%BB%B7%E5%8D%95_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E5%BA%8F%E5%A7%94%E5%A4%96%E7%94%B3%E8%AF%B7%E5%AE%9A%E4%BB%B7%E5%8D%95_%E6%98%8E%E7%BB%86",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%A4%96%E5%8D%8F%E4%BE%9B%E5%BA%94%E5%95%86%E7%AE%A1%E7%90%86_%E4%B8%BB%E8%A1%A8"
+      ],
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline metadata; matched historical query SQL and logs where available",
+      "population_evidence_file": "table-population-evidence.json",
+      "limitations": "勤哲仅证实缓存结构，未核实非空或现行使用。"
+    },
+    {
+      "business_object_ref": "BO-QZ-TOOLING",
+      "name": "勤哲工装结构",
+      "aliases": [
+        "工装",
+        "专用工装",
+        "工装调用"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%A3%85%E5%93%81%E7%A7%8D%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%A3%85%E4%BD%8D%E7%BD%AE%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%B8%93%E7%94%A8%E5%B7%A5%E8%A3%85%E8%B0%83%E7%94%A8%E7%94%B3%E8%AF%B7_%E4%B8%BB%E8%A1%A8"
+      ],
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline metadata; matched historical query SQL and logs where available",
+      "population_evidence_file": "table-population-evidence.json",
+      "limitations": "勤哲仅证实缓存结构，未核实非空或现行使用。"
+    },
+    {
+      "business_object_ref": "BO-QZ-CUSTOMER",
+      "name": "勤哲客户名称结构",
+      "aliases": [
+        "客户名称",
+        "客户简称"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%AE%A2%E6%88%B7%E5%90%8D%E7%A7%B0_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%AE%A2%E6%88%B7%E7%AE%80%E7%A7%B0_%E4%B8%BB%E8%A1%A8"
+      ],
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline metadata; matched historical query SQL and logs where available",
+      "population_evidence_file": "table-population-evidence.json",
+      "limitations": "勤哲仅证实缓存结构，未核实非空或现行使用。"
+    },
+    {
+      "business_object_ref": "BO-U8-PURCHASE-BILLING",
+      "name": "用友采购发票与应付历史数据证据",
+      "aliases": [
+        "采购发票",
+        "应付",
+        "付款",
+        "历史非空"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:PurBillVouch",
+        "gkdb:u8:UFDATA_333_2025:dbo:PurBillVouchs",
+        "gkdb:u8:UFDATA_333_2025:dbo:Ap_Detail",
+        "gkdb:u8:UFDATA_333_2025:dbo:Ap_CloseBill"
+      ],
+      "evidence_refs": [
+        "EV-POP-Q049-SQL",
+        "EV-POP-Q051-SQL",
+        "EV-POP-Q053-SQL",
+        "EV-U8-LOG",
+        "EV-U8-Q024",
+        "EV-U8-Q048R"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline metadata; matched historical query SQL and logs where available",
+      "population_evidence_file": "table-population-evidence.json",
+      "limitations": "历史条件查询记录不等于当前整表数据量，也不代表已确认业务规则。"
+    },
+    {
+      "business_object_ref": "BO-U8-SALES-BILLING",
+      "name": "用友销售发票与应收历史数据证据",
+      "aliases": [
+        "销售发票",
+        "应收",
+        "历史非空"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:SaleBillVouch",
+        "gkdb:u8:UFDATA_333_2025:dbo:SaleBillVouchs",
+        "gkdb:u8:UFDATA_333_2025:dbo:Ar_Detail"
+      ],
+      "evidence_refs": [
+        "EV-POP-Q057-SQL",
+        "EV-POP-Q063-SQL",
+        "EV-U8-LOG",
+        "EV-U8-Q048R",
+        "EV-U8-Q062"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "offline metadata; matched historical query SQL and logs where available",
+      "population_evidence_file": "table-population-evidence.json",
+      "limitations": "历史条件查询记录不等于当前整表数据量，也不代表已确认业务规则。"
+    },
+    {
+      "business_object_ref": "BO-U8-MATERIAL-ISSUE",
+      "name": "用友材料出库与生产用料候选",
+      "aliases": [
+        "材料出库",
+        "领料",
+        "生产领料"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecord11",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "Selected cache structure and byte-matched historical SQL definitions; no individual results",
+      "evidence_refs": [
+        "EV-U8-Q006",
+        "EV-U8-Q024"
+      ],
+      "logic_reference": "workflow-reference.md",
+      "limitations": "仅供编制数据需求和待核关联；不确认虚拟件枚举、实际出库、审批完成、09系列业务类型或当前运行。"
+    },
+    {
+      "business_object_ref": "BO-U8-SALES-OUTBOUND",
+      "name": "用友销售出库、发货与发票引用",
+      "aliases": [
+        "销售出库",
+        "发货",
+        "出库单"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecord32",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords32",
+        "gkdb:u8:UFDATA_333_2025:dbo:DispatchList",
+        "gkdb:u8:UFDATA_333_2025:dbo:DispatchLists",
+        "gkdb:u8:UFDATA_333_2025:dbo:SaleBillVouchs"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "Selected cache structure and byte-matched historical SQL definitions; no individual results",
+      "evidence_refs": [
+        "EV-U8-Q024",
+        "EV-U8-Q048R"
+      ],
+      "logic_reference": "workflow-reference.md",
+      "limitations": "仅供编制数据需求和待核关联；不确认虚拟件枚举、实际出库、审批完成、09系列业务类型或当前运行。"
+    },
+    {
+      "business_object_ref": "BO-U8-OTHER-OUTBOUND-CANDIDATE",
+      "name": "用友09系列其他出库候选结构",
+      "aliases": [
+        "其他出库",
+        "09系列",
+        "出库候选"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:RdRecord09",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords09"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "Selected cache structure and byte-matched historical SQL definitions; no individual results",
+      "evidence_refs": [
+        "EV-U8-Q024"
+      ],
+      "logic_reference": "workflow-reference.md",
+      "limitations": "仅供编制数据需求和待核关联；不确认虚拟件枚举、实际出库、审批完成、09系列业务类型或当前运行。"
+    },
+    {
+      "business_object_ref": "BO-U8-VIRTUAL-PART",
+      "name": "用友虚拟件标记与BOM层级线索",
+      "aliases": [
+        "虚拟件",
+        "bVirtual",
+        "虚拟展开",
+        "VirOpComponentIds"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:bas_part",
+        "gkdb:u8:UFDATA_333_2025:dbo:bom_parent",
+        "gkdb:u8:UFDATA_333_2025:dbo:bom_bom",
+        "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "Selected cache structure and byte-matched historical SQL definitions; no individual results",
+      "evidence_refs": [
+        "EV-U8-CACHE-PART-OUTBOUND",
+        "EV-U8-Q006",
+        "EV-U8-Q141"
+      ],
+      "logic_reference": "workflow-reference.md",
+      "limitations": "仅供编制数据需求和待核关联；不确认虚拟件枚举、实际出库、审批完成、09系列业务类型或当前运行。"
+    },
+    {
+      "business_object_ref": "BO-U8-BOM-ALLOCATION",
+      "name": "用友BOM结构、生产用料与出库核对",
+      "aliases": [
+        "BOM 用料",
+        "配料",
+        "计划与实发"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:bom_bom",
+        "gkdb:u8:UFDATA_333_2025:dbo:bom_parent",
+        "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent",
+        "gkdb:u8:UFDATA_333_2025:dbo:bas_part",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "Selected cache structure and byte-matched historical SQL definitions; no individual results",
+      "evidence_refs": [
+        "EV-U8-CACHE-PART-OUTBOUND",
+        "EV-U8-Q006",
+        "EV-U8-Q024",
+        "EV-U8-Q141"
+      ],
+      "logic_reference": "workflow-reference.md",
+      "limitations": "仅供编制数据需求和待核关联；不确认虚拟件枚举、实际出库、审批完成、09系列业务类型或当前运行。"
+    },
+    {
+      "business_object_ref": "BO-U8-OUTBOUND-REVERSAL-REVIEW",
+      "name": "用友出库红字与有效性待核字段",
+      "aliases": [
+        "退料",
+        "红字",
+        "反审核",
+        "出库净额"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecord11",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecord32",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords32"
+      ],
+      "business_confirmation": "pending",
+      "interpretation_basis": "Selected cache structure and byte-matched historical SQL definitions; no individual results",
+      "evidence_refs": [
+        "EV-U8-Q024"
+      ],
+      "logic_reference": "workflow-reference.md",
+      "limitations": "仅供编制数据需求和待核关联；不确认虚拟件枚举、实际出库、审批完成、09系列业务类型或当前运行。"
+    },
+    {
+      "business_object_ref": "BO-3088-QUALITY-ATTRIBUTION",
+      "name": "3088出入库质量身份与订单归属",
+      "aliases": [
+        "质量编号 出入库",
+        "质量源头",
+        "生产质量编号",
+        "3088"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords10",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11"
+      ],
+      "evidence_refs": [
+        "EV-3088-JOINS",
+        "EV-3088-QUALITY-SOURCE",
+        "EV-3088-QUALITY-GROUPS",
+        "EV-3088-FIELDS",
+        "EV-3088-SERVER",
+        "EV-3088-README",
+        "EV-3088-HISTORICAL-SYNC",
+        "EV-3088-USER-CONFIRMATIONS",
+        "EV-3088-STATIC-SCHEMA"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "confirmed_scope": "Original user confirmations for 3088; application query implementation",
+      "limitations": "源头唯一性与生产复制值一致性是两项独立检查；不表示正式审核、仓库放行或子件来源入库追溯已完成。"
+    },
+    {
+      "business_object_ref": "BO-3088-QUALITY-UNIQUENESS",
+      "name": "3088同图号质量编号唯一性核查",
+      "aliases": [
+        "质量编号 重复",
+        "图号 质量编号",
+        "质量唯一性"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords10",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11"
+      ],
+      "evidence_refs": [
+        "EV-3088-JOINS",
+        "EV-3088-QUALITY-SOURCE",
+        "EV-3088-QUALITY-GROUPS",
+        "EV-3088-FIELDS",
+        "EV-3088-SERVER",
+        "EV-3088-README",
+        "EV-3088-HISTORICAL-SYNC",
+        "EV-3088-USER-CONFIRMATIONS",
+        "EV-3088-STATIC-SCHEMA"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "confirmed_scope": "Original user confirmations for 3088; application query implementation",
+      "limitations": "源头唯一性与生产复制值一致性是两项独立检查；不表示正式审核、仓库放行或子件来源入库追溯已完成。"
+    },
+    {
+      "business_object_ref": "BO-LIVE-END-TO-END",
+      "name": "销售到制造工序与结算的实时核验",
+      "aliases": [
+        "生产订单 制造大纲",
+        "临时流转卡",
+        "单工序检验",
+        "全链路"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe",
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8",
+        "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail"
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L024",
+        "EV-LIVE-L047",
+        "EV-LIVE-L046",
+        "EV-LIVE-L042"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "本地已准备、限定范围数据库与存储规则证据；不作为业务批准或自动操作授权。"
+    },
+    {
+      "business_object_ref": "BO-LIVE-INSPECTION-HOURS",
+      "name": "检验分工工时公式及撤销",
+      "aliases": [
+        "多人多工序分工时",
+        "工时结算",
+        "无损检测",
+        "工时占比"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%A4%9A%E4%BA%BA%E5%91%98%E5%A4%9A%E5%B7%A5%E5%BA%8F%E5%88%86%E9%85%8D_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%BB%E8%A1%A8",
+        "gkdb:kfu8qz:KFU8QZ:dbo:ImportWorkHours"
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L056",
+        "EV-LIVE-L031",
+        "EV-LIVE-L046",
+        "EV-LIVE-L042"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "本地已准备、限定范围数据库与存储规则证据；不作为业务批准或自动操作授权。"
+    },
+    {
+      "business_object_ref": "BO-LIVE-STOCK-FLAGS",
+      "name": "首末工序与出入库状态接口",
+      "aliases": [
+        "是否领料",
+        "是否入库",
+        "领料待办",
+        "入库状态"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords10",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11"
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L056",
+        "EV-LIVE-L050",
+        "EV-LIVE-L059",
+        "EV-LIVE-L043"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "本地已准备、限定范围数据库与存储规则证据；不作为业务批准或自动操作授权。"
+    },
+    {
+      "business_object_ref": "BO-LIVE-TEMPORARY",
+      "name": "临时大纲与增补工序分支",
+      "aliases": [
+        "临时制造大纲",
+        "临时增补流转卡",
+        "取消工序"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1%E4%B8%B4%E6%97%B6%E6%9B%B4%E6%94%B9%E5%8D%95%E5%A2%9E%E8%A1%A5%E5%B7%A5%E5%BA%8F_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8"
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L028",
+        "EV-LIVE-L039",
+        "EV-LIVE-L040"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "本地已准备、限定范围数据库与存储规则证据；不作为业务批准或自动操作授权。"
+    },
+    {
+      "business_object_ref": "BO-LIVE-COST-LEDGER",
+      "name": "中间库月度工时费用与台账",
+      "aliases": [
+        "ImportWorkHours",
+        "InputVouch",
+        "LedgerRecords",
+        "费用分摊"
+      ],
+      "system_refs": [
+        "kfu8qz"
+      ],
+      "object_refs": [
+        "gkdb:kfu8qz:KFU8QZ:dbo:ImportWorkHours",
+        "gkdb:kfu8qz:KFU8QZ:dbo:InputVouch",
+        "gkdb:kfu8qz:KFU8QZ:dbo:InputVouchs",
+        "gkdb:kfu8qz:KFU8QZ:dbo:LedgerRecord",
+        "gkdb:kfu8qz:KFU8QZ:dbo:LedgerRecords"
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L033",
+        "EV-LIVE-L042",
+        "EV-LIVE-L048R"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "本地已准备、限定范围数据库与存储规则证据；不作为业务批准或自动操作授权。"
+    },
+    {
+      "business_object_ref": "BO-LIVE-QUALITY-CHANGE",
+      "name": "制造对象质量号传播与当前差异",
+      "aliases": [
+        "质量编号 变更",
+        "质量号 传播",
+        "销售源头差异"
+      ],
+      "system_refs": [
+        "qinzhe",
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95%E6%B1%87%E6%80%BB_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8"
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L024",
+        "EV-LIVE-L032",
+        "EV-LIVE-L056"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "本地已准备、限定范围数据库与存储规则证据；不作为业务批准或自动操作授权。"
+    },
+    {
+      "business_object_ref": "BO-CLOSURE-HOURS-EXCEL",
+      "name": "工时Excel导入与明细来源核对",
+      "aliases": [
+        "工时取数",
+        "工时导入",
+        "勤哲取数"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:kfu8qz:KFU8QZ:dbo:ImportWorkHours",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8"
+      ],
+      "evidence_refs": [
+        "EV-CLOSURE-C031",
+        "EV-CLOSURE-WORKBOOK-DATABASE-RECONCILIATION",
+        "EV-CODE-VolPro.Core.Import-0x06001FF1"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "已取得研发报工源SQL及原文件，但没有制造工时导入转换的完整证明；原始取数、筛选、换算及分配仍保留证据缺口。"
+    },
+    {
+      "business_object_ref": "BO-CLOSURE-AUTO-STOCK",
+      "name": "自动领料及入库状态消费者",
+      "aliases": [
+        "TDOrder",
+        "LL",
+        "CPRK",
+        "谁处理状态"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail",
+        "gkdb:kfu8qz:KFU8QZ:dbo:Sys_QuartzOptions",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecords10"
+      ],
+      "evidence_refs": [
+        "EV-CODE-U8.Services.momorderdetailService",
+        "EV-CODE-U8.Controllers.momorderdetailController",
+        "EV-CLOSURE-C002"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "检验写是及批号来源已更正；保存事件未回放，历史字段值、原始导出口径及业务责任仍待确认。"
+    },
+    {
+      "business_object_ref": "BO-CLOSURE-VIRTUAL",
+      "name": "虚拟件卷叠与组件路径",
+      "aliases": [
+        "虚拟件展开",
+        "WIPType",
+        "VirOpComponentIds"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponentopt",
+        "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate"
+      ],
+      "evidence_refs": [
+        "EV-CLOSURE-C040",
+        "EV-CLOSURE-C017R",
+        "EV-CLOSURE-C023"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "依据实现与限定数据核验；原取数SQL、状态转换及业务责任未确认处保留明确缺口。"
+    },
+    {
+      "business_object_ref": "BO-CLOSURE-RUNTIME",
+      "name": "自动任务结果及入库保护",
+      "aliases": [
+        "CCPRKFlag",
+        "任务成功",
+        "入库阻塞"
+      ],
+      "system_refs": [
+        "kfu8qz"
+      ],
+      "object_refs": [
+        "gkdb:kfu8qz:KFU8QZ:dbo:Sys_QuartzOptions",
+        "gkdb:kfu8qz:KFU8QZ:dbo:Sys_QuartzLog",
+        "gkdb:kfu8qz:KFU8QZ:dbo:_YB_TaskLogs"
+      ],
+      "evidence_refs": [
+        "EV-CLOSURE-C028R",
+        "EV-CLOSURE-C035",
+        "EV-CODE-VolPro.Core.Quartz.HttpResultfulJob"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "检验写是及批号来源已更正；保存事件未回放，历史字段值、原始导出口径及业务责任仍待确认。"
+    },
+    {
+      "business_object_ref": "BO-TH-TRIGGER",
+      "name": "检验触发出入库条件",
+      "aliases": [
+        "否到是",
+        "否→是",
+        "检验写是",
+        "首末工序",
+        "质量编号批号"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E9%99%A4%E5%8F%96%E6%B6%88%E5%A4%96%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7%E6%9C%80%E5%B0%8F%E5%92%8C%E6%9C%80%E5%A4%A7%E5%B7%A5%E5%BA%8F%E5%8F%B7",
+        "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail"
+      ],
+      "evidence_refs": [
+        "EV-TH-D044",
+        "EV-TH-D047",
+        "EV-TH-D041R"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "只读实现与限定观察，不替代历史事件、岗位职责或业务批准。"
+    },
+    {
+      "business_object_ref": "BO-TH-HOURS58",
+      "name": "历史工时导入差异的技术核对边界",
+      "aliases": [
+        "工时取数差异"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%BB%E8%A1%A8",
+        "gkdb:kfu8qz:KFU8QZ:dbo:ImportWorkHours"
+      ],
+      "evidence_refs": [
+        "EV-TH-D012",
+        "EV-TH-D059",
+        "EV-TH-HOURS-COMPARISON-SUMMARY"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "已取得研发报工源SQL及原文件，但没有制造工时导入转换的完整证明；原始取数、筛选、换算及分配仍保留证据缺口。"
+    },
+    {
+      "business_object_ref": "BO-TH-CHAIN",
+      "name": "全链流程数据引用示例",
+      "aliases": [
+        "全链流程引用样例",
+        "销售生产大纲工时入库结算"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe",
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%A4%9A%E4%BA%BA%E5%91%98%E5%A4%9A%E5%B7%A5%E5%BA%8F%E5%88%86%E9%85%8D_%E4%B8%BB%E8%A1%A8",
+        "gkdb:kfu8qz:KFU8QZ:dbo:LedgerRecord"
+      ],
+      "evidence_refs": [
+        "EV-TH-D051",
+        "EV-TH-D053",
+        "EV-TH-D056",
+        "EV-TH-D057"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "已补业务日期/操作时间及保护故障链；特定历史调用入口和业务完成判定仍待复核。"
+    },
+    {
+      "business_object_ref": "BO-ORIGIN-CLOSE",
+      "name": "入库关闭与勤哲未完工的不同判定",
+      "aliases": [
+        "已入库仍未完工",
+        "业务日期与操作时间",
+        "关闭日期",
+        "CloseTime"
+      ],
+      "system_refs": [
+        "qinzhe",
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_parameter",
+        "gkdb:u8:UFDATA_333_2025:dbo:rdrecord10",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8"
+      ],
+      "evidence_refs": [
+        "EV-ORIGIN-E007R",
+        "EV-ORIGIN-E009",
+        "EV-ORIGIN-E056"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "限定只读证据；不确定办理责任、历史唯一调用者、原始上传来源或业务验收。"
+    },
+    {
+      "business_object_ref": "BO-ORIGIN-GUARD",
+      "name": "入库保护故障时间线及完成状态回写",
+      "aliases": [
+        "实体重复跟踪",
+        "CCPRKFlag",
+        "入库标志为空",
+        "完成状态回写"
+      ],
+      "system_refs": [
+        "kfu8qz"
+      ],
+      "object_refs": [
+        "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail",
+        "gkdb:kfu8qz:KFU8QZ:dbo:Sys_QuartzLog",
+        "gkdb:kfu8qz:KFU8QZ:dbo:_YB_TaskLogs"
+      ],
+      "evidence_refs": [
+        "EV-ORIGIN-E047",
+        "EV-ORIGIN-E048",
+        "EV-ORIGIN-E053",
+        "EV-ORIGIN-PUBLISHED-CODE-SCOPE"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "已定位静态触发机制及当轮发料复核子集；历史唯一冲突ID、调用栈及当日加载版本未取得。"
+    },
+    {
+      "business_object_ref": "BO-ORIGIN-EXTRACT",
+      "name": "勤哲工时统计取数规则及上传来源缺口",
+      "aliases": [
+        "原始取数口径",
+        "所有工时统计查询",
+        "8月工时导出"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E6%B1%87%E6%80%BB%E6%96%B0",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E6%89%80%E6%9C%89%E5%B7%A5%E6%97%B6%E7%BB%9F%E8%AE%A1%E6%9F%A5%E8%AF%A2_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E6%89%80%E6%9C%89%E5%B7%A5%E6%97%B6%E7%BB%9F%E8%AE%A1%E6%9F%A5%E8%AF%A2%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7_%E6%98%8E%E7%BB%86"
+      ],
+      "evidence_refs": [
+        "EV-ORIGIN-E039",
+        "EV-ORIGIN-E054",
+        "EV-ORIGIN-HOURS-ORIGIN-SUMMARY"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "已取得研发报工源SQL及原文件，但没有制造工时导入转换的完整证明；原始取数、筛选、换算及分配仍保留证据缺口。"
+    },
+    {
+      "business_object_ref": "BO-TRACE-TRACKER",
+      "name": "领料到入库的同ID实体重复跟踪机制",
+      "aliases": [
+        "9月23日",
+        "实体重复跟踪具体代码",
+        "冲突记录",
+        "LL",
+        "CPRK"
+      ],
+      "system_refs": [
+        "kfu8qz"
+      ],
+      "object_refs": [
+        "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail",
+        "gkdb:kfu8qz:KFU8QZ:dbo:_YB_TaskLogs",
+        "gkdb:kfu8qz:KFU8QZ:dbo:Sys_QuartzLog"
+      ],
+      "evidence_refs": [
+        "EV-TRACE-TRACKING-CODE-LOCATORS",
+        "EV-TRACE-F002",
+        "EV-TRACE-TRACKING-SUMMARY"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "只读来源与实现观察；不确定历史冲突ID、研发到制造分配、业务单位、办理责任或正式规则。"
+    },
+    {
+      "business_object_ref": "BO-TRACE-RD-SOURCE",
+      "name": "研发项目报工源SQL与行身份",
+      "aliases": [
+        "研发项目工时填报表",
+        "最终报工工时",
+        "记录编号",
+        "表内记录行号",
+        "KYXM"
+      ],
+      "system_refs": [
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E5%A1%AB%E6%8A%A5%E8%A1%A8_%E4%B8%BB%E8%A1%A8",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E5%A1%AB%E6%8A%A5%E8%A1%A8_%E6%98%8E%E7%BB%86",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E9%A1%B9%E7%9B%AE%E5%B7%A5%E6%97%B6%E7%BB%9F%E8%AE%A1"
+      ],
+      "evidence_refs": [
+        "EV-TRACE-USER-RD-SQL",
+        "EV-TRACE-RD-WORKBOOK",
+        "EV-TRACE-F013",
+        "EV-TRACE-F018"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "只读来源与实现观察；不确定历史冲突ID、研发到制造分配、业务单位、办理责任或正式规则。"
+    },
+    {
+      "business_object_ref": "BO-TRACE-TEMPLATE",
+      "name": "KFU九列上传模板读取与上游加工边界",
+      "aliases": [
+        "九列模板",
+        "第一个工作表",
+        "项目映射",
+        "研发工时到KFU",
+        "RD"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe"
+      ],
+      "object_refs": [
+        "gkdb:kfu8qz:KFU8QZ:dbo:ImportWorkHours",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E5%A1%AB%E6%8A%A5%E8%A1%A8_%E6%98%8E%E7%BB%86"
+      ],
+      "evidence_refs": [
+        "EV-TRACE-IMPORT-HELPER-CODE-EVIDENCE",
+        "EV-TRACE-ADDITIONAL-CODE-EVIDENCE",
+        "EV-TRACE-RD-ORIGIN-SUMMARY"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "只读来源与实现观察；不确定历史冲突ID、研发到制造分配、业务单位、办理责任或正式规则。"
+    },
+    {
+      "business_object_ref": "BO-PROJECT-CATALOG",
+      "name": "U8项目大类与研制项目目录",
+      "aliases": [
+        "研制项目目录",
+        "项目大类",
+        "项目编码",
+        "fitemss01"
+      ],
+      "system_refs": [
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:fitem",
+        "gkdb:u8:UFDATA_333_2025:dbo:fitemss01",
+        "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails"
+      ],
+      "evidence_refs": [
+        "EV-PROJECT-G007",
+        "EV-PROJECT-G011",
+        "EV-PROJECT-G032"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "限定已读结构、规则及行引用样本；不批准项目维护责任或KYXM到RD映射，不纳入本轮工时专项加工结果。"
+    },
+    {
+      "business_object_ref": "BO-PROJECT-NAME-LINEAGE",
+      "name": "生产与销售行的项目引用及勤哲名称传递",
+      "aliases": [
+        "项目名称传递",
+        "生产订单行归属",
+        "销售项目来源",
+        "F1646"
+      ],
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe",
+        "u8"
+      ],
+      "object_refs": [
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_order",
+        "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail",
+        "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails",
+        "gkdb:kfu8qz:KFU8QZ:dbo:SODetails",
+        "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8_%E6%98%8E%E7%BB%86"
+      ],
+      "evidence_refs": [
+        "EV-PROJECT-G007",
+        "EV-PROJECT-G009",
+        "EV-PROJECT-G013",
+        "EV-PROJECT-G037"
+      ],
+      "business_confirmation": "pending",
+      "logic_reference": "workflow-reference.md",
+      "limitations": "限定已读结构、规则及行引用样本；不批准项目维护责任或KYXM到RD映射，不纳入本轮工时专项加工结果。"
+    }
+  ],
+  "object_labels": {
+    "gkdb:u8:UFDATA_333_2025:dbo:Inventory": [
+      "用友存货档案",
+      "物料",
+      "存货编码",
+      "物资分类"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:InventoryClass": [
+      "用友存货档案",
+      "物料",
+      "存货编码",
+      "物资分类"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:SO_SOMain": [
+      "用友销售订单",
+      "客户订单",
+      "销售明细",
+      "生产编号"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails": [
+      "用友销售订单",
+      "客户订单",
+      "销售明细",
+      "生产编号"
+    ],
+    "gkdb:kfu8qz:KFU8QZ:dbo:SODetails": [
+      "用友销售订单",
+      "客户订单",
+      "销售明细",
+      "生产编号"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_order": [
+      "用友生产订单",
+      "生产任务",
+      "生产明细",
+      "领料",
+      "销售来源",
+      "生产订单、生产编号与制造大纲引用链",
+      "生产订单 制造大纲",
+      "生产编号 大纲",
+      "跨系统追溯",
+      "关联链"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail": [
+      "用友生产订单",
+      "生产任务",
+      "生产明细",
+      "领料",
+      "销售来源",
+      "生产订单、生产编号与制造大纲引用链",
+      "生产订单 制造大纲",
+      "生产编号 大纲",
+      "跨系统追溯",
+      "关联链",
+      "用友材料出库与生产用料候选",
+      "材料出库",
+      "生产领料",
+      "用友BOM结构、生产用料与出库核对",
+      "BOM 用料",
+      "配料",
+      "计划与实发"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate": [
+      "用友生产订单",
+      "生产任务",
+      "生产明细",
+      "领料",
+      "销售来源",
+      "用友材料出库与生产用料候选",
+      "材料出库",
+      "生产领料",
+      "用友虚拟件标记与BOM层级线索",
+      "虚拟件",
+      "bVirtual",
+      "虚拟展开",
+      "VirOpComponentIds",
+      "用友BOM结构、生产用料与出库核对",
+      "BOM 用料",
+      "配料",
+      "计划与实发"
+    ],
+    "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail": [
+      "用友生产订单",
+      "生产任务",
+      "生产明细",
+      "领料",
+      "销售来源",
+      "生产订单、生产编号与制造大纲引用链",
+      "生产订单 制造大纲",
+      "生产编号 大纲",
+      "跨系统追溯",
+      "关联链"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:bom_bom": [
+      "用友物料清单",
+      "BOM",
+      "父件",
+      "子件",
+      "基础用量",
+      "用友虚拟件标记与BOM层级线索",
+      "虚拟件",
+      "bVirtual",
+      "虚拟展开",
+      "VirOpComponentIds",
+      "用友BOM结构、生产用料与出库核对",
+      "BOM 用料",
+      "配料",
+      "计划与实发"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:bom_parent": [
+      "用友物料清单",
+      "BOM",
+      "父件",
+      "子件",
+      "基础用量",
+      "用友虚拟件标记与BOM层级线索",
+      "虚拟件",
+      "bVirtual",
+      "虚拟展开",
+      "VirOpComponentIds",
+      "用友BOM结构、生产用料与出库核对",
+      "BOM 用料",
+      "配料",
+      "计划与实发"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent": [
+      "用友物料清单",
+      "BOM",
+      "父件",
+      "子件",
+      "基础用量",
+      "用友虚拟件标记与BOM层级线索",
+      "虚拟件",
+      "bVirtual",
+      "虚拟展开",
+      "VirOpComponentIds",
+      "用友BOM结构、生产用料与出库核对",
+      "BOM 用料",
+      "配料",
+      "计划与实发"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:PO_Pomain": [
+      "用友采购订单",
+      "采购",
+      "供应商订单"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:PO_Podetails": [
+      "用友采购订单",
+      "采购",
+      "供应商订单"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:RdRecord01": [
+      "用友库存单据",
+      "采购入库",
+      "产成品入库",
+      "材料出库",
+      "仓库"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecords01": [
+      "用友库存单据",
+      "采购入库",
+      "产成品入库",
+      "材料出库",
+      "仓库"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecord10": [
+      "用友库存单据",
+      "采购入库",
+      "产成品入库",
+      "材料出库",
+      "仓库"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecords10": [
+      "用友库存单据",
+      "采购入库",
+      "产成品入库",
+      "材料出库",
+      "仓库"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecord11": [
+      "用友库存单据",
+      "采购入库",
+      "产成品入库",
+      "材料出库",
+      "仓库",
+      "用友材料出库与生产用料候选",
+      "领料",
+      "生产领料",
+      "用友出库红字与有效性待核字段",
+      "退料",
+      "红字",
+      "反审核",
+      "出库净额"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11": [
+      "用友库存单据",
+      "采购入库",
+      "产成品入库",
+      "材料出库",
+      "仓库",
+      "用友材料出库与生产用料候选",
+      "领料",
+      "生产领料",
+      "用友BOM结构、生产用料与出库核对",
+      "BOM 用料",
+      "配料",
+      "计划与实发",
+      "用友出库红字与有效性待核字段",
+      "退料",
+      "红字",
+      "反审核",
+      "出库净额"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:IA_Subsidiary": [
+      "用友存货与总账",
+      "成本",
+      "会计凭证",
+      "金额"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:GL_accvouch": [
+      "用友存货与总账",
+      "成本",
+      "会计凭证",
+      "金额"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:fa_Cards": [
+      "用友固定资产",
+      "资产卡片",
+      "折旧"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:fa_DeprTransactions": [
+      "用友固定资产",
+      "资产卡片",
+      "折旧"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2_%E4%B8%BB%E8%A1%A8": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页",
+      "生产订单、生产编号与制造大纲引用链",
+      "生产订单 制造大纲",
+      "生产编号 大纲",
+      "跨系统追溯",
+      "关联链",
+      "勤哲生产任务、流转卡与大纲引用",
+      "生产任务",
+      "流转卡 大纲",
+      "下卡",
+      "制造大纲表编号"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%8F%82%E8%80%83%E6%96%87%E4%BB%B6_%E4%B8%BB%E8%A1%A8": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%8F%82%E8%80%83%E6%96%87%E4%BB%B6_%E6%98%8E%E7%BB%86": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%B7%A5%E5%BA%8F%E9%A1%B5_%E4%B8%BB%E8%A1%A8": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%B7%A5%E5%BA%8F%E9%A1%B5_%E6%98%8E%E7%BB%86": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%B7%A5%E8%A3%85%E5%92%8C%E8%AE%BE%E5%A4%87%E7%A8%8B%E5%BA%8F_%E4%B8%BB%E8%A1%A8": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%B7%A5%E8%A3%85%E5%92%8C%E8%AE%BE%E5%A4%87%E7%A8%8B%E5%BA%8F_%E6%98%8E%E7%BB%86": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%9D%90%E6%96%99%E9%A1%B5_%E4%B8%BB%E8%A1%A8": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%9D%90%E6%96%99%E9%A1%B5_%E6%98%8E%E7%BB%86": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E7%89%88%E6%AC%A1%E8%AE%B0%E5%BD%95%E9%A1%B5_%E4%B8%BB%E8%A1%A8": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E7%89%88%E6%AC%A1%E8%AE%B0%E5%BD%95%E9%A1%B5_%E6%98%8E%E7%BB%86": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E8%9C%82%E7%AA%9D%E6%9D%90%E6%96%99%E9%A1%B5_%E4%B8%BB%E8%A1%A8": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E8%9C%82%E7%AA%9D%E6%9D%90%E6%96%99%E9%A1%B5_%E6%98%8E%E7%BB%86": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E9%99%84%E5%9B%BE_%E4%B8%BB%E8%A1%A8": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E9%99%84%E5%9B%BE_%E6%98%8E%E7%BB%86": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E9%92%A2%E7%B4%AB%E5%A4%96%E7%BA%BF%E6%9A%B4%E9%9C%B2%E9%A1%B5_%E4%B8%BB%E8%A1%A8": [
+      "勤哲产品制造大纲",
+      "制造大纲",
+      "大纲编号",
+      "大纲版次",
+      "工序",
+      "材料页"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%E5%A4%A7%E7%BA%B2": [
+      "勤哲大纲版本选择",
+      "最新版本",
+      "批准日期",
+      "旧版例外",
+      "车间选用"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%B2%E8%B5%B0%E5%AE%8C%E5%AE%A1%E6%89%B9%E6%B5%81%E7%A8%8B%E5%A4%A7%E7%BA%B2": [
+      "勤哲大纲版本选择",
+      "最新版本",
+      "批准日期",
+      "旧版例外",
+      "车间选用"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%89%B9%E6%AE%8A%E5%8F%AF%E4%BE%9B%E8%BD%A6%E9%97%B4%E9%80%89%E7%94%A8%E6%97%A7%E7%89%88%E5%A4%A7%E7%BA%B2_%E6%98%8E%E7%BB%86": [
+      "勤哲大纲版本选择",
+      "最新版本",
+      "批准日期",
+      "旧版例外",
+      "车间选用"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:ES_WorkItem": [
+      "勤哲工作项与待办",
+      "工作流",
+      "工作项",
+      "待办",
+      "办理人"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:ES_WiTodo": [
+      "勤哲工作项与待办",
+      "工作流",
+      "工作项",
+      "待办",
+      "办理人"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:ES_WfTask": [
+      "勤哲工作项与待办",
+      "工作流",
+      "工作项",
+      "待办",
+      "办理人"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:ES_RepCase": [
+      "勤哲工作项与待办",
+      "工作流",
+      "工作项",
+      "待办",
+      "办理人"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:ES_WiLink": [
+      "勤哲工作项与待办",
+      "工作流",
+      "工作项",
+      "待办",
+      "办理人"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:ES_v_Todo": [
+      "勤哲工作项与待办",
+      "工作流",
+      "工作项",
+      "待办",
+      "办理人"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:u8%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8": [
+      "勤哲引用用友生产明细的视图",
+      "跨系统",
+      "用友接口",
+      "生产编号",
+      "U8AUTOID",
+      "生产订单、生产编号与制造大纲引用链",
+      "生产订单 制造大纲",
+      "生产编号 大纲",
+      "跨系统追溯",
+      "关联链",
+      "勤哲生产订单输入与中间明细映射线索",
+      "U8生产编号",
+      "u8autoid",
+      "本地中间表",
+      "生产订单表编号",
+      "任务与u8生产编号"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95_%E4%B8%BB%E8%A1%A8": [
+      "生产订单、生产编号与制造大纲引用链",
+      "生产订单 制造大纲",
+      "生产编号 大纲",
+      "跨系统追溯",
+      "关联链",
+      "勤哲生产任务、流转卡与大纲引用",
+      "生产任务",
+      "流转卡 大纲",
+      "下卡",
+      "制造大纲表编号"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8": [
+      "生产订单、生产编号与制造大纲引用链",
+      "生产订单 制造大纲",
+      "生产编号 大纲",
+      "跨系统追溯",
+      "关联链",
+      "勤哲生产任务、流转卡与大纲引用",
+      "生产任务",
+      "流转卡 大纲",
+      "下卡",
+      "制造大纲表编号"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E6%89%80%E6%9C%89%E6%B5%81%E8%BD%AC%E5%8D%A1": [
+      "勤哲生产任务、流转卡与大纲引用",
+      "生产任务",
+      "流转卡 大纲",
+      "下卡",
+      "制造大纲表编号"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E6%B5%81%E8%BD%AC%E5%8D%A1%E5%92%8C%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E4%B8%BB%E8%A1%A8": [
+      "勤哲生产任务、流转卡与大纲引用",
+      "生产任务",
+      "流转卡 大纲",
+      "下卡",
+      "制造大纲表编号"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E8%BE%93%E5%85%A5_%E4%B8%BB%E8%A1%A8": [
+      "勤哲生产订单输入与中间明细映射线索",
+      "U8生产编号",
+      "u8autoid",
+      "本地中间表",
+      "生产订单表编号",
+      "任务与u8生产编号"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8%E6%96%B0_%E4%B8%BB%E8%A1%A8": [
+      "勤哲生产订单输入与中间明细映射线索",
+      "U8生产编号",
+      "u8autoid",
+      "本地中间表",
+      "生产订单表编号",
+      "任务与u8生产编号"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8%E6%96%B0_%E6%98%8E%E7%BB%86": [
+      "勤哲生产订单输入与中间明细映射线索",
+      "U8生产编号",
+      "u8autoid",
+      "本地中间表",
+      "生产订单表编号",
+      "任务与u8生产编号"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8": [
+      "生产工序与零件层级追溯",
+      "零件编号 流水工序号",
+      "主零件 次零件",
+      "生产编号 工序"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95_%E4%B8%BB%E8%A1%A8": [
+      "生产工序与零件层级追溯",
+      "零件编号 流水工序号",
+      "主零件 次零件",
+      "生产编号 工序"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95_%E6%98%8E%E7%BB%86": [
+      "生产工序与零件层级追溯",
+      "零件编号 流水工序号",
+      "主零件 次零件",
+      "生产编号 工序"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95%E6%B1%87%E6%80%BB_%E4%B8%BB%E8%A1%A8": [
+      "生产工序与零件层级追溯",
+      "零件编号 流水工序号",
+      "主零件 次零件",
+      "生产编号 工序"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%A2%9E%E8%A1%A5%E5%8F%AF%E9%80%89%E5%8F%96%E5%B7%A5%E5%BA%8F": [
+      "生产工序与零件层级追溯",
+      "零件编号 流水工序号",
+      "主零件 次零件",
+      "生产编号 工序"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E9%94%80%E5%94%AE%E5%8F%91%E8%B4%A7%E5%8D%95_%E4%B8%BB%E8%A1%A8": [
+      "勤哲销售发货结构",
+      "销售发货",
+      "送货",
+      "发货明细"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E9%94%80%E5%94%AE%E5%8F%91%E8%B4%A7%E5%8D%95_%E6%98%8E%E7%BB%86": [
+      "勤哲销售发货结构",
+      "销售发货",
+      "送货",
+      "发货明细"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%BB%E8%A1%A8": [
+      "勤哲工序检验结构",
+      "工序检验",
+      "过检",
+      "质量检查"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%8D%E5%90%88%E6%A0%BC%E5%B7%A5%E5%BA%8F": [
+      "勤哲工序检验结构",
+      "工序检验",
+      "过检",
+      "质量检查"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E6%A3%80%E9%AA%8C%E5%B7%A5%E5%BA%8F%E5%B7%B2%E8%BF%87%E6%A3%80%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7": [
+      "勤哲工序检验结构",
+      "工序检验",
+      "过检",
+      "质量检查"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%B8%8D%E5%90%88%E6%A0%BC%E5%AE%A1%E7%90%86%E5%8D%95_%E4%B8%BB%E8%A1%A8": [
+      "勤哲不合格审理结构",
+      "不合格",
+      "质量审理",
+      "审理单"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%B8%8D%E5%90%88%E6%A0%BC%E5%AE%A1%E7%90%86%E5%8D%95%E6%98%8E%E7%BB%86_%E4%B8%BB%E8%A1%A8": [
+      "勤哲不合格审理结构",
+      "不合格",
+      "质量审理",
+      "审理单"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%B8%8D%E5%90%88%E6%A0%BC%E5%AE%A1%E7%90%86%E5%8D%95_%E6%93%8D%E4%BD%9C%E5%B7%A5%E5%B7%A5%E6%97%B6": [
+      "勤哲不合格审理结构",
+      "不合格",
+      "质量审理",
+      "审理单"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E8%BF%94%E5%B7%A5%E8%BF%94%E4%BF%AE%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%BB%E8%A1%A8": [
+      "勤哲返工返修结构",
+      "返工",
+      "返修",
+      "返修大纲"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E8%BF%94%E5%B7%A5%E8%BF%94%E4%BF%AE%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E6%93%8D%E4%BD%9C%E5%B7%A5%E5%B7%A5%E6%97%B6": [
+      "勤哲返工返修结构",
+      "返工",
+      "返修",
+      "返修大纲"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E8%BF%94%E4%BF%AE%E8%BF%94%E5%B7%A5%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8": [
+      "勤哲返工返修结构",
+      "返工",
+      "返修",
+      "返修大纲"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8": [
+      "勤哲人员工时结构",
+      "工时",
+      "人员工时",
+      "调度"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E5%BA%8F%E5%A7%94%E5%A4%96%E7%94%B3%E8%AF%B7%E5%AE%9A%E4%BB%B7%E5%8D%95_%E4%B8%BB%E8%A1%A8": [
+      "勤哲工序委外定价结构",
+      "委外",
+      "外协",
+      "定价",
+      "供应商"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E5%BA%8F%E5%A7%94%E5%A4%96%E7%94%B3%E8%AF%B7%E5%AE%9A%E4%BB%B7%E5%8D%95_%E6%98%8E%E7%BB%86": [
+      "勤哲工序委外定价结构",
+      "委外",
+      "外协",
+      "定价",
+      "供应商"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%A4%96%E5%8D%8F%E4%BE%9B%E5%BA%94%E5%95%86%E7%AE%A1%E7%90%86_%E4%B8%BB%E8%A1%A8": [
+      "勤哲工序委外定价结构",
+      "委外",
+      "外协",
+      "定价",
+      "供应商"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%A3%85%E5%93%81%E7%A7%8D%E8%A1%A8": [
+      "勤哲工装结构",
+      "工装",
+      "专用工装",
+      "工装调用"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%A3%85%E4%BD%8D%E7%BD%AE%E8%A1%A8": [
+      "勤哲工装结构",
+      "工装",
+      "专用工装",
+      "工装调用"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%B8%93%E7%94%A8%E5%B7%A5%E8%A3%85%E8%B0%83%E7%94%A8%E7%94%B3%E8%AF%B7_%E4%B8%BB%E8%A1%A8": [
+      "勤哲工装结构",
+      "工装",
+      "专用工装",
+      "工装调用"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%AE%A2%E6%88%B7%E5%90%8D%E7%A7%B0_%E4%B8%BB%E8%A1%A8": [
+      "勤哲客户名称结构",
+      "客户名称",
+      "客户简称"
+    ],
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%AE%A2%E6%88%B7%E7%AE%80%E7%A7%B0_%E4%B8%BB%E8%A1%A8": [
+      "勤哲客户名称结构",
+      "客户名称",
+      "客户简称"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:PurBillVouch": [
+      "用友采购发票与应付历史数据证据",
+      "采购发票",
+      "应付",
+      "付款",
+      "历史非空"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:PurBillVouchs": [
+      "用友采购发票与应付历史数据证据",
+      "采购发票",
+      "应付",
+      "付款",
+      "历史非空"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:Ap_Detail": [
+      "用友采购发票与应付历史数据证据",
+      "采购发票",
+      "应付",
+      "付款",
+      "历史非空"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:Ap_CloseBill": [
+      "用友采购发票与应付历史数据证据",
+      "采购发票",
+      "应付",
+      "付款",
+      "历史非空"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:SaleBillVouch": [
+      "用友销售发票与应收历史数据证据",
+      "销售发票",
+      "应收",
+      "历史非空"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:SaleBillVouchs": [
+      "用友销售发票与应收历史数据证据",
+      "销售发票",
+      "应收",
+      "历史非空",
+      "用友销售出库、发货与发票引用",
+      "销售出库",
+      "发货",
+      "出库单"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:Ar_Detail": [
+      "用友销售发票与应收历史数据证据",
+      "销售发票",
+      "应收",
+      "历史非空"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecord32": [
+      "用友销售出库、发货与发票引用",
+      "销售出库",
+      "发货",
+      "出库单",
+      "用友出库红字与有效性待核字段",
+      "退料",
+      "红字",
+      "反审核",
+      "出库净额"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecords32": [
+      "用友销售出库、发货与发票引用",
+      "销售出库",
+      "发货",
+      "出库单",
+      "用友出库红字与有效性待核字段",
+      "退料",
+      "红字",
+      "反审核",
+      "出库净额"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:DispatchList": [
+      "用友销售出库、发货与发票引用",
+      "销售出库",
+      "发货",
+      "出库单"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:DispatchLists": [
+      "用友销售出库、发货与发票引用",
+      "销售出库",
+      "发货",
+      "出库单"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:RdRecord09": [
+      "用友09系列其他出库候选结构",
+      "其他出库",
+      "09系列",
+      "出库候选"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecords09": [
+      "用友09系列其他出库候选结构",
+      "其他出库",
+      "09系列",
+      "出库候选"
+    ],
+    "gkdb:u8:UFDATA_333_2025:dbo:bas_part": [
+      "用友虚拟件标记与BOM层级线索",
+      "虚拟件",
+      "bVirtual",
+      "虚拟展开",
+      "VirOpComponentIds",
+      "用友BOM结构、生产用料与出库核对",
+      "BOM 用料",
+      "配料",
+      "计划与实发"
+    ]
+  },
+  "field_semantics": {
+    "gkdb:u8:UFDATA_333_2025:dbo:Inventory:field:cInvCode": {
+      "label": "存货编码",
+      "definition": "检索释义来自对象结构和查询使用；业务编码规则待确认。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:Inventory:field:cInvName": {
+      "label": "存货名称",
+      "definition": "检索释义；不推断唯一性或主数据审核状态。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:Inventory:field:cInvCCode": {
+      "label": "存货分类编码",
+      "definition": "关联分类档案的候选，须核验实际关系与覆盖。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:iSOsID": {
+      "label": "销售订单明细技术ID",
+      "definition": "Q017/Q018查询使用的关联字段；不以销售单号替代。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:cSOCode": {
+      "label": "销售订单号",
+      "definition": "Q017/Q018历史一致性检查字段。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:cDefine25": {
+      "label": "生产编号（业务口径待复核）",
+      "definition": "历史查询与接口中文生产编号相等；不能仅凭自定义字段编号推定语义。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:MoDId": {
+      "label": "生产订单明细技术ID",
+      "definition": "Q018用于承接接口U8AUTOID。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:OrderDId": {
+      "label": "来源销售订单明细ID",
+      "definition": "Q018通过此字段连接SO_SODetails.iSOsID；范围限历史查询。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:Define25": {
+      "label": "生产编号（业务口径待复核）",
+      "definition": "Q018用于与销售自定义字段做一致性检查。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail:field:U8AUTOID": {
+      "label": "U8生产明细关联标识",
+      "definition": "Q018先TRY_CONVERT(int)再连接；转换失败与未匹配需分别记录。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:kfu8qz:KFU8QZ:dbo:SODetails:field:U8AUTOID": {
+      "label": "U8销售明细关联标识",
+      "definition": "Q017先TRY_CONVERT(int)再连接。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2_%E4%B8%BB%E8%A1%A8:field:%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E7%BC%96%E5%8F%B7": {
+      "label": "制造大纲编号",
+      "definition": "缓存主键的一部分，需同时保留制造大纲版次。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2_%E4%B8%BB%E8%A1%A8:field:%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E7%89%88%E6%AC%A1": {
+      "label": "制造大纲版次",
+      "definition": "缓存复合主键的一部分；不可当作批准时间顺序。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2_%E4%B8%BB%E8%A1%A8:field:%E5%B7%A5%E6%97%B6%E7%89%88%E6%AC%A1": {
+      "label": "工时版次",
+      "definition": "与制造大纲版次分别存在，含义及选择条件待业务确认。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%B7%A5%E5%BA%8F%E9%A1%B5_%E6%98%8E%E7%BB%86:field:%E5%B7%A5%E6%97%B6": {
+      "label": "工序工时",
+      "definition": "单位、计算口径和定额/实际属性尚未取得确认，不直接进入工作负荷计算。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:ES_WorkItem:field:WiId": {
+      "label": "工作项标识",
+      "definition": "缓存待办视图用于关联ES_WiTodo及ES_WiLink。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_order:field:MoCode": {
+      "label": "生产订单表头单据码（MoCode）",
+      "definition": "Q015通过MoId连接订单头后取该字段；与Define28和生产编号分别记录，不据标准字段名推翻已确认自定义口径。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:Define28": {
+      "label": "生产零件编号（已测样本口径）",
+      "definition": "L045中31条命中的当前用友明细均等于MoCode与生产明细SortSeq拼接；L050另保留接口零件编号对应比较。该样本不是所有历史或账套的编码规则证明，不与生产编号Define25互换。",
+      "status": "user_scope_and_scoped_live_evidence",
+      "evidence_refs": [
+        "EV-LIVE-L045",
+        "EV-LIVE-L050"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95_%E4%B8%BB%E8%A1%A8:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7": {
+      "label": "勤哲本地生产编号（按对象引用）",
+      "definition": "缓存本地任务、流转卡或工序筛选使用此字段；不得自动等同U8生产编号、Define25、Define28、MoCode或MoDId。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95_%E4%B8%BB%E8%A1%A8:field:U8%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7": {
+      "label": "勤哲保留的U8生产编号字段（转换待核）",
+      "definition": "该表同时存在生产编号与U8生产编号；源字段、同值关系、转换与填充规则尚未取得。保留大小写及原物理名。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7": {
+      "label": "勤哲本地生产编号（按对象引用）",
+      "definition": "缓存本地任务、流转卡或工序筛选使用此字段；不得自动等同U8生产编号、Define25、Define28、MoCode或MoDId。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8:field:u8%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7": {
+      "label": "勤哲保留的U8生产编号字段（转换待核）",
+      "definition": "该流转卡表同时存在生产编号与小写u8生产编号；源字段、同值关系、转换与填充规则尚未取得。保留物理名大小写，不与任务单或工序表的U8生产编号混写。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7": {
+      "label": "勤哲本地生产编号（按对象引用）",
+      "definition": "缓存本地任务、流转卡或工序筛选使用此字段；不得自动等同U8生产编号、Define25、Define28、MoCode或MoDId。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:U8%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7": {
+      "label": "勤哲保留的U8生产编号字段（转换待核）",
+      "definition": "该表同时存在生产编号与U8生产编号；源字段、同值关系、转换与填充规则尚未取得。保留大小写及原物理名。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8:field:%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E8%A1%A8%E7%BC%96%E5%8F%B7": {
+      "label": "流转卡引用的大纲记录表编号",
+      "definition": "缓存流转卡和制造大纲主表视图以该字段关联大纲表编号；表编号唯一性和当前匹配情况仍待核。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E6%B5%81%E6%B0%B4%E5%B7%A5%E5%BA%8F%E5%8F%B7": {
+      "label": "工序复合键中的流水工序号",
+      "definition": "缓存与零件编号共同构成主键；增补可选取工序按零件和并行标志聚合最大流水号，再按零件+流水号回连。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8%E6%96%B0_%E6%98%8E%E7%BB%86:field:%E4%BB%BB%E5%8A%A1%E4%B8%8Eu8%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7": {
+      "label": "生产任务上的U8生产编号副本",
+      "definition": "ES_RuleFill明确直接取生产任务单_主表.U8生产编号，匹配条件为本地生产编号相等；未做拼接。",
+      "status": "scoped_live_implementation_evidence",
+      "evidence_refs": [
+        "EV-LIVE-L034",
+        "EV-LIVE-L035"
+      ],
+      "formal_business_rule_approved": false,
+      "current_scope_note": "Current implementation and separately measured records; no execution history or business approval inferred."
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:bas_part:field:bVirtual": {
+      "label": "待确认业务语义的布尔标志",
+      "definition": "本次7077条记录全部为1；不能据字段名称把所有物料认定为虚拟件，枚举含义仍需业务或权威实现说明。",
+      "status": "scoped_live_implementation_evidence",
+      "evidence_refs": [
+        "EV-LIVE-L052"
+      ],
+      "formal_business_rule_approved": false,
+      "current_scope_note": "Current implementation and separately measured records; no execution history or business approval inferred."
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate:field:VirOpComponentIds": {
+      "label": "有序BOM子件行展开路径",
+      "definition": "GenAllocate首层写OpComponentId，卷下层以逗号追加当前子件OpComponentId，InsAllocate写入用料；150条多段路径全通过结构核对。按有序节点检查后关联，不能整串等值连接、跳过节点验证或按路径节点重复求和。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-CLOSURE-C017R",
+        "EV-CLOSURE-C023",
+        "EV-CLOSURE-C040",
+        "EV-LIVE-L052"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11:field:iOMoDID": {
+      "label": "材料出库iOMoDID（历史筛选用途待核）",
+      "definition": "Q025把它作为传入MoD参数的筛选项但记录返回0行，未JOIN生产订单。SQL别名不能确认实际源对象，也不替代其他候选字段的核验。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11:field:iMPoIds": {
+      "label": "材料出库领用引用到生产用料",
+      "definition": "3088已有实现按iMPoIds>0且TRY_CONVERT(int,iMPoIds)=AllocateId定位生产用料；L043已在2026-10-01至2026-10-24前的11914条现存出库明细上全部命中用料与生产明细。范围内支持，不推出全历史、来源入库分配或审核完成。",
+      "status": "user_scope_and_scoped_live_evidence",
+      "evidence_refs": [
+        "EV-3088-JOINS",
+        "EV-3088-USER-CONFIRMATIONS",
+        "EV-LIVE-L043"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecords32:field:iDLsID": {
+      "label": "销售出库引用发货明细的查询字段",
+      "definition": "Q058/Q128以r.iDLsID=d.iDLsID连接发货明细；该侧为LEFT JOIN，历史返回行数不能证明出库侧命中或一对一。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate:field:Qty": {
+      "label": "生产用料数量原始字段Qty",
+      "definition": "Q147同时选择Qty、IssQty、DeclaredQty；只记录查询结构，不把三个字段相互替代，不推断实发、退料、累计或当前净额公式。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate:field:IssQty": {
+      "label": "生产用料数量原始字段IssQty",
+      "definition": "Q147同时选择Qty、IssQty、DeclaredQty；只记录查询结构，不把三个字段相互替代，不推断实发、退料、累计或当前净额公式。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate:field:DeclaredQty": {
+      "label": "生产用料数量原始字段DeclaredQty",
+      "definition": "Q147同时选择Qty、IssQty、DeclaredQty；只记录查询结构，不把三个字段相互替代，不推断实发、退料、累计或当前净额公式。",
+      "status": "analysis_label_pending_confirmation"
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:cDefine29": {
+      "label": "销售源头质量编号（用户确认口径）",
+      "definition": "沿用用户明确的销售子表源头口径；先按iSOsID等记录引用确认归属，再比较生产对应值。不是按质量号串表，也不证明动作时历史一致或自动改号传播。具体核验统计不随本公开字典分发。",
+      "status": "user_scope_and_scoped_live_evidence",
+      "evidence_refs": [
+        "EV-3088-JOINS",
+        "EV-3088-USER-CONFIRMATIONS",
+        "EV-LIVE-L024"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:Define29": {
+      "label": "生产明细质量编号（销售源头对应值）",
+      "definition": "沿用用户明确的生产质量编号字段及销售源头口径；L024已核验当前全体现存生产明细的引用与质量比较，差异和缺失分别保留。字段复制时间、质量变更历史与自动级联更新仍未证实，不缺失补填或覆盖任一侧。",
+      "status": "user_scope_and_scoped_live_evidence",
+      "evidence_refs": [
+        "EV-3088-JOINS",
+        "EV-3088-USER-CONFIRMATIONS",
+        "EV-LIVE-L024",
+        "EV-LIVE-L032"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E5%B7%A5%E6%97%B6": {
+      "label": "检验回写后的人员工时",
+      "definition": "合格且非外协时，按CEILING(单工序检验工时*检验操作工工时占比/100*合格数量)回写；已分摊，不应再次乘占比。无损/X射线不合格有按投产数量的独立分支，普通不合格分支不写工时。计量单位及与KFU换算未证实。",
+      "status": "scoped_live_implementation_evidence",
+      "evidence_refs": [
+        "EV-LIVE-L056",
+        "EV-LIVE-L046"
+      ],
+      "formal_business_rule_approved": false,
+      "current_scope_note": "Current implementation and separately measured records; no execution history or business approval inferred."
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E5%85%A5%E8%B4%A6%E5%B9%B4%E6%9C%88": {
+      "label": "检验规则形成的入账年月",
+      "definition": "合格及无损/X射线不合格分支使用动作日期vDate生成year-month；不能当作生产日期或由创建月份代替；删除规则清空入账年月。",
+      "status": "scoped_live_implementation_evidence",
+      "evidence_refs": [
+        "EV-LIVE-L056"
+      ],
+      "formal_business_rule_approved": false,
+      "current_scope_note": "Current implementation and separately measured records; no execution history or business approval inferred."
+    },
+    "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail:field:%E6%98%AF%E5%90%A6%E9%A2%86%E6%96%99": {
+      "label": "检验规则写入的传单条件及累计完成标志",
+      "definition": "勤哲单工序检验ru20251014000002在本次流水工序等于首有效流水工序时按零件编号写是；首末计算排除取消和报废。规则不要求原值为否，不能假定存在另一个否转是环节。LL在累计用料无剩余时写已领料。SQL自身未加账套条件和完成状态保护；标志不能替代审核单据。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-CLOSURE-C028R",
+        "EV-CLOSURE-C035",
+        "EV-CODE-U8.Controllers.momorderdetailController",
+        "EV-CODE-U8.Services.momorderdetailService",
+        "EV-LIVE-L050",
+        "EV-LIVE-L056",
+        "EV-LIVE-L059",
+        "EV-TH-D041R",
+        "EV-TH-D044",
+        "EV-TH-D047"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail:field:%E6%98%AF%E5%90%A6%E5%85%A5%E5%BA%93": {
+      "label": "检验传单条件与有保护前提的完成回写",
+      "definition": "末有效工序检验规则写是。CPRK生单阶段筛是；方法末尾另遍历原传入list，对尚非已入库且U8剩余入库量为0的项可写已入库，不局限生单筛出的项。CCPRKFlag非0入口即返回，生单与该回写均跳过。不能把它描述为独立持续对账作业，或认定本例历史输入列表已实测。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-CLOSURE-C028R",
+        "EV-CLOSURE-C035",
+        "EV-CODE-U8.Controllers.momorderdetailController",
+        "EV-CODE-U8.Services.momorderdetailService",
+        "EV-LIVE-L050",
+        "EV-LIVE-L056",
+        "EV-LIVE-L059",
+        "EV-ORIGIN-E041",
+        "EV-ORIGIN-PUBLISHED-CODE-SCOPE",
+        "EV-TH-D041R",
+        "EV-TH-D044",
+        "EV-TH-D047"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:kfu8qz:KFU8QZ:dbo:ImportWorkHours:field:iWH": {
+      "label": "首个工作表读取的上传工时值；上游加工待追溯",
+      "definition": "取得的通用Import按模板表头读取第一个文件的第一个工作表，并做类型、必填等校验；专用服务没有Import覆盖或构造器钩子。未见在此完成月份项目筛选、除以60、研发项目转生产订单或KYXM到RD映射。历史差异的专项调查不随本公开字典分发。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-CLOSURE-QINZHE-IMPORT-COMPARISON",
+        "EV-CLOSURE-WORKBOOK-DATABASE-RECONCILIATION",
+        "EV-CODE-VolPro.Core.Import-0x06001FF1",
+        "EV-ORIGIN-E015",
+        "EV-ORIGIN-E039",
+        "EV-ORIGIN-HOURS-ORIGIN-SUMMARY",
+        "EV-TH-D012",
+        "EV-TH-D059",
+        "EV-TH-HOURS-COMPARISON-SUMMARY",
+        "EV-TRACE-ADDITIONAL-CODE-EVIDENCE",
+        "EV-TRACE-IMPORT-HELPER-CODE-EVIDENCE",
+        "EV-TRACE-RD-ORIGIN-SUMMARY"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:kfu8qz:KFU8QZ:dbo:ImportWorkHours:field:cQZCode": {
+      "label": "界面标签为勤哲单号",
+      "definition": "此批8月文件及对应记录为空；它不参与已读单条重复检查，不能猜测为工序主键。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-CLOSURE-C027",
+        "EV-CODE-Report.Services.ImportWorkHoursService"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:kfu8qz:KFU8QZ:dbo:LedgerRecord:field:bFlag": {
+      "label": "当前实现中的系统记账标志",
+      "definition": "Checkout创建记账记录时写1；单条工时增删改据同期间bFlag=1拒绝操作。不能据此认定Excel导入也经过同一路径，或公司已完成业务验收。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-CODE-Report.Services.ImportWorkHoursService",
+        "EV-CODE-Report.Services.LedgerRecordService"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponentopt:field:WIPType": {
+      "label": "BOM子件供应类型（现行实现）",
+      "definition": "通过bom_opcomponent.OptionsId连接；现行视图注释3领料、4虚拟，生成过程沿WIPType=4继续卷叠并在最终组件表分支排除4。直接供应5在部分条件下也卷叠，需保留原分支。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-CLOSURE-C020",
+        "EV-CLOSURE-C022",
+        "EV-CLOSURE-C040"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent:field:FVFlag": {
+      "label": "固定用量相关标志，不能当作虚拟件标志",
+      "definition": "现行视图标注固定用量；生成过程以FVFlag选择上层数量基础并影响损耗和数量计算。虚拟供应类型由选项WIPType判别。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-CLOSURE-C020",
+        "EV-CLOSURE-C040"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail:field:%E6%89%B9%E5%8F%B7": {
+      "label": "末工序检验传入的类别质量编号",
+      "definition": "ru20251014000003把检验.类别质量编号写入批号，两个usedb分支均如此；不是生产批架次。CPRK取接口批号作为成品入库批次来源。质量字段与存货、批次及来源版本分别核对，不推定跨系统恒等。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-CODE-U8.Services.momorderdetailService",
+        "EV-TH-D044"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%BB%E8%A1%A8:field:%E7%B1%BB%E5%88%AB%E8%B4%A8%E9%87%8F%E7%BC%96%E5%8F%B7": {
+      "label": "末有效工序写入接口批号的来源",
+      "definition": "检验末有效流水工序触发ru20251014000003时向KFU批号赋此值。其余系统质量字段可能保留原快照，本例实际入库批次与此值一致不证明单据由该规则或自动任务生成。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-TH-D044",
+        "EV-TH-D055",
+        "EV-TH-D056"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_parameter:field:MoSysClosedFlag": {
+      "label": "U8按累计入库数量关闭的现行开关",
+      "definition": "本轮值为1。Usp_MO_UpdMoQty通过状态/冻结/并发/数量等检查后，在累计入库量更新分支可按正入库增量及QualifiedInQty达到MrpQty关闭；不读取勤哲末工序或KFU入库标志。该定义不能证明某笔历史调用必经此过程。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-ORIGIN-E009",
+        "EV-ORIGIN-E019",
+        "EV-ORIGIN-E057"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:CloseDate": {
+      "label": "业务关闭日期",
+      "definition": "已读数量回写过程使用传入关闭日期，独立关闭过程使用业务处理日期，CloseTime另用GETDATE。业务日期可与操作时间字段不同；本例业务8月31日、执行时间10月12日。不能用CloseDate代替实际操作时间或历史审批依据。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-ORIGIN-E009",
+        "EV-ORIGIN-E056"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:CloseTime": {
+      "label": "关闭执行时间字段",
+      "definition": "现行数量回写及独立关闭过程均以GETDATE写入；本例比入库制单时间字段晚1.034秒。当前值不是完整关闭历史，不能唯一确定调用过程或办理人。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-ORIGIN-E007R",
+        "EV-ORIGIN-E009",
+        "EV-ORIGIN-E056"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecord10:field:dDate": {
+      "label": "入库单业务日期",
+      "definition": "用于业务归属，不能代替dnmaketime。本例业务日期8月31日而制单时间字段为10月12日。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-ORIGIN-E007R"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecord10:field:dVeriDate": {
+      "label": "入库单审核日期",
+      "definition": "本例为8月31日，dnverifytime为10月21日；日期字段与审核操作时间分别引用。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-ORIGIN-E007R"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecord10:field:dnmaketime": {
+      "label": "制单操作时间字段",
+      "definition": "本例记录10月12日15:02:50.633；不能由单号日期推断制单时间。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-ORIGIN-E007R"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecord10:field:dnmodifytime": {
+      "label": "修改操作时间字段",
+      "definition": "本例10月20日有修改时间，未取得字段前后值，不能猜测改了批次、日期或数量。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-ORIGIN-E007R"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:rdrecord10:field:dnverifytime": {
+      "label": "审核操作时间字段",
+      "definition": "本例记录10月21日；单据审核不等同于勤哲末工序检验或全流程控制闭环。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-ORIGIN-E007R"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E6%B1%87%E6%80%BB%E6%96%B0:field:%E5%85%A5%E8%B4%A6%E6%97%A5%E6%9C%9F": {
+      "label": "检验日期转换的报表日期",
+      "definition": "现有视图取convert(date,检验日期,101)，与入账年月字段分别保存。所有工时统计查询按开始/结束参数对该日期筛选；表单中的本月不能替代当次参数。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-ORIGIN-E039",
+        "EV-TH-D014"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E6%89%80%E6%9C%89%E5%B7%A5%E6%97%B6%E7%BB%9F%E8%AE%A1%E6%9F%A5%E8%AF%A2%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7_%E6%98%8E%E7%BB%86:field:%E5%B7%A5%E6%97%B6": {
+      "label": "当前报表按U8零件编号求和的工时原值",
+      "definition": "ru20250624000003按工时汇总新.入账日期范围及U8零件编号求SUM(操作工工时)，连接本次报表行；SQL未除以60。未证明该报表就是制造工时上传的源报表，原筛选、单位及模板加工仍缺。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-ORIGIN-E039",
+        "EV-ORIGIN-EXTRACTION-RULE-REVIEW"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E5%A1%AB%E6%8A%A5%E8%A1%A8_%E6%98%8E%E7%BB%86:field:%E5%B7%A5%E6%97%B6": {
+      "label": "研发报工原值；最终报工工时为导出别名",
+      "definition": "用户确认SQL直接读取本字段并命名为最终报工工时，没有运算、审核筛选或除以60。别名不是审批或结算状态，不沿用制造检验工时的候选单位换算。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-TRACE-F011",
+        "EV-TRACE-RD-ORIGIN-SUMMARY",
+        "EV-TRACE-USER-RD-SQL"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E5%A1%AB%E6%8A%A5%E8%A1%A8_%E6%98%8E%E7%BB%86:field:ExcelServerRN": {
+      "label": "研发报工表内行号",
+      "definition": "与主明细RCID共同定位研发报工源行。不是生产订单SortSeq或KFU iRowNo；当前该组合没有重复组。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-TRACE-F013",
+        "EV-TRACE-F016"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E5%A1%AB%E6%8A%A5%E8%A1%A8_%E6%98%8E%E7%BB%86:field:%E9%A1%B9%E7%9B%AE%E7%BC%96%E5%8F%B7": {
+      "label": "研发项目编号；跨编码映射未取得",
+      "definition": "勤哲立项编号与U8研制项目编码使用不同编号体系。不能直接同值连接，未取得两套编码的明确映射，不表示它们没有业务关系。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-TRACE-F013",
+        "EV-TRACE-F014",
+        "EV-TRACE-F017",
+        "EV-TRACE-F018"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail:field:%E5%85%A5%E5%BA%93%E6%98%AF%E5%90%A6%E5%BC%82%E5%B8%B8": {
+      "label": "入库消息回写与同ID实体跟踪风险",
+      "definition": "现行CPRK重新查询同ID实例再写本字段，Update附加在Detached之前；LL末尾完成回写可能保留同ID跟踪实例。支持具体冲突机制，未取得9月23日唯一冲突ID或历史堆栈，不把实现偏差确认为业务规则。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-TRACE-F002",
+        "EV-TRACE-TRACKING-CODE-LOCATORS"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:fitem:field:citem_class": {
+      "label": "项目大类编码",
+      "definition": "本轮00为批产项目、01为研制项目、02为项目施工工程；ctable指定对应项目目录表。该代码不是目录表内的citemccode。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-PROJECT-G032"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:fitem:field:ctable": {
+      "label": "项目大类对应的项目目录物理表",
+      "definition": "本轮项目大类01指向fitemss01。读取项目时按账套、大类及实际ctable选择目录，不能将所有大类都查fitemss01。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-PROJECT-G006",
+        "EV-PROJECT-G032"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:fitemss01:field:citemcode": {
+      "label": "U8研制项目编码",
+      "definition": "在项目大类01的目录fitemss01中定位，配合citemname读取名称；本轮代码无重复。没有取得与勤哲KYXM编号的明确映射依据。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-PROJECT-G011",
+        "EV-PROJECT-G012",
+        "EV-PROJECT-G032"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:cItem_class": {
+      "label": "销售行项目大类",
+      "definition": "与cItemCode分别引用。只有当前大类为01时，本文给出fitemss01目录引用分支；不按编码RD前缀代替大类检查。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-PROJECT-G007",
+        "EV-PROJECT-G032"
+      ],
+      "formal_business_rule_approved": false
+    },
+    "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8_%E6%98%8E%E7%BB%86:field:%E9%A1%B9%E7%9B%AE%E5%90%8D%E7%A7%B0": {
+      "label": "按生产编号从KFU销售中间数据提取的项目名称",
+      "definition": "现存规则ru20250318000004查询KFU8QZ.dbo.SODetails，按生产编号等值输出F1646。ES_v_Rtfs确认它对应本字段；规则没有账套条件，也没有KYXM到RD编码转换。",
+      "status": "scoped_current_implementation_evidence",
+      "evidence_refs": [
+        "EV-PROJECT-G009",
+        "EV-PROJECT-G037"
+      ],
+      "formal_business_rule_approved": false
+    }
+  },
+  "relations": [
+    {
+      "relation_ref": "REL-U8-SALES-ID",
+      "name": "接口销售明细→U8销售明细",
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:SODetails:field:U8AUTOID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:iSOsID"
+        }
+      ],
+      "relation_kind": "query_join",
+      "condition": "TRY_CONVERT(int, SODetails.U8AUTOID) = SO_SODetails.iSOsID",
+      "evidence_refs": [
+        "EV-LIVE-L058",
+        "EV-U8-Q017"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "历史查询584行匹配；日志未保存账套与日期参数实际值，不推定全年或当前覆盖。"
+    },
+    {
+      "relation_ref": "REL-U8-PRODUCTION-ID",
+      "name": "接口生产明细→U8生产明细",
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail:field:U8AUTOID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:MoDId"
+        }
+      ],
+      "relation_kind": "query_join",
+      "condition": "TRY_CONVERT(int, momorderdetail.U8AUTOID) = mom_orderdetail.MoDId",
+      "evidence_refs": [
+        "EV-LIVE-L032",
+        "EV-U8-Q018"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "历史查询815行匹配；不证明接口服务写入时点、重复转单、实际期间或当前情况。"
+    },
+    {
+      "relation_ref": "REL-U8-PRODUCTION-SALES",
+      "name": "生产明细→来源销售明细",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:OrderDId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:iSOsID"
+        }
+      ],
+      "relation_kind": "query_join",
+      "condition": "mom_orderdetail.OrderDId = SO_SODetails.iSOsID",
+      "evidence_refs": [
+        "EV-3088-HISTORICAL-SYNC",
+        "EV-3088-JOINS",
+        "EV-LIVE-L024",
+        "EV-U8-Q018",
+        "EV-U8-Q019",
+        "EV-U8-Q020"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "历史统计609个销售来源分组对应815条生产行，最大11条；不能把一对多压成一对一。；另有3088显式OrderDId引用实现证据，不能据此将质量号改作连接键。"
+    },
+    {
+      "relation_ref": "REL-U8-PRODUCTION-NUMBER",
+      "name": "生产编号一致性校验",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:Define25",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:cDefine25"
+        }
+      ],
+      "relation_kind": "consistency_check",
+      "condition": "在先按行级ID匹配后检查Define25 = cDefine25",
+      "evidence_refs": [
+        "EV-U8-Q018"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "该SQL中的等值比较不是原始连接条件；业务含义与全范围唯一性仍待确认。"
+    },
+    {
+      "relation_ref": "REL-U8-INVENTORY-CLASS",
+      "name": "存货→存货分类候选",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:Inventory:field:cInvCCode",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:InventoryClass:field:cInvCCode"
+        }
+      ],
+      "relation_kind": "structural_candidate",
+      "condition": "",
+      "evidence_refs": [
+        "EV-U8-Q024"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "本包仅有字段结构，不声称已有外键、实时命中率或正式主数据认定。"
+    },
+    {
+      "relation_ref": "REL-QZ-TODO-WORKITEM",
+      "name": "工作项→待办",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:ES_WorkItem:field:WiId",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:ES_WiTodo:field:WiId"
+        }
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "同名字段等值；ES_v_Todo还含State=0、TType<=2、DelFlag=0、AccState=0等筛选和UNION分支。",
+      "evidence_refs": [
+        "EV-QZ-VIEW-TODO"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "只证明缓存视图实现，不说明当前页面使用、业务状态完整枚举或人员职责；外连接/存在性与分支按原视图复核。"
+    },
+    {
+      "relation_ref": "REL-QZ-TODO-USER",
+      "name": "待办→系统用户",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:ES_WiTodo:field:UserId",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:ES_User:field:UserId"
+        }
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "同名字段等值；ES_v_Todo还含State=0、TType<=2、DelFlag=0、AccState=0等筛选和UNION分支。",
+      "evidence_refs": [
+        "EV-QZ-VIEW-TODO"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "只证明缓存视图实现，不说明当前页面使用、业务状态完整枚举或人员职责；外连接/存在性与分支按原视图复核。"
+    },
+    {
+      "relation_ref": "REL-QZ-TODO-TASK",
+      "name": "工作项→任务定义",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:ES_WorkItem:field:TId",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:ES_WfTask:field:TId"
+        }
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "同名字段等值；ES_v_Todo还含State=0、TType<=2、DelFlag=0、AccState=0等筛选和UNION分支。",
+      "evidence_refs": [
+        "EV-QZ-VIEW-TODO"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "只证明缓存视图实现，不说明当前页面使用、业务状态完整枚举或人员职责；外连接/存在性与分支按原视图复核。"
+    },
+    {
+      "relation_ref": "REL-QZ-TODO-TEMPLATE",
+      "name": "任务→模板",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:ES_WfTask:field:RtId",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:ES_Tmp:field:RtId"
+        }
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "同名字段等值；ES_v_Todo还含State=0、TType<=2、DelFlag=0、AccState=0等筛选和UNION分支。",
+      "evidence_refs": [
+        "EV-QZ-VIEW-TODO"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "只证明缓存视图实现，不说明当前页面使用、业务状态完整枚举或人员职责；外连接/存在性与分支按原视图复核。"
+    },
+    {
+      "relation_ref": "REL-QZ-TODO-CASE",
+      "name": "工作项→表单实例",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:ES_WorkItem:field:RcId",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:ES_RepCase:field:RcId"
+        }
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "同名字段等值；ES_v_Todo还含State=0、TType<=2、DelFlag=0、AccState=0等筛选和UNION分支。",
+      "evidence_refs": [
+        "EV-QZ-VIEW-TODO"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "只证明缓存视图实现，不说明当前页面使用、业务状态完整枚举或人员职责；外连接/存在性与分支按原视图复核。"
+    },
+    {
+      "relation_ref": "REL-QZ-TODO-LINK",
+      "name": "工作项→前后工作项连接",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:ES_WorkItem:field:WiId",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:ES_WiLink:field:WiId"
+        }
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "同名字段等值；ES_v_Todo还含State=0、TType<=2、DelFlag=0、AccState=0等筛选和UNION分支。",
+      "evidence_refs": [
+        "EV-QZ-VIEW-TODO"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "只证明缓存视图实现，不说明当前页面使用、业务状态完整枚举或人员职责；外连接/存在性与分支按原视图复核。"
+    },
+    {
+      "relation_ref": "REL-QZ-OPERATION",
+      "name": "工序页明细→工序页主表",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%B7%A5%E5%BA%8F%E9%A1%B5_%E6%98%8E%E7%BB%86:field:ExcelServerRCID",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E5%B7%A5%E5%BA%8F%E9%A1%B5_%E4%B8%BB%E8%A1%A8:field:ExcelServerRCID"
+        }
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "",
+      "evidence_refs": [
+        "EV-QZ-VIEW-OPERATION"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "缓存视图按RCID连接；不推断全部主明细表采用相同关系或当前匹配率。"
+    },
+    {
+      "relation_ref": "REL-QZ-TRAVELER",
+      "name": "流转卡→制造大纲引用",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8:field:%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E8%A1%A8%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2_%E4%B8%BB%E8%A1%A8:field:%E8%A1%A8%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "",
+      "evidence_refs": [
+        "EV-QZ-VIEW-TRAVELER"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "缓存视图的表编号连接；表编号唯一性与流转卡选版时点尚未实时验证。"
+    },
+    {
+      "relation_ref": "REL-QZ-WI-CANDIDATE",
+      "name": "大纲工作项副本→工作项候选",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2_%E4%B8%BB%E8%A1%A8_wi:field:ExcelServerWIID",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:ES_WorkItem:field:WiId"
+        }
+      ],
+      "relation_kind": "structural_candidate",
+      "condition": "",
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "只取得结构与历史口径线索；保存时点、生命周期和运行记录关系待验证。"
+    },
+    {
+      "relation_ref": "REL-U8-ORDER-HEADER",
+      "name": "用友生产订单明细→订单头及表头单据码",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:MoId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_order:field:MoId"
+        }
+      ],
+      "evidence_refs": [
+        "EV-U8-Q015-SQL"
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "h.MoId = d.MoId；查询同时选择h.MoCode、d.Define25和d.Define28。",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "只核对历史SQL定义与日志摘要，没有读取该查询的业务结果；不认定MoCode、Define28或生产编号互相等价。"
+    },
+    {
+      "relation_ref": "REL-KFU-PROJECTION-ORDER-HEADER",
+      "name": "接口库同名视图投影U8：mom_order",
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:mom_order:field:MoId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_order:field:MoId"
+        }
+      ],
+      "evidence_refs": [
+        "EV-KFU-VIEW-ORDER-HEADER",
+        "EV-LIVE-L016",
+        "EV-LIVE-L026"
+      ],
+      "relation_kind": "current_stored_view_projection",
+      "condition": "缓存定义为select * from UFDATA_333_2025.dbo.mom_order",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "当前勤哲链接目标与KFU对应视图定义已由L016/L026核验；同名物理接口表momorderdetail与下划线视图mom_orderdetail仍是不同对象。定义不证明历史执行或同步完整性。"
+    },
+    {
+      "relation_ref": "REL-KFU-PROJECTION-ORDER-DETAIL",
+      "name": "接口库同名视图投影U8：mom_orderdetail",
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:mom_orderdetail:field:MoDId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:MoDId"
+        }
+      ],
+      "evidence_refs": [
+        "EV-KFU-VIEW-ORDER-DETAIL",
+        "EV-LIVE-L016",
+        "EV-LIVE-L026"
+      ],
+      "relation_kind": "current_stored_view_projection",
+      "condition": "缓存定义为select * from UFDATA_333_2025.dbo.mom_orderdetail",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "当前勤哲链接目标与KFU对应视图定义已由L016/L026核验；同名物理接口表momorderdetail与下划线视图mom_orderdetail仍是不同对象。定义不证明历史执行或同步完整性。"
+    },
+    {
+      "relation_ref": "REL-KFU-PROJECTION-SALES-DETAIL",
+      "name": "接口库同名视图投影U8：SO_SODetails",
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:SO_SODetails:field:iSOsID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:iSOsID"
+        }
+      ],
+      "evidence_refs": [
+        "EV-KFU-VIEW-SALES-DETAIL",
+        "EV-LIVE-L016",
+        "EV-LIVE-L026"
+      ],
+      "relation_kind": "current_stored_view_projection",
+      "condition": "缓存定义为select * from UFDATA_333_2025.dbo.SO_SODetails",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "当前勤哲链接目标与KFU对应视图定义已由L016/L026核验；同名物理接口表momorderdetail与下划线视图mom_orderdetail仍是不同对象。定义不证明历史执行或同步完整性。"
+    },
+    {
+      "relation_ref": "REL-QZ-CARD-PRODUCTION-TASK",
+      "name": "流转卡→生产任务：按生产编号关联",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95_%E4%B8%BB%E8%A1%A8:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L047",
+        "EV-QZ-VIEW-ALL-CARDS"
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "t1.生产编号 = t2.生产编号；原视图为LEFT JOIN。",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "连接发生在勤哲本地生产编号；没有据此证明它等于U8生产编号、Define25、Define28或MoCode。LEFT JOIN不保证每张卡命中任务。"
+    },
+    {
+      "relation_ref": "REL-QZ-TASK-ACTIVE-PROJECTION",
+      "name": "进行中任务视图→生产任务编号",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E8%BF%9B%E8%A1%8C%E4%B8%AD%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95_%E4%B8%BB%E8%A1%A8:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-QZ-VIEW-TASK-ACTIVE"
+      ],
+      "relation_kind": "cached_view_projection",
+      "condition": "视图投影任务编号和生产编号，筛选ISNULL(完成状态,'') = N'进行中'。",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "仅说明缓存筛选逻辑；不把单个状态常量扩展为完整业务状态枚举或正式开工条件。"
+    },
+    {
+      "relation_ref": "REL-QZ-OPERATION-ACTIVE-TASK",
+      "name": "工序→进行中生产任务集合",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E8%BF%9B%E8%A1%8C%E4%B8%AD%E7%9A%84%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-QZ-VIEW-AREA-OPERATIONS",
+        "EV-QZ-VIEW-TASK-ACTIVE"
+      ],
+      "relation_kind": "cached_view_membership",
+      "condition": "ISNULL(工序.生产编号,空串) IN 进行中任务生产编号集合；还排除工序工时明细主键已分派的记录。",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "这是IN集合筛选，不是明细等值JOIN；ISNULL空串处理可能影响语义，未核对真实空值与命中率。"
+    },
+    {
+      "relation_ref": "REL-QZ-PART-COMPLETION-TASK",
+      "name": "零件完成情况→生产任务数量来源",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95%E6%B1%87%E6%80%BB_%E4%B8%BB%E8%A1%A8:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95_%E4%B8%BB%E8%A1%A8:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-QZ-VIEW-PART-COMPLETION"
+      ],
+      "relation_kind": "cached_scalar_lookup",
+      "condition": "按生产编号相关子查询任务数量；对零件状态为已完成或报废且成品类型为成品的投产数量求和。",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "不把该计算定义为公司正式完工率或合格产量；报废被纳入该视图汇总，业务解释与计量口径待确认。"
+    },
+    {
+      "relation_ref": "REL-QZ-PART-HIERARCHY-DETAIL",
+      "name": "零件层级工艺清单主明细关联",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95_%E4%B8%BB%E8%A1%A8:field:ExcelServerRCID",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95_%E6%98%8E%E7%BB%86:field:ExcelServerRCID"
+        }
+      ],
+      "evidence_refs": [
+        "EV-QZ-VIEW-PART-HIERARCHY"
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "t1.ExcelServerRCID = t2.ExcelServerRCID",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "只覆盖二级零件编号完成情况视图中的主明细连接，不推广到所有业务表。"
+    },
+    {
+      "relation_ref": "REL-QZ-PART-HIERARCHY-SUMMARY",
+      "name": "二级零件明细→工艺清单汇总",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95_%E6%98%8E%E7%BB%86:field:%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95%E6%B1%87%E6%80%BB_%E4%B8%BB%E8%A1%A8:field:%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-QZ-VIEW-PART-HIERARCHY"
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "t2.零件编号 = t3.零件编号",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "视图分别输出主零件编号与次零件编号；不将零件编号当成存货编码或图号，层级方向按原定义保留。"
+    },
+    {
+      "relation_ref": "REL-QZ-UNFINISHED-PART-SUMMARY",
+      "name": "未完成工序零件集合→工艺清单汇总",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95%E6%B1%87%E6%80%BB_%E4%B8%BB%E8%A1%A8:field:%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-QZ-VIEW-UNFINISHED-CARDS"
+      ],
+      "relation_kind": "cached_view_join",
+      "condition": "先取工序状态为进行中或待加工的DISTINCT零件编号，再INNER JOIN工艺清单汇总。",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "没有直接连接流转卡主表；不能仅凭视图名已下卡推定已经发卡或卡片存在，DISTINCT只构造零件集合。"
+    },
+    {
+      "relation_ref": "REL-QZ-OPERATION-CARD-CANDIDATE",
+      "name": "候选：工序记录→流转卡零件编号",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8:field:%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "relation_kind": "structural_candidate",
+      "condition": "仅记录同名字段候选；尚未取得这两张表间的直接JOIN或生成公式。",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "工序键含流水工序号，流转卡缓存主键为制造大纲编号+类别质量编号；零件编号不能单独证明卡片唯一性或更新范围。"
+    },
+    {
+      "relation_ref": "REL-QZ-OPERATION-OUTLINE-CANDIDATE",
+      "name": "候选：工序记录→制造大纲表编号",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E8%A1%A8%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2_%E4%B8%BB%E8%A1%A8:field:%E8%A1%A8%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "relation_kind": "structural_candidate",
+      "condition": "工序记录含制造大纲表编号；本轮未取得它到大纲主表的直接连接SQL。",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "流转卡已有同名引用字段不证明工序表沿用相同生成或更新逻辑，不能自动补齐该边。"
+    },
+    {
+      "relation_ref": "REL-QZ-INPUT-SNAPSHOT-CANDIDATE",
+      "name": "候选：生产订单输入→本地中间明细批次",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E8%BE%93%E5%85%A5_%E4%B8%BB%E8%A1%A8:field:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E8%A1%A8%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8%E6%96%B0_%E6%98%8E%E7%BB%86:field:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E8%A1%A8%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "relation_kind": "structural_candidate",
+      "condition": "仅存在同名生产订单表编号；实际填充、关联与同步时点待原始公式核验。",
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "本地中间明细与远程投影视图是不同对象，不从名称推定其当前数据来源或有效性。"
+    },
+    {
+      "relation_ref": "REL-QZ-SNAPSHOT-REMOTE-ID-CANDIDATE",
+      "name": "本地中间明细u8autoid到远程接口U8AUTOID引用",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8%E6%96%B0_%E6%98%8E%E7%BB%86:field:u8autoid",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:u8%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8:field:U8AUTOID"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L016",
+        "EV-LIVE-L018",
+        "EV-LIVE-L041R",
+        "EV-LIVE-L056",
+        "EV-QZ-CACHE",
+        "EV-QZ-VIEW-U8-BRIDGE"
+      ],
+      "relation_kind": "current_rule_and_measured_reference",
+      "condition": "同类命名与结构线索；没有取得保存两者映射的公式、视图连接或记录样本。",
+      "business_confirmation": "pending",
+      "cardinality": "many local records to one interface record within tested account; local duplicates exist",
+      "limitations": "链接目标、接口视图投影及按ID回写规则已有实时依据。L041R本地756个重复ID分组；限定333后5953行未命中。原relation_ref保留兼容旧引用，不能据其CANDIDATE字样忽略当前证据，也不推断全部当前已同步。"
+    },
+    {
+      "relation_ref": "REL-OV-MATERIAL-HEADER",
+      "name": "材料出库主明细连接",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11:field:ID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:rdrecord11:field:ID"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "r.ID = h.ID",
+      "evidence_refs": [
+        "EV-POP-Q025-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "Q025记录返回0条，只证明保存SQL的连接写法；不证明物理外键、实际命中或当前是否出库。",
+      "join_type": "INNER",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-MATERIAL-MO-FILTER",
+      "name": "待核：iOMoDID到生产明细的筛选假设",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11:field:iOMoDID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:MoDId"
+        }
+      ],
+      "relation_kind": "historical_filter_candidate",
+      "condition": "历史SQL仅使用 r.iOMoDID IN (@MoD1,@MoD2)，没有JOIN生产明细。",
+      "evidence_refs": [
+        "EV-POP-Q025-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "不能把参数名或SQL别名当成公司字段含义；iOMoDID对应对象及来源类型未知，禁止作为已验证生产订单关联。",
+      "join_type": null,
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-MATERIAL-ALLOCATION-CANDIDATE",
+      "name": "3088材料出库领用引用到生产用料",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:rdrecords11:field:iMPoIds",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate:field:AllocateId"
+        }
+      ],
+      "relation_kind": "application_reference_join",
+      "condition": "mom_moallocate.AllocateId = TRY_CONVERT(int,rdrecords11.iMPoIds) AND rdrecords11.iMPoIds > 0",
+      "evidence_refs": [
+        "EV-3088-FIELDS",
+        "EV-3088-HISTORICAL-SYNC",
+        "EV-LIVE-L043",
+        "EV-U8-Q006",
+        "EV-U8-Q024"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "3088实现引用取得本次月份范围实际记录支持；未核查全历史或证明具体子件来源入库与数量分配。dVeriDate、cHandler分布独立记录，不将有单据当作已审核或自动发料完成。",
+      "join_type": null,
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-SALES-HEADER",
+      "name": "销售出库主明细连接",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:rdrecords32:field:ID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:rdrecord32:field:ID"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "r.ID = rh.ID",
+      "evidence_refs": [
+        "EV-OV-Q038-SQL",
+        "EV-OV-Q058-SQL",
+        "EV-POP-Q037-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "Q037/Q038为零返回，Q058中出库头为LEFT JOIN；未读取明细结果，不判定头与行完整匹配。",
+      "join_type": "INNER in Q037/Q038; LEFT in Q058",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-OUTBOUND-DISPATCH",
+      "name": "销售出库明细到发货明细",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:rdrecords32:field:iDLsID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:DispatchLists:field:iDLsID"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "r.iDLsID = d.iDLsID",
+      "evidence_refs": [
+        "EV-OV-Q058-SQL",
+        "EV-OV-Q128-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "出库为LEFT JOIN可选侧；日志有返回不能证明出库侧非空，分批出库和重复命中未核。",
+      "join_type": "LEFT",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-DISPATCH-SALES",
+      "name": "发货明细到销售订单明细",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:DispatchLists:field:iSOsID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:iSOsID"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "d.iSOsID = so.iSOsID",
+      "evidence_refs": [
+        "EV-OV-Q058-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "只支持保存SQL中的标识关联；不由此认定订单已全部交付或某个单据状态生效。",
+      "join_type": "INNER",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-DISPATCH-HEADER",
+      "name": "发货单主明细连接",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:DispatchLists:field:DLID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:DispatchList:field:DLID"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "dh.DLID = d.DLID",
+      "evidence_refs": [
+        "EV-OV-Q058-SQL",
+        "EV-OV-Q128-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "唯一性、当前有效性及作废/退货范围待核，不依据单据编号或存货编码去重。",
+      "join_type": "INNER",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-INVOICE-DISPATCH-COMPOSITE",
+      "name": "销售发票到发货明细的复合条件",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:SaleBillVouchs:field:iDLsID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:DispatchLists:field:iDLsID"
+        },
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:SaleBillVouchs:field:iSOsID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:DispatchLists:field:iSOsID"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "i.iDLsID = d.iDLsID AND i.iSOsID = d.iSOsID",
+      "evidence_refs": [
+        "EV-OV-Q128-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "必须保留两项条件；同时连接多笔出库和多笔发票可产生乘积行，不能直接求和出库量或发票量。",
+      "join_type": "LEFT",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-INVOICE-OUTBOUND-ID-CANDIDATE",
+      "name": "待核：销售发票RdsID到出库行标识",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:SaleBillVouchs:field:RdsID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:rdrecords32:field:AutoID"
+        }
+      ],
+      "relation_kind": "structural_candidate",
+      "condition": "仅列出待核字段，不宣称存在已验证等值连接。",
+      "evidence_refs": [
+        "EV-U8-Q024",
+        "EV-U8-Q048R"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "历史发票SQL选出RdsID但本轮未取得其直接JOIN；来源范围及是否适用所有业务类型未知。",
+      "join_type": null,
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-MO-ALLOCATION",
+      "name": "生产订单明细到生产用料记录",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate:field:MoDId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:MoDId"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "d.MoDId = a.MoDId",
+      "evidence_refs": [
+        "EV-OV-Q147-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "Q147历史返回6行，未读取逐笔值；Qty、IssQty和DeclaredQty的具体计算及当前实发仍未核。",
+      "join_type": "INNER",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-MO-BOM-CANDIDATE",
+      "name": "待核：生产订单选用BOM标识",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:BomId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:bom_bom:field:BomId"
+        }
+      ],
+      "relation_kind": "structural_candidate",
+      "condition": "生产明细含BomId；Q147选择该字段但未直接连接BOM头。",
+      "evidence_refs": [
+        "EV-U8-Q006"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "不按最新版本替换已选BOM，不能由字段存在判定实际用料已按该版本生成。",
+      "join_type": null,
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-ALLOCATION-COMPONENT-CANDIDATE",
+      "name": "生产用料末端组件到BOM子件行",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate:field:OpComponentId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent:field:OpComponentId"
+        }
+      ],
+      "relation_kind": "structural_candidate",
+      "condition": "两个对象保留同名标识，尚无直接JOIN和匹配统计。",
+      "evidence_refs": [
+        "EV-CLOSURE-C017R",
+        "EV-CLOSURE-C040",
+        "EV-U8-Q006"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "追加、替代、版本变更及虚拟展开可能影响对应关系，不能只按存货编码匹配或假定一对一。",
+      "join_type": null,
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-PART-INVENTORY",
+      "name": "部件到存货档案的查询连接",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:bas_part:field:InvCode",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:Inventory:field:cInvCode"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "i.cInvCode = p.InvCode",
+      "evidence_refs": [
+        "EV-OV-Q142-SQL",
+        "EV-OV-Q143-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "bas_part另有Free1至Free10，当前SQL未把它们列入该连接；InvCode不能单独证明部件身份唯一。",
+      "join_type": "LEFT",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-BOM-PARENT-PART",
+      "name": "BOM父件到部件身份",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:bom_parent:field:ParentId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:bas_part:field:PartId"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "p.PartId = bp.ParentId",
+      "evidence_refs": [
+        "EV-OV-Q143-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "缓存未采集bas_part主键约束，不能仅由PartId名称断言唯一；不得把ParentId直接等同存货编码。",
+      "join_type": "INNER",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-BOM-PARENT-HEADER",
+      "name": "BOM父件记录到版本头",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:bom_parent:field:BomId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:bom_bom:field:BomId"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "bp.BomId = b.BomId",
+      "evidence_refs": [
+        "EV-OV-Q143-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "版本状态码、有效日期及父件选择口径待确认；不同版本不能直接混合求和。",
+      "join_type": "INNER",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-BOM-COMPONENT-HEADER",
+      "name": "BOM子件记录到版本头",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent:field:BomId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:bom_bom:field:BomId"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "c.BomId = b.BomId",
+      "evidence_refs": [
+        "EV-OV-Q143-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "版本头日期与子件行日期分别存在；只按其中一个时间或只取最大BomId不能证明有效版本。",
+      "join_type": "LEFT",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-BOM-COMPONENT-PART",
+      "name": "BOM子件到部件身份",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent:field:ComponentId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:bas_part:field:PartId"
+        }
+      ],
+      "relation_kind": "historical_query_join",
+      "condition": "cp.PartId = c.ComponentId",
+      "evidence_refs": [
+        "EV-OV-Q143-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "父件和子件的PartId均要保留；子件另有子BOM不自动说明它是虚拟件。",
+      "join_type": "LEFT",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-BOM-UPPER-LEVEL",
+      "name": "材料反查上一层BOM的EXISTS关系",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:bom_parent:field:ParentId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent:field:ComponentId"
+        }
+      ],
+      "relation_kind": "historical_exists_lookup",
+      "condition": "EXISTS子查询将直接父件ParentId与上层子件ComponentId关联，查询原材料的间接使用层级。",
+      "evidence_refs": [
+        "EV-OV-Q159-SQL",
+        "EV-OV-Q160-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "这些SQL没有bVirtual条件，也没有执行虚拟件展开；多层结构不能单独证明虚拟件身份或生产实际路径。",
+      "join_type": "EXISTS",
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-OTHER-OUTBOUND-HEADER-CANDIDATE",
+      "name": "待核：09系列单据主明细",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:rdrecords09:field:ID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:RdRecord09:field:ID"
+        }
+      ],
+      "relation_kind": "structural_candidate",
+      "condition": "缓存中两表均含ID，主明细用途及连接为待核分析标签。",
+      "evidence_refs": [
+        "EV-U8-Q024"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "本轮只取得缓存字段，未取得09系列业务定义、SQL连接、行数或实际用途。",
+      "join_type": null,
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-OV-OUTBOUND-COST-CANDIDATE",
+      "name": "待核：出库行到存货核算ID",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:rdrecords32:field:AutoID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:IA_Subsidiary:field:ID"
+        }
+      ],
+      "relation_kind": "historical_filter_candidate",
+      "condition": "Q059仅按IA_Subsidiary.ID和iYear筛选，未直接连接出库明细。",
+      "evidence_refs": [
+        "EV-OV-Q059-SQL"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_globally_verified",
+      "limitations": "日志为零返回；单一ID可能跨单据域重复，来源类型、年度、凭证及金额口径未核，不能据此判定未记账。",
+      "join_type": null,
+      "logic_reference": "workflow-reference.md"
+    },
+    {
+      "relation_ref": "REL-3088-QUALITY-CONSISTENCY",
+      "name": "3088销售源头与生产质量编号一致性核查",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:Define29",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:cDefine29"
+        }
+      ],
+      "relation_kind": "application_consistency_check",
+      "comparison_not_join": true,
+      "condition": "生产及销售引用先通过核验；两质量号去除首尾普通空格，缺失单列，有效值比较same/different。",
+      "evidence_refs": [
+        "EV-3088-JOINS",
+        "EV-3088-STATIC-SCHEMA",
+        "EV-3088-USER-CONFIRMATIONS",
+        "EV-LIVE-L024"
+      ],
+      "business_confirmation": "pending",
+      "cardinality": "not_a_record_binding_rule",
+      "limitations": "这是归属后的比较条件，禁止转为按质量号连接记录；核对一致不证明出入库放行或历史时点一致。"
+    },
+    {
+      "relation_ref": "REL-LIVE-SALES-ID",
+      "name": "KFU销售中间表引用用友销售明细",
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:SODetails:field:U8AUTOID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:iSOsID"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L057",
+        "EV-LIVE-L058"
+      ],
+      "relation_kind": "live_measured_reference_join",
+      "condition": "账套333下TRY_CONVERT(int,U8AUTOID)=iSOsID；现有勤哲视图使用U8AUTOID=CAST(iSOsID AS nvarchar)",
+      "cardinality": "44588 checked; 44477 hit,111 miss;0 duplicate source-id groups",
+      "business_confirmation": "pending",
+      "limitations": "源视图没有账套条件；只读引用须显式选择账套并保留未命中，不能按质量号补连。"
+    },
+    {
+      "relation_ref": "REL-LIVE-PROD-ID",
+      "name": "KFU生产明细引用用友生产明细",
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail:field:U8AUTOID",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:MoDId"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L032"
+      ],
+      "relation_kind": "live_measured_reference_join",
+      "condition": "账套333下TRY_CONVERT(int,U8AUTOID)=MoDId",
+      "cardinality": "72140 checked;67343 hit;4797 miss",
+      "business_confirmation": "pending",
+      "limitations": "不匹配可能涉及历史、删除、替换或同步等原因，本次不作原因定性。"
+    },
+    {
+      "relation_ref": "REL-LIVE-MIDDLE-ID",
+      "name": "勤哲本地生产中间明细引用KFU生产明细",
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8%E6%96%B0_%E6%98%8E%E7%BB%86:field:u8autoid",
+          "to": "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail:field:U8AUTOID"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L041R",
+        "EV-LIVE-L056"
+      ],
+      "relation_kind": "live_measured_reference_join",
+      "condition": "本地u8autoid=接口U8AUTOID；实际已读/已修改规则用该引用",
+      "cardinality": "local may be many:one;756 duplicate local-id groups",
+      "business_confirmation": "pending",
+      "limitations": "本地78849行有72896行命中333接口ID、5953行未命中。不是唯一主表，不应直接串接后求和。"
+    },
+    {
+      "relation_ref": "REL-LIVE-PROCESS-LIST",
+      "name": "工艺清单承接本地中间明细",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8%E6%96%B0_%E6%98%8E%E7%BB%86:field:%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95%E6%B1%87%E6%80%BB_%E4%B8%BB%E8%A1%A8:field:U8%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L056",
+        "EV-LIVE-L047"
+      ],
+      "relation_kind": "live_measured_reference_join",
+      "condition": "新增工艺清单rule ru20250226000005投影零件编号到工艺清单的零件编号/U8零件编号等字段；新增status、未存在及主表数量条件见规则",
+      "cardinality": "35-case scoped lineage; not globally unique assertion",
+      "business_confirmation": "pending",
+      "limitations": "新增规则用NOT IN；空值行为、重复事件及重开单不能据样本推断。"
+    },
+    {
+      "relation_ref": "REL-LIVE-CARD-OPS",
+      "name": "流转卡工时页生成生产工序记录",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1%E5%B7%A5%E6%97%B6%E9%A1%B5_%E6%98%8E%E7%BB%86:field:%E5%B7%A5%E6%97%B6%E6%98%8E%E7%BB%86%E4%B8%BB%E9%94%AE",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E5%B7%A5%E5%BA%8F%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E5%B7%A5%E5%BA%8F%E5%B7%A5%E6%97%B6%E6%98%8E%E7%BB%86%E4%B8%BB%E9%94%AE"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L056",
+        "EV-LIVE-L055"
+      ],
+      "relation_kind": "stored_rule_projection",
+      "condition": "ru20241115000001按工时页逐行新建，工时明细主键、流水工序号、U8标识、质量号和工时版次投影见field-lineage",
+      "cardinality": "one card to many operations; stored projection",
+      "business_confirmation": "pending",
+      "limitations": "不是仅按制造大纲编号或图号串接；同大纲不同版次及不同制造对象需分别保留。"
+    },
+    {
+      "relation_ref": "REL-LIVE-ASSIGN-RCID",
+      "name": "多人多工序分配单连接工序与人员明细",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%A4%9A%E4%BA%BA%E5%91%98%E5%A4%9A%E5%B7%A5%E5%BA%8F%E5%88%86%E9%85%8D_%E4%B8%BB%E8%A1%A8:field:ExcelServerRCID",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E5%A4%9A%E4%BA%BA%E5%91%98%E5%A4%9A%E5%B7%A5%E5%BA%8F%E5%88%86%E9%85%8D%E5%B7%A5%E5%BA%8F_%E6%98%8E%E7%BB%86:field:ExcelServerRCID"
+        },
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%A4%9A%E4%BA%BA%E5%91%98%E5%A4%9A%E5%B7%A5%E5%BA%8F%E5%88%86%E9%85%8D_%E4%B8%BB%E8%A1%A8:field:ExcelServerRCID",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E5%A4%9A%E4%BA%BA%E5%91%98%E5%A4%9A%E5%B7%A5%E5%BA%8F%E5%88%86%E9%85%8D%E6%93%8D%E4%BD%9C%E5%B7%A5_%E6%98%8E%E7%BB%86:field:ExcelServerRCID"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L031",
+        "EV-LIVE-L056"
+      ],
+      "relation_kind": "live_measured_reference_join",
+      "condition": "一单内工序明细×人员明细形成按人按工序的工时记录；rule ru20241114000017",
+      "cardinality": "one assignment to many operations and many workers",
+      "business_confirmation": "pending",
+      "limitations": "源规则临时明细做笛卡尔组合是按人按工序展开；聚合时不得把整单工时重复分配。"
+    },
+    {
+      "relation_ref": "REL-LIVE-ASSIGN-HOURS",
+      "name": "分工记录生成按人按工序工时",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%A4%9A%E4%BA%BA%E5%91%98%E5%A4%9A%E5%B7%A5%E5%BA%8F%E5%88%86%E9%85%8D%E5%B7%A5%E5%BA%8F_%E6%98%8E%E7%BB%86:field:%E5%B7%A5%E5%BA%8F%E5%B7%A5%E6%97%B6%E6%98%8E%E7%BB%86%E4%B8%BB%E9%94%AE",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E5%B7%A5%E5%BA%8F%E5%B7%A5%E6%97%B6%E6%98%8E%E7%BB%86%E4%B8%BB%E9%94%AE"
+        },
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%A4%9A%E4%BA%BA%E5%91%98%E5%A4%9A%E5%B7%A5%E5%BA%8F%E5%88%86%E9%85%8D%E6%93%8D%E4%BD%9C%E5%B7%A5_%E6%98%8E%E7%BB%86:field:%E7%99%BB%E5%BD%95%E8%B4%A6%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E7%99%BB%E5%BD%95%E8%B4%A6%E6%88%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L056",
+        "EV-LIVE-L055"
+      ],
+      "relation_kind": "stored_rule_projection",
+      "condition": "同一分配表的工序×人员；工时初始0、工时占比取占比、工时状态正常、分配表编号与质量/版次随行",
+      "cardinality": "many workers per operation",
+      "business_confirmation": "pending",
+      "limitations": "PK还含操作工；检验回写条件按opkey+login。不得只按生产编号或工序名称关联。"
+    },
+    {
+      "relation_ref": "REL-LIVE-INSPECTION-HOURS",
+      "name": "单工序检验按工序及账号回写人员工时",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E6%93%8D%E4%BD%9C%E5%B7%A5:field:%E5%B7%A5%E5%BA%8F%E5%B7%A5%E6%97%B6%E6%98%8E%E7%BB%86%E4%B8%BB%E9%94%AE",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E5%B7%A5%E5%BA%8F%E5%B7%A5%E6%97%B6%E6%98%8E%E7%BB%86%E4%B8%BB%E9%94%AE"
+        },
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E6%93%8D%E4%BD%9C%E5%B7%A5:field:%E7%99%BB%E5%BD%95%E8%B4%A6%E6%88%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%BA%E5%91%98%E5%B7%A5%E6%97%B6%E4%BF%A1%E6%81%AF_%E4%B8%BB%E8%A1%A8:field:%E7%99%BB%E5%BD%95%E8%B4%A6%E6%88%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L056",
+        "EV-LIVE-L046"
+      ],
+      "relation_kind": "live_measured_reference_join",
+      "condition": "合格分支按检验操作工明细的工序主键+登录账户定位；公式及例外见正文",
+      "cardinality": "353 eligible sample rows:353 formula equal; no duplicate worker match",
+      "business_confirmation": "pending",
+      "limitations": "样本不是全库一致性认证；普通不合格、无损检测、外协、删除等分支条件不同。"
+    },
+    {
+      "relation_ref": "REL-LIVE-IMPORT-ORDER",
+      "name": "KFU工时导入定位用友生产明细",
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:ImportWorkHours:field:cMoCode",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_order:field:MoCode"
+        },
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:ImportWorkHours:field:iRowNo",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:SortSeq"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L042",
+        "EV-LIVE-L033"
+      ],
+      "relation_kind": "live_measured_reference_join",
+      "condition": "cMoCode=MoCode AND iRowNo=生产明细SortSeq，再由MoId连接生产主子表",
+      "cardinality": "2823 rows all exactly one hit",
+      "business_confirmation": "pending",
+      "limitations": "未取得勤哲到导入行的取数SQL、批次来源和单位换算；cQZCode不能猜成工序主键。"
+    },
+    {
+      "relation_ref": "REL-LIVE-LEDGER-ORDER",
+      "name": "月度台账按订单和明细行定位制造对象",
+      "system_refs": [
+        "kfu8qz",
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:LedgerRecords:field:MoCode",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_order:field:MoCode"
+        },
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:LedgerRecords:field:SortSeq",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:mom_orderdetail:field:SortSeq"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L042",
+        "EV-LIVE-L048R"
+      ],
+      "relation_kind": "live_measured_reference_join",
+      "condition": "MoCode+生产明细SortSeq定位；台账还需保留Id与columnName费用维度",
+      "cardinality": "128969 ledger detail rows all hit",
+      "business_confirmation": "pending",
+      "limitations": "费用纵表，不能把每个费用列当作不同制造对象或累计行数；未证明分摊公式与薪酬结算规则。"
+    },
+    {
+      "relation_ref": "REL-LIVE-COST-PARENT",
+      "name": "费用录入明细到月度主表",
+      "system_refs": [
+        "kfu8qz"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:InputVouchs:field:Id",
+          "to": "gkdb:kfu8qz:KFU8QZ:dbo:InputVouch:field:Id"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L042"
+      ],
+      "relation_kind": "live_measured_reference_join",
+      "condition": "InputVouchs.Id=InputVouch.Id",
+      "cardinality": "1056 detail rows all hit",
+      "business_confirmation": "pending",
+      "limitations": "只能证明结构引用，不证明金额、费率或审核已被业务验收。"
+    },
+    {
+      "relation_ref": "REL-LIVE-LEDGER-PARENT",
+      "name": "费用台账明细到月度主表",
+      "system_refs": [
+        "kfu8qz"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:LedgerRecords:field:Id",
+          "to": "gkdb:kfu8qz:KFU8QZ:dbo:LedgerRecord:field:Id"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L042"
+      ],
+      "relation_kind": "live_measured_reference_join",
+      "condition": "LedgerRecords.Id=LedgerRecord.Id",
+      "cardinality": "128969 detail rows all hit",
+      "business_confirmation": "pending",
+      "limitations": "bFlag全为1是数据分布，未确认其审核/关闭语义。"
+    },
+    {
+      "relation_ref": "REL-LIVE-QUALITY-PROPAGATION",
+      "name": "接口质量号沿中间明细工艺清单和流转卡传递",
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail:field:%E8%B4%A8%E9%87%8F%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8%E6%96%B0_%E6%98%8E%E7%BB%86:field:%E8%B4%A8%E9%87%8F%E7%BC%96%E5%8F%B7"
+        },
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E8%AE%A2%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8%E6%96%B0_%E6%98%8E%E7%BB%86:field:%E8%B4%A8%E9%87%8F%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95%E6%B1%87%E6%80%BB_%E4%B8%BB%E8%A1%A8:field:%E8%B4%A8%E9%87%8F%E7%BC%96%E5%8F%B7"
+        },
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E8%89%BA%E6%B8%85%E5%8D%95%E6%B1%87%E6%80%BB_%E4%B8%BB%E8%A1%A8:field:%E8%B4%A8%E9%87%8F%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E4%BA%A7%E5%93%81%E5%88%B6%E9%80%A0%E5%A4%A7%E7%BA%B2%E6%B5%81%E8%BD%AC%E5%8D%A1_%E4%B8%BB%E8%A1%A8:field:%E7%B1%BB%E5%88%AB%E8%B4%A8%E9%87%8F%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-LIVE-L056",
+        "EV-LIVE-L035"
+      ],
+      "relation_kind": "stored_field_propagation",
+      "condition": "先按零件/制造对象引用归属，再由ru20260414000003、ru20250226000005、ru20260414000004复制质量字段",
+      "cardinality": "stored field copying, not a quality equality join",
+      "business_confirmation": "pending",
+      "limitations": "不是质量号等值串表。普通变更工艺清单规则仅更新图号和名称；未证明改号自动贯穿已有卡片、工序和工时。",
+      "comparison_not_join": true
+    },
+    {
+      "relation_ref": "REL-CLOSURE-BOM-OPTION",
+      "name": "BOM子件引用供应选项",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent:field:OptionsId",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponentopt:field:OptionsId"
+        }
+      ],
+      "evidence_refs": [
+        "EV-CLOSURE-C020",
+        "EV-CLOSURE-C023"
+      ],
+      "condition": "bom_opcomponent.OptionsId=bom_opcomponentopt.OptionsId",
+      "relation_kind": "current_stored_reference_join",
+      "business_confirmation": "pending",
+      "limitations": "虚拟属性在BOM选项粒度；不以bas_part或展开后用料全为3否定虚拟层存在。"
+    },
+    {
+      "relation_ref": "REL-CLOSURE-PATH",
+      "name": "展开路径逐节点定位BOM子件",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:mom_moallocate:field:VirOpComponentIds",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:bom_opcomponent:field:OpComponentId"
+        }
+      ],
+      "evidence_refs": [
+        "EV-CLOSURE-C040",
+        "EV-CLOSURE-C017R"
+      ],
+      "condition": "按生成过程语法分解有序节点、整数验证、逐节点关联并检查前后BOM父子和末端身份；禁止整串等值JOIN",
+      "relation_kind": "ordered_component_path",
+      "business_confirmation": "pending",
+      "limitations": "本次全部150条多段现存路径均为两级；任意深度、直接供应及历史变体没有全部场景数据验收。"
+    },
+    {
+      "relation_ref": "REL-CLOSURE-QUARTZ-LOG",
+      "name": "自动传单任务到调度日志",
+      "system_refs": [
+        "kfu8qz"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:Sys_QuartzOptions:field:Id",
+          "to": "gkdb:kfu8qz:KFU8QZ:dbo:Sys_QuartzLog:field:Id"
+        }
+      ],
+      "evidence_refs": [
+        "EV-CLOSURE-C002",
+        "EV-CLOSURE-C007"
+      ],
+      "condition": "任务Id=日志Id；LogId是每次日志自身主键",
+      "relation_kind": "operational_reference_join",
+      "business_confirmation": "pending",
+      "limitations": "Result=1只表示HTTP任务无异常，不证明每张单据生单、审核、库存或记账完成。"
+    },
+    {
+      "relation_ref": "REL-TH-INSPECT-INTERFACE",
+      "name": "单工序检验首末条件定位传单接口",
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%BB%E8%A1%A8:field:%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail:field:%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-TH-D044",
+        "EV-TH-D047"
+      ],
+      "condition": "检验当前流水工序号等于排除取消/报废后的最小或最大值，按对应规则写是；无原值为否条件",
+      "relation_kind": "stored_rule_write",
+      "business_confirmation": "pending",
+      "limitations": "现有SQL未加账套和完成状态保护；不等于审核单据已完成，不证明具体历史事件。"
+    },
+    {
+      "relation_ref": "REL-TH-QUALITY-BATCH",
+      "name": "末有效工序将类别质量编号传为接口批号",
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%8D%95%E5%B7%A5%E5%BA%8F%E6%A3%80%E9%AA%8C_%E4%B8%BB%E8%A1%A8:field:%E7%B1%BB%E5%88%AB%E8%B4%A8%E9%87%8F%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:kfu8qz:KFU8QZ:dbo:momorderdetail:field:%E6%89%B9%E5%8F%B7"
+        }
+      ],
+      "evidence_refs": [
+        "EV-TH-D044"
+      ],
+      "condition": "ru20251014000003命中本地零件编号与末有效流水工序号时赋值；两个usedb分支一致",
+      "relation_kind": "stored_assignment",
+      "business_confirmation": "pending",
+      "limitations": "来源不是生产批架次；不能把跨来源质量值一律强行统一。"
+    },
+    {
+      "relation_ref": "REL-ORIGIN-REPORT-PART",
+      "name": "现存工时报表按U8零件编号汇总",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E6%B1%87%E6%80%BB%E6%96%B0:field:U8%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E6%89%80%E6%9C%89%E5%B7%A5%E6%97%B6%E7%BB%9F%E8%AE%A1%E6%9F%A5%E8%AF%A2%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7_%E6%98%8E%E7%BB%86:field:U8%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7"
+        },
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E6%B1%87%E6%80%BB%E6%96%B0:field:%E6%93%8D%E4%BD%9C%E5%B7%A5%E5%B7%A5%E6%97%B6",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E6%89%80%E6%9C%89%E5%B7%A5%E6%97%B6%E7%BB%9F%E8%AE%A1%E6%9F%A5%E8%AF%A2%E9%9B%B6%E4%BB%B6%E7%BC%96%E5%8F%B7_%E6%98%8E%E7%BB%86:field:%E5%B7%A5%E6%97%B6"
+        }
+      ],
+      "condition": "先按报表开始/结束日期筛选，按U8零件编号SUM操作工工时并连接本次报表行；SQL不含÷60",
+      "relation_kind": "stored_aggregate_assignment",
+      "evidence_refs": [
+        "EV-ORIGIN-E039"
+      ],
+      "business_confirmation": "pending",
+      "limitations": "不能据此认定上传文件来源；实际参数、筛选及模板转换未取得。"
+    },
+    {
+      "relation_ref": "REL-ORIGIN-REPORT-DATE",
+      "name": "现存工时报表的日期范围参数",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E6%B1%87%E6%80%BB%E6%96%B0:field:%E5%85%A5%E8%B4%A6%E6%97%A5%E6%9C%9F",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E6%89%80%E6%9C%89%E5%B7%A5%E6%97%B6%E7%BB%9F%E8%AE%A1%E6%9F%A5%E8%AF%A2_%E4%B8%BB%E8%A1%A8:field:%E5%BC%80%E5%A7%8B%E6%97%B6%E9%97%B4"
+        },
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E6%B1%87%E6%80%BB%E6%96%B0:field:%E5%85%A5%E8%B4%A6%E6%97%A5%E6%9C%9F",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E6%89%80%E6%9C%89%E5%B7%A5%E6%97%B6%E7%BB%9F%E8%AE%A1%E6%9F%A5%E8%AF%A2_%E4%B8%BB%E8%A1%A8:field:%E7%BB%93%E6%9D%9F%E6%97%B6%E9%97%B4"
+        }
+      ],
+      "condition": "入账日期>=开始时间 AND 入账日期<=结束时间；这是范围过滤而非日期等值连接",
+      "relation_kind": "stored_range_filter",
+      "evidence_refs": [
+        "EV-ORIGIN-E039",
+        "EV-TH-D014"
+      ],
+      "business_confirmation": "pending",
+      "limitations": "视图已将检验日期转date；不能用创建日期或年月文本代替导出参数。"
+    },
+    {
+      "relation_ref": "REL-TRACE-RD-HEADER-DETAIL",
+      "name": "用户确认研发报工导出的主明细内连接",
+      "system_refs": [
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E5%A1%AB%E6%8A%A5%E8%A1%A8_%E4%B8%BB%E8%A1%A8:field:ExcelServerRCID",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E5%B7%A5%E6%97%B6%E5%A1%AB%E6%8A%A5%E8%A1%A8_%E6%98%8E%E7%BB%86:field:ExcelServerRCID"
+        }
+      ],
+      "condition": "工时填报表_主表.ExcelServerRCID=工时填报表_明细.ExcelServerRCID；保留明细ExcelServerRN；原SQL无月份、审核过滤或换算",
+      "relation_kind": "user_supplied_inner_join",
+      "evidence_refs": [
+        "EV-TRACE-USER-RD-SQL",
+        "EV-TRACE-F013",
+        "EV-TRACE-F015",
+        "EV-TRACE-F016",
+        "EV-TRACE-F020"
+      ],
+      "business_confirmation": "pending",
+      "source_query_user_confirmed": true,
+      "limitations": "当前6条无主表明细被内连接排除，均属2025-12；本关系不是制造订单或KFU项目映射。"
+    },
+    {
+      "relation_ref": "REL-PROJECT-SALES-CATALOG",
+      "name": "销售行研制项目的大类与目录引用",
+      "system_refs": [
+        "u8"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:cItem_class",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:fitem:field:citem_class"
+        },
+        {
+          "from": "gkdb:u8:UFDATA_333_2025:dbo:SO_SODetails:field:cItemCode",
+          "to": "gkdb:u8:UFDATA_333_2025:dbo:fitemss01:field:citemcode"
+        }
+      ],
+      "condition": "先固定账套；cItem_class='01'且fitem.ctable='fitemss01'时，以cItemCode=citemcode读取研制项目名称",
+      "relation_kind": "scoped_catalog_reference",
+      "evidence_refs": [
+        "EV-PROJECT-G007",
+        "EV-PROJECT-G011",
+        "EV-PROJECT-G032"
+      ],
+      "business_confirmation": "pending",
+      "limitations": "只定义目录引用分支；其他大类需另核对对应ctable；不建立KYXM到RD映射。"
+    },
+    {
+      "relation_ref": "REL-PROJECT-QZ-NAME",
+      "name": "KFU销售中间数据向勤哲任务中间表传递项目名称",
+      "system_refs": [
+        "kfu8qz",
+        "qinzhe"
+      ],
+      "field_pairs": [
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:SODetails:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8_%E6%98%8E%E7%BB%86:field:%E7%94%9F%E4%BA%A7%E7%BC%96%E5%8F%B7"
+        },
+        {
+          "from": "gkdb:kfu8qz:KFU8QZ:dbo:SODetails:field:%E9%A1%B9%E7%9B%AE%E5%90%8D%E7%A7%B0",
+          "to": "gkdb:qinzhe:CXSYSYS:dbo:%E7%94%9F%E4%BA%A7%E4%BB%BB%E5%8A%A1%E5%8D%95%E4%B8%AD%E9%97%B4%E8%A1%A8_%E6%98%8E%E7%BB%86:field:%E9%A1%B9%E7%9B%AE%E5%90%8D%E7%A7%B0"
+        }
+      ],
+      "condition": "ru20250318000004在RtId=47.1按生产编号ISNULL后等值提取项目名称；F1622/F1646分别为该表生产编号/项目名称的RtfId",
+      "relation_kind": "stored_rule_assignment",
+      "evidence_refs": [
+        "EV-PROJECT-G009",
+        "EV-PROJECT-G037"
+      ],
+      "business_confirmation": "pending",
+      "limitations": "规则未加入账套条件；空生产编号与重复匹配需核对。该路径只传项目名称，不构成项目编码映射。"
+    }
+  ],
+  "implementation_observations": [
+    {
+      "observation_ref": "OBS-QZ-APPROVED",
+      "evidence_refs": [
+        "EV-QZ-VIEW-APPROVED"
+      ],
+      "statement": "缓存视图已走完审批流程大纲仅筛选批准日期非空且批准非空；没有逐项核验所有审批字段或工作流终态。",
+      "limitation": "属于实现观察，不把该筛选改写成业务审批完成规则。"
+    },
+    {
+      "observation_ref": "OBS-QZ-LATEST",
+      "evidence_refs": [
+        "EV-QZ-VIEW-LATEST"
+      ],
+      "statement": "缓存最新版本大纲按制造大纲编号取MAX(批准日期)，并UNION ALL特殊可供车间选用旧版大纲_明细。",
+      "limitation": "不是按版次最大值选择，也不能推定输出每个编号唯一；例外规则、并列日期和重复需另核。"
+    },
+    {
+      "observation_ref": "OBS-QZ-U8-BRIDGE",
+      "evidence_refs": [
+        "EV-QZ-VIEW-U8-BRIDGE"
+      ],
+      "statement": "勤哲缓存视图u8生产订单中间表直接投影[KFU8QZNEW4].[KFU8QZ].[dbo].[momorderdetail]的24个字段，包括U8AUTOID、生产编号、产品代码、数量、投产数量和账套号。",
+      "limitation": "只取得视图定义及输出字段；链接服务器的实际目标、权限、实时可用性和是否与本包U8探查实例一致均未验证。"
+    },
+    {
+      "observation_ref": "OBS-QZ-TASK-CARD-OUTLINE",
+      "evidence_refs": [
+        "EV-QZ-VIEW-ALL-CARDS",
+        "EV-QZ-VIEW-TRAVELER"
+      ],
+      "statement": "缓存中可沿生产任务单.生产编号←流转卡.生产编号，以及流转卡.制造大纲表编号→大纲.表编号分步追溯。",
+      "limitation": "两份定义的可组合性仍受空值、命中率、表编号唯一性与版本时效约束；不表示跨系统整链已跑通。"
+    },
+    {
+      "observation_ref": "OBS-QZ-NUMBER-DISTINCTION",
+      "evidence_refs": [
+        "EV-QZ-CACHE"
+      ],
+      "statement": "任务单和工序记录同时存在生产编号与U8生产编号；流转卡实际物理字段为生产编号与小写u8生产编号；中间明细另有任务与u8生产编号。",
+      "limitation": "未取得转换公式或样本，不认定字段互等、复合表达格式或主数据身份。"
+    },
+    {
+      "observation_ref": "OBS-QZ-AVAILABLE-OPERATION-GRAIN",
+      "evidence_refs": [
+        "EV-QZ-VIEW-AVAILABLE-OPERATIONS"
+      ],
+      "statement": "增补可选取工序按零件编号+并行标志取最大流水工序号，并按零件编号+流水工序号回连；另合并非并行分支。",
+      "limitation": "保留取消、已完成与临时增补流转卡的排除条件；不能只按生产编号或零件编号回连造成工序扩增。"
+    },
+    {
+      "observation_ref": "OBS-QZ-COMPLETION-SEMANTICS",
+      "evidence_refs": [
+        "EV-QZ-VIEW-PART-COMPLETION"
+      ],
+      "statement": "零件完成情况把零件状态为已完成或报废的成品投产数量汇总为已完成数量。",
+      "limitation": "实现包含报废，不能直接作为合格数量或公司正式完工率；不因发现偏差新增业务规则。"
+    },
+    {
+      "observation_ref": "OBS-U8-ORDER-CODE-DISTINCTION",
+      "evidence_refs": [
+        "EV-U8-Q015-SQL"
+      ],
+      "statement": "历史SQL分别选择订单头MoCode、明细Define25及Define28，并以Define25=@ProductionNo筛选。",
+      "limitation": "不因参数名判定全部业务含义，不把MoCode、Define28、生产编号与明细技术ID合并。"
+    },
+    {
+      "observation_ref": "OBS-KFU-MIRROR-VS-PHYSICAL",
+      "evidence_refs": [
+        "EV-KFU-VIEW-ORDER-DETAIL",
+        "EV-U8-Q004"
+      ],
+      "statement": "KFU8QZ.mom_orderdetail是投影U8同名表的视图；momorderdetail是另一物理对象，二者仅差下划线但用途不同。",
+      "limitation": "不得按名称归一化合并；SQL缓存实例与勤哲链接目标的对应仍待核。"
+    },
+    {
+      "observation_ref": "OBS-OV-LEFT-JOIN-CAUTION",
+      "evidence_refs": [
+        "EV-OV-Q058-SQL",
+        "EV-OV-Q128-SQL"
+      ],
+      "statement": "销售链的出库侧使用LEFT JOIN；发货与发票可分别一对多连接到发货明细。",
+      "limitation": "有查询结果不等于出库侧有记录；混合展开行数不能直接汇总业务数量。"
+    },
+    {
+      "observation_ref": "OBS-3088-ORIGIN-CONSUMPTION",
+      "evidence_refs": [
+        "EV-3088-FIELDS",
+        "EV-3088-HISTORICAL-SYNC"
+      ],
+      "statement": "入库展示产出归属，材料出库展示实际领用订单的生产母件及其销售源头质量号。",
+      "limitation": "母件质量号不能证明领用子件来源入库；当前映射没有来源入库到领用出库的数量分配桥。"
+    },
+    {
+      "observation_ref": "OBS-3088-QUALITY-SCOPE",
+      "evidence_refs": [
+        "EV-3088-QUALITY-SOURCE",
+        "EV-3088-QUALITY-GROUPS",
+        "EV-3088-USER-CONFIRMATIONS"
+      ],
+      "statement": "同图号+质量号组合内不同销售生产编号数超过1时判重复；从销售源头判定，避免生产拆单和出入库次数放大。",
+      "limitation": "这不是全库质量编号单字段唯一，不以单据行数或实物数量替代去重生产编号数。"
+    },
+    {
+      "observation_ref": "OBS-3088-CURRENT-VERSUS-EVENT",
+      "evidence_refs": [
+        "EV-3088-FIELDS",
+        "EV-3088-JOINS"
+      ],
+      "statement": "质量号查询读取上游当前值，没有作为24个映射字段中的事件时质量号快照；当前比较没有历史差异记录。",
+      "limitation": "今天两处一致不能证明动作发生时一致；本服务查询和告警不能单独证明仓库动作按质量号强制放行。"
+    },
+    {
+      "observation_ref": "OBS-LIVE-FLAGS-NO",
+      "statement": "首有效工序检验规则写是否领料=是；末有效工序写是否入库=是并以类别质量编号写批号。存储SQL只按零件编号匹配，没有账套或完成状态保护；不能从标志认定仓库完成。",
+      "evidence_refs": [
+        "EV-LIVE-L056",
+        "EV-LIVE-L059",
+        "EV-TH-D044",
+        "EV-TH-RULE-EXTRACTION-REVIEW"
+      ],
+      "limitation": "限本次读取范围与当前实现；没有执行规则、正式写库或完成业务验收。",
+      "identifier_note": "Legacy reference retained; NO in the identifier is not a current value definition."
+    },
+    {
+      "observation_ref": "OBS-LIVE-SHARE-FORMULA",
+      "statement": "分配单工序×人员生成工时记录；合格非外协按CEILING(工时*占比/100*合格数量)，无损/X射线不合格按投产数量，删除清零并清空入账字段。",
+      "evidence_refs": [
+        "EV-LIVE-L056",
+        "EV-LIVE-L046"
+      ],
+      "limitation": "限本次读取范围与当前实现；没有执行规则、正式写库或完成业务验收。"
+    },
+    {
+      "observation_ref": "OBS-CLOSURE-GENERATOR",
+      "statement": "用户指定发布程序调用Usp_MO_GenAllocate/Usp_MO_InsAllocate；已取得现行存储定义，路径语法和WIPType分支可核验。",
+      "evidence_refs": [
+        "EV-CODE-U8.Services.GetSoToMoListService",
+        "EV-CLOSURE-C040"
+      ],
+      "limitation": "静态实现及限定实时范围；不得转为业务批准、执行授权或已验收结论。"
+    },
+    {
+      "observation_ref": "OBS-CLOSURE-IMPORT-PATH",
+      "statement": "单条工时增删改有记账和重复校验，已读通用Excel Import直接AddRange，不能把单条校验推广为导入已强制执行同样限制。",
+      "evidence_refs": [
+        "EV-CODE-Report.Services.ImportWorkHoursService",
+        "EV-CODE-VolPro.Core.Import-0x06001FF1"
+      ],
+      "limitation": "静态实现及限定实时范围；不得转为业务批准、执行授权或已验收结论。"
+    },
+    {
+      "observation_ref": "OBS-PROJECT-RTFID",
+      "statement": "规则SQL中F1622/F1646对应ES_v_Rtfs.RtfId；本轮映射的数据字段FldId为1830/1854，不能将表单字段数字直接当作ES_DataField.FldId。",
+      "evidence_refs": [
+        "EV-PROJECT-G009",
+        "EV-PROJECT-G036R",
+        "EV-PROJECT-G037"
+      ],
+      "limitation": "限定当前表单47.1及本次元数据，不推定其他表单采用相同编号。"
+    }
+  ]
+}

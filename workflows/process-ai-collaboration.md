@@ -41,8 +41,8 @@
 关键结论与四项成果对应位置及修订影响，复用已有材料与答复。
 涉及用友或勤哲的数据时，按knowledge/database-knowledge.md和
 rules/database-reference.md检索所需字段；精确映射另存辅助记录，
-不把缓存或历史查询写成当前数据库，不将内部知识包复制到公共仓库。
-Git拉取不包含受限内部包，接收与检查按workflows/database-knowledge-sharing.md执行。
+不把缓存或历史查询写成当前数据库，不将原始取数或本地受限包复制到公共仓库。
+Git拉取包含已审阅的随库字典，按database-knowledge/current.json定位；同步与检查按workflows/database-knowledge-sharing.md执行，无需另索取ZIP。
 参考按任务阶段取得，不自动展开历史快照链接或全量校验代码。
 不能读取时说明需要我提供什么，不假称已取得内容或调用技能。
 

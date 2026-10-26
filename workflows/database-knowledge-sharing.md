@@ -1,86 +1,40 @@
-# 数据库知识的同步与领用
+# 数据库知识的同步与使用
 
-数据库知识方法组件：2026-10-26.1，状态为已准备。数据库字典作为公司级技术知识，应供获准同事取得和引用。当前公开方法仓库只同步方法、工具和模板；内部字典应进入已核实的公司私有目标，或通过受限离线包交付。方法版本、Git提交和内部包批次分别记录，不以本机private隔离代替公司内共享。
+数据库知识方法组件：2026-10-26.2，状态为已准备。按用户2026-10-26要求，方法、工具和已审阅的真实字典在同一个公开Gitee仓库中版本管理。本轮提交推送后，同事一次拉取即可使用，无需另行索取ZIP或建立private目录。当前仍是本地准备，远端是否已包含以实际提交核对。
 
-## 公司级字典的共享目标
+## 同事拉取并检查
 
-如果要求同事通过Git拉取后直接使用实际字典，应在公司私有仓库中版本管理已审阅的目录与引用文件。可选择经明确授权将现有仓库改为私有，或使用已有公司私有仓库；目标地址、实际可见性、获准成员和维护目录确定后，才把真实内容纳入该目标。对公开仓库不能仅因“公司级知识”就提交内部结构。
+先核对工作副本、远程地址和本地改动。远程名以实际指向Gitee的配置为准；有本地修改时按[无损拉取](../.agents/skills/lossless-pull/SKILL.md)备份与恢复，不重置或覆盖。拉取及版本差异按[会话规则](../rules/process-session-rules.md)处理。
 
-若现有Gitee仓库私有化后承载内部字典，公开GitHub镜像不能继续接收同一内部提交；须同时处理推送目标和双端工具的边界。私有仓库中也不纳入凭据、连接配置、原始逐笔业务结果或未审阅研究材料。尚未确定私有目标时，先准备可审查的内部同步候选及受限离线包，不将只有公共方法的Git同步报告为字典共享已完成。
-
-## 同事先同步共享仓库
-
-先核对`git remote -v`。从Gitee克隆的副本通常使用`origin`；维护副本可能使用`gitee`。下面的远程名必须实际指向Gitee：
+在包含本轮变更的仓库根目录运行：
 
 ```powershell
-git status --short
-git fetch origin main
-git rev-list --left-right --count HEAD...FETCH_HEAD
-```
-
-工作区干净、当前分支为main且本地只落后时，再运行：
-
-```powershell
-git pull --ff-only origin main
-git rev-parse HEAD
 node scripts/check-package.cjs
-```
-
-有未提交改动时先按[无损拉取](../.agents/skills/lossless-pull/SKILL.md)处理；领先或分叉时按[会话规则](../rules/process-session-rules.md)核对，不重置或覆盖本地内容。进行中的流程继续保留其已记录基线，换版先核对影响。
-
-## 维护者另行交付内部知识包
-
-1. 确认获准接收范围，固定一个已检查批次，记录manifest摘要。内部结构、SQL定义、真实映射、来源路径和统计受限，不进入公开仓库；不能据“没有逐笔记录”推定包可公开。
-2. 发送者在能访问原始来源的环境运行`check --verify-sources`。该检查只证明所读文件身份与引用一致，不等于实时数据库或业务验收。
-3. 只打包该批次声明的核心文件、附加文件、manifest及技术验证记录，可携带指向该批次的current.json和交接清单。不压缩整个private，不打入research目录、原始结果、Excel、程序集、连接配置或凭据。旧批次不覆盖。
-4. 经获准的内部渠道交付ZIP和SHA-256。交接清单记录批次、manifest摘要、共享范围、发送时检查和未验证事项；没有发送授权时只准备本地文件。
-
-包内文件与原批次保持相同摘要。接收者可使用离线目录，但不能因此声称重新核实了原始来源。
-
-## 接收者检查并领用
-
-先取得发送者提供的ZIP摘要。以下PowerShell示例须替换ZIP路径和预期摘要，解压目标必须是新目录：
-
-```powershell
-$bundleFile = '<受限ZIP路径>'
-$expectedSha256 = '<发送者提供的SHA-256>'
-if ((Get-FileHash -LiteralPath $bundleFile -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expectedSha256.ToLowerInvariant()) {
-    throw 'ZIP摘要不一致，停止领用'
-}
-$receivedDir = Join-Path (Get-Location) 'private/database-knowledge-incoming/batch-001'
-if (Test-Path -LiteralPath $receivedDir) { throw '目标已存在，请换一个新目录' }
-Expand-Archive -LiteralPath $bundleFile -DestinationPath $receivedDir
-$pointer = Get-Content -LiteralPath (Join-Path $receivedDir 'current.json') -Raw | ConvertFrom-Json
-$packageDir = Join-Path $receivedDir $pointer.package_path
-if ((Get-FileHash -LiteralPath (Join-Path $packageDir 'manifest.json') -Algorithm SHA256).Hash.ToLowerInvariant() -ne $pointer.manifest_sha256) {
-    throw '知识包manifest摘要不一致，停止领用'
-}
-node scripts/database-knowledge.cjs check --package $packageDir
-if ($LASTEXITCODE -ne 0) { throw '知识包检查失败，停止领用' }
+if ($LASTEXITCODE -ne 0) { throw '共享包或随库字典检查失败' }
+$pointer = Get-Content database-knowledge/current.json -Raw | ConvertFrom-Json
+$packageDir = Join-Path 'database-knowledge' $pointer.package_path
 node scripts/database-knowledge.cjs query --package $packageDir --kind business --query 生产订单 --limit 5
 ```
 
-普通`check`核对包内核心文件、已声明附加文件及引用。没有原始文件的接收者不加`--verify-sources`；普通检查通过不能写成原始来源已重新核对。获准且能访问原件时，才使用额外来源校验选项。工具不连接数据库。
+check-package同时核对方法登记、字典指针、manifest摘要及包内完整性。需要单独复查字典时运行`node scripts/database-knowledge.cjs check --package $packageDir`。公开字典仅含来源摘要及定位说明，接收者不加`--verify-sources`；维护者原始文件不在同事电脑上属于预期情况，不是拉取风险。普通检查不表示原始来源在接收端重新核验或当前数据库已核实。
 
-示例中的current.json仅指向该交付批次，直接引用新接收目录，不覆盖本机原有current.json或已用批次。
+## 同步报告如何判断
 
-## 在流程会话中登记
+- 方法和字典均通过检查：报告“方法与字典已同步”，记录实际Git提交、字典批次及manifest摘要。
+- 仍在旧的仅方法提交：报告“方法已同步，当前版本尚未包含随库字典”，按版本规则更新；不要求反复拉取同一提交，也不按private目录缺失判断失败。
+- 本轮版本已声明随库字典但文件缺失或摘要不符：报告具体文件或完整性错误，停止依赖该字典的引用，保留本地内容。
+- Git冲突、未恢复stash或工作区丢失风险：仍按无损拉取的对应步骤处理，与字典的业务适用性分别报告。
 
-将下列信息补入[流程会话启动文本](process-ai-collaboration.md)：
+## 公开字典的内容边界
 
-```text
-共享方法库：本地目录、实际Git提交及改动状态。
-内部数据库知识包：获准接收的本地目录、实际批次及manifest SHA-256。
-接收检查：ZIP摘要、包内检查结果；原始来源是否在本机重新核对。
-按knowledge/database-knowledge.md和rules/database-reference.md离线检索。
-仅引用本流程所需字段，保留来源时间、完整条件和待确认事项。
-未取得内部包时据实说明，不凭公共方法文件补造本公司数据库结构。
-```
+随库保留真实库表字段、稳定结构标识、关系条件、视图SQL定义、字段流向、来源证据号及摘要。原始取数、网络地址、个人电脑路径、连接配置、凭据、核验统计及专项调查附件不随库分发；完整审计材料和原本地批次保留在private。是否可以公开取决于实际内容和用户授权，不因名称中有“内部字典”就要求仓库私有化。
 
-工具可用性、快照来源、业务含义和业务审批分别核对。接收内部包不自动赋予数据库连接权限，也不表示可上传到任意外部AI服务。
+本批次由已有只读快照整理，没有新连业务数据库；结构与实现证据不自动成为业务规则。部门职能资料继续遵守各部门颗粒度未对齐、仅供参考的限制。
 
-## 提交与推送的边界
+## 维护及旧流程引用
 
-提交前审阅实际文件列表和差异，只暂存共享文件，核对没有private、真实来源、受限ZIP或Secret。不强制添加内部包。维护者默认显式推送到Gitee；仅在用户明确要求双端时使用`git publish`，见[协作帮助](collaboration-guide.md)。
+维护者先在private的新批次核对原件及SQL摘要，再从已审阅内容生成新的公开字典批次，不压缩或复制整个private。保持原结构标识、来源摘要和完整使用条件；新批次与派生整理策略写入manifest，检查通过后更新database-knowledge/current.json。不得覆盖旧批次或强制暂存被忽略的原始内部包。
 
-本说明和工具检查不执行提交、推送、可见性变更或分发。当前公开方法仓库推送后，同事拉取共享方法；实际字典按获准的私有目标或受限离线包领用。公司私有Git同步是否已经开启，必须另有实际证据。
+任务记录分别登记方法组件版本、实际Git提交、字典批次、manifest摘要及检查范围。进行中的流程保留原批次和辅助引用；采用新批次时处理受影响引用，不自动继承审核结果或改写任务分工。没有本地原件时不运行来源文件核验。
+
+提交与推送仍由用户当次授权决定，默认仅Gitee。本说明不执行暂存、提交、推送或仓库可见性修改；Git同步成功不表示业务批准或验收。

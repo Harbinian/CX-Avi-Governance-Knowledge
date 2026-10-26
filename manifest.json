@@ -87,7 +87,18 @@
     "automatic_sync_enabled": false,
     "business_rules_approved": false,
     "pending_3000_corrections": 1,
-    "business_confirmation_source": "SRC-ORG-005"
+    "business_confirmation_source": "SRC-ORG-005",
+    "department_functions_reference": {
+      "source_id": "SRC-ORG-006",
+      "status": "reference_only",
+      "entrypoint": "knowledge/department-functions-reference.md",
+      "source_record": "sources/organization-sources.md",
+      "change_record": "sources/organization-reference-confirmation-2026-10-26.md",
+      "source_sha256": "a02f82cb0b40fdc85c836727198f3cc7067eb5410a740067e307cba917b3ec7d",
+      "usage_confirmed_on": "2026-10-26",
+      "department_granularity_aligned": false,
+      "business_rules_approved": false
+    }
   },
   "repository_skills": [
     {
@@ -101,7 +112,7 @@
     }
   ],
   "database_knowledge_package": {
-    "version": "2026-10-26.1",
+    "version": "2026-10-26.2",
     "status": "prepared",
     "entrypoint": "knowledge/database-knowledge.md",
     "reference_rules": "rules/database-reference.md",
@@ -111,14 +122,15 @@
     "query_tool": "scripts/database-knowledge.cjs",
     "tests": "scripts/test-database-knowledge.py",
     "source_record": "sources/database-knowledge-upgrade-2026-10-22.md",
-    "verification_record": "verification/database-knowledge-sharing-readiness-2026-10-26.md",
+    "verification_record": "verification/database-knowledge-public-sync-2026-10-26.md",
     "sharing_workflow": "workflows/database-knowledge-sharing.md",
-    "change_record": "sources/database-knowledge-sharing-2026-10-26.md",
-    "public_sync_scope": "methods_tools_templates_only",
-    "restricted_package_delivery": "separate_authorized_channel",
-    "contains_internal_catalog": false,
+    "change_record": "sources/database-knowledge-public-sync-2026-10-26.md",
+    "public_sync_scope": "methods_tools_templates_public_dictionary",
+    "restricted_package_delivery": "maintainer_evidence_only",
+    "contains_internal_catalog": true,
     "business_rules_approved": false,
     "live_queries_enabled": false,
-    "conversation_verification_status": "not_run"
+    "conversation_verification_status": "not_run",
+    "catalog_entrypoint": "database-knowledge/current.json"
   }
 }

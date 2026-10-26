@@ -179,6 +179,39 @@ with tempfile.TemporaryDirectory(prefix='database-knowledge-test-', dir=private)
     assert run(cli+['check','--package',str(pack),'--verify-sources'],False)['valid'] is False
     moved_xml.rename(xml)
     passed('recipient_check_without_original_sources_is_distinct')
+    public_manifest=copy.deepcopy(original_manifest)
+    public_manifest['sharing_scope']='public_dictionary'
+    public_manifest['contains_aggregate_statistics']=False
+    public_sources=MOD.read_json(pack/'sources.json')
+    original_sources=copy.deepcopy(public_sources)
+    for source_item in public_sources:
+        for key in ['source_path','original_source_path','sql_path','audit_catalog','target_host','row_count','result_rows','logged_result_row_count']:
+            source_item.pop(key,None)
+    MOD.write_json(pack/'sources.json',public_sources)
+    public_manifest['files']['sources.json']=MOD.digest(pack/'sources.json')
+    MOD.write_json(pack/'manifest.json',public_manifest)
+    assert run(cli+['check','--package',str(pack)])['valid']
+    passed('public_dictionary_works_without_original_paths')
+    error=run(cli+['check','--package',str(pack),'--verify-sources'],False)
+    assert 'without --verify-sources' in error['error']
+    passed('public_dictionary_source_verification_explains_scope')
+    public_sources[0]['target_host']='192.168.0.1'
+    MOD.write_json(pack/'sources.json',public_sources)
+    public_manifest['files']['sources.json']=MOD.digest(pack/'sources.json')
+    MOD.write_json(pack/'manifest.json',public_manifest)
+    assert run(cli+['check','--package',str(pack)],False)['valid'] is False
+    passed('public_dictionary_rejects_private_source_metadata')
+    public_sources[0].pop('target_host')
+    MOD.write_json(pack/'sources.json',public_sources)
+    MOD.write_json(pack/'aggregates.json',[dict(evidence_ref='EV-CACHE',rows=[dict(count=1)])])
+    public_manifest['files']['sources.json']=MOD.digest(pack/'sources.json')
+    public_manifest['files']['aggregates.json']=MOD.digest(pack/'aggregates.json')
+    MOD.write_json(pack/'manifest.json',public_manifest)
+    assert run(cli+['check','--package',str(pack)],False)['valid'] is False
+    passed('public_dictionary_rejects_business_aggregates')
+    MOD.write_json(pack/'sources.json',original_sources)
+    MOD.write_json(pack/'aggregates.json',[])
+    MOD.write_json(pack/'manifest.json',original_manifest)
     (pack/'objects.json').write_text('[]',encoding='utf-8')
     assert run(cli+['check','--package',str(pack)],False)['valid'] is False
     passed('modified_catalog_digest_rejected')
