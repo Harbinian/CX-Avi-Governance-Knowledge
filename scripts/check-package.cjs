@@ -39,6 +39,18 @@ const designLicense = designSource.upstream.files.find(item => item.path === 'LI
 assert.ok(designLicense, '缺少上游许可摘要');
 assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, designPackage.license))).digest('hex'), designLicense.sha256, '方案技能包许可摘要不一致');
 const repositorySkills = manifest.repository_skills;
+const databasePackage = manifest.database_knowledge_package;
+assert.ok(databasePackage, '缺少数据库知识方法登记');
+assert.equal(databasePackage.status, 'prepared');
+assert.equal(databasePackage.contains_internal_catalog, false);
+assert.equal(databasePackage.business_rules_approved, false);
+assert.equal(databasePackage.live_queries_enabled, false);
+assert.equal(databasePackage.public_sync_scope, 'methods_tools_templates_only');
+assert.equal(databasePackage.restricted_package_delivery, 'separate_authorized_channel');
+for (const key of ['entrypoint', 'reference_rules', 'format', 'reference_template', 'builder', 'query_tool', 'tests', 'source_record', 'verification_record', 'sharing_workflow', 'change_record']) {
+  const file = path.resolve(root, databasePackage[key]);
+  assert.ok(file.startsWith(root + path.sep) && fs.existsSync(file), `数据库知识方法入口缺失或越界：${key}`);
+}
 assert.ok(Array.isArray(repositorySkills) && repositorySkills.length > 0, '缺少仓库技能登记');
 for (const item of repositorySkills) {
   for (const key of ['name', 'status', 'entrypoint', 'claude_code_skill', 'claude_code_primary_skill', 'verification_record', 'conversation_verification_status']) {

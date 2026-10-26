@@ -1,13 +1,13 @@
 # 使用者与管理者操作帮助
 
-本文面向两类用户：使用本库编制流程的同事（使用者），以及负责审核、合并和双端发布的维护者（管理者）。命令以本机已安装 Git 和 Node.js 为前提；实际写入权限以托管平台配置为准。
+本文面向两类用户：使用本库编制流程的同事（使用者），以及负责审核、合并和按授权发布的维护者（管理者）。命令以本机已安装 Git 和 Node.js 为前提；实际写入权限以托管平台配置为准。
 
 ## 角色与边界
 
 | 角色 | 主要操作 | 边界 |
 |---|---|---|
 | 使用者 | 克隆或拉取、阅读材料、编制流程、在任务目录保存成果、提出修改申请 | 不在 `main` 上直接改写共享规则、模板、示例或技术快照；需要更新时按修改申请和 Pull Request 流程提出 |
-| 管理者 | 审核修改、合并分支或 Pull Request、双端推送、核对远端、维护平台设置 | 合并和技术检查通过不等于业务批准或正式发布 |
+| 管理者 | 审核修改、合并分支或 Pull Request、按授权推送、核对远端、维护平台设置 | 合并和技术检查通过不等于业务批准或正式发布 |
 
 Gitee 和 GitHub 的主线分支均为 `main`。Gitee 旧 `master` 分支已停止使用，仅供历史追溯。
 
@@ -107,6 +107,8 @@ git push origin rule-update/<主题>
 - 不把本地技术检查通过表述为业务审核、3000 核对或正式发布。
 - 不直接改写共享规则、技术快照、示例或他人任务成果。
 
+内部数据库知识不随Git取得，接收与核对按[同步与领用](database-knowledge-sharing.md)另行执行。
+
 ## 二、管理者
 
 ### 1. 认证与凭据
@@ -117,18 +119,14 @@ git push origin rule-update/<主题>
 
 ### 2. 日常同步
 
-从 GitHub 拉取：
+默认从Gitee同步，先核对远程地址和本地改动：
 
 ```bash
 git switch main
-git pull --ff-only origin main
-```
-
-从 Gitee 拉取：
-
-```bash
 git pull --ff-only gitee main
 ```
+
+从Gitee克隆的副本通常使用origin。仅在用户明确指定GitHub时，才连接指向GitHub的远程，不默认从GitHub拉取。
 
 ### 3. 审核与合并
 
@@ -144,7 +142,7 @@ git switch main
 git pull --ff-only gitee main
 ```
 
-5. 推送到双端：
+5. 核对Gitee合并结果。只有用户明确要求GitHub时，才继续双端发布：
 
 ```bash
 git publish
@@ -156,30 +154,32 @@ git publish
 git fetch gitee
 git merge --no-ff gitee/<同事分支>
 # 检查差异、解决冲突并运行必要检查
-git push origin main:main
 git push gitee main:main
 ```
+
+明确要求GitHub时，再执行双端发布；不从本地合并自动推定该授权。
 
 ### 4. 合并后检查
 
 ```bash
 node scripts/check-package.cjs
 node scripts/test-offline-package.cjs
-git ls-remote origin refs/heads/main
 git ls-remote gitee refs/heads/main
 ```
 
 - 修改 Markdown、`manifest.json` 或技能文件后，先运行 `check-package.cjs`。
 - 修改 `scripts/*.cjs` 后，重跑对应测试脚本。
-- 两端 `main` 的提交标识应一致；不一致时先查明原因，不把单端成功表述为双端同步完成。
+- 默认核对Gitee；明确执行双端发布时，另核对GitHub并比较两端main，不把单端成功表述为双端完成。
 
 ### 5. 推送与失败处理
 
+默认显式推送到Gitee：
+
 ```bash
-git publish
+git push gitee main:main
 ```
 
-或分别推送：
+用户明确要求GitHub与Gitee双端时，使用`git publish`，或分别推送：
 
 ```bash
 git push origin main:main
@@ -209,7 +209,7 @@ git push gitee main:main
 | 首次获取 | `git clone https://gitee.com/HarbinianCN/CX-Avi-Governance-Knowledge.git` | 同左，或从 GitHub 拉取 |
 | 拉取更新 | `git pull --ff-only` | `git pull --ff-only origin main` 或 `git pull --ff-only gitee main` |
 | 本地提交 | `git add <文件>`、`git commit -m "<说明>"` | 同左 |
-| 推送修改 | `git push origin <分支>`（需权限） | `git publish` 或分别推送两端 `main` |
+| 推送修改 | `git push origin <分支>`（远程须指向Gitee，需权限） | 默认`git push gitee main:main`；双端需明确要求 |
 | 发起合并 | 在 Gitee/GitHub 发起 Pull Request 到 `main` | 审核后合并，并同步本地 |
 | 检查包一致性 | 不需要 | `node scripts/check-package.cjs` |
 | 核对远端 | `git rev-parse HEAD` | `git ls-remote origin refs/heads/main`、`git ls-remote gitee refs/heads/main` |

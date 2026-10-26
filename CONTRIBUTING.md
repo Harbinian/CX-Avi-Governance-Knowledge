@@ -1,16 +1,18 @@
 # 内容贡献说明
 
-状态：起步协作说明；GitHub 仓库 `Harbinian/CX-Avi-Governance-Knowledge` 与 Gitee 仓库 `HarbinianCN/CX-Avi-Governance-Knowledge` 当前均公开，维护工作副本默认向两端推送。成员写入权限及正式内容审核人员按实际配置和确认记录核对。
+状态：起步协作说明；GitHub 仓库 `Harbinian/CX-Avi-Governance-Knowledge` 与 Gitee 仓库 `HarbinianCN/CX-Avi-Governance-Knowledge` 的共享方法按公开材料边界管理，实际可见性在操作前核对。日常默认使用Gitee，只有用户明确要求GitHub时才双端发布。成员写入权限及正式内容审核人员按实际配置和确认记录核对。
 
 ## 当前可以做什么
 
-可以在本地起草内容和提出修改建议。本地主线及 GitHub 使用 `main`，Gitee 使用 `main`；维护者用 `git publish` 向两端发布同一提交，推送配置及单端失败后的重试见 [README](README.md)。公开仓库可供读取，写入须有相应授权；不得把本文件中的拟建审核流程描述为已启用控制。
+可以在本地起草内容和提出修改建议。本地主线及 GitHub 使用 `main`，Gitee 使用 `main`；维护者默认显式推送到Gitee；明确要求双端时使用`git publish`发布同一提交，配置及重试见[README](README.md)。公开仓库可供读取，写入须有相应授权；不得把本文件中的拟建审核流程描述为已启用控制。
 
 同事使用本库设计或编制具体流程时，按照 [AI 会话作业入口](workflows/process-ai-collaboration.md) 取得固定基线，成果保存到各自任务目录。只有需要改变共享知识、规则、方法或模板时，才向本库提出内容修改申请。
 
-当前2026-10-22.1方法升级已在本地准备：沿用远端版本校验和外部流程补充规则，新增[流程逻辑与部署质量六维编制检查](rules/process-content-quality.md)，与工作负荷评价分开；仍无正式业务发布。依据及影响见[本轮修改记录](sources/method-upgrade-confirmation-2026-10-22.md)。用户已确认完整试用、功能无问题，具体记录及范围见[试用确认](verification/user-trial-confirmation-2026-10-13.md)；该确认不覆盖其后新增规则，22项预设用例仍按其实际记录保留状态。Git共享状态按实际提交与远程核对，不能从准备检查记录推定。维护者修改会话方法或四项成果时同步主技能、模板、受影响的Claude入口及manifest；旧process-authoring仅作兼容。原技能快照仅按[读取边界](rules/material-reading-boundaries.md)追溯，不直接覆盖当前规则。技术快照仍为2026-10-08.1，更新时按[技术来源说明](sources/tooling-sources.md)重新生成并验证，不能手改预编译代码。会话用例按[验证指南](verification/conversation-guide.md)记录真实结果，工具检查不代表模型通过；用户确认的grill-me方法不赋予业务审批权限。通用方案文档包同日补充为2026-10-22.1：涉及流程或部署安排的通用访谈可按六维组织问题，但不评分、不替代单流程编制；依据及影响见[本轮记录](sources/grill-with-docs-six-dimension-2026-10-22.md)。
+当前2026-10-22.2方法包已在本地准备，新增[数据库知识引用](knowledge/database-knowledge.md)，授权及影响见[数据库升级记录](sources/database-knowledge-upgrade-2026-10-22.md)。此前2026-10-22.1方法继续适用：沿用远端版本校验和外部流程补充规则，新增[流程逻辑与部署质量六维编制检查](rules/process-content-quality.md)，与工作负荷评价分开；仍无正式业务发布。依据及影响见[本轮修改记录](sources/method-upgrade-confirmation-2026-10-22.md)。用户已确认完整试用、功能无问题，具体记录及范围见[试用确认](verification/user-trial-confirmation-2026-10-13.md)；该确认不覆盖其后新增规则，22项预设用例仍按其实际记录保留状态。Git共享状态按实际提交与远程核对，不能从准备检查记录推定。维护者修改会话方法或四项成果时同步主技能、模板、受影响的Claude入口及manifest；旧process-authoring仅作兼容。原技能快照仅按[读取边界](rules/material-reading-boundaries.md)追溯，不直接覆盖当前规则。技术快照仍为2026-10-08.1，更新时按[技术来源说明](sources/tooling-sources.md)重新生成并验证，不能手改预编译代码。会话用例按[验证指南](verification/conversation-guide.md)记录真实结果，工具检查不代表模型通过；用户确认的grill-me方法不赋予业务审批权限。通用方案文档包同日补充为2026-10-22.1：涉及流程或部署安排的通用访谈可按六维组织问题，但不评分、不替代单流程编制；依据及影响见[本轮记录](sources/grill-with-docs-six-dimension-2026-10-22.md)。
 
 通用内容复核按[当前规则](rules/process-content-review.md)。实际案例只提供本次事实和评价背景；提炼共享方法时保留可复用要求及其确认依据，不复制真实部门原答复或把局部缺口推广为部门整体结论。本次方法修改的依据与范围见[确认及修改申请记录](sources/process-review-confirmations-2026-10-12.md)。
+
+同事同步数据库知识时，按[同步与领用](workflows/database-knowledge-sharing.md)分别取得共享方法和受限内部包；Git拉取不包含内部字典。
 
 ## 每次修改需要说明
 

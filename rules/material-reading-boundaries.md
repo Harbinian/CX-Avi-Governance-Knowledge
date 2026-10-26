@@ -14,6 +14,7 @@
 | 用户指定的最新四项成果、问答与续接记录 | 恢复当前任务；旧摘要与最新文件冲突时定位差异，不直接覆盖最新稿 |
 | 依据追溯规则 | 编制、续编或交付复核读取[当前规则](process-evidence-traceability.md)，复用任务记录核对来源实际取得情况、关键结论及修订影响；不默认展开全部来源正文 |
 | `knowledge/`、`sources/organization-sources.md` | 按业务主题读取派生草稿和来源定位；不能从部门或岗位推定任务角色及审批权 |
+| 数据库知识入口、引用规则及本次获准的内部知识包 | 需要用友或勤哲数据时按业务对象、字段、关联逐步检索；登记版本、来源时间和缺口，不默认展开全量目录、认证字段、原始记录或连接配置；见[引用规则](database-reference.md) |
 | `technical/snapshot.json`、`technical/contracts/` | 需要JSON字段或兼容检查时读取对应版本和有关字段；旧结构仅为兼容依赖 |
 | `technical/compiled-schemas.cjs`及校验运行模块 | 默认由Node执行，不整份送入提示词；维护校验实现时才读有关代码 |
 | `sources/tooling-sources.md`、`sources/authoring-source-snapshot.json` | 维护、追溯或核对版本时读取来源元信息；目录和链接不授权自动展开历史正文 |

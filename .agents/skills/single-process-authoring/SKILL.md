@@ -25,6 +25,8 @@ description: 在Governance-Knowledge中编制或续修一个流程，先区分�
 
 ## 四项成果与辅助记录
 
+涉及用友、勤哲的数据来源时，按[数据库知识入口](../../../knowledge/database-knowledge.md)及[引用规则](../../../rules/database-reference.md)，仅检索本流程所需对象与字段，记录实际取得的知识包版本、来源及限制。缓存和历史查询不代替业务确认；精确数据库映射另存[辅助记录](../../../templates/database-reference-record.json)，不新增到流程JSON。未取得内部知识包时明确缺口，继续已有依据支持的部分。
+
 | 成果 | 建议文件名 | 完整范围 |
 |---|---|---|
 | 制度正文 | `<流程短名>-procedure-draft.md` | 八章，无封面；第6章保留人工插图说明；涉及拟新建表单时附空白样张及字段要求 |

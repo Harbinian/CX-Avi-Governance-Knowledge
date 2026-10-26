@@ -1,8 +1,8 @@
 # 内部 AI 治理知识与规则库
 
-本库供内部同事共享治理知识、规则、AI 作业方法和模板，作为与 AI 会话设计或编制业务流程的共同基础。远程托管采用 GitHub 和 Gitee，维护工作副本默认向两端推送。本库与 Infomat 独立维护，每位同事使用自己的工作副本和任务材料。
+本库供内部同事共享治理知识、规则、AI 作业方法和模板，作为与 AI 会话设计或编制业务流程的共同基础。远程托管采用 GitHub 和 Gitee，日常核对与推送默认使用Gitee；仅在用户明确要求GitHub时执行双端发布。本库与 Infomat 独立维护，每位同事使用自己的工作副本和任务材料。
 
-GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com/Harbinian/CX-Avi-Governance-Knowledge)；Gitee 远程仓库：[HarbinianCN/CX-Avi-Governance-Knowledge](https://gitee.com/HarbinianCN/CX-Avi-Governance-Knowledge)。两端当前均为公开仓库，推送前核对材料的共享范围。`Governance-Knowledge` 为本库简称，本地工作副本目录可自行选择。
+GitHub 远程仓库：[Harbinian/CX-Avi-Governance-Knowledge](https://github.com/Harbinian/CX-Avi-Governance-Knowledge)；Gitee 远程仓库：[HarbinianCN/CX-Avi-Governance-Knowledge](https://gitee.com/HarbinianCN/CX-Avi-Governance-Knowledge)。本共享方法库按公开材料边界管理，实际远端可见性、成员权限和材料范围在操作前核对。`Governance-Knowledge` 为本库简称，本地工作副本目录可自行选择。
 
 ## 使用者快速上手（Gitee）
 
@@ -103,10 +103,10 @@ git pull --ff-only
 
 - 已建立本地 Git 仓库及起步文件。
 - 尚无正式发布版本，`manifest.json` 的正式内容清单为空。
-- 日常维护以本地 `main` 为主线，将同一提交推送至 GitHub 和 Gitee 的 `main`；推送完成后，同事直接打开或克隆 Gitee 仓库即可取得主线内容。
+- 日常维护以本地 `main` 为主线，默认显式推送到Gitee的`main`；明确要求双端时再发布同一提交到两端。同事拉取Gitee取得共享主线，受限内部包另行领用。
 - 同事的写入权限、分支保护、自动检查和备份任务须按各平台实际配置核对；仓库公开不表示受控协作已经开启。
 
-当前**单流程AI完整编制包为2026-10-22.1，本轮升级已在本地准备**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。方法包括材料读取边界、流程内容复核、依据追溯、成果一致性、继承性外部流程的外部单位部门与角色补充、治理会话启动时的Gitee远端版本校验、流程逻辑与部署质量六维编制检查及继续治理反馈。
+当前**单流程AI完整编制包为2026-10-22.2，本轮升级已在本地准备**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。方法包括材料读取边界、流程内容复核、依据追溯、成果一致性、继承性外部流程的外部单位部门与角色补充、治理会话启动时的Gitee远端版本校验、流程逻辑与部署质量六维编制检查及继续治理反馈。
 
 **用户于2026-10-13确认已完成完整试用、功能无问题**，见[试用确认记录](verification/user-trial-confirmation-2026-10-13.md)；具体试用包版本与环境未登记。该确认只覆盖当时版本；2026-10-19.1新增的继承性外部流程规则及2026-10-20.1新增的启动远端版本校验规则均尚未经过完整试用。2026-10-13升级检查见[记录](verification/method-upgrade-readiness-2026-10-13.md)，2026-10-19检查见[记录](verification/method-upgrade-readiness-2026-10-19.md)，2026-10-20检查见[记录](verification/method-upgrade-readiness-2026-10-20.md)，本次六维编制规则检查见[记录](verification/method-upgrade-readiness-2026-10-22.md)。2026-10-22.1新增规则尚未经过真实编制会话验证。22个虚构会话用例仍按各自记录保留未执行状态，不能由完整试用确认推定全部通过。技术合同快照仍为2026-10-08.1，V7/V8合同未改变。使用者记录取得版本的实际提交及本地修改状态；直接传文件夹须包含`.agents/`和`.claude/`。正式业务知识清单仍为空；本轮本地修改不表示已提交或推送。
 
@@ -154,6 +154,14 @@ Codex 等支持仓库技能的工具可用 `$技能名`，或按 `.agents/skills
 
 评价草稿内容或整理继续治理反馈时，按[内容复核规则](rules/process-content-review.md)与[反馈模板](templates/process-review-feedback.md)工作。允许阶段稿继续治理，技术结果与业务完整性分开；真实案例优先，允许可定位材料和明确说明提供等效依据；理解偏差只评价具体问题和已核验范围。方法依据见[用户确认记录](sources/process-review-confirmations-2026-10-12.md)，实际检查见[准备检查记录](verification/content-review-readiness-2026-10-12.md)。
 
+## 数据库知识引用
+
+同事同步分两部分：Git拉取方法、工具和模板，真实内部字典按[同步与领用说明](workflows/database-knowledge-sharing.md)另行取得。共享方法、Git提交和受限批次分别记录；本轮准备及检查见[同步记录](sources/database-knowledge-sharing-2026-10-26.md)。
+
+已准备[用友、勤哲数据库知识入口](knowledge/database-knowledge.md)、[引用规则](rules/database-reference.md)及离线检索工具，方法组件版本2026-10-26.1。主编制包2026-10-22.2按需使用该能力，精确数据库映射另存辅助记录；V8/V7合同未改。真实内部目录、映射与统计留在Git忽略的`private/`，同事需通过获准渠道另行取得，公开仓库只含方法、工具和虚构验证。没有内部包时明确缺口。
+
+本轮授权及影响见[修改记录](sources/database-knowledge-upgrade-2026-10-22.md)，实际检查见[验证记录](verification/database-knowledge-readiness-2026-10-22.md)。本地已准备不表示已推送、当前数据库已核实或业务已验收；本次新增能力尚未经过真实AI编制会话验证。共享公共资料文件夹时排除`private/`、`scratch/`和`backups/`；内部包按获准范围单独交付，Git忽略不等于目录访问控制。
+
 ## 组织、岗位与制度职责参考
 
 2026-10-20用户指定以《新花名册.xlsx》导入3000后的数据为真源，同步Infomat与本库。组织名称、人员所属部门与办公室归属按3000当前目录；职务、班组按3000原始导入审计。Excel仅作明确导入材料，不以当前同名原件反向覆盖3000。
@@ -183,7 +191,13 @@ cd CX-Avi-Governance-Knowledge
 git rev-parse HEAD
 ```
 
-发布维护者从 GitHub 拉取。本地主线为 `main`，GitHub 和 Gitee 均对应 `main`。维护者使用 `git publish` 一次推送同一提交到两端，执行[发布脚本](scripts/push-remotes.cjs)；需要本机安装 Node.js。Git 的远程配置保存在本机，不会随克隆传递，新维护副本执行一次以下配置：
+维护者先用`git remote -v`核对实际地址。本维护副本默认显式推送到Gitee：
+
+```bash
+git push gitee main:main
+```
+
+从Gitee克隆的同事副本通常以origin指向Gitee，不照搬维护副本的远程名。仅在用户明确要求GitHub与Gitee双端发布时，使用`git publish`执行[发布脚本](scripts/push-remotes.cjs)。以下为该情形下的新维护副本配置，需要Node.js；远程配置只保存在本机，不随克隆传递：
 
 ```bash
 git remote set-url origin https://github.com/Harbinian/CX-Avi-Governance-Knowledge.git
@@ -197,7 +211,7 @@ git config --local alias.publish "!node scripts/push-remotes.cjs"
 git publish
 ```
 
-已有 `gitee` 远程时，用 `git remote set-url gitee https://gitee.com/HarbinianCN/CX-Avi-Governance-Knowledge.git` 核对地址。`git publish --dry-run` 可做推送预检查，不更新远端。发布命令只推送本地 `main` 的已提交内容，不自动暂存或提交；其他分支须显式指定目标。普通 `git push` 按 Git 配置推送到 `origin`，主线双端同步使用 `git publish`。
+已有 `gitee` 远程时，用 `git remote set-url gitee https://gitee.com/HarbinianCN/CX-Avi-Governance-Knowledge.git` 核对地址。`git publish --dry-run` 可做推送预检查，不更新远端。发布命令只推送本地 `main` 的已提交内容，不自动暂存或提交；其他分支须显式指定目标。普通`git push`按本机配置选择远程；日常明确指定Gitee远程，明确要求双端时才使用`git publish`。
 
 两端推送分别执行，可能一端成功、另一端失败。维护者检查两端结果，并在失败端恢复连接或完成身份验证后重试；不得将单端成功表述为两端同步完成。单端重试可显式指定目标：
 

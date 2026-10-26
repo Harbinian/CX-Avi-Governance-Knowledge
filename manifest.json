@@ -6,7 +6,7 @@
   "effective_entries": [],
   "description": "供内部同事与AI会话编制流程；公司业务知识尚无正式发布版本或已生效条目，AI作业方法与技术编制包分别登记。",
   "authoring_package": {
-    "version": "2026-10-22.1",
+    "version": "2026-10-22.2",
     "status": "prepared",
     "session_rule_confirmation": "User instructions on 2026-10-08 and confirmations on 2026-10-09: complete skill, actual/design goals, and design scenario review; user confirmations on 2026-10-12: stage drafts allowed, equivalent evidence allowed, and understanding judgments limited to verified questions and scope; user request on 2026-10-19: allow user-confirmed external-unit departments and roles in inherited external processes to be added through dialogue; user request on 2026-10-20: verify the Gitee main remote version at the start of governance sessions, report and ask before pulling when behind, and record an unverified status when the check is unavailable; user request on 2026-10-22: integrate the six dimensions for process logic and implementation quality into authoring, independently of the six work-intensity dimensions for workload evaluation",
     "entrypoint": "workflows/process-ai-collaboration.md",
@@ -50,11 +50,12 @@
     "review_feedback_template": "templates/process-review-feedback.md",
     "content_review_confirmations": "sources/process-review-confirmations-2026-10-12.md",
     "traceability_rules": "rules/process-evidence-traceability.md",
-    "method_upgrade_record": "sources/method-upgrade-confirmation-2026-10-22.md",
+    "method_upgrade_record": "sources/database-knowledge-upgrade-2026-10-22.md",
     "user_trial_record": "verification/user-trial-confirmation-2026-10-13.md",
     "user_trial_status": "user_confirmed",
     "content_quality_rules": "rules/process-content-quality.md",
-    "content_quality_confirmations": "sources/method-upgrade-confirmation-2026-10-22.md"
+    "content_quality_confirmations": "sources/method-upgrade-confirmation-2026-10-22.md",
+    "database_reference_rules": "rules/database-reference.md"
   },
   "design_documentation_package": {
     "version": "2026-10-22.1",
@@ -98,5 +99,26 @@
       "verification_record": "verification/lossless-pull-readiness-2026-10-20.md",
       "conversation_verification_status": "not_run"
     }
-  ]
+  ],
+  "database_knowledge_package": {
+    "version": "2026-10-26.1",
+    "status": "prepared",
+    "entrypoint": "knowledge/database-knowledge.md",
+    "reference_rules": "rules/database-reference.md",
+    "format": "technical/database-knowledge-format.md",
+    "reference_template": "templates/database-reference-record.json",
+    "builder": "scripts/build-database-knowledge.py",
+    "query_tool": "scripts/database-knowledge.cjs",
+    "tests": "scripts/test-database-knowledge.py",
+    "source_record": "sources/database-knowledge-upgrade-2026-10-22.md",
+    "verification_record": "verification/database-knowledge-sharing-readiness-2026-10-26.md",
+    "sharing_workflow": "workflows/database-knowledge-sharing.md",
+    "change_record": "sources/database-knowledge-sharing-2026-10-26.md",
+    "public_sync_scope": "methods_tools_templates_only",
+    "restricted_package_delivery": "separate_authorized_channel",
+    "contains_internal_catalog": false,
+    "business_rules_approved": false,
+    "live_queries_enabled": false,
+    "conversation_verification_status": "not_run"
+  }
 }
