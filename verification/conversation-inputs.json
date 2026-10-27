@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "suite_id": "claude-deepseek-process-session-v1",
-  "package_version": "2026-10-22.2",
+  "package_version": "2026-10-27.1",
   "status": "prepared",
   "synthetic": true,
   "common_instruction": "按Governance-Knowledge当前single-process-authoring及会话规则执行，实际读取主技能与rules/material-reading-boundaries.md；涉及内容复核和继续治理反馈时读取rules/process-content-review.md及相关模板。启动时按会话规则校验Gitee远端版本；本用例目录不是Git工作副本，无法核对时记录“未校验”及原因，并视本用例登记的package_version为使用者已确认的本地版本，记录后继续，不因此增加首轮提问。仅读取当前方法和本用例task下指定输入，不读取verification内的用例、评审标准或结果。默认另存task/output，不覆盖输入，不修改共享库，不上传系统。 按当前阶段读取rules/process-content-quality.md检查流程逻辑与部署质量，交付可复核稿时记录六维自查；与工作负荷评价分开，不新增分数门槛或JSON字段。",

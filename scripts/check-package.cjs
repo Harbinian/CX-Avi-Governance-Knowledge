@@ -93,7 +93,7 @@ function walk(directory) {
   }
 }
 walk(root);
-const skills = ['single-process-authoring', 'grill-me', 'process-authoring', 'grill-with-docs', 'grilling', 'domain-modeling', 'lossless-pull'];
+const skills = ['single-process-authoring', 'grill-me', 'process-authoring', 'grill-with-docs', 'grilling', 'domain-modeling', 'lossless-pull', 'knowledge-review'];
 for (const name of skills) {
   const content = fs.readFileSync(path.join(root, '.agents/skills', name, 'SKILL.md'), 'utf8');
   assert.ok(content.startsWith('---\n'));
@@ -106,14 +106,29 @@ for (const name of skills) {
   assert.ok(entry.includes(`name: ${name}\n`), `.claude/skills/${name} name不一致`);
   assert.ok(entry.includes(description[0] + '\n'), `.claude/skills/${name} description与主技能不一致，需同步`);
   assert.ok(entry.includes(`../../../.agents/skills/${name}/SKILL.md`), `.claude/skills/${name} 缺少同包正文路由`);
+  if (name === 'knowledge-review') {
+    assert.match(entry, /^disable-model-invocation: false$/m, '知识库检查入口必须允许编制收尾隐式调用');
+  }
 }
-const prefixedEntries = { 'gk-single-process-authoring': 'single-process-authoring', 'gk-grill-me': 'grill-me', 'gk-grill-with-docs': 'grill-with-docs', 'gk-lossless-pull': 'lossless-pull' };
+const prefixedEntries = { 'gk-single-process-authoring': 'single-process-authoring', 'gk-grill-me': 'grill-me', 'gk-grill-with-docs': 'grill-with-docs', 'gk-lossless-pull': 'lossless-pull', 'gk-knowledge-review': 'knowledge-review' };
 for (const [entryName, methodName] of Object.entries(prefixedEntries)) {
   const entry = fs.readFileSync(path.join(root, '.claude/skills', entryName, 'SKILL.md'), 'utf8');
   const method = fs.readFileSync(path.join(root, '.agents/skills', methodName, 'SKILL.md'), 'utf8');
   assert.ok(entry.startsWith('---\n') && entry.includes(`name: ${entryName}\n`));
   assert.ok(entry.includes(method.match(/^description: .+/m)[0] + '\n'), `${entryName} description不一致`);
   assert.ok(entry.includes(`../../../.agents/skills/${methodName}/SKILL.md`), `${entryName} 缺少方法路由`);
+  if (methodName === 'knowledge-review') {
+    assert.match(entry, /^disable-model-invocation: false$/m, '知识库检查前缀入口必须允许编制收尾隐式调用');
+  }
 }
+const knowledgeReviewer = repositorySkills.find(item => item.name === 'knowledge-review');
+assert.ok(knowledgeReviewer, '缺少知识库按需检查登记');
+assert.equal(knowledgeReviewer.invocation_mode, 'explicit_or_authoring_completion');
+assert.equal(knowledgeReviewer.completion_trigger.caller, 'single-process-authoring');
+assert.equal(knowledgeReviewer.completion_trigger.scope, 'current_process_references');
+assert.equal(manifest.authoring_package.knowledge_review_skill, knowledgeReviewer.entrypoint);
+assert.ok(fs.existsSync(path.join(root, knowledgeReviewer.source_record)), '缺少知识库检查技能来源记录');
+const reviewPolicy = fs.readFileSync(path.join(root, '.agents/skills/knowledge-review/agents/openai.yaml'), 'utf8');
+assert.match(reviewPolicy, /^\s+allow_implicit_invocation: true$/m, 'Codex知识库检查技能必须允许编制收尾隐式调用');
 const { suite } = loadSuite(root);
 console.log(JSON.stringify({ valid: true, authoring_package_version: manifest.authoring_package.version, technical_snapshot_version: snapshot.package_version, design_documentation_package_version: designPackage.version, database_knowledge_package_version: databasePackage.version, database_dictionary_version: catalogPointer.package_version, database_dictionary_valid: catalogResult.valid, database_dictionary_source_files_verified: catalogResult.source_files_verified, markdown_files: markdownFiles, local_links: localLinks, technical_files: snapshot.files.length, source_skill_files: sourceSnapshot.files.length, skills, claude_entries: [...skills, ...Object.keys(prefixedEntries)], user_trial_status: manifest.authoring_package.user_trial_status, conversation_cases: suite.cases.length, conversation_model_execution: manifest.authoring_package.conversation_verification_status, design_documentation_model_execution: designPackage.conversation_verification_status }, null, 2));

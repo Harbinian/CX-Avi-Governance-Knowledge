@@ -63,6 +63,9 @@ Git拉取包含已审阅的随库字典，按database-knowledge/current.json定�
 与部署质量，交付前记录六维自查、具体理由和缺口。内容质量分与工作负荷分开；
 工作平衡报告仍采用原工作强度六维及周期负荷方法，未知参数不填默认值。
 JSON按本包实际结构和语义规则生成；技术检查实际执行后再报告结果。
+本轮形成可复核稿或最终成果时，在交付前由single-process-authoring隐式调用knowledge-review，
+按其编制收尾模式只检查本流程实际引用及本轮受影响内容，结果并入任务记录和简短交付说明。
+有据的成果遗漏直接修正，缺证或冲突集中列入待确认；不自动回写共享知识库或新增必交成果。
 保持已有process_ref和其他稳定标识，不能为通过检查删除未知内容。
 成果保存到本次任务目录，不自动更新共享知识库、上传系统或审核发布。
 ```
@@ -77,6 +80,7 @@ JSON按本包实际结构和语义规则生成；技术检查实际执行后再�
 | 内容完整性评价／继续治理反馈 | [内容复核规则](../rules/process-content-review.md)及[反馈模板](../templates/process-review-feedback.md)，按行为划分说明对象并对照双方接口 |
 | 当前方法／历史追溯／压缩续接 | [材料读取边界](../rules/material-reading-boundaries.md) |
 | 来源实际取得／结论追溯／修订影响 | [依据追溯规则](../rules/process-evidence-traceability.md)，在既有任务记录中登记；只读本轮相关依据 |
+| 编制交付收尾的知识引用复核 | [knowledge-review](../.agents/skills/knowledge-review/SKILL.md)的编制收尾模式，由主技能隐式调用；只查本流程实际引用，不展开全库 |
 | Claude Code接DeepSeek入口 | [专用说明](claude-deepseek.md)，普通编制不展开其评审链接 |
 | 维护会话用例及会话外评审 | [验证指南](../verification/conversation-guide.md)，被测会话不读取指南及评审标准 |
 | 部门业务主题、组织边界与配置参考 | knowledge相关摘要、待确认事项及sources原件登记 |

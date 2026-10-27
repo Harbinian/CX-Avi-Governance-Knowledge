@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 流程会话实际读取`AGENTS.md`、同包主技能、`rules/process-session-rules.md`及`rules/material-reading-boundaries.md`，按阶段只读必要参考。历史快照、旧报告和链接不能自动成为当前指令；压缩或中断续接后重读当前规则并核对最新稿。
 
-Claude Code接DeepSeek的环境与验证说明见`workflows/claude-deepseek.md`。推荐`/gk-single-process-authoring`和`/gk-grill-me`，实际检查加载路径；个人同名技能可能优先于项目入口。
+Claude Code接DeepSeek的环境与验证说明见`workflows/claude-deepseek.md`。推荐`/gk-single-process-authoring`、`/gk-grill-me`；需要检查知识库来源与引用时使用`/gk-knowledge-review`。实际检查加载路径；个人同名技能可能优先于项目入口。
 
 - 正文内容使用中文；机器字段、文件名、代码标识使用英文。
 - 引用旧 Git 提交时须说明相关文件所属的提交或包版本，不得假称新增文件已包含在旧提交中。
@@ -89,9 +89,9 @@ git publish [--dry-run]
 
 ## 架构：内容层、编制包、数据库知识与技术层
 
-**内容层**（人工编辑）：`README.md`、`AGENTS.md`、`manifest.json`、`rules/`、`workflows/`、`templates/`、`knowledge/`、`sources/`、`planning/`、`examples/`、`verification/`。各目录职责见 README 的"目录职责"表。
+**内容层**（人工编辑）：`README.md`、`AGENTS.md`、`CONTRIBUTING.md`、`manifest.json`、`rules/`、`workflows/`、`templates/`、`knowledge/`、`sources/`、`planning/`、`examples/`、`verification/`。各目录职责见 README 的"目录职责"表。
 
-**编制包入口链**：会话作业入口 → 会话规则与读取边界 → `.agents/skills/single-process-authoring/`与`.agents/skills/grill-me/`；manifest登记入口、版本、四项成果及会话用例，并单独登记通用方案文档包（grill-with-docs，2026-10-22.1）与 lossless-pull 技能；生成或修复流程 JSON 前读取 `rules/process-v8-contract.md`（V8 合同）。旧process-authoring只兼容路由，只有一套方法。默认四项成果为八章正文、V8 JSON、工作平衡报告、待确认事项，问答及续接记录另存。共享包含.agents和.claude目录；Claude Code的gk前缀入口和旧入口均为薄壳，实际读取同包正文，description与目标技能一致，由check-package检查路由及描述。方法变化同步受影响入口、模板与manifest。
+**编制包入口链**：会话作业入口 → 会话规则与读取边界 → `.agents/skills/single-process-authoring/`与`.agents/skills/grill-me/`；manifest登记入口、版本、四项成果及会话用例，并单独登记通用方案文档包（grill-with-docs，2026-10-22.1）与 lossless-pull、knowledge-review 技能；生成或修复流程 JSON 前读取 `rules/process-v8-contract.md`（V8 合同）。旧process-authoring只兼容路由，只有一套方法。默认四项成果为八章正文、V8 JSON、工作平衡报告、待确认事项，问答及续接记录另存。共享包含.agents和.claude目录；Claude Code的gk前缀入口和旧入口均为薄壳，实际读取同包正文，description与目标技能一致，由check-package检查路由及描述。方法变化同步受影响入口、模板与manifest。
 
 **数据库知识能力**（独立方法组件 `2026-10-26.2`，独立于流程 V7/V8 合同）：入口 `knowledge/database-knowledge.md`，引用规则 `rules/database-reference.md`，格式说明 `technical/database-knowledge-format.md`，离线工具 `scripts/database-knowledge.cjs`（同时导出 `load`、`check`、`query`、`compare`、`hash` 供其他脚本复用），维护者构建 `scripts/build-database-knowledge.py`，辅助引用模板 `templates/database-reference-record.json`，同步与领用 `workflows/database-knowledge-sharing.md`。知识包格式为 `gk-database-knowledge-v1`，辅助引用格式为 `gk-database-references-v1`。流程内 `data_ref/field_ref` 表示业务对象及字段，数据库侧 `object_ref/field_ref`（`gkdb:` 前缀）定位物理对象，两套标识不互相替换；精确映射只写入辅助引用记录，不新增到流程 JSON。已审阅的真实结构、字段、关系、SQL定义与来源摘要随 `database-knowledge/` 同库同步，由 `database-knowledge/current.json` 定位（当前批次 `2026-10-26.5-public`）；方法组件版本与字典批次版本分别记录，`check-package.cjs` 同时输出 `database_knowledge_package_version` 与 `database_dictionary_version`。构建器只写 `private/` 下新目录，公开批次由维护者从已审阅内容整理后写入 `database-knowledge/`，换版新增批次并更新指针，不覆盖旧批次。原始取数、地址、个人路径、核验统计和专项调查留在 Git 忽略的 `private/`。一次拉取后运行普通check，无需另行索取ZIP；公开字典不加 `--verify-sources`，`check-package.cjs` 输出 `database_dictionary_source_files_verified: false` 属预期，不表示字典无效。缓存结构、历史查询和样本统计不自动等于业务确认或当前数据库状态。
 
@@ -101,12 +101,14 @@ git publish [--dry-run]
 
 - `.gitattributes`对技术快照、`database-knowledge/**`、`sources/organization-directory-snapshot.json`、空白JSON、虚构JSON、`sources/skill-snapshots/**`、`sources/licenses/**`及`verification/conversation-fixtures/*.json`标记`-text`，对`.agents`与`.claude`下的`SKILL.md`固定`eol=lf`，防止换行转换破坏摘要或入口文件。技术文件由validate检查，原技能历史快照与来源快照摘要由check-package检查；历史快照不能作为当前业务规则执行。
 - 更新技术快照的唯一途径是 `build-technical-snapshot.cjs --source <Infomat目录>`；该命令除 `technical/**` 外还重写 `templates/process-v8.blank.json` 与 `examples/demo-process-v8.json`（后者是离线测试的合法夹具），重建后须按 `sources/tooling-sources.md` 重新验证，重跑 `check-package.cjs` 与 `test-offline-package.cjs`（来源等价检查加 `--source`），不得手改预编译代码。
-- 编制包、数据库知识能力与技术快照版本分别维护：当前编制包2026-10-22.2，manifest状态prepared（在2026-10-22.1六维编制检查基础上接入数据库知识引用），数据库知识方法组件2026-10-26.2，使用2026-10-08.1技术快照。用户已确认完整试用、功能无问题，但该确认只覆盖2026-10-13当时版本（见manifest登记的user_trial_record）；2026-10-19.1、2026-10-20.1、2026-10-22.1、2026-10-22.2及数据库知识能力的新增内容尚未完整试用，也未经过真实AI编制会话验证。22项预设用例仍按各自实际记录说明，Git共享不改变执行结果。编制及复核读取`rules/process-evidence-traceability.md`，按`templates/process-task-record.md`登记来源实际取得、关键结论、成果位置与修订影响；复用已有记录，不逐句建台账，来源号与结论号不写入 JSON。manifest的technical_snapshot_version及结构范围与snapshot一致；兼容校验输出package_version仍指技术快照。check-package断言正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
+- 编制包、数据库知识能力与技术快照版本分别维护：当前编制包2026-10-27.1，manifest中编制包状态prepared、仓库正式状态draft（沿用六维编制检查及数据库知识引用，加入交付收尾隐式知识检查），数据库知识方法组件2026-10-26.2，使用2026-10-08.1技术快照。用户已确认完整试用、功能无问题，但该确认只覆盖2026-10-13当时版本（见manifest登记的user_trial_record）；2026-10-19.1、2026-10-20.1、2026-10-22.1、2026-10-22.2、2026-10-27.1及数据库知识能力的新增内容尚未完整试用，也未经过真实AI编制会话验证。22项预设用例仍按各自实际记录说明，Git共享不改变执行结果。编制及复核读取`rules/process-evidence-traceability.md`，按`templates/process-task-record.md`登记来源实际取得、关键结论、成果位置与修订影响；复用已有记录，不逐句建台账，来源号与结论号不写入 JSON。manifest的technical_snapshot_version及结构范围与snapshot一致；兼容校验输出package_version仍指技术快照。check-package断言正式业务状态为draft、release_version为null、business_rules_approved为false；变更须有依据并同步检查。
 - 移动或重命名任何文件后必须更新引用：`check-package.cjs` 扫描全部 Markdown 的本地链接并断言目标存在。
 
 **状态区分（全库核心原则）**：技术校验通过 ≠ 用户确认事实 ≠ 3000 部门核对与正式审核发布。校验输出固定携带 `business_review: "not_assessed"` 与 `target_3000_readiness: "not_checked"`；当前 manifest 正式有效清单为空。任何报告中不得把本地准备或技术通过表述为已批准、已上传或已验收。
 
 ## 会话规则
+
+knowledge-review 2026-10-27.1保留`/gk-knowledge-review`（兼容`/knowledge-review`）手动入口，也允许single-process-authoring在本轮交付前隐式调用编制收尾模式。两个Claude入口的`disable-model-invocation`均为false，Codex的`allow_implicit_invocation`为true；实际读取`.agents/skills/knowledge-review/SKILL.md`。收尾只查本流程实际使用的知识及本轮受影响引用，默认静默核对，结果并入原任务记录与简短交付说明；有据修正限本次已授权成果，缺证或冲突集中列入待确认，不自动回写共享知识库或新增必交成果。普通同步或提交不触发全库检查，六维自查仍独立。manifest记录调用方及范围，包检查核对配置；真实隐式调用状态仍为not_run。
 
 流程编制与续编的全部会话时点规则（启动远端版本校验、首次/续编的 grill-me 调用、设计推演、修订后重核等）以 `rules/process-session-rules.md` 为唯一权威；执行前实际读取该文件，不以其摘要代替。
 
@@ -129,7 +131,7 @@ git publish [--dry-run]
 
 ## 技能来源与分工
 
-本库自带技能以`.agents/skills/`为唯一正文：single-process-authoring、grill-me、process-authoring兼容路由，独立的grill-with-docs、grilling、domain-modeling通用组合，以及lossless-pull无损拉取。`.claude/skills/`的同名和gk前缀入口不复制方法。真实会话检查实际来源；原生调用未加载本包时可按文件执行，并如实记录方式。数据库知识引用不是独立技能：按 `knowledge/database-knowledge.md` 与 `rules/database-reference.md` 执行；面向同事的静默补充说明为 `knowledge/database-knowledge-upgrade-note.md`。
+本库自带技能以`.agents/skills/`为唯一正文：single-process-authoring、grill-me、process-authoring兼容路由，独立的grill-with-docs、grilling、domain-modeling通用组合，以及lossless-pull无损拉取和knowledge-review按需知识库检查。`.claude/skills/`的同名和gk前缀入口不复制方法。真实会话检查实际来源；原生调用未加载本包时可按文件执行，并如实记录方式。数据库知识引用不是独立技能：按 `knowledge/database-knowledge.md` 与 `rules/database-reference.md` 执行；面向同事的静默补充说明为 `knowledge/database-knowledge-upgrade-note.md`。
 
 通用需求或方案访谈需要同步术语与决定记录时，使用`/gk-grill-with-docs`并实际读取[同包方法](.agents/skills/grill-with-docs/SKILL.md)。依赖和格式参考均随库分发，来源及适配见[迁入记录](sources/grill-with-docs-import-2026-10-19.md)，本轮六维问题结合见[变更记录](sources/grill-with-docs-six-dimension-2026-10-22.md)；真实模型会话尚未验证。涉及流程或部署安排时按六维组织问题但不评分；单流程编制仍使用原grill-me方法并执行交付前六维自查。
 

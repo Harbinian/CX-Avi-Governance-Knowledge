@@ -17,6 +17,7 @@
 9. 编制各阶段按`rules/process-content-quality.md`检查流程逻辑与部署质量六维，交付前形成自查记录；与工作负荷六维分开，不设默认分或统一合格线。内容完整性评价、继续治理反馈和交付复核同时按`rules/process-content-review.md`，需要清单时用`templates/process-review-feedback.md`。阶段稿可继续治理，评价只限具体问题和已核验范围，不自动扩大为部门整体认知不足。
 10. 编制、续编和交付复核按`rules/process-evidence-traceability.md`记录来源实际取得情况、关键结论与四项成果对应位置及修订影响；复用已有任务记录，不逐句建台账或重复索取材料。
 11. 通用需求或方案访谈需要同步术语与决定记录时，读取`.agents/skills/grill-with-docs/SKILL.md`及其同包依赖；涉及流程或部署安排时，可按[六维](rules/process-content-quality.md)组织问题、发现缺口，但访谈本身不评分，也不替代单流程编制的阶段检查和交付前自查；具体单流程仍按第6项的方法与核验边界执行。
+12. 用户主动检查知识库时使用[knowledge-review](.agents/skills/knowledge-review/SKILL.md)；single-process-authoring交付收尾时也隐式调用其编制收尾模式，只复核本流程实际引用及本轮受影响内容，结果并入任务记录和简短交付说明。普通同步、提交不触发全库检查；具体流程稿仍按第9项复核。
 
 ## 内容与来源
 

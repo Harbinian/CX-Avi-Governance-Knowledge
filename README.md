@@ -106,7 +106,7 @@ git pull --ff-only
 - 日常维护以本地 `main` 为主线，默认显式推送到Gitee的`main`；明确要求双端时再发布同一提交到两端。同事拉取Gitee取得共享主线，受限内部包另行领用。
 - 同事的写入权限、分支保护、自动检查和备份任务须按各平台实际配置核对；仓库公开不表示受控协作已经开启。
 
-当前**单流程AI完整编制包为2026-10-22.2，本轮升级已在本地准备**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。方法包括材料读取边界、流程内容复核、依据追溯、成果一致性、继承性外部流程的外部单位部门与角色补充、治理会话启动时的Gitee远端版本校验、流程逻辑与部署质量六维编制检查及继续治理反馈。
+当前**单流程AI完整编制包为2026-10-27.1，本轮升级已在本地准备**：统一的single-process-authoring主技能、grill-me访谈与核验、八章正文、V8 JSON、工作平衡报告和待确认事项，以及离线工具和人工交接。旧process-authoring保留兼容入口；Claude Code推荐使用带gk前缀的同包入口。方法包括材料读取边界、流程内容复核、依据追溯、成果一致性、继承性外部流程的外部单位部门与角色补充、治理会话启动时的Gitee远端版本校验、流程逻辑与部署质量六维编制检查及继续治理反馈。
 
 **用户于2026-10-13确认已完成完整试用、功能无问题**，见[试用确认记录](verification/user-trial-confirmation-2026-10-13.md)；具体试用包版本与环境未登记。该确认只覆盖当时版本；2026-10-19.1新增的继承性外部流程规则及2026-10-20.1新增的启动远端版本校验规则均尚未经过完整试用。2026-10-13升级检查见[记录](verification/method-upgrade-readiness-2026-10-13.md)，2026-10-19检查见[记录](verification/method-upgrade-readiness-2026-10-19.md)，2026-10-20检查见[记录](verification/method-upgrade-readiness-2026-10-20.md)，本次六维编制规则检查见[记录](verification/method-upgrade-readiness-2026-10-22.md)。2026-10-22.1新增规则尚未经过真实编制会话验证。22个虚构会话用例仍按各自记录保留未执行状态，不能由完整试用确认推定全部通过。技术合同快照仍为2026-10-08.1，V7/V8合同未改变。使用者记录取得版本的实际提交及本地修改状态；直接传文件夹须包含`.agents/`和`.claude/`。正式业务知识清单仍为空；本轮本地修改不表示已提交或推送。
 
@@ -158,7 +158,7 @@ Codex 等支持仓库技能的工具可用 `$技能名`，或按 `.agents/skills
 
 本轮提交推送后，同事一次Git拉取即可同时取得方法、工具和已审阅的真实数据库字典，无需另行索取ZIP。按[同步与使用说明](workflows/database-knowledge-sharing.md)检查，当前字典由[批次指针](database-knowledge/current.json)定位；本轮依据与范围见[同库同步记录](sources/database-knowledge-public-sync-2026-10-26.md)。
 
-已准备[用友、勤哲数据库知识入口](knowledge/database-knowledge.md)、[引用规则](rules/database-reference.md)及离线检索工具，方法组件版本2026-10-26.2。主编制包2026-10-22.2按需使用该能力，精确数据库映射另存辅助记录；V8/V7合同未改。已审阅的库表字段、关系、SQL定义及来源摘要保存在`database-knowledge/`；原始取数、地址、个人电脑路径、核验统计和专项调查仍留在Git忽略的`private/`。字段和关联可直接离线检索，不因此赋予数据库连接或业务审批权限。
+已准备[用友、勤哲数据库知识入口](knowledge/database-knowledge.md)、[引用规则](rules/database-reference.md)及离线检索工具，方法组件版本2026-10-26.2。主编制包2026-10-27.1按需使用该能力，精确数据库映射另存辅助记录；V8/V7合同未改。已审阅的库表字段、关系、SQL定义及来源摘要保存在`database-knowledge/`；原始取数、地址、个人电脑路径、核验统计和专项调查仍留在Git忽略的`private/`。字段和关联可直接离线检索，不因此赋予数据库连接或业务审批权限。
 
 本轮授权及影响见[同库同步记录](sources/database-knowledge-public-sync-2026-10-26.md)，实际检查见[验证记录](verification/database-knowledge-public-sync-2026-10-26.md)。本地已准备不表示已推送、当前数据库已核实或业务已验收；本次新增能力尚未经过真实AI编制会话验证。共享公共资料文件夹时排除`private/`、`scratch/`和`backups/`；原始本地包不随库分发，Git忽略不等于目录访问控制。
 
@@ -180,6 +180,7 @@ Codex 等支持仓库技能的工具可用 `$技能名`，或按 `.agents/skills
 3. AI 读取 [AGENTS.md](AGENTS.md)，再检查 [内容清单](manifest.json)；不能读取文件的工具由用户提供同一版本的相关内容。
 4. 按任务读取相关材料；当前可使用来源索引和派生草稿辅助设计、提问和起草，不得声称已采用本库正式有效规则。具体业务材料及确认记录仍需提供。
 5. 提出共享内容更新时遵循 [贡献说明](CONTRIBUTING.md)，使用 [修改申请模板](templates/change-request.md)。
+6. 需要检查知识库自身质量时，主动调用[knowledge-review](.agents/skills/knowledge-review/SKILL.md)：Codex使用`$knowledge-review`，Claude Code使用`/gk-knowledge-review`（兼容`/knowledge-review`）。例如“检查本轮数据库知识的来源、时效、冲突和覆盖，列出证据、问题及修订建议”。手动检查默认只报告；single-process-authoring本轮交付前还会隐式调用其编制收尾模式，只查本流程实际引用，结果并入任务记录和简短交付说明。不设定时任务，不替代单流程六维自查；当前变更及限制见[收尾编排记录](sources/knowledge-review-authoring-completion-2026-10-27.md)。
 
 原 [建设说明](planning/internal-governance-knowledge-guide.md) 保留前期讨论记录；其中固定电脑及 Gitea 部署内容不再作为当前托管方案。
 
@@ -236,7 +237,7 @@ GitHub 和 Gitee 的主线分支均为 `main`，各自保留初始化提交的�
 | examples | 脱敏示例，不作为具体业务依据 |
 | sources | 来源索引、确认记录及原技能历史快照；不默认保存受限业务原件 |
 | planning | 建设和部署准备材料，不作为已生效治理规则 |
-| .agents/skills | single-process-authoring主技能、grill-me、process-authoring兼容入口、grill-with-docs通用组合及lossless-pull无损拉取；共享时必须包含 |
+| .agents/skills | single-process-authoring主技能、grill-me、process-authoring兼容入口、grill-with-docs通用组合、lossless-pull无损拉取及knowledge-review按需知识库检查；共享时必须包含 |
 | .claude/skills | Claude Code薄壳；gk前缀入口与旧入口均指向.agents/skills唯一方法正文 |
 | technical | 固定结构、共享语义校验器、预编译校验及来源摘要，供离线使用 |
 | scripts | 离线校验、维护者生成与验证、显式运行的双端发布脚本，不连接业务系统 |

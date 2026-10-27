@@ -1,5 +1,7 @@
 # 来源登记说明
 
+[知识检查收尾编排](knowledge-review-authoring-completion-2026-10-27.md)登记用户要求single-process-authoring结束时隐式调用knowledge-review的决定。手动全库或主题检查仍保留，编制收尾只查本流程实际引用，结果并入任务记录及交付摘要，不替代六维自查或业务批准。[此前仅手动方案](knowledge-review-skill-2026-10-26.md)保留历史追溯。
+
 [数据库知识引用升级记录](database-knowledge-upgrade-2026-10-22.md)登记用户授权的离线资料追溯、受限知识包与流程引用方法。原始本地包和调查材料继续留在Git忽略的`private/`；公开字典的当前范围见[同库同步记录](database-knowledge-public-sync-2026-10-26.md)，不作为正式业务发布。
 
 [数据库知识同库同步](database-knowledge-public-sync-2026-10-26.md)登记用户要求同事直接从公开Gitee一同拉取字典的决定，以及公开整理范围。[此前同步准备](database-knowledge-sharing-2026-10-26.md)保留当时分包方案的追溯；当前方法为2026-10-26.2，不再要求另行索取ZIP。
