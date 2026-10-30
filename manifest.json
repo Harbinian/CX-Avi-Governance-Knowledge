@@ -82,7 +82,7 @@
     "captured_at": "2026-10-20T06:59:17.608Z",
     "source_record": "sources/organization-sources.md",
     "snapshot": "sources/organization-directory-snapshot.json",
-    "snapshot_sha256": "22226966fa0a1e84e1222d606a7499b1c2718e7a3964132a64991090176280e1",
+    "snapshot_sha256": "cf2dd9e01b763ad77a56e354be5b06281ad8988f062d342867026f4b45dbab41",
     "directory_snapshot_hash": "e7f4f98544b842844b05d168d62c4e86719255b8f50d0ea9dd7e689b3662afbc",
     "contains_personnel_identifiers": false,
     "automatic_sync_enabled": false,
@@ -154,6 +154,8 @@
     "policy": "ANONYMIZATION.md",
     "private_policy_tracked": false,
     "scope": "repository_content",
-    "history_rewritten": false
+    "history_rewritten": true,
+    "mode": "literal",
+    "revision": "2026-10-30.2"
   }
 }

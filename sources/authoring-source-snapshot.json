@@ -7,56 +7,64 @@
     {
       "source_path": ".agents/skills/single-process-authoring/SKILL.md",
       "snapshot_path": "sources/skill-snapshots/2026-10-09-infomat-single-process-authoring/SKILL.md",
-      "sha256": "90c4b5951f3e63ea799b6ffad96e137bc2968fc3deaf84f72015303436717267"
+      "sha256": "90c4b5951f3e63ea799b6ffad96e137bc2968fc3deaf84f72015303436717267",
+      "snapshot_transform": "literal_anonymization"
     },
     {
       "source_path": ".agents/skills/single-process-authoring/agents/openai.yaml",
       "snapshot_path": "sources/skill-snapshots/2026-10-09-infomat-single-process-authoring/agents/openai.yaml",
-      "sha256": "135d9142e959a1da5d9a6b80f7ed783f0e47d2c0a1c0632b323bf7e931f6d4ef"
+      "sha256": "135d9142e959a1da5d9a6b80f7ed783f0e47d2c0a1c0632b323bf7e931f6d4ef",
+      "snapshot_transform": "literal_anonymization"
     },
     {
       "source_path": ".agents/skills/single-process-authoring/assets/minimal-v8-example.json",
       "snapshot_path": "sources/skill-snapshots/2026-10-09-infomat-single-process-authoring/assets/minimal-v8-example.json",
-      "sha256": "52a4a458be5a97523cf871b5db34b498cdb1bc709689f1d9f65939aecbc98fbb"
+      "sha256": "52a4a458be5a97523cf871b5db34b498cdb1bc709689f1d9f65939aecbc98fbb",
+      "snapshot_transform": "literal_anonymization"
     },
     {
       "source_path": ".agents/skills/single-process-authoring/references/authoring-stages.md",
       "snapshot_path": "sources/skill-snapshots/2026-10-09-infomat-single-process-authoring/references/authoring-stages.md",
       "sha256": "d8caea56ef7d3216cec391861689f7328c217c05f655f643e73b864552f030fe",
       "source_sha256": "0ef24268573104a8719ad7b9941bc4984afb22e7728ae6cb998ea2eeafac495b",
-      "snapshot_transform": "anonymized"
+      "snapshot_transform": "literal_anonymization"
     },
     {
       "source_path": ".agents/skills/single-process-authoring/references/continue-and-repair.md",
       "snapshot_path": "sources/skill-snapshots/2026-10-09-infomat-single-process-authoring/references/continue-and-repair.md",
-      "sha256": "da60e34a20ab806be805a854500c9a01c824229b44428a0eddb7572582641e46"
+      "sha256": "da60e34a20ab806be805a854500c9a01c824229b44428a0eddb7572582641e46",
+      "snapshot_transform": "literal_anonymization"
     },
     {
       "source_path": ".agents/skills/single-process-authoring/references/document-standard.md",
       "snapshot_path": "sources/skill-snapshots/2026-10-09-infomat-single-process-authoring/references/document-standard.md",
       "sha256": "491e92f2801fe63738536b2edf743df350f6e3f9fc7c08a0b3e79a135efb37ea",
       "source_sha256": "46fe4859440e65330384b6a9780669158fbfb7e6590a4243a76254f6ab546e49",
-      "snapshot_transform": "anonymized"
+      "snapshot_transform": "literal_anonymization"
     },
     {
       "source_path": ".agents/skills/single-process-authoring/references/output-templates.md",
       "snapshot_path": "sources/skill-snapshots/2026-10-09-infomat-single-process-authoring/references/output-templates.md",
-      "sha256": "8342041e648dd0369eca0ab8154ebc237143deb8cac3ad19c5fa3c732adb36db"
+      "sha256": "8342041e648dd0369eca0ab8154ebc237143deb8cac3ad19c5fa3c732adb36db",
+      "snapshot_transform": "literal_anonymization"
     },
     {
       "source_path": ".agents/skills/single-process-authoring/references/v8-structure-rules.md",
       "snapshot_path": "sources/skill-snapshots/2026-10-09-infomat-single-process-authoring/references/v8-structure-rules.md",
-      "sha256": "269026384cad57efb0c98641338e44287c82d8f306c22df9e0de505b42d00925"
+      "sha256": "269026384cad57efb0c98641338e44287c82d8f306c22df9e0de505b42d00925",
+      "snapshot_transform": "literal_anonymization"
     },
     {
       "source_path": ".agents/skills/single-process-authoring/references/workload-method.md",
       "snapshot_path": "sources/skill-snapshots/2026-10-09-infomat-single-process-authoring/references/workload-method.md",
-      "sha256": "36d6394dc597713f9a30dcf0cd027a3d015c61c5721b621a89230805a73d65ef"
+      "sha256": "36d6394dc597713f9a30dcf0cd027a3d015c61c5721b621a89230805a73d65ef",
+      "snapshot_transform": "literal_anonymization"
     },
     {
       "source_path": ".agents/skills/single-process-authoring/scripts/validate-process-v8.mjs",
       "snapshot_path": "sources/skill-snapshots/2026-10-09-infomat-single-process-authoring/scripts/validate-process-v8.mjs",
-      "sha256": "58e9db91279dafe795f0205d7f3b80a05da3d98a2751b14fe46edf2cd5b0400c"
+      "sha256": "58e9db91279dafe795f0205d7f3b80a05da3d98a2751b14fe46edf2cd5b0400c",
+      "snapshot_transform": "literal_anonymization"
     }
   ],
   "usage": "historical_source_snapshot_not_active_business_rules"

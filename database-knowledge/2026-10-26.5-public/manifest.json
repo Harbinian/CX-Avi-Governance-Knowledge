@@ -31,11 +31,11 @@
     }
   },
   "files": {
-    "objects.json": "87451b80518ddc5dbb41ad678e7963816c95e293564fb52af280bd25580c711a",
-    "sources.json": "a343850336f922c7e35025c3386a8e1d4382980a75cdcaa3823adfeaa7978571",
+    "objects.json": "db065001625136c9bbc6e646f06f7cbd9189eb8c708397d194dd199f1920fa2c",
+    "sources.json": "21b4864aaadec4dff97d4ee3c75c6cd2221ca7880f3e07028d21e6913832a537",
     "aggregates.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
-    "views.json": "13a58772c0b3d103b67fbbe594fd28ba7d3b94f0c0b94654646afd3127c6affd",
-    "curation.json": "601dbb102a6fa765067b78a66d5d4500585ce08350e6067607dbc026ff7fadd8"
+    "views.json": "1b9966acc9f3b0d368eafeac8ed8beeb9431f1132e6fd0ef40fafe930b8fd6af",
+    "curation.json": "afff588a1f2cc4c4fa564f41f72dc5bb6f1e49ae2ea514fc2da77f534224b87c"
   },
   "supplemental_files": {
     "README.md": "1763573451e8b476fe8d66a0fb3a79bf0bd03fa836de0f9614bbafd50583a6d8",
@@ -45,9 +45,11 @@
   },
   "current_reference": "workflow-reference.md",
   "anonymization": {
-    "revision": "2026-10-30.1",
+    "revision": "2026-10-30.2",
     "identifiers": "stable_public_aliases",
     "mapping_delivery": "local_ignored",
-    "live_query_supported": false
+    "live_query_supported": false,
+    "mode": "literal",
+    "source_digests": "anonymized_trace_identifiers"
   }
 }
