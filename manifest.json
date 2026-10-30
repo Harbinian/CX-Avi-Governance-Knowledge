@@ -149,5 +149,11 @@
     "live_queries_enabled": false,
     "conversation_verification_status": "not_run",
     "catalog_entrypoint": "database-knowledge/current.json"
+  },
+  "anonymization": {
+    "policy": "ANONYMIZATION.md",
+    "private_policy_tracked": false,
+    "scope": "repository_content",
+    "history_rewritten": false
   }
 }
