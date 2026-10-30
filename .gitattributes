@@ -6,3 +6,4 @@
 /verification/conversation-fixtures/*.json -text
 /.agents/**/SKILL.md text eol=lf
 /.claude/**/SKILL.md text eol=lf
+/.githooks/* text eol=lf

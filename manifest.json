@@ -69,5 +69,12 @@
     "upstream_commit": "49dd158d1076134a641b33efb035946536778336",
     "conversation_verification_status": "not_run",
     "business_rules_approved": false
+  },
+  "anonymization": {
+    "policy": "ANONYMIZATION.md",
+    "history_rewritten": true,
+    "mode": "literal",
+    "revision": "2026-10-30.2",
+    "private_policy_tracked": false
   }
 }
